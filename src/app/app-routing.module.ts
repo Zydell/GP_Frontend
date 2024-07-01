@@ -5,7 +5,7 @@ import { DashboardpublicoComponent } from './Template/templatePublico/dashboardp
 import { DashboardadminComponent } from './Template/templateAdmin/dashboardadmin/dashboardadmin.component';
 import { PortadainicialComponent } from './Template/templatePublico/portadainicial/portadainicial.component';
 import { PgPrincipaladministracionComponent } from './ModuloAdministracion/pg-principaladministracion/pg-principaladministracion.component';
-import { PgPrincipaltestComponent } from './ModuloAdministracion/pg-principaltest/pg-principaltest.component';
+//import { PgPrincipaltestComponent } from './ModuloAdministracion/pg-principaltest/pg-principaltest.component';
 const routes: Routes = [
   {
     path: '',
@@ -33,11 +33,11 @@ const routes: Routes = [
         {
           path: 'principaladmin',
           component: PgPrincipaladministracionComponent
-        },
+        }/*,
         {
           path: 'principaltest',
           component: PgPrincipaltestComponent
-        }
+        }*/
       ]
       }
   

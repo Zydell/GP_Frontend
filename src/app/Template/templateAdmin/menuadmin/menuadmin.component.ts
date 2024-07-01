@@ -12,9 +12,9 @@ export class MenuadminComponent implements OnInit{
   ngOnInit() {
       this.items = [
           {
-              label: 'Admin Test',
+              label: 'Administración',
               icon: 'pi pi-fw pi-file',
-              items: [
+              /*items: [
                     {
                       label: 'Seccion',
                       icon: 'pi pi-fw pi-pencil',
@@ -41,8 +41,8 @@ export class MenuadminComponent implements OnInit{
                       icon: 'pi pi-fw pi-pencil',
                       url: './dashadmin/principaladmin'
                   }
-              ]
-          },
+              ]*/
+          }/*,
           {
               label: 'Test',
               icon: 'pi pi-fw pi-user',
@@ -65,7 +65,7 @@ export class MenuadminComponent implements OnInit{
                       label: 'Justify',
                       icon: 'pi pi-fw pi-align-justify'
                   }
-              ]*/
+              ]*//*
           },
           {
             label: 'Simulador',
@@ -164,7 +164,7 @@ export class MenuadminComponent implements OnInit{
                       ]
                   }
               ]
-          },
+          }*/,
           {
               separator: true
           },

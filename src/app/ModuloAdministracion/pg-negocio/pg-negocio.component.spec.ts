@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PgDimensionComponent } from './pg-dimension.component';
+import { PgNegocioComponent } from './pg-negocio.component';
 
-describe('PgDimensionComponent', () => {
-  let component: PgDimensionComponent;
-  let fixture: ComponentFixture<PgDimensionComponent>;
+describe('PgNegocioComponent', () => {
+  let component: PgNegocioComponent;
+  let fixture: ComponentFixture<PgNegocioComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PgDimensionComponent ]
+      declarations: [ PgNegocioComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PgDimensionComponent);
+    fixture = TestBed.createComponent(PgNegocioComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -21,4 +21,3 @@ describe('PgDimensionComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

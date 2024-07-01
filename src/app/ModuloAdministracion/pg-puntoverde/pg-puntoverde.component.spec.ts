@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PgSeccionComponent } from './pg-seccion.component';
+import { PgPuntoverdeComponent } from './pg-puntoverde.component';
 
-describe('PgSeccionComponent', () => {
-  let component: PgSeccionComponent;
-  let fixture: ComponentFixture<PgSeccionComponent>;
+describe('PgPuntoverdeComponent', () => {
+  let component: PgPuntoverdeComponent;
+  let fixture: ComponentFixture<PgPuntoverdeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PgSeccionComponent ]
+      declarations: [ PgPuntoverdeComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PgSeccionComponent);
+    fixture = TestBed.createComponent(PgPuntoverdeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

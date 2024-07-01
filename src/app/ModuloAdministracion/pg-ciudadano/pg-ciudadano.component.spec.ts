@@ -1,17 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PgTestComponent } from './pg-test.component'; 
 
-describe('PgTestComponent', () => {
-  let component: PgTestComponent;
-  let fixture: ComponentFixture<PgTestComponent>;
+import { PgCiudadanoComponent } from './pg-ciudadano.component';
+
+describe('PgCiudadanoComponent', () => {
+  let component: PgCiudadanoComponent;
+  let fixture: ComponentFixture<PgCiudadanoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PgTestComponent ]
+      declarations: [ PgCiudadanoComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PgTestComponent);
+    fixture = TestBed.createComponent(PgCiudadanoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
