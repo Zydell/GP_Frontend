@@ -5,12 +5,28 @@ import { DashboardpublicoComponent } from './Template/templatePublico/dashboardp
 import { DashboardadminComponent } from './Template/templateAdmin/dashboardadmin/dashboardadmin.component';
 import { PortadainicialComponent } from './Template/templatePublico/portadainicial/portadainicial.component';
 import { PgPrincipaladministracionComponent } from './ModuloAdministracion/pg-principaladministracion/pg-principaladministracion.component';
-//import { PgPrincipaltestComponent } from './ModuloAdministracion/pg-principaltest/pg-principaltest.component';
+import { PgLoginComponent } from './Template/pg-login/pg-login.component';
+import { PgRegisterComponent } from './Template/pg-register/pg-register.component';
+//import { ProtectedComponent } from './components/protected/protected.component';
+import { PgDashuserComponent } from './ModuloUsuario/pg-dashuser/pg-dashuser.component';
+import { AuthGuard } from './ModuloServiciosWeb/auth.guard';
+
 const routes: Routes = [
   {
     path: '',
     component: PgInicioportadaComponent
   },
+  {
+    path: 'inicio',
+    component: PgLoginComponent
+  },
+  {
+    path: 'registro',
+    component: PgRegisterComponent
+  },
+  //{ path: 'protected', component: ProtectedComponent, canActivate: [AuthGuard] },
+  { path: 'user-menu', component: PgDashuserComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: 'dashpublic',
     component: DashboardpublicoComponent,
@@ -18,8 +34,7 @@ const routes: Routes = [
       {
         path: 'inicio',
         component: PortadainicialComponent
-      },
-     
+      }     
     ]
     },
     {

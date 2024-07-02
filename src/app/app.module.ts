@@ -19,6 +19,9 @@ import { HeaderadminComponent } from './Template/templateAdmin/headeradmin/heade
 import { MenuadminComponent } from './Template/templateAdmin/menuadmin/menuadmin.component';
 import { DashboardadminComponent } from './Template/templateAdmin/dashboardadmin/dashboardadmin.component';
 
+import { AuthInterceptor } from './ModuloServiciosWeb/auth.interceptor';
+import { AuthService } from './ModuloServiciosWeb/Servicio.Auth';
+import { UrlServicios } from './ModuloServiciosWeb/urlServiciosWeb.component'; // Asegúrate de importar tu servicio UrlServicios
 
 import { AvatarModule } from 'primeng/avatar';
 import { SlideMenuModule } from 'primeng/slidemenu';
@@ -55,6 +58,10 @@ import { PgNegocioComponent } from './ModuloAdministracion/pg-negocio/pg-negocio
 import { PgMaterialComponent } from './ModuloAdministracion/pg-material/pg-material.component';
 import { PgPuntoverdeComponent } from './ModuloAdministracion/pg-puntoverde/pg-puntoverde.component';
 import { PgOfertaComponent } from './ModuloAdministracion/pg-oferta/pg-oferta.component';
+import { PgLoginComponent } from './Template/pg-login/pg-login.component';
+import { PgRegisterComponent } from './Template/pg-register/pg-register.component';
+import { PgDashuserComponent } from './ModuloUsuario/pg-dashuser/pg-dashuser.component';
+import { PgPuntosverdesComponent } from './ModuloUsuario/pg-puntosverdes/pg-puntosverdes.component';
 
 
 @NgModule({
@@ -81,7 +88,11 @@ import { PgOfertaComponent } from './ModuloAdministracion/pg-oferta/pg-oferta.co
     PgNegocioComponent,
     PgMaterialComponent,
     PgPuntoverdeComponent,
-    PgOfertaComponent
+    PgOfertaComponent,
+    PgLoginComponent,
+    PgRegisterComponent,
+    PgDashuserComponent,
+    PgPuntosverdesComponent
   ],
   imports: [
     BrowserModule,
@@ -92,7 +103,10 @@ import { PgOfertaComponent } from './ModuloAdministracion/pg-oferta/pg-oferta.co
     CardModule,PanelMenuModule,TabViewModule,TableModule,ProgressSpinnerModule,AccordionModule,TagModule,ImageModule,
     InputTextModule,ToolbarModule,ButtonModule,MenubarModule,SlideMenuModule,DialogModule,DividerModule,ToastModule,FileUploadModule
   ],
-  providers: [SpinnerService,{ provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true } ],// Agrega el interceptor HTTP],
+  providers: [AuthService, UrlServicios, SpinnerService,
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],// Agrega el interceptor HTTP],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
