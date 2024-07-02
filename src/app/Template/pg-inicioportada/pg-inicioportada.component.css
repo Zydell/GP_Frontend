@@ -334,8 +334,12 @@ body {
   --------------------------------------------------------------*/
   #hero {
     width: 100%;
-    height: 80vh;
+    height: 80vh;/*
     background: #42af20;
+    background: #558b72;
+    */
+    background: #39981c;
+
   }
   #hero .container {
     padding-top: 72px;
