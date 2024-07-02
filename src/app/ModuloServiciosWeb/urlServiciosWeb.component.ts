@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class UrlServicios {
 
 //Servicios Localhost
-urlServicio:String="http://localhost:3002";
+urlServicio:String="http://localhost:5000";
 
 }
 

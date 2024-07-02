@@ -14,6 +14,7 @@ export class PgMaterialComponent implements OnInit{
   lsListado:any=[];
   objSeleccion:any="-1";
   intvalor:any="";
+  strnombre:any="";
   strEstado:any="";
   visibleEditar: boolean=false;
   visibleEstado: boolean=false;
@@ -31,6 +32,7 @@ async ngOnInit() {
 
 ModalNuevoInformacion() {
 this.intvalor="";
+this.strnombre="";
     this.visibleNuevo = true;
 }
 ModalEditarInformacion(seleccion:any) {
@@ -40,7 +42,7 @@ ModalEditarInformacion(seleccion:any) {
 }
 ModalCambiarEstado(seleccion:any) {
   this.objSeleccion=seleccion;
-  if(this.objSeleccion.bl_estado){
+  if(this.objSeleccion.estado){
     this.strEstado="Desactivar";
   }else{
     this.strEstado="Activar";
@@ -52,17 +54,17 @@ ModalCambiarEstado(seleccion:any) {
     const data = await new Promise<any>(resolve => this.servicios.ListadoMaterial().subscribe(translated => { resolve(translated) }));
     console.log(data)
 
-    if (data.success) {
-      this.lsListado=data.datos;
+    if (data) {
+      this.lsListado=data;
     }
   }
   
   async RegistrarNuevo(){
-    if(this.intvalor!=""){
+    if(this.intvalor!="" && this.strnombre!=""){
       console.log("aqui")
-      const data = await new Promise<any>(resolve => this.servicios.NuevaDimension(this.intvalor).subscribe(translated => { resolve(translated) }));
+      const data = await new Promise<any>(resolve => this.servicios.NuevoMaterial(this.intvalor, this.strnombre).subscribe(translated => { resolve(translated) }));
       console.log(data)
-      if(data.success){
+      if(data){
         await this.ListadoInformacion();
         this.messageService.add({ severity: 'success', summary: 'Success', detail: this.mensajes.RegistroExitoso });
         this.visibleNuevo = false;
@@ -73,16 +75,14 @@ ModalCambiarEstado(seleccion:any) {
       this.messageService.add({ severity: 'info', summary: 'Info', detail: this.mensajes.IngreseNombre });
       
     }
-
-
   }
+
   async RegistrarActualizacion(){
-    if(this.objSeleccion.int_valor!=""){
+    if(this.objSeleccion.tipo!="" && this.objSeleccion.valor_por_libra!=""){
       console.log("aqui")
-      const data = await new Promise<any>(resolve => this.servicios.ActualizacionDimension(this.objSeleccion.id_dimension,this.objSeleccion.int_valor).subscribe(translated => { resolve(translated) }));
-      //const data = await new Promise<any>(resolve => this.servicios.ActualizacionDimension(this.strEstado,this.objSeleccion.ounombre).subscribe(translated => { resolve(translated) }));
+      const data = await new Promise<any>(resolve => this.servicios.ActualizacionMaterial(this.objSeleccion.materiales_id,this.objSeleccion.tipo,this.objSeleccion.valor_por_libra).subscribe(translated => { resolve(translated) }));
       console.log(data)
-      if(data.success){
+      if(data){
         await this.ListadoInformacion();
         this.messageService.add({ severity: 'success', summary: 'Success', detail: this.mensajes.ActualizacionExitosa });
         this.visibleEditar = false;
@@ -93,18 +93,18 @@ ModalCambiarEstado(seleccion:any) {
       this.messageService.add({ severity: 'info', summary: 'Info', detail: this.mensajes.IngreseNombre }); 
     }
   }
+
   async EstadoCambiarActualizacion(){
     var estado:any;
-    if(this.objSeleccion.bl_estado){
+    if(this.objSeleccion.estado){
       estado=false;
     }else{
       estado=true;
     }
       console.log("aqui")
-      //const data = await new Promise<any>(resolve => this.servicios.EstadoCambiarDimension(this.objSeleccion.id_dimension,estado).subscribe(translated => { resolve(translated) }));
-      const data = await new Promise<any>(resolve => this.servicios.EstadoCambiarDimension(this.objSeleccion.id_dimension,estado).subscribe(translated => { resolve(translated) }));
+      const data = await new Promise<any>(resolve => this.servicios.EstadoCambiarMaterial(this.objSeleccion.materiales_id,estado).subscribe(translated => { resolve(translated) }));
       console.log(data)
-      if(data.success){
+      if(data){
         await this.ListadoInformacion();
         this.messageService.add({ severity: 'success', summary: 'Success', detail: this.mensajes.ActualizacionExitosa });
         this.visibleEstado = false;

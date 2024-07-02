@@ -19,8 +19,41 @@ export class ServiciviosVarios {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
  //   let parametros = opcion + "/" + tipo + "/" + codCarrera + "/" + param;
-    return this.hpptclient.get<any>(this.urlServiciosTest + '/wsSimulador/rutadimension/ListadoDimensionTodos')
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/materiales')
   }
+
+  NuevoMaterial(intvalor:any, strnombre:any) {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    let parametros = { valor_por_libra: intvalor, tipo: strnombre } ;
+    return this.hpptclient.post<any>(this.urlServiciosTest + '/api/materiales', parametros)
+  }
+
+  EstadoCambiarMaterial(idMaterial:number,estado:any) {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    console.log("AAAAAAAAAA: "+estado+idMaterial);
+    let parametros = { estado: estado } ;
+     return this.hpptclient.put<any>(this.urlServiciosTest + '/api/materiales/'+idMaterial, parametros)
+  }
+
+  ActualizacionMaterial(idMaterial:number,nombre:any, valorlibra:any) {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    let parametros = { tipo: nombre, valor_por_libra: valorlibra } ;
+     return this.hpptclient.put<any>(this.urlServiciosTest + '/api/materiales/'+idMaterial, parametros)
+  }
+
+
+
+
+
+
+
+
+
+
+
 
 
   ListadoDimensionActivos() {
