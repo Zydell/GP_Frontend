@@ -40,13 +40,17 @@
 }
 
 .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  /*
   border-color: #d31a2b !important;
   color: #d31a2b !important;
+  */
+  border-color: #11b019 !important;
+  color: #13ab1b !important;
 }
 
 .p-menubar {
   gap: 20px;
-  border-bottom: 2px solid #d31a2b;
+  border-bottom: 2px solid #0a670f;
   border-radius: 0 !important;
   -webkit-border-radius: 0 !important;
   -moz-border-radius: 0 !important;
@@ -64,7 +68,7 @@
 
 .p-slidemenu {
   width: auto !important;
-  border-right: 2px solid #d31a2b6b;
+  border-right: 2px solid #11710d6b;
   border-radius: 0 !important;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -73,7 +77,7 @@
 }
 
 .p-slidemenu .p-menuitem-link:not(.p-disabled):hover {
-  background: #d31a2b3d;
+  background: #0d6c2a3d;
 }
 
 .layout-menu {
@@ -108,7 +112,7 @@
 
 .footer {
   grid-area: footer;
-  background: #d31a2b;
+  background: #16a729;
   color: white;
   padding: 10px;
   text-align: center;
