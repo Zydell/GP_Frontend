@@ -14,7 +14,15 @@ export class ServiciviosVarios {
     
   }
 
-  // DIMENSION
+  // MATERIALES
+  ListadoMaterial() {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+ //   let parametros = opcion + "/" + tipo + "/" + codCarrera + "/" + param;
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/wsSimulador/rutadimension/ListadoDimensionTodos')
+  }
+
+
   ListadoDimensionActivos() {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
@@ -26,7 +34,7 @@ export class ServiciviosVarios {
       headers.append('Content-Type', 'application/json');
    //   let parametros = opcion + "/" + tipo + "/" + codCarrera + "/" + param;
       return this.hpptclient.get<any>(this.urlServiciosTest + '/wsSimulador/rutadimension/ListadoDimensionTodos')
-  }
+    }
   ActualizacionDimension(idDimension:number,intvalor:any) {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
@@ -77,44 +85,4 @@ export class ServiciviosVarios {
      let parametros = {str_nombre: srtnombre, str_descripcion: strdescripcion, id_recomendacion: selectedRecomendaciones, id_instruccion: selectedInstrucciones} ;
      return this.hpptclient.post<any>(this.urlServiciosTest + '/wsSimulador/rutatest/CrearTest', parametros)
   }
-
-  /*
-GenerarSolicitud(contenido:any) {
-  return this.hpptclient.post<any>(this.urlServiciosTest + '/rutareportes/pdfSolicitudVoluntarioss', contenido)
-}
-GenerarpdfTermino(idPersona:any) {
-  let headers = new HttpHeaders();
-  headers.append('Content-Type', 'application/json');
-  let parametros =  "/"+idPersona  ;
-  return this.hpptclient.get<any>(this.urlServiciosTest + '/rutareportes/pdfTerminosCondiciones'+parametros)
-}
-ActualizarEstadoSolicitud(idVoluntario:any,idEstado:any) {
-  let headers = new HttpHeaders();
-  headers.append('Content-Type', 'application/json');
-  let parametros =  "/"+idVoluntario+"/"+ idEstado+"/" ;
-  return this.hpptclient.get<any>(this.urlServiciosTest + '/rutavoluntarios/ActualizarestadoVoluntario'+parametros)
-}
-GenerarpdfCartaAceptacion(idPersona:any,strCedula:any) {
-  let headers = new HttpHeaders();
-  headers.append('Content-Type', 'application/json');
-   let parametros =  "/"+idPersona +"/"+strCedula ;
-  return this.hpptclient.get<any>(this.urlServiciosTest + '/rutareportes/pdfCartaAceptacion'+parametros)
-}
-ListadoEstadosCivilActivos() {
-  let headers = new HttpHeaders();
-  headers.append('Content-Type', 'application/json');
-
-  return this.hpptclient.get<any>(this.urlServiciosTest + '/rutavoluntarios/EstadoCivilActivos')
-}
-ListadoParentescoActivos() {
-  let headers = new HttpHeaders();
-  headers.append('Content-Type', 'application/json');
-  return this.hpptclient.get<any>(this.urlServiciosTest + '/rutavoluntarios/ParentezcoActivos')
-}
-ListadoTipoIngresoActivos() {
-  let headers = new HttpHeaders();
-  headers.append('Content-Type', 'application/json');
- 
-  return this.hpptclient.get<any>(this.urlServiciosTest + '/rutavoluntarios/TipoIngresosActivos')
-}*/
 }

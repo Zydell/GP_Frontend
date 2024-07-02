@@ -4,12 +4,12 @@ import { Mensajes } from '../../ModuloHerramientas/Mensajes.component';
 import { MessageService } from 'primeng/api';
 
 @Component({
-  selector: 'app-pg-material',
-  templateUrl: './pg-material.component.html',
-  styleUrls: ['./pg-material.component.css'],
+  selector: 'app-pg-oferta',
+  templateUrl: './pg-oferta.component.html',
+  styleUrls: ['./pg-oferta.component.css'],
   providers: [MessageService]
 })
-export class PgMaterialComponent implements OnInit{
+export class PgOfertaComponent implements OnInit{
 
   lsListado:any=[];
   objSeleccion:any="-1";
@@ -49,8 +49,9 @@ ModalCambiarEstado(seleccion:any) {
   this.visibleEstado = true;
 }
   async ListadoInformacion() {
-    const data = await new Promise<any>(resolve => this.servicios.ListadoMaterial().subscribe(translated => { resolve(translated) }));
-    console.log(data)
+
+    const data = await new Promise<any>(resolve => this.servicios.ListadoDimension().subscribe(translated => { resolve(translated) }));
+   console.log(data)
 
     if (data.success) {
       this.lsListado=data.datos;

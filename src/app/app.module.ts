@@ -50,10 +50,12 @@ import { PgPrincipaladministracionComponent } from './ModuloAdministracion/pg-pr
 //import { PgTestComponent } from './ModuloAdministracion/pg-test/pg-test.component';
 //import { PgInstruccionComponent } from './ModuloAdministracion/pg-instruccion/pg-instruccion.component';
 //import { PgRecomendacionComponent } from './ModuloAdministracion/pg-recomendacion/pg-recomendacion.component';
-import { PgCiudadanoComponent } from './ModuloAdministracion/pg-ciudadano/pg-ciudadano.component';
+//import { PgCiudadanoComponent } from './ModuloAdministracion/pg-ciudadano/pg-ciudadano.component';
 import { PgNegocioComponent } from './ModuloAdministracion/pg-negocio/pg-negocio.component';
 import { PgMaterialComponent } from './ModuloAdministracion/pg-material/pg-material.component';
 import { PgPuntoverdeComponent } from './ModuloAdministracion/pg-puntoverde/pg-puntoverde.component';
+import { PgOfertaComponent } from './ModuloAdministracion/pg-oferta/pg-oferta.component';
+
 
 @NgModule({
   declarations: [
@@ -75,10 +77,11 @@ import { PgPuntoverdeComponent } from './ModuloAdministracion/pg-puntoverde/pg-p
     //PgTestComponent,
     //PgInstruccionComponent,
     //PgRecomendacionComponent,
-    PgCiudadanoComponent,
+    //PgCiudadanoComponent,
     PgNegocioComponent,
     PgMaterialComponent,
-    PgPuntoverdeComponent
+    PgPuntoverdeComponent,
+    PgOfertaComponent
   ],
   imports: [
     BrowserModule,
