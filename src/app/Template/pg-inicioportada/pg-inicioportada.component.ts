@@ -4,6 +4,8 @@ import { EjecutarScript } from './../../../Herramientas/EjecutarScript';
 @Component({
   selector: 'app-pg-inicioportada',
   templateUrl: './pg-inicioportada.component.html',
+  styleUrls: ['./pg-inicioportada.component.css']
+  /*
   styleUrls: ['./pg-inicioportada.component.css',
 './../../../assets/vendor/aos/aos.css'
 ,'./../../../assets/vendor/bootstrap-icons/bootstrap-icons.css'
@@ -12,7 +14,7 @@ import { EjecutarScript } from './../../../Herramientas/EjecutarScript';
 ,'./../../../assets/vendor/remixicon/remixicon.css'
 ,'./../../../assets/vendor/swiper/swiper-bundle.min.css'
 ,'./../../../assets/css/style.css'
-]
+]*/
 })
 
 export class PgInicioportadaComponent implements OnInit {
