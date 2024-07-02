@@ -14,6 +14,7 @@ export class MenuadminComponent implements OnInit{
           {
               label: 'Administración',
               icon: 'pi pi-fw pi-file',
+              url: './dashadmin/principaladmin'
               /*items: [
                     {
                       label: 'Seccion',
