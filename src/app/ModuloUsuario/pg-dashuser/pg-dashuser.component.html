@@ -14,10 +14,10 @@
   <link href="assets2/img/apple-touch-icon.png" rel="apple-touch-icon">
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Optionally, you can include Popper.js for tooltips and popovers -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
-  <!-- Bootstrap JS -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+  <!-- Optionally, you can include Popper.js for tooltips and popovers 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>-->
+  <!-- Bootstrap JS 
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>-->
 
 
 
@@ -34,8 +34,10 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/hero-img.png" alt="">
+      <a href="/user-menu">
+        <img src="assets/img/hero-imsg.png" height="50px" width="auto">
+      </a>
+      <a href="/user-menu" class="logo d-flex align-items-center">
         <span class="d-none d-lg-block">GreenPoint</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -144,14 +146,14 @@
         <li class="nav-item dropdown pe-3">
           <a class="nav-link nav-profile d-flex align-items-center pe-0" (click)="toggleMenu('profile', $event)" role="button">
             <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{ user?.nombre +" " + user?.apellido }}</span>
           </a>
           <!-- End Profile Image Icon -->
         
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile" *ngIf="menus['profile']" style="right: 15px !important; top: 45px !important;">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
+              <h6>{{ user?.nombre +" " + user?.apellido }}</h6>
+              <span>Reciclador</span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -187,7 +189,7 @@
               <hr class="dropdown-divider">
             </li>
             <li *ngIf="authService.isAuthenticated()">
-              <a (click)="logout()" class="dropdown-item d-flex align-items-center" href="#">
+              <a (click)="logout()" class="dropdown-item d-flex align-items-center" role="button">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Cerrar Sesión</span>
               </a>
@@ -513,14 +515,14 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Revenue <span>| This Month</span></h5>
+                  <h5 class="card-title">GreenCoins <span>| Total</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                       <i class="bi bi-currency-dollar"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>$3,264</h6>
+                      <h6>{{"$"+user?.greencoins}}</h6>
                       <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                     </div>
@@ -1097,8 +1099,8 @@
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-  <!-- Bootstrap JS -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap JS 
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>-->
 </body>
 
 </html>

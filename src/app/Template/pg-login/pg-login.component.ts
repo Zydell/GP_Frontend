@@ -8,9 +8,7 @@ import { EjecutarScript } from './../../../Herramientas/EjecutarScript';
   templateUrl: './pg-login.component.html',
   styleUrls: ['./pg-login.component.css']
 })
-/*
-export class PgLoginComponent {
-}*/
+
 export class PgLoginComponent {
   email: string = '';
   password: string = '';

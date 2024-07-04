@@ -11,8 +11,18 @@ import { Router } from '@angular/router';
 })
 export class PgDashuserComponent {
   title = 'GreenPoint';
-  constructor(public  authService: AuthService, private router: Router) {}
+  user: any = {};
 
+  constructor(
+    public  authService: AuthService, 
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.user = this.authService.getUser(); // Obtiene la información del usuario al inicializar el componente
+    console.log('User info on init:', this.user); // Agregar log para debug
+  }
+  
   menus: { [key: string]: boolean } = {};
 
   toggleMenu(menu: string, event: Event) {
