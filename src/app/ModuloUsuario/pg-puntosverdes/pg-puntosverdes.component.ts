@@ -59,8 +59,8 @@ export class PgPuntosverdesComponent implements OnInit {
               map,
               title: punto.descripcion,
               icon: {
-                url: "assets/img/recycle.png",
-                scaledSize: new google.maps.Size(25, 25)
+                url: "assets/img/ubicacion.png",
+                scaledSize: new google.maps.Size(60, 60)
               }
             });
           });
@@ -101,8 +101,8 @@ export class PgPuntosverdesComponent implements OnInit {
           map,
           title: punto.descripcion,
           icon: {
-            url: "assets/img/recycle.png",
-            scaledSize: new google.maps.Size(25, 25)
+            url: "assets/img/ubicacion.png",
+            scaledSize: new google.maps.Size(60, 60)
           }
         });
       });
