@@ -1,9 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files*/
 @import "primeng/resources/themes/lara-light-indigo/theme.css";
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
 @import "primeflex/primeflex.css";
-
+ 
 
 /* Demos */
 @import "assets/styles/flags/flags.css";
@@ -112,7 +112,7 @@
 
 .footer {
   grid-area: footer;
-  background: #16a729;
+  /*background: #16a729;*/
   color: white;
   padding: 10px;
   text-align: center;

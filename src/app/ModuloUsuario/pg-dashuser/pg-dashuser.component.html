@@ -5,30 +5,26 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard - NiceAdmin Bootstrap Template</title>
+  <title>Dashboard - Ciudadano</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
   <link href="assets2/img/favicon.png" rel="icon">
   <link href="assets2/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Optionally, you can include Popper.js for tooltips and popovers -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+
+
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-  <!-- Vendor CSS Files 
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-    -->
-  <!-- Template Main CSS File
-  <link href="assets/css/style.css" rel="stylesheet">
-     -->
 
 </head>
 
@@ -40,7 +36,7 @@
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="assets/img/hero-img.png" alt="">
-        <span class="d-none d-lg-block">NiceAdmin</span>
+        <span class="d-none d-lg-block">GreenPoint</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -59,24 +55,25 @@
           <a class="nav-link nav-icon search-bar-toggle " href="#">
             <i class="bi bi-search"></i>
           </a>
-        </li><!-- End Search Icon-->
+        </li><!-- End Search Icon
         <li>
           <nav>
             <ul>
               <li><a routerLink="/login">Login</a></li>
               <li><a routerLink="/register">Register</a></li>
-              <li *ngIf="authService.isAuthenticated()"><a (click)="logout()">Logout</a></li>
             </ul>
           </nav>
         </li>
+        -->
+
         <li class="nav-item dropdown">
 
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+          <a class="nav-link nav-icon" data-bs-toggle="dropdown" (click)="toggleMenu('notifications', $event)" role="button">
             <i class="bi bi-bell"></i>
             <span class="badge bg-primary badge-number">4</span>
           </a><!-- End Notification Icon -->
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications" *ngIf="menus['notifications']" style="right: 9px !important; top: 45px !important;">
             <li class="dropdown-header">
               You have 4 new notifications
               <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
@@ -143,81 +140,15 @@
           </ul><!-- End Notification Dropdown Items -->
 
         </li><!-- End Notification Nav -->
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <li class="dropdown-header">
-              You have 3 new messages
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets2/img/messages-1.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Maria Hudson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>4 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets2/img/messages-2.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Anna Nelson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>6 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets2/img/messages-3.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>David Muldon</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>8 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="dropdown-footer">
-              <a href="#">Show all messages</a>
-            </li>
-
-          </ul><!-- End Messages Dropdown Items -->
-
-        </li><!-- End Messages Nav -->
-
+        
         <li class="nav-item dropdown pe-3">
-
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets2/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" (click)="toggleMenu('profile', $event)" role="button">
+            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
-          </a><!-- End Profile Iamge Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+          </a>
+          <!-- End Profile Image Icon -->
+        
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile" *ngIf="menus['profile']" style="right: 15px !important; top: 45px !important;">
             <li class="dropdown-header">
               <h6>Kevin Anderson</h6>
               <span>Web Designer</span>
@@ -225,7 +156,7 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
+        
             <li>
               <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                 <i class="bi bi-person"></i>
@@ -235,7 +166,7 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
+        
             <li>
               <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                 <i class="bi bi-gear"></i>
@@ -245,7 +176,7 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
+        
             <li>
               <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
                 <i class="bi bi-question-circle"></i>
@@ -255,16 +186,18 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+            <li *ngIf="authService.isAuthenticated()">
+              <a (click)="logout()" class="dropdown-item d-flex align-items-center" href="#">
                 <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
+                <span>Cerrar Sesión</span>
               </a>
             </li>
+          </ul>
+          <!-- End Profile Dropdown Items -->
+        </li>
+        <!-- End Profile Nav -->
+        
 
-          </ul><!-- End Profile Dropdown Items -->
-        </li><!-- End Profile Nav -->
 
       </ul>
     </nav><!-- End Icons Navigation -->
@@ -532,8 +465,8 @@
               <div class="card info-card sales-card">
 
                 <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                  <a class="icon" data-bs-toggle="dropdown" (click)="toggleMenu('menu1', $event)" role="button"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" *ngIf="menus['menu1']">
                     <li class="dropdown-header text-start">
                       <h6>Filter</h6>
                     </li>
@@ -567,8 +500,8 @@
               <div class="card info-card revenue-card">
 
                 <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                  <a class="icon" data-bs-toggle="dropdown" (click)="toggleMenu('menu2', $event)" role="button"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" *ngIf="menus['menu2']">
                     <li class="dropdown-header text-start">
                       <h6>Filter</h6>
                     </li>
@@ -603,8 +536,8 @@
               <div class="card info-card customers-card">
 
                 <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                  <a class="icon" data-bs-toggle="dropdown" (click)="toggleMenu('menu3', $event)" role="button"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" *ngIf="menus['menu3']">
                     <li class="dropdown-header text-start">
                       <h6>Filter</h6>
                     </li>
@@ -639,8 +572,8 @@
               <div class="card">
 
                 <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                  <a class="icon" data-bs-toggle="dropdown" (click)="toggleMenu('menu4', $event)" role="button"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" *ngIf="menus['menu4']">
                     <li class="dropdown-header text-start">
                       <h6>Filter</h6>
                     </li>
@@ -721,8 +654,8 @@
               <div class="card recent-sales overflow-auto">
 
                 <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                  <a class="icon"  data-bs-toggle="dropdown" (click)="toggleMenu('menu5', $event)" role="button"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" *ngIf="menus['menu5']">
                     <li class="dropdown-header text-start">
                       <h6>Filter</h6>
                     </li>
@@ -795,8 +728,8 @@
               <div class="card top-selling overflow-auto">
 
                 <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                  <a class="icon" data-bs-toggle="dropdown" (click)="toggleMenu('menu6', $event)" role="button"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" *ngIf="menus['menu6']">
                     <li class="dropdown-header text-start">
                       <h6>Filter</h6>
                     </li>
@@ -873,8 +806,8 @@
           <!-- Recent Activity -->
           <div class="card">
             <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+              <a class="icon" data-bs-toggle="dropdown" (click)="toggleMenu('menu7', $event)" role="button"><i class="bi bi-three-dots"></i></a>
+              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" *ngIf="menus['menu7']">
                 <li class="dropdown-header text-start">
                   <h6>Filter</h6>
                 </li>
@@ -946,8 +879,8 @@
           <!-- Budget Report -->
           <div class="card">
             <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+              <a class="icon" data-bs-toggle="dropdown" (click)="toggleMenu('menu8', $event)" role="button"><i class="bi bi-three-dots"></i></a>
+              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" *ngIf="menus['menu8']">
                 <li class="dropdown-header text-start">
                   <h6>Filter</h6>
                 </li>
@@ -1020,8 +953,8 @@
           <!-- Website Traffic -->
           <div class="card">
             <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+              <a class="icon"  data-bs-toggle="dropdown" (click)="toggleMenu('menu9', $event)" role="button"><i class="bi bi-three-dots"></i></a>
+              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" *ngIf="menus['menu9']">
                 <li class="dropdown-header text-start">
                   <h6>Filter</h6>
                 </li>
@@ -1098,8 +1031,8 @@
           <!-- News & Updates Traffic -->
           <div class="card">
             <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+              <a class="icon" data-bs-toggle="dropdown" (click)="toggleMenu('menu10', $event)" role="button"><i class="bi bi-three-dots"></i></a>
+              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" *ngIf="menus['menu10']">
                 <li class="dropdown-header text-start">
                   <h6>Filter</h6>
                 </li>
@@ -1164,8 +1097,8 @@
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
