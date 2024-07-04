@@ -57,7 +57,7 @@ export class PgPuntosverdesComponent implements OnInit {
           response.forEach(punto => {
             this.http.get<any>(`http://localhost:5000/api/negocios/${punto.negocio_id}`).subscribe(
               (negocio: any) => {
-                let distancia=calcularDistancia(userLat,userLng,punto.latitud,punto.longitud);
+                let distancia=calcularDistancia(userLat,userLng,punto.latitud,punto.longitud).toFixed(2);
                 const contentString = `
                   <div>
                     <h1>${negocio.nombre}</h1>
@@ -194,7 +194,7 @@ function calcularDistancia(lat1: number, lon1: number, lat2: number, lon2: numbe
             Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-  const distancia = R * c; // Distancia en metros
+  const distancia = (R * c)/1000; // Distancia en metros
 
   return distancia;
 }
