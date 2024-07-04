@@ -11,7 +11,6 @@ async CargarScriptLogin(){
   await this.loadScript("/assets/vendor/glightbox/js/glightbox.min.js");
   await this.loadScript("/assets/vendor/isotope-layout/isotope.pkgd.min.js");
   await this.loadScript("/assets/vendor/swiper/swiper-bundle.min.js");
-  //await this.loadScript("/assets/vendor/waypoints/noframework.waypoints.js");
   await this.loadScript("/assets/js/main.js");
 }
 

@@ -23,8 +23,9 @@ export class PgLoginComponent {
   }
  
   login() {
-    this.authService.login({ email: this.email, password: this.password }).subscribe(
-      () => this.router.navigate(['/protected']),
+    
+    this.authService.login({ correo_electronico: this.email, contrasena: this.password }).subscribe(
+      () => this.router.navigate(['/user-menu']),
       err => console.error(err)
     );
   }

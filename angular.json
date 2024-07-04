@@ -22,7 +22,8 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/gp.ico",
-              "src/assets"
+              "src/assets",
+              "src/assets2"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
@@ -85,7 +86,8 @@
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               "src/gp.ico",
-              "src/assets"
+              "src/assets",
+              "src/assets2"
             ],
             "styles": [
               "src/styles.css",

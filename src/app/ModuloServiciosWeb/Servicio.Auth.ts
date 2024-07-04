@@ -16,8 +16,8 @@ export class AuthService {
       
     }
 
-  login(credentials: { email: string, password: string }): Observable<any> {
-    return this.hpptclient.post<any>(this.urlServiciosTest + '/login', credentials)
+  login(credentials: { correo_electronico: string, contrasena: string }): Observable<any> {
+    return this.hpptclient.post<any>(this.urlServiciosTest + '/api/auth/login', credentials)
       .pipe(
         tap(response => {
           if (response && response.token) {
@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   register(user: { email: string, password: string }): Observable<any> {
-    return this.http.post<any>(this.urlServiciosTest + '/register', user);
+    return this.http.post<any>(this.urlServiciosTest + '/api/auth/register', user);
   }
 
   logout() {

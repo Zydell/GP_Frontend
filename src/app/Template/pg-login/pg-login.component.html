@@ -77,20 +77,20 @@
                     <p class="text-center small">Ingrese su correo y contraseña para acceder</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
+                  <form (ngSubmit)="login()" class="row g-3 needs-validation" novalidate>
 
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">Correo electrónico</label>
+                      <label for="email" class="form-label">Correo electrónico</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
+                        <input type="email" name="username" [(ngModel)]="email" class="form-control" id="email" required>
                         <div class="invalid-feedback">Ingrese su correo electrónico.</div>
                       </div>
                     </div>
 
                     <div class="col-12" style="margin-top: 0px;">
-                      <label for="yourPassword" class="form-label">Contraseña</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
+                      <label for="password" class="form-label">Contraseña</label>
+                      <input type="password" name="password" [(ngModel)]="password" class="form-control" id="password" required>
                       <div class="invalid-feedback">Ingrese su contraseña!</div>
                     </div>
 
@@ -101,7 +101,7 @@
                       </div>
                     </div>
                     <div class="col-12" style="margin-top: 0px;">
-                      <button class="btn btn-primary w-100" type="submit" >Iniciar Sesión</button>
+                      <button class="btn btn-primary w-100" type="submit">Iniciar Sesión</button>
                     </div>
                     <div class="col-12">
                       <p class="small mb-0">No tienes cuenta? <a href="/registro">Regístrate ahora!</a></p>
