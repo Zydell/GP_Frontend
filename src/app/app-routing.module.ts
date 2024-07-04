@@ -17,7 +17,7 @@ const routes: Routes = [
     component: PgInicioportadaComponent
   },
   {
-    path: 'inicio',
+    path: 'login',
     component: PgLoginComponent
   },
   {

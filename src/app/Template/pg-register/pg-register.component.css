@@ -20,12 +20,12 @@ body {
 }
 
 a {
-  color: #4154f1;
+  color: #008407;
   text-decoration: none;
 }
 
 a:hover {
-  color: #717ff5;
+  color: #00d134;
   text-decoration: none;
 }
 
@@ -64,7 +64,7 @@ h6 {
   font-size: 24px;
   margin-bottom: 0;
   font-weight: 600;
-  color: #012970;
+  color: #017012;
 }
 
 /*--------------------------------------------------------------
@@ -77,7 +77,7 @@ h6 {
   right: 15px;
   bottom: 15px;
   z-index: 99999;
-  background: #4154f1;
+  background: #39981c;
   width: 40px;
   height: 40px;
   border-radius: 4px;
@@ -91,7 +91,7 @@ h6 {
 }
 
 .back-to-top:hover {
-  background: #6776f4;
+  background: #70e34d;
   color: #fff;
 }
 
@@ -131,7 +131,7 @@ h6 {
 }
 
 .dropdown-menu .dropdown-divider {
-  color: #a5c5fe;
+  color: #a5feae;
   margin: 0;
 }
 
@@ -236,7 +236,7 @@ h6 {
   padding: 20px 0 15px 0;
   font-size: 18px;
   font-weight: 500;
-  color: #012970;
+  color: #018a0f;
   font-family: "Poppins", sans-serif;
 }
 
@@ -247,7 +247,7 @@ h6 {
 }
 
 .card-body {
-  padding: 0 20px 20px 20px;
+  padding: 0 15px 15px 15px;
 }
 
 .card-img-overlay {
@@ -294,7 +294,7 @@ h6 {
 
 .accordion-flush .accordion-button:not(.collapsed) {
   box-shadow: none;
-  color: #4154f1;
+  color: #41f164;
 }
 
 .accordion-flush .accordion-body {
@@ -307,7 +307,7 @@ h6 {
 .breadcrumb {
   font-size: 14px;
   font-family: "Nunito", sans-serif;
-  color: #899bbd;
+  color: #9fbd89;
   font-weight: 600;
 }
 
@@ -342,13 +342,13 @@ h6 {
 
 .nav-tabs-bordered .nav-link:hover,
 .nav-tabs-bordered .nav-link:focus {
-  color: #4154f1;
+  color: #41f161; 
 }
 
 .nav-tabs-bordered .nav-link.active {
   background-color: #fff;
-  color: #4154f1;
-  border-bottom: 2px solid #4154f1;
+  color: #41f15b;
+  border-bottom: 2px solid #41f153;
 }
 
 /*--------------------------------------------------------------
@@ -372,7 +372,7 @@ h6 {
 .logo span {
   font-size: 26px;
   font-weight: 700;
-  color: #012970;
+  color: #017022;
   font-family: "Nunito", sans-serif;
 }
 
@@ -391,7 +391,7 @@ h6 {
   font-size: 32px;
   padding-left: 10px;
   cursor: pointer;
-  color: #012970;
+  color: #017028;
 }
 
 .header .search-bar {
@@ -428,7 +428,7 @@ h6 {
 .header .search-form input {
   border: 0;
   font-size: 14px;
-  color: #012970;
+  color: #017012;
   border: 1px solid rgba(1, 41, 112, 0.2);
   padding: 7px 38px 7px 8px;
   border-radius: 3px;
@@ -451,7 +451,7 @@ h6 {
 }
 
 .header .search-form button i {
-  color: #012970;
+  color: #137001;
 }
 
 /*--------------------------------------------------------------
@@ -468,13 +468,13 @@ h6 {
 
 .header-nav .nav-icon {
   font-size: 22px;
-  color: #012970;
+  color: #287001;
   margin-right: 25px;
   position: relative;
 }
 
 .header-nav .nav-profile {
-  color: #012970;
+  color: #1b7001;
 }
 
 .header-nav .nav-profile img {
@@ -684,7 +684,7 @@ h6 {
   align-items: center;
   font-size: 15px;
   font-weight: 600;
-  color: #4154f1;
+  color: #41f147;
   transition: 0.3;
   background: #f6f9ff;
   padding: 10px 15px;
@@ -694,11 +694,11 @@ h6 {
 .sidebar-nav .nav-link i {
   font-size: 16px;
   margin-right: 10px;
-  color: #4154f1;
+  color: #41f164;
 }
 
 .sidebar-nav .nav-link.collapsed {
-  color: #012970;
+  color: #017008;
   background: #fff;
 }
 
@@ -707,12 +707,12 @@ h6 {
 }
 
 .sidebar-nav .nav-link:hover {
-  color: #4154f1;
+  color: #41f144;
   background: #f6f9ff;
 }
 
 .sidebar-nav .nav-link:hover i {
-  color: #4154f1;
+  color: #41f16a;
 }
 
 .sidebar-nav .nav-link .bi-chevron-down {
@@ -735,7 +735,7 @@ h6 {
   align-items: center;
   font-size: 14px;
   font-weight: 600;
-  color: #012970;
+  color: #01701f;
   transition: 0.3;
   padding: 10px 0 10px 40px;
   transition: 0.3s;
@@ -750,11 +750,11 @@ h6 {
 
 .sidebar-nav .nav-content a:hover,
 .sidebar-nav .nav-content a.active {
-  color: #4154f1;
+  color: #41f173;
 }
 
 .sidebar-nav .nav-content a.active i {
-  background-color: #4154f1;
+  background-color: #41f15b;
 }
 
 /*--------------------------------------------------------------
@@ -777,7 +777,7 @@ h6 {
 
 .dashboard .filter .icon:hover,
 .dashboard .filter .icon:focus {
-  color: #4154f1;
+  color: #41f161;
 }
 
 .dashboard .filter .dropdown-header {
@@ -805,7 +805,7 @@ h6 {
 
 .dashboard .info-card h6 {
   font-size: 28px;
-  color: #012970;
+  color: #017015;
   font-weight: 700;
   margin: 0;
   padding: 0;
@@ -821,7 +821,7 @@ h6 {
 }
 
 .dashboard .sales-card .card-icon {
-  color: #4154f1;
+  color: #41f167;
   background: #f6f6fe;
 }
 
@@ -906,7 +906,7 @@ h6 {
 }
 
 .dashboard .news h4 a:hover {
-  color: #4154f1;
+  color: #41f15b;
 }
 
 .dashboard .news p {
@@ -973,7 +973,7 @@ h6 {
   background-color: #fff;
   border-radius: 0.25rem;
   text-align: center;
-  color: #012970;
+  color: #01700c;
   padding: 15px 0;
 }
 
@@ -1004,7 +1004,7 @@ h6 {
 .profile .profile-card h2 {
   font-size: 24px;
   font-weight: 700;
-  color: #2c384e;
+  color: #2c4e35;
   margin: 10px 0 0 0;
 }
 
@@ -1015,14 +1015,14 @@ h6 {
 .profile .profile-card .social-links a {
   font-size: 20px;
   display: inline-block;
-  color: rgba(1, 41, 112, 0.5);
+  color: rgba(1, 112, 23, 0.5);
   line-height: 0;
   margin-right: 10px;
   transition: 0.3s;
 }
 
 .profile .profile-card .social-links a:hover {
-  color: #012970;
+  color: #017022;
 }
 
 .profile .profile-overview .row {
@@ -1031,17 +1031,17 @@ h6 {
 }
 
 .profile .profile-overview .card-title {
-  color: #012970;
+  color: #017015;
 }
 
 .profile .profile-overview .label {
   font-weight: 600;
-  color: rgba(1, 41, 112, 0.6);
+  color: rgba(1, 112, 12, 0.6);
 }
 
 .profile .profile-edit label {
   font-weight: 600;
-  color: rgba(1, 41, 112, 0.6);
+  color: rgba(1, 112, 18, 0.6);
 }
 
 .profile .profile-edit img {
@@ -1054,7 +1054,7 @@ h6 {
 .faq .basic h6 {
   font-size: 18px;
   font-weight: 600;
-  color: #4154f1;
+  color: #41f170;
 }
 
 .faq .basic p {
@@ -1071,12 +1071,12 @@ h6 {
 .contact .info-box i {
   font-size: 38px;
   line-height: 0;
-  color: #4154f1;
+  color: #41f16a;
 }
 
 .contact .info-box h3 {
   font-size: 20px;
-  color: #012970;
+  color: #017003;
   font-weight: 700;
   margin: 20px 0 10px 0;
 }
@@ -1138,7 +1138,7 @@ h6 {
 
 .contact .php-email-form input:focus,
 .contact .php-email-form textarea:focus {
-  border-color: #4154f1;
+  border-color: #41f15b;
 }
 
 .contact .php-email-form input {
@@ -1150,7 +1150,7 @@ h6 {
 }
 
 .contact .php-email-form button[type=submit] {
-  background: #4154f1;
+  background: #41f15b;
   border: 0;
   padding: 10px 30px;
   color: #fff;
@@ -1159,7 +1159,7 @@ h6 {
 }
 
 .contact .php-email-form button[type=submit]:hover {
-  background: #5969f3;
+  background: #59f370;
 }
 
 @keyframes animate-loading {
@@ -1182,7 +1182,7 @@ h6 {
 .error-404 h1 {
   font-size: 180px;
   font-weight: 700;
-  color: #4154f1;
+  color: #41f14d;
   margin-bottom: 0;
   line-height: 150px;
 }
@@ -1190,18 +1190,18 @@ h6 {
 .error-404 h2 {
   font-size: 24px;
   font-weight: 700;
-  color: #012970;
+  color: #017008;
   margin-bottom: 30px;
 }
 
 .error-404 .btn {
-  background: #51678f;
+  background: #518f5a;
   color: #fff;
   padding: 8px 30px;
 }
 
 .error-404 .btn:hover {
-  background: #3e4f6f;
+  background: #3e6f47;
 }
 
 @media (min-width: 992px) {
@@ -1217,17 +1217,33 @@ h6 {
   padding: 20px 0;
   font-size: 14px;
   transition: all 0.3s;
-  border-top: 1px solid #cddfff;
+  border-top: 1px solid #ddffcd;
 }
 
 .footer .copyright {
   text-align: center;
-  color: #012970;
+  color: #017019;
 }
 
 .footer .credits {
   padding-top: 5px;
   text-align: center;
   font-size: 13px;
-  color: #012970;
+  color: #01701b;
 }
+
+.btn {
+  background: #3e6f47;
+  color: #fff;
+  padding: 8px 30px;
+  border: #008407;
+}
+
+.btn:hover {
+  background: #60af6f;
+  color: #fff;
+  padding: 8px 30px;
+  border: #68cc6d;
+}
+
+
