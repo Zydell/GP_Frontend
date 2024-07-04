@@ -26,10 +26,16 @@
               "src/assets2"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeicons/primeicons.css"
             ],
-            "scripts": []
+            "scripts": [
+              "https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js",
+              "https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -92,10 +98,14 @@
             "styles": [
               "src/styles.css",
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css"
             ],
-            "scripts": [  ]
+            "scripts": [ 
+              "https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js",
+              "https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+             ]
           }
         }
       }

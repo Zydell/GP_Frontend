@@ -1,3 +1,37 @@
+/*
+.nav-profile {
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  display: block;
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  min-width: 160px;
+  z-index: 1;
+}
+
+.dropdown-header {
+  padding: 8px 16px;
+}
+
+.dropdown-divider {
+  margin: 0;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: black;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
 /**
 * Template Name: NiceAdmin
 * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -105,6 +139,7 @@ h6 {
 --------------------------------------------------------------*/
 /* Dropdown menus */
 .dropdown-menu {
+  display:block;
   border-radius: 4px;
   padding: 10px 0;
   animation-name: dropdown-animate;
