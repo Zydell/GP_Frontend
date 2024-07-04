@@ -62,6 +62,7 @@ import { PgLoginComponent } from './Template/pg-login/pg-login.component';
 import { PgRegisterComponent } from './Template/pg-register/pg-register.component';
 import { PgDashuserComponent } from './ModuloUsuario/pg-dashuser/pg-dashuser.component';
 import { PgPuntosverdesComponent } from './ModuloUsuario/pg-puntosverdes/pg-puntosverdes.component';
+import { GreenPointsMapComponent } from './green-points-map/green-points-map.component';
 
 
 @NgModule({
@@ -92,7 +93,8 @@ import { PgPuntosverdesComponent } from './ModuloUsuario/pg-puntosverdes/pg-punt
     PgLoginComponent,
     PgRegisterComponent,
     PgDashuserComponent,
-    PgPuntosverdesComponent
+    PgPuntosverdesComponent,
+    GreenPointsMapComponent
   ],
   imports: [
     BrowserModule,
