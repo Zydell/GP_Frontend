@@ -10,6 +10,7 @@ declare global {
       Map: any;
       Marker: any;
       Size: any;
+      InfoWindow: any;
     };
   };
 }
