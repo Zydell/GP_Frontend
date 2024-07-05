@@ -5,7 +5,7 @@ import { EjecutarScript } from './../../../Herramientas/EjecutarScript';
 @Component({
   selector: 'app-pg-register',
   templateUrl: './pg-register.component.html',
-  styleUrls: ['./pg-register.component.css']
+  styleUrls: ['./pg-register.component.css' ]
 })
 /*
 export class PgRegisterComponent {
