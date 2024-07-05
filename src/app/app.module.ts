@@ -63,6 +63,7 @@ import { PgRegisterComponent } from './Template/pg-register/pg-register.componen
 import { PgDashuserComponent } from './ModuloUsuario/pg-dashuser/pg-dashuser.component';
 import { PgPuntosverdesComponent } from './ModuloUsuario/pg-puntosverdes/pg-puntosverdes.component';
 import { GreenPointsMapComponent } from './green-points-map/green-points-map.component';
+import { MessagesModule } from 'primeng/messages';
 
 
 @NgModule({
@@ -98,6 +99,7 @@ import { GreenPointsMapComponent } from './green-points-map/green-points-map.com
   ],
   imports: [
     BrowserModule,
+    MessagesModule,
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,ReactiveFormsModule,MultiSelectModule,

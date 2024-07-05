@@ -56,81 +56,81 @@
 
   <main>
     <div class="container"><br><br><br>
-
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
-
-              <div class="d-flex justify-content-center py-4" style="position: absolute; z-index: 100; margin-bottom: 620px;">
-                <a href="">
-                  <img src="assets/img/hero-img.png" alt="" width="auto" height="100px" style="z-index: 100;">
-                </a>
-              </div><!-- End Logo -->
-
-              <div class="card mb-3">
-
-                <div class="card-body">
-
-                  <div class="pt-4 pb-2" style="margin-top: -20px;">
-                    <h5 class="card-title text-center pb-0 fs-4">Create una Cuenta</h5>
-                    <p class="text-center small">Ingresa la siguiente informacion personal</p>
+              <div class="card-wrapper position-relative">
+    
+                <div class="logo-wrapper position-absolute d-flex justify-content-center py-4" style="top: -100px; z-index: 100;">
+                  <a href="">
+                    <img src="assets/img/hero-img.png" alt="" width="auto" height="100px" style="z-index: 100;">
+                  </a>
+                </div><!-- End Logo -->
+    
+                <div class="card mb-3" style="margin-top: -100px;">
+                  <div class="card-body">
+                    <div class="pt-4 pb-2" style="margin-top: -20px;">
+                      <h5 class="card-title text-center pb-0 fs-4">Crea una Cuenta</h5>
+                      <p class="text-center small" style="margin-top: -10px; font-size: 13px;">Ingrese la siguiente información</p>
+                    </div>
+    
+                    <form class="row g-3 needs-validation" novalidate style="margin-top: -25px;">
+                      <div class="col-12 form-group">
+                        <label for="yourName" class="form-label" style="font-size: 14px;">Nombres</label>
+                        <input type="text" name="name" class="form-control" id="yourName" required style="font-size: 13px;">
+                        <div class="invalid-feedback floating-invalid-feedback">Debes ingresar tus nombres!</div>
+                      </div>
+    
+                      <div class="col-12 form-group" style="margin-top: -10px;">
+                        <label for="yourApellidos" class="form-label" style="font-size: 14px;">Apellidos</label>
+                        <div class="input-group has-validation">
+                          <input type="text" name="username" class="form-control" id="yourApellidos" required style="font-size: 13px;">
+                          <div class="invalid-feedback floating-invalid-feedback">Ingresa tu nombre de usuario.</div>
+                        </div>
+                      </div>
+    
+                      <div class="col-12 form-group" style="margin-top: -10px;">
+                        <label for="yourEmail" class="form-label" style="font-size: 14px;">Correo Electrónico</label>
+                        <div class="input-group has-validation">
+                          <span class="input-group-text" id="inputGroupPrepend">@</span>
+                          <input type="email" name="email" class="form-control" id="yourEmail" required style="font-size: 13px;">
+                          <div class="invalid-feedback floating-invalid-feedback">Debes ingresar tu correo electrónico!</div>
+                        </div>
+                      </div>
+    
+                      <div class="col-12 form-group" style="margin-top: -10px;">
+                        <label for="yourPassword" class="form-label" style="font-size: 14px;">Contraseña</label>
+                        <input type="password" name="password" class="form-control" id="yourPassword" required style="font-size: 13px;">
+                        <div class="invalid-feedback floating-invalid-feedback">Debes ingresar tu contraseña!</div>
+                      </div>
+    
+                      <div class="col-12 form-group" style="margin-top: -10px;">
+                        <div class="form-check">
+                          <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
+                          <label class="form-check-label" for="acceptTerms" style="font-size: 12px;">Estoy de acuerdo y acepto los <a href="#">términos y condiciones</a></label>
+                          <div class="invalid-feedback floating-invalid-feedback">Debes aceptar antes de enviar.</div>
+                        </div>
+                      </div>
+                      <div class="col-12" style="margin-top: -10px;">
+                        <button class="btn btn-primary w-100" type="submit">Crear Cuenta</button>
+                      </div>
+                      <div class="col-12" style="margin-top: 5px; margin-bottom: -30px;">
+                        <p class="small mb-0" style="font-size: 13px;">Ya tienes una cuenta? <a href="/login">Inicia sesión</a></p>
+                      </div>
+                    </form>
+    
                   </div>
-
-                  <form class="row g-3 needs-validation" novalidate>
-                    <div class="col-12">
-                      <label for="yourName" class="form-label">Nombres</label>
-                      <input type="text" name="name" class="form-control" id="yourName" required placeholder="">
-                      <div class="invalid-feedback">Debes ingresar tus nombres!</div>
-                    </div>
-
-                    <div class="col-12" style="margin-top: 0px;">
-                      <label for="yourApellidos" class="form-label">Apellidos</label>
-                      <div class="input-group has-validation">
-                        <input type="text" name="username" class="form-control" id="yourApellidos" required>
-                        <div class="invalid-feedback">Ingresa tu nombre de usuario.</div>
-                      </div>
-                    </div>
-
-                    <div class="col-12" style="margin-top: 0px;">
-                      <label for="yourEmail" class="form-label">Correo Electrónico</label>
-                      <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="email" name="email" class="form-control" id="yourEmail" required>
-                        <div class="invalid-feedback">Debes ingresar tu correo electrónico!</div>
-                      </div>
-                    </div>
-
-                    <div class="col-12" style="margin-top: 0px;">
-                      <label for="yourPassword" class="form-label">Contraseña</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
-                      <div class="invalid-feedback">Debes ingresar tu contraseña!</div>
-                    </div>
-
-                    <div class="col-12" style="margin-top: 0px;">
-                      <div class="form-check">
-                        <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
-                        <label class="form-check-label" for="acceptTerms" style="font-size: 12px;">Estoy de acuerdo y acepto los <a href="#">terminos y condiciones</a></label>
-                        <div class="invalid-feedback">Debes aceptar antes de enviar.</div>
-                      </div>
-                    </div>
-                    <div class="col-12" style="margin-top: 0px;">
-                      <button class="btn btn-primary w-100" type="submit">Crear Cuenta</button>
-                    </div>
-                    <div class="col-12">
-                      <p class="small mb-0">Ya tienes una cuenta? <a href="/login">Inicia sesión</a></p>
-                    </div>
-                  </form>
-
                 </div>
+    
               </div>
             </div>
           </div>
         </div>
-
       </section>
-
     </div>
+    
+    
   </main><!-- End #main -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

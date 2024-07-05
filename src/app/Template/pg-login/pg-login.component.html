@@ -56,67 +56,68 @@
 
   <main>
     <div class="container"><br>
-
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
-              
-              <div class="d-flex justify-content-center py-4" style="position: absolute; z-index: 100; margin-bottom: 500px;">
-                <a href="">
-                  <img src="assets/img/hero-img.png" alt="" width="auto" height="100px" style="z-index: 100;">
-                </a>
-              </div><!-- End Logo -->
-
-              <div class="card mb-3">
-
-                <div class="card-body">
-
-                  <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Iniciar sesión en GreenPoint</h5>
-                    <p class="text-center small">Ingrese su correo y contraseña para acceder</p>
+              <div class="card-wrapper position-relative">
+    
+                <div class="logo-wrapper position-absolute d-flex justify-content-center py-4" style="top: -80px; z-index: 100;">
+                  <a href="">
+                    <img src="assets/img/hero-img.png" alt="" width="auto" height="100px" style="z-index: 100;">
+                  </a>
+                </div><!-- End Logo -->
+    
+                <div class="card mb-3" style="margin-top: -80px;">
+    
+                  <div class="card-body">
+    
+                    <div class="pt-4 pb-2" >
+                      <h5 class="card-title text-center pb-0 fs-4" style="margin-top: -30px;">Iniciar sesión en GreenPoint</h5>
+                      <p class="text-center small" style="font-size: 13px;">Ingrese su correo y contraseña para acceder</p>
+                    </div>
+    
+                    <form #form="ngForm" (ngSubmit)="login(form)" class="row g-3 needs-validation" novalidate>
+    
+                      <div class="col-12 form-group">
+                        <label for="email" class="form-label" style="font-size: 14px;">Correo electrónico</label>
+                        <div class="input-group has-validation">
+                          <span class="input-group-text" id="inputGroupPrepend">@</span>
+                          <input type="email" name="username" [(ngModel)]="email" class="form-control" id="email" required style="font-size: 13px;">
+                          <div class="invalid-feedback floating-invalid-feedback">Ingrese su correo electrónico.</div>
+                        </div>
+                      </div>
+    
+                      <div class="col-12 form-group" style="margin-top: -10px;">
+                        <label for="password" class="form-label" style="font-size: 14px;">Contraseña</label>
+                        <input type="password" name="password" [(ngModel)]="password" class="form-control" id="password" required style="font-size: 13px;">
+                        <div class="invalid-feedback floating-invalid-feedback">Ingrese su contraseña!</div>
+                      </div>
+    
+                      <div class="col-12 form-group" style="margin-top: -10px;">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
+                          <label class="form-check-label" for="rememberMe" style="font-size: 12px;">Recuerdame</label>
+                        </div>
+                      </div>
+                      <div class="col-12" style="margin-top: -10px;">
+                        <button class="btn btn-primary w-100" type="submit">Iniciar Sesión</button>
+                      </div>
+                      <div class="col-12" style="margin-top: 5px; margin-bottom: -30px;" >
+                        <p class="small mb-0" style="font-size: 13px;">No tienes cuenta? <a href="/registro">Regístrate ahora!</a></p>
+                      </div>
+                    </form>
+    
                   </div>
-
-                  <form (ngSubmit)="login()" class="row g-3 needs-validation" novalidate>
-
-                    <div class="col-12">
-                      <label for="email" class="form-label">Correo electrónico</label>
-                      <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="email" name="username" [(ngModel)]="email" class="form-control" id="email" required>
-                        <div class="invalid-feedback">Ingrese su correo electrónico.</div>
-                      </div>
-                    </div>
-
-                    <div class="col-12" style="margin-top: 0px;">
-                      <label for="password" class="form-label">Contraseña</label>
-                      <input type="password" name="password" [(ngModel)]="password" class="form-control" id="password" required>
-                      <div class="invalid-feedback">Ingrese su contraseña!</div>
-                    </div>
-
-                    <div class="col-12" style="margin-top: 0px;">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
-                        <label class="form-check-label" for="rememberMe">Recuerdame</label>
-                      </div>
-                    </div>
-                    <div class="col-12" style="margin-top: 0px;">
-                      <button class="btn btn-primary w-100" type="submit">Iniciar Sesión</button>
-                    </div>
-                    <div class="col-12">
-                      <p class="small mb-0">No tienes cuenta? <a href="/registro">Regístrate ahora!</a></p>
-                    </div>
-                  </form>
-
                 </div>
+    
               </div>
             </div>
           </div>
         </div>
-
       </section>
-
     </div>
+    <p-messages [(value)]="messages1" [enableService]="false" [closable]="true" class="floating-message"></p-messages>
   </main><!-- End #main -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

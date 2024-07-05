@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, ViewEncapsulation  } from '@angular/core';
 import { AuthService } from '../../ModuloServiciosWeb/Servicio.Auth';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
   templateUrl: './pg-dashuser.component.html',
   styleUrls: [ './pg-dashuser.component.css',
     "./../../../assets/vendor/bootstrap-icons/bootstrap-icons.css"
-    ] 
+    ]//,
+    //encapsulation: ViewEncapsulation.ShadowDom
 })
 export class PgDashuserComponent {
   title = 'GreenPoint';
