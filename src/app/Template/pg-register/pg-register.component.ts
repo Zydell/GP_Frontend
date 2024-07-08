@@ -16,7 +16,7 @@ export class PgRegisterComponent {
   @ViewChild('ciudadanoform') ciudadanoform!: NgForm;
   @ViewChild('negocioform') negocioform!: NgForm;
   telefono:  string = '';
-  fechaNacimiento: string = '';
+  fechaNacimiento: Date = new Date();
   lastname: string = '';
   name: string = '';
   email: string = '';
@@ -29,7 +29,7 @@ export class PgRegisterComponent {
   uploadedFiles: any[] = [];
   // Otros campos si es necesario
 
-  constructor(private authService: AuthService, private js:EjecutarScript) {}
+  constructor(private authService: AuthService, private router: Router, private js:EjecutarScript) {}
 
   ngOnInit() {
     this.js.CargarScriptLogin();
@@ -44,7 +44,6 @@ export class PgRegisterComponent {
   }
 
   addFormValidation() { 
-    console.log("AQUIIIIIIIIIIIII")
     setTimeout(() => {
       const forms = document.querySelectorAll('.needs-validation');
       Array.prototype.slice.call(forms).forEach(function (form: HTMLFormElement) {
@@ -61,10 +60,15 @@ export class PgRegisterComponent {
     
   register(form: NgForm) {
     if (form.valid) {
+      this.messages1 = [{severity:'error', summary:'Error', detail:'Form valido'}];
       if (this.tipo === 'ciudadano') {
-        this.authService.registerCiudadano({ email: this.email, password: this.password }).subscribe(
-          response => console.log('Ciudadano registrado correctamente!', response),
-          err => console.error(err)
+        this.authService.registerCiudadano({ fecha_nac: this.fechaNacimiento, telefono: this.telefono, apellido: this.lastname, nombre: this.name, correo_electronico: this.email, contrasena: this.password }).subscribe(
+          //response => console.log('Ciudadano registrado correctamente!', response),
+          () => this.router.navigate(['/user-menu']),
+          err => {
+            console.error(err);
+            this.messages1 = [{severity:'error', summary:'Error', detail:err.error.message}];
+          }
         );
       } else if (this.tipo === 'negocio') {
 
@@ -82,7 +86,7 @@ export class PgRegisterComponent {
         );
       }
     }else{
-      this.messages1 = [];
+      //this.messages1 = [{severity:'error', summary:'Error', detail:'Form invalido'}];
     }
   }
 

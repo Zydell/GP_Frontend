@@ -1,5 +1,25 @@
 @import "../../../assets/styles/layout.css";
 
+.floating-message {
+  position: fixed;
+  top: 470px; /* Ajusta según sea necesario */
+  right: 20px; /* Ajusta según sea necesario */
+  z-index: 1050; /* Asegúrate de que esté por encima del modal */
+  width: auto;
+  max-width: 350px; /* Puedes ajustar esto también */
+}
+
+.card-wrapper {
+  position: relative;
+  padding-top: 80px; /* Espacio para el logo */
+}
+
+.logo-wrapper {
+  top: -80px; /* Ajusta según la altura del logo */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 /* RadioButton */
 .custom-radiobutton .p-radiobutton .p-radiobutton-box {
   width: 5px;

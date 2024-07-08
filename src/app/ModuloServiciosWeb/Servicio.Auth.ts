@@ -39,12 +39,12 @@ export class AuthService {
       );
   }
 
-  registerCiudadano(user: { email: string, password: string }): Observable<any> {
-    return this.http.post<any>(this.urlServiciosTest + '/api/auth/register', user);
+  registerCiudadano(user: { fecha_nac: Date, telefono: string, apellido: string, nombre: string, correo_electronico: string, contrasena: string }): Observable<any> {
+    return this.http.post<any>(this.urlServiciosTest + '/api/auth/register/ciudadano', user);
   }
 
   registerNegocio(user: FormData): Observable<any> {
-    return this.http.post<any>(this.urlServiciosTest + '/api/auth/register', user);
+    return this.http.post<any>(this.urlServiciosTest + '/api/auth/register/negocio', user);
   }
 
   logout() {
