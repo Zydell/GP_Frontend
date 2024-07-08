@@ -40,7 +40,9 @@
       <a href="/user-menu" class="logo d-flex align-items-center">
         <span class="d-none d-lg-block">GreenPoint</span>
       </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
+      <!--</i><i class="bi bi-list toggle-sidebar-btn"></i>-->
+      
+      <i class="bi bi-list toggle-sidebar-btn" (click)="toggleSidebar()"></i>
     </div><!-- End Logo -->
 
     <div class="search-bar">
@@ -57,16 +59,8 @@
           <a class="nav-link nav-icon search-bar-toggle " href="#">
             <i class="bi bi-search"></i>
           </a>
-        </li><!-- End Search Icon
-        <li>
-          <nav>
-            <ul>
-              <li><a routerLink="/login">Login</a></li>
-              <li><a routerLink="/register">Register</a></li>
-            </ul>
-          </nav>
-        </li>
-        -->
+        </li><!-- End Search Icon-->
+        
 
         <li class="nav-item dropdown">
 
@@ -207,7 +201,7 @@
   </header><!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
+  <aside id="sidebar" class="sidebar" [class.collapsed]="sidebarCollapsed">
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
@@ -443,7 +437,7 @@
 
   </aside><!-- End Sidebar-->
 
-  <main id="main" class="main">
+  <main id="main" class="main" [class.toggle-sidebar]="sidebarCollapsed">
 
     <div class="pagetitle">
       <h1>Dashboard</h1>
@@ -587,63 +581,11 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Reports <span>/Today</span></h5>
-
+                  <h5 class="card-title">Puntos Verdes <span>/Ecuador</span></h5>
                   <!-- Line Chart -->
                   <div id="reportsChart"></div>
-
-                  <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-                      new ApexCharts(document.querySelector("#reportsChart"), {
-                        series: [{
-                          name: 'Sales',
-                          data: [31, 40, 28, 51, 42, 82, 56],
-                        }, {
-                          name: 'Revenue',
-                          data: [11, 32, 45, 32, 34, 52, 41]
-                        }, {
-                          name: 'Customers',
-                          data: [15, 11, 32, 18, 9, 24, 11]
-                        }],
-                        chart: {
-                          height: 350,
-                          type: 'area',
-                          toolbar: {
-                            show: false
-                          },
-                        },
-                        markers: {
-                          size: 4
-                        },
-                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                        fill: {
-                          type: "gradient",
-                          gradient: {
-                            shadeIntensity: 1,
-                            opacityFrom: 0.3,
-                            opacityTo: 0.4,
-                            stops: [0, 90, 100]
-                          }
-                        },
-                        dataLabels: {
-                          enabled: false
-                        },
-                        stroke: {
-                          curve: 'smooth',
-                          width: 2
-                        },
-                        xaxis: {
-                          type: 'datetime',
-                          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-                        },
-                        tooltip: {
-                          x: {
-                            format: 'dd/MM/yy HH:mm'
-                          },
-                        }
-                      }).render();
-                    });
-                  </script>
+                  <app-green-points-map></app-green-points-map>
+                  
                   <!-- End Line Chart -->
 
                 </div>

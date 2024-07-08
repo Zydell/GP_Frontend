@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class PgDashuserComponent {
   title = 'GreenPoint';
   user: any = {};
+  sidebarCollapsed = false;
 
   constructor(
     public  authService: AuthService, 
@@ -23,8 +24,29 @@ export class PgDashuserComponent {
     this.user = this.authService.getUser(); // Obtiene la información del usuario al inicializar el componente
     console.log('User info on init:', this.user); // Agregar log para debug
   }
+  /*
+  toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar) {
+      sidebar.classList.toggle('collapsed');
+    }
+  }
+ 
+    toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const mainContent = document.getElementById('main');
+      if (sidebar && mainContent) {
+        sidebar.classList.toggle('collapsed');
+        mainContent.classList.toggle('expanded');
+      }
+    }*/
   
-  menus: { [key: string]: boolean } = {};
+  
+      toggleSidebar() {
+        this.sidebarCollapsed = !this.sidebarCollapsed;
+      }
+
+  menus: { [key: string]: boolean } = {};  
 
   toggleMenu(menu: string, event: Event) {
     this.menus[menu] = !this.menus[menu];
@@ -43,3 +65,4 @@ export class PgDashuserComponent {
   }
   
 }
+

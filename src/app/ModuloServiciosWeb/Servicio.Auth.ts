@@ -39,7 +39,11 @@ export class AuthService {
       );
   }
 
-  register(user: { email: string, password: string }): Observable<any> {
+  registerCiudadano(user: { email: string, password: string }): Observable<any> {
+    return this.http.post<any>(this.urlServiciosTest + '/api/auth/register', user);
+  }
+
+  registerNegocio(user: FormData): Observable<any> {
     return this.http.post<any>(this.urlServiciosTest + '/api/auth/register', user);
   }
 

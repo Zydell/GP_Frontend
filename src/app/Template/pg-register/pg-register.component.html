@@ -1,17 +1,3 @@
-<!--
-<form (ngSubmit)="register()">
-    <div>
-      <label for="email">Email:</label>
-      <input type="email" [(ngModel)]="email" name="email" required>
-    </div>
-    <div>
-      <label for="password">Password:</label>
-      <input type="password" [(ngModel)]="password" name="password" required>
-    </div>
-     Otros campos si es necesario --> <!--
-    <button type="submit">Register</button>
-  </form>
--->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,25 +17,6 @@
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-  <!-- Vendor CSS Files 
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-  -->
-  <!-- Template Main CSS File 
-  <link href="assets/css/style.css" rel="stylesheet">
-  -->
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Updated: Apr 20 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -74,34 +41,62 @@
                       <h5 class="card-title text-center pb-0 fs-4">Crea una Cuenta</h5>
                       <p class="text-center small" style="margin-top: -10px; font-size: 13px;">Ingrese la siguiente información</p>
                     </div>
-    
-                    <form class="row g-3 needs-validation" novalidate style="margin-top: -25px;">
+                
+                      <div class="flex flex-wrap gap-3" style="margin-top: 10px;">
+                        <div class="flex align-items-center">
+                            <p-radioButton name="ciudadano" value="ciudadano" [(ngModel)]="tipo" inputId="tipo1" (onClick)="ngOnInit()"></p-radioButton>
+                            <label for="tipo1" class="ml-2" style="font-size: 14px;">Ciudadano</label>
+                        </div>
+                        
+                        <div class="flex align-items-center">
+                            <p-radioButton name="negocio" value="negocio" [(ngModel)]="tipo" inputId="tipo2" (onClick)="ngOnInit()"></p-radioButton>
+                            <label for="tipo2" class="ml-2" style="font-size: 14px;">Negocio</label>
+                        </div>
+                      </div>
+
+                    <form #ciudadanoform="ngForm" *ngIf="tipo === 'ciudadano'" (ngSubmit)="register(ciudadanoform)" class="row g-3 needs-validation" novalidate style="margin-top: -15px;">
                       <div class="col-12 form-group">
-                        <label for="yourName" class="form-label" style="font-size: 14px;">Nombres</label>
-                        <input type="text" name="name" class="form-control" id="yourName" required style="font-size: 13px;">
+                        <label for="name" class="form-label" style="font-size: 14px;">Nombres</label>
+                        <input type="text" name="name" [(ngModel)]="name" class="form-control" id="name" required style="font-size: 13px;">
                         <div class="invalid-feedback floating-invalid-feedback">Debes ingresar tus nombres!</div>
                       </div>
     
                       <div class="col-12 form-group" style="margin-top: -10px;">
-                        <label for="yourApellidos" class="form-label" style="font-size: 14px;">Apellidos</label>
+                        <label for="lastname" class="form-label" style="font-size: 14px;">Apellidos</label>
                         <div class="input-group has-validation">
-                          <input type="text" name="username" class="form-control" id="yourApellidos" required style="font-size: 13px;">
+                          <input type="text" name="lastname" [(ngModel)]="lastname" class="form-control" id="lastname" required style="font-size: 13px;">
                           <div class="invalid-feedback floating-invalid-feedback">Ingresa tu nombre de usuario.</div>
                         </div>
                       </div>
-    
+
                       <div class="col-12 form-group" style="margin-top: -10px;">
-                        <label for="yourEmail" class="form-label" style="font-size: 14px;">Correo Electrónico</label>
+                        <label for="telefono" class="form-label" style="font-size: 14px;">Teléfono</label>
+                        <div class="input-group has-validation">
+                          <input type="text" name="telefono" [(ngModel)]="telefono" pattern="^09\d{8}$" class="form-control" id="telefono" required style="font-size: 13px;">
+                          <div class="invalid-feedback floating-invalid-feedback">Ingresa tu número telefónico (10 dígitos)</div>
+                        </div>
+                      </div>
+                      
+                      <div class="col-12 form-group" style="margin-top: -10px;">
+                        <label for="fechaNacimiento" class="form-label" style="font-size: 14px;">Fecha de Nacimiento</label>
+                        <div class="input-group has-validation">
+                          <input type="date" name="fechaNacimiento" [(ngModel)]="fechaNacimiento" class="form-control" id="fechaNacimiento" required style="font-size: 13px;">
+                          <div class="invalid-feedback floating-invalid-feedback">Ingresa una fecha de nacimiento válida.</div>
+                        </div>
+                      </div>
+
+                      <div class="col-12 form-group" style="margin-top: -10px;">
+                        <label for="email" class="form-label" style="font-size: 14px;">Correo Electrónico</label>
                         <div class="input-group has-validation">
                           <span class="input-group-text" id="inputGroupPrepend">@</span>
-                          <input type="email" name="email" class="form-control" id="yourEmail" required style="font-size: 13px;">
+                          <input type="email" [(ngModel)]="email" name="email" class="form-control" id="email" required style="font-size: 13px;">
                           <div class="invalid-feedback floating-invalid-feedback">Debes ingresar tu correo electrónico!</div>
                         </div>
                       </div>
     
                       <div class="col-12 form-group" style="margin-top: -10px;">
-                        <label for="yourPassword" class="form-label" style="font-size: 14px;">Contraseña</label>
-                        <input type="password" name="password" class="form-control" id="yourPassword" required style="font-size: 13px;">
+                        <label for="password" class="form-label" style="font-size: 14px;">Contraseña</label>
+                        <input type="password" name="password" [(ngModel)]="password" class="form-control" id="password" required style="font-size: 13px;">
                         <div class="invalid-feedback floating-invalid-feedback">Debes ingresar tu contraseña!</div>
                       </div>
     
@@ -119,7 +114,87 @@
                         <p class="small mb-0" style="font-size: 13px;">Ya tienes una cuenta? <a href="/login">Inicia sesión</a></p>
                       </div>
                     </form>
+                    
+
+                    <form #negocioform="ngForm" *ngIf="tipo === 'negocio'" (ngSubmit)="register(negocioform)" class="row g-3 needs-validation" novalidate style="margin-top: -15px;">
+                      <div class="col-12 form-group">
+                        <label for="name" class="form-label" style="font-size: 14px;">Nombre del negocio</label>
+                        <input type="text" name="name" [(ngModel)]="name" class="form-control" id="name" required style="font-size: 13px;">
+                        <div class="invalid-feedback floating-invalid-feedback">Debes ingresar tus nombres!</div>
+                      </div>
+
+                      <div class="col-12 form-group" style="margin-top: -10px;">
+                        <label for="propietario" class="form-label" style="font-size: 14px;">Propietario</label>
+                        <div class="input-group has-validation">
+                          <input type="text" name="propietario" [(ngModel)]="propietario" class="form-control" id="propietario" required style="font-size: 13px;">
+                          <div class="invalid-feedback floating-invalid-feedback">Ingresa tu nombre de usuario.</div>
+                        </div>
+                      </div>
     
+                      <div class="col-12 form-group" style="margin-top: -10px;">
+                        <label for="t_negocio" class="form-label" style="font-size: 14px;">Tipo de Negocio</label>
+                        <div class="input-group has-validation">
+                          <input type="text" name="t_negocio" [(ngModel)]="t_negocio" class="form-control" id="t_negocio" required style="font-size: 13px;">
+                          <div class="invalid-feedback floating-invalid-feedback">Ingresa tu nombre de usuario.</div>
+                        </div>
+                      </div>
+
+                      <div class="col-12 form-group" style="margin-top: -10px;">
+                        <label for="direccion" class="form-label" style="font-size: 14px;">Direccion</label>
+                        <div class="input-group has-validation">
+                          <input type="text" name="direccion" [(ngModel)]="direccion" class="form-control" id="direccion" required style="font-size: 13px;">
+                          <div class="invalid-feedback floating-invalid-feedback">Ingresa tu nombre de usuario.</div>
+                        </div>
+                      </div>
+
+                      <div class="col-12 form-group" style="margin-top: -10px;">
+                        <label for="telefono" class="form-label" style="font-size: 14px;">Teléfono</label>
+                        <div class="input-group has-validation">
+                          <input type="text" name="telefono" [(ngModel)]="telefono" pattern="^09\d{8}$" class="form-control" id="telefono" required style="font-size: 13px;">
+                          <div class="invalid-feedback floating-invalid-feedback">Ingresa tu número telefónico (10 dígitos)</div>
+                        </div>
+                      </div>
+
+                      <div class="col-12 form-group" style="margin-top: -10px;">
+                        <label for="email" class="form-label" style="font-size: 14px;">Correo Electrónico</label>
+                        <div class="input-group has-validation">
+                          <span class="input-group-text" id="inputGroupPrepend">@</span>
+                          <input type="email" [(ngModel)]="email" name="email" class="form-control" id="email" required style="font-size: 13px;">
+                          <div class="invalid-feedback floating-invalid-feedback">Debes ingresar tu correo electrónico!</div>
+                        </div>
+                      </div>
+    
+                      <div class="col-12 form-group" style="margin-top: -10px;">
+                        <label for="password" class="form-label" style="font-size: 14px;">Contraseña</label>
+                        <input type="password" name="password" [(ngModel)]="password" class="form-control" id="password" required style="font-size: 13px;">
+                        <div class="invalid-feedback floating-invalid-feedback">Debes ingresar tu contraseña!</div>
+                      </div>
+                      <!--
+                      <div class="col-12 form-group" style="margin-top: -10px;">
+                        <label for="image" class="form-label" style="font-size: 14px;">Subir Imagen</label>
+                        <p-fileUpload name="image" accept="image/*" [maxFileSize]="1000000" (onUpload)="onUpload($event)" [customUpload]="true" chooseLabel="Elegir" uploadLabel="Subir" cancelLabel="Cancelar"></p-fileUpload>
+                      </div>
+                      -->
+                      
+                      <div class="col-12 form-group" style="margin-top: -10px;">
+                        <label for="image" class="form-label" style="font-size: 14px;">Foto del Negocio</label>
+                        <p-fileUpload mode="basic" chooseLabel="Elegir" name="image" accept="image/*" [maxFileSize]="1000000" (onUpload)="onUpload($event)"></p-fileUpload>
+                      </div>
+
+                      <div class="col-12 form-group" style="margin-top: 0px;">
+                        <div class="form-check">
+                          <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
+                          <label class="form-check-label" for="acceptTerms" style="font-size: 12px;">Estoy de acuerdo y acepto los <a href="#">términos y condiciones</a></label>
+                          <div class="invalid-feedback floating-invalid-feedback">Debes aceptar antes de enviar.</div>
+                        </div>
+                      </div>
+                      <div class="col-12" style="margin-top: -10px;">
+                        <button class="btn btn-primary w-100" type="submit">Crear Cuenta</button>
+                      </div>
+                      <div class="col-12" style="margin-top: 5px; margin-bottom: -30px;">
+                        <p class="small mb-0" style="font-size: 13px;">Ya tienes una cuenta? <a href="/login">Inicia sesión</a></p>
+                      </div>
+                    </form>
                   </div>
                 </div>
     
@@ -130,7 +205,8 @@
       </section>
     </div>
     
-    
+  <p-messages [(value)]="messages1" [enableService]="false" [closable]="true" class="floating-message"></p-messages>
+
   </main><!-- End #main -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

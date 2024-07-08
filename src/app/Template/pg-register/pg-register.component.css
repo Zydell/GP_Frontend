@@ -1,5 +1,13 @@
 @import "../../../assets/styles/layout.css";
 
+/* RadioButton */
+.custom-radiobutton .p-radiobutton .p-radiobutton-box {
+  width: 5px;
+  height: 5px;
+  font-size: 1px; /* Ajusta esto si quieres que el ícono también sea más grande */
+}
+
+/* Otro xd */
 .card-wrapper {
   position: relative;
   padding-top: 80px; /* Espacio para el logo */

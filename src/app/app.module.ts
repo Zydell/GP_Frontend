@@ -64,6 +64,7 @@ import { PgDashuserComponent } from './ModuloUsuario/pg-dashuser/pg-dashuser.com
 import { PgPuntosverdesComponent } from './ModuloUsuario/pg-puntosverdes/pg-puntosverdes.component';
 import { GreenPointsMapComponent } from './green-points-map/green-points-map.component';
 import { MessagesModule } from 'primeng/messages';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 
 @NgModule({
@@ -99,7 +100,7 @@ import { MessagesModule } from 'primeng/messages';
   ],
   imports: [
     BrowserModule,
-    MessagesModule,
+    MessagesModule, RadioButtonModule,
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,ReactiveFormsModule,MultiSelectModule,
