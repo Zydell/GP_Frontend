@@ -14,6 +14,7 @@ export class PgDashuserComponent {
   title = 'GreenPoint';
   user: any = {};
   sidebarCollapsed = false;
+  cdn: any;
 
   constructor(
     public  authService: AuthService, 
@@ -22,29 +23,24 @@ export class PgDashuserComponent {
 
   ngOnInit(): void {
     this.user = this.authService.getUser(); // Obtiene la información del usuario al inicializar el componente
+    this.ListadoInformacion();
     console.log('User info on init:', this.user); // Agregar log para debug
   }
-  /*
-  toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    if (sidebar) {
-      sidebar.classList.toggle('collapsed');
+
+  async ListadoInformacion() {
+    const data = await new Promise<any>(resolve => this.authService.getInfo(this.user.ciudadano_id).subscribe((translated:any) => { resolve(translated) }));
+    //console.log("INFOOOOOOOOOO " + data + "XD" + this.user.ciudadano_id)
+    console.log("INFOOOOOOOOOO " + JSON.stringify(data, null, 2) + "XD" + this.user.ciudadano_id);
+    console.log(data.greencoins);
+    if (data) {
+      this.cdn = data;
+      console.log("OLAAAAAAAAAAAA"+this.cdn.greencoins)
     }
   }
- 
-    toggleSidebar() {
-      const sidebar = document.getElementById('sidebar');
-      const mainContent = document.getElementById('main');
-      if (sidebar && mainContent) {
-        sidebar.classList.toggle('collapsed');
-        mainContent.classList.toggle('expanded');
-      }
-    }*/
   
-  
-      toggleSidebar() {
-        this.sidebarCollapsed = !this.sidebarCollapsed;
-      }
+  toggleSidebar() {
+    this.sidebarCollapsed = !this.sidebarCollapsed;
+  }
 
   menus: { [key: string]: boolean } = {};  
 

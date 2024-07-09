@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UrlServicios } from './urlServiciosWeb.component';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -64,6 +64,24 @@ export class AuthService {
     const user = localStorage.getItem('user');
     console.log('Retrieved user from localStorage:', user);
         return user ? JSON.parse(user) : null; 
+  }
+
+  getInfo(id_cdn:number): any {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    //let parametros = { str_nombre: strnombre, str_descripcion: strdescripcion, id_instruccion: selectedInstrucciones, id_recomendacion: selectedRecomendaciones } ;
+    //console.log("VERIFICA: "+idTest, strnombre, strdescripcion, selectedInstrucciones, selectedRecomendaciones );
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/ciudadanos/'+id_cdn)
+    /*
+    this.hpptclient.get<any>(this.urlServiciosTest + '/api/ciudadanos/'+id_cdn)
+    .subscribe(data => {
+      console.log("Datos recibidos:", JSON.stringify(data, null, 2));
+    },
+    error => {
+        console.error('Error al obtener los datos:', error);
+    });
+    */
+    //return data;
   }
 
   isAuthenticated(): boolean {
