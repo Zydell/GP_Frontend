@@ -80,7 +80,7 @@
                       <div class="col-12 form-group" style="margin-top: -10px;">
                         <label for="fechaNacimiento" class="form-label" style="font-size: 14px;">Fecha de Nacimiento</label>
                         <div class="input-group has-validation">
-                          <input type="date" name="fechaNacimiento" [(ngModel)]="fechaNacimiento" class="form-control" id="fechaNacimiento" required style="font-size: 13px;">
+                          <input type="date" name="fechaNacimiento" [(ngModel)]="fechaNacimiento" class="form-control" [max]="maxDate" id="fechaNacimiento" required style="font-size: 13px;">
                           <div class="invalid-feedback floating-invalid-feedback">Ingresa una fecha de nacimiento válida.</div>
                         </div>
                       </div>
@@ -93,13 +93,19 @@
                           <div class="invalid-feedback floating-invalid-feedback">Debes ingresar tu correo electrónico!</div>
                         </div>
                       </div>
-    
+                      <!--
                       <div class="col-12 form-group" style="margin-top: -10px;">
                         <label for="password" class="form-label" style="font-size: 14px;">Contraseña</label>
                         <input type="password" name="password" [(ngModel)]="password" class="form-control" id="password" required style="font-size: 13px;">
                         <div class="invalid-feedback floating-invalid-feedback">Debes ingresar tu contraseña!</div>
                       </div>
-    
+                      -->
+                      <div class="col-12 form-group" style="margin-top: -10px;">
+                        <label for="password" class="form-label" style="font-size: 14px;">Contraseña</label>
+                        <input minlength="8" maxlength="16" pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,16}$" type="password" name="password" [(ngModel)]="password" class="form-control" id="password" required style="font-size: 13px;">
+                        <div class="invalid-feedback floating-invalid-feedback">Debes ingresar tu contraseña valida (al menos una mayuscula y numero)!</div>
+                      </div>
+                      
                       <div class="col-12 form-group" style="margin-top: -10px;">
                         <div class="form-check">
                           <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
@@ -146,6 +152,14 @@
                           <div class="invalid-feedback floating-invalid-feedback">Ingresa tu nombre de usuario.</div>
                         </div>
                       </div>
+                      
+                      <div class="col-12 form-group" style="margin-top: -10px;">
+                        <label for="fechaCreacion" class="form-label" style="font-size: 14px;">Fecha de creación del negocio</label>
+                        <div class="input-group has-validation">
+                          <input type="date" name="fechaCreacion" [(ngModel)]="fechaCreacion" class="form-control" id="fechaCreacion" [max]="maxDate" required style="font-size: 13px;">
+                          <div class="invalid-feedback floating-invalid-feedback">Ingresa una fecha de creación válida.</div>
+                        </div>
+                      </div>
 
                       <div class="col-12 form-group" style="margin-top: -10px;">
                         <label for="telefono" class="form-label" style="font-size: 14px;">Teléfono</label>
@@ -163,12 +177,13 @@
                           <div class="invalid-feedback floating-invalid-feedback">Debes ingresar tu correo electrónico!</div>
                         </div>
                       </div>
-    
+                      
                       <div class="col-12 form-group" style="margin-top: -10px;">
                         <label for="password" class="form-label" style="font-size: 14px;">Contraseña</label>
-                        <input type="password" name="password" [(ngModel)]="password" class="form-control" id="password" required style="font-size: 13px;">
-                        <div class="invalid-feedback floating-invalid-feedback">Debes ingresar tu contraseña!</div>
+                        <input minlength="8" maxlength="16" pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,16}$" type="password" name="password" [(ngModel)]="password" class="form-control" id="password" required style="font-size: 13px;">
+                        <div class="invalid-feedback floating-invalid-feedback">Debes ingresar tu contraseña valida (al menos una mayuscula y numero)!</div>
                       </div>
+
                       <!--
                       <div class="col-12 form-group" style="margin-top: -10px;">
                         <label for="image" class="form-label" style="font-size: 14px;">Subir Imagen</label>
@@ -178,16 +193,19 @@
                       
                       <div class="col-12 form-group" style="margin-top: -10px;">
                         <label for="image" class="form-label" style="font-size: 14px;">Foto del Negocio</label>
-                        <p-fileUpload mode="basic" chooseLabel="Elegir" name="image" accept="image/*" [maxFileSize]="1000000" (onUpload)="onUpload($event)"></p-fileUpload>
+                        <!--<p-fileUpload mode="basic" chooseLabel="Elegir" name="image" accept="image/*"  [maxFileSize]="1000000" (onUpload)="onUpload($event)"></p-fileUpload>-->
+                        <p-fileUpload mode="basic" chooseLabel="Elegir" name="image" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" [maxFileSize]="1000000" (onUpload)="onUpload($event)"></p-fileUpload>
+                        <div *ngIf="!imageBase64" class="invalid-feedback floating-invalid-feedback">Debes subir una imagen del negocio.</div>
                       </div>
 
                       <div class="col-12 form-group" style="margin-top: 0px;">
                         <div class="form-check">
-                          <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
+                          <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required required (change)="onTermsChange($event)">
                           <label class="form-check-label" for="acceptTerms" style="font-size: 12px;">Estoy de acuerdo y acepto los <a href="#">términos y condiciones</a></label>
                           <div class="invalid-feedback floating-invalid-feedback">Debes aceptar antes de enviar.</div>
                         </div>
                       </div>
+                    
                       <div class="col-12" style="margin-top: -10px;">
                         <button class="btn btn-primary w-100" type="submit">Crear Cuenta</button>
                       </div>

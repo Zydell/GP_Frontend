@@ -17,6 +17,9 @@ export class PgRegisterComponent {
   @ViewChild('negocioform') negocioform!: NgForm;
   telefono:  string = '';
   fechaNacimiento: Date = new Date();
+  fechaCreacion: Date = new Date();
+  //private _fechaCreacion: Date = new Date();
+  maxDate: string = '';
   lastname: string = '';
   name: string = '';
   email: string = '';
@@ -27,6 +30,9 @@ export class PgRegisterComponent {
   direccion: string = '';
   messages1: Message[] = [];
   uploadedFiles: any[] = [];
+  errorMessage: string = '';
+  imageBase64: string | null = null;
+  termsAccepted: boolean = false;
   // Otros campos si es necesario
 
   constructor(private authService: AuthService, private router: Router, private js:EjecutarScript) {}
@@ -34,34 +40,45 @@ export class PgRegisterComponent {
   ngOnInit() {
     this.js.CargarScriptLogin();
     this.addFormValidation();
+    // Establece la fecha máxima permitida a la fecha actual
+    const today = new Date();
+    this.maxDate = today.toISOString().split('T')[0];
   }
 
   onUpload(event: any): void {
-    for (let file of event.files) {
-      this.uploadedFiles.push(file);
-    }
-    console.log(this.uploadedFiles);
+    this.uploadedFiles = event.files;
+    console.log("XDXDXD "+ this.uploadedFiles);
   }
 
-  addFormValidation() { 
-    setTimeout(() => {
-      const forms = document.querySelectorAll('.needs-validation');
-      Array.prototype.slice.call(forms).forEach(function (form: HTMLFormElement) {
-        form.addEventListener('submit', function (event: Event) {
-          if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          form.classList.add('was-validated');
-        }, false);
+    addFormValidation() {
+      setTimeout(() => {
+        const forms = document.querySelectorAll('.needs-validation');
+        Array.prototype.slice.call(forms).forEach((form: HTMLFormElement) => {
+          form.addEventListener('submit', (event: Event) => {
+            if (this.tipo === 'ciudadano'){
+              if (!form.checkValidity() || !this.termsAccepted) {
+                event.preventDefault();
+                event.stopPropagation();
+                //if (!this.termsAccepted) {
+                //  this.messages1.push({severity:'error', summary:'Error', detail:'Debes aceptar los términos y condiciones'});
+                //}
+              }
+            }else{
+              if (!form.checkValidity() || this.uploadedFiles.length == 0 || !this.termsAccepted) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
       });
-    });
-  }
+    }
     
   register(form: NgForm) {
-    if (form.valid) {
-      this.messages1 = [{severity:'error', summary:'Error', detail:'Form valido'}];
-      if (this.tipo === 'ciudadano') {
+    if (this.tipo === 'ciudadano') {
+      if (form.valid && this.termsAccepted){
+        //this.messages1 = [{severity:'error', summary:'Error', detail:'Form valido'}];
         this.authService.registerCiudadano({ fecha_nac: this.fechaNacimiento, telefono: this.telefono, apellido: this.lastname, nombre: this.name, correo_electronico: this.email, contrasena: this.password }).subscribe(
           //response => console.log('Ciudadano registrado correctamente!', response),
           () => this.router.navigate(['/user-menu']),
@@ -70,24 +87,50 @@ export class PgRegisterComponent {
             this.messages1 = [{severity:'error', summary:'Error', detail:err.error.message}];
           }
         );
-      } else if (this.tipo === 'negocio') {
+      }else{
+        this.messages1 = [{severity:'error', summary:'Error', detail:'Formulario inválido'}];
+      }
 
+    }else if (this.tipo === 'negocio') {
+      if (form.valid && this.termsAccepted && this.uploadedFiles.length > 0){
         const formData = new FormData();
-        formData.append('email', this.email);
-        formData.append('password', this.password);
+        formData.append('nombre', this.name);
+        formData.append('correo_electronico', this.email);
+        formData.append('contrasena', this.password);
+        formData.append('propietario', this.propietario);
+        formData.append('tipo_negocio', this.t_negocio);
+        formData.append('direccion', this.direccion);
+        formData.append('telefono', this.telefono);
+        formData.append('fechacreacion', this.fechaNacimiento.toISOString());
 
+        // Agregar la imagen si se ha cargado
         if (this.uploadedFiles.length > 0) {
           formData.append('image', this.uploadedFiles[0], this.uploadedFiles[0].name);
         }
 
         this.authService.registerNegocio(formData).subscribe(
-          response => console.log('Negocio registrado correctamente!', response),
-          err => console.error(err)
+          response => {
+            console.log('Negocio registrado correctamente!', response);
+            this.router.navigate(['/user-menu']);
+            //this.messages1 = [{severity:'success', summary:'Ok', detail:'Negocio registrado correctamente!'}];
+          },
+          err => {
+            console.error(err);
+            this.messages1 = [{severity:'error', summary:'Error', detail:err.error.message}];
+          }
         );
+      }else{
+        if (form.valid && this.uploadedFiles.length == 0 && this.termsAccepted) {
+          this.messages1 = [{severity:'error', summary:'Error', detail:'Debes subir una imagen del negocio'}];
+        }else{
+          this.messages1 = [{severity:'error', summary:'Error', detail:'Formulario inválido'}];
+        } 
       }
-    }else{
-      //this.messages1 = [{severity:'error', summary:'Error', detail:'Form invalido'}];
     }
+  }
+
+  onTermsChange(event: any) {
+    this.termsAccepted = event.target.checked;
   }
 
 }

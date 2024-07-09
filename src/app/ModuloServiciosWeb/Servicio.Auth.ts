@@ -42,7 +42,11 @@ export class AuthService {
   registerCiudadano(user: { fecha_nac: Date, telefono: string, apellido: string, nombre: string, correo_electronico: string, contrasena: string }): Observable<any> {
     return this.http.post<any>(this.urlServiciosTest + '/api/auth/register/ciudadano', user);
   }
-
+  /*
+  registerNegocio(negocio: { nombre: string, correo_electronico: string, contrasena: string, propietario: string, tipo_negocio: string, direccion: string, telefono: string, fecha_creacion: Date, image: string | null }): Observable<any> {
+    return this.http.post<any>(`${this.urlServiciosTest}/api/auth/register/negocio`, negocio);
+  }
+  */
   registerNegocio(user: FormData): Observable<any> {
     return this.http.post<any>(this.urlServiciosTest + '/api/auth/register/negocio', user);
   }
