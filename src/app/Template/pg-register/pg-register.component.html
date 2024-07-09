@@ -106,9 +106,9 @@
                         <div class="invalid-feedback floating-invalid-feedback">Debes ingresar tu contraseña valida (al menos una mayuscula y numero)!</div>
                       </div>
                       
-                      <div class="col-12 form-group" style="margin-top: -10px;">
+                      <div class="col-12 form-group" style="margin-top: 0px;">
                         <div class="form-check">
-                          <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
+                          <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required required (change)="onTermsChange($event)">
                           <label class="form-check-label" for="acceptTerms" style="font-size: 12px;">Estoy de acuerdo y acepto los <a href="#">términos y condiciones</a></label>
                           <div class="invalid-feedback floating-invalid-feedback">Debes aceptar antes de enviar.</div>
                         </div>
