@@ -80,9 +80,13 @@ export class PgRegisterComponent {
     if (this.tipo === 'ciudadano') {
       if (form.valid && this.termsAccepted){
         //this.messages1 = [{severity:'error', summary:'Error', detail:'Form valido'}];
-        this.authService.registerCiudadano({ fecha_nac: this.fechaNacimiento, telefono: this.telefono, apellido: this.lastname, nombre: this.name, correo_electronico: this.email, contrasena: this.password }).subscribe(
-          //response => console.log('Ciudadano registrado correctamente!', response),
-          () => this.router.navigate(['/user-menu']),
+        this.authService.registerCiudadano({ fecha_nac: this.fechaNacimiento, telefono: this.telefono, apellido: this.lastname, nombre: this.name, correo_electronico: this.email, contrasena: this.password })
+        .subscribe(() => {
+            this.messages2 = [{severity:'success', summary:'Éxito', detail:'Usuario registrado correctamente'}];
+            setTimeout(() => {
+              this.router.navigate(['/login']);
+            }, 2000)  ; // Redirecciona después de 2 segundos 
+          },
           err => {
             console.error(err);
             this.messages1 = [{severity:'error', summary:'Error', detail:err.error.message}];
@@ -111,7 +115,7 @@ export class PgRegisterComponent {
 
         this.authService.registerNegocio(formData).subscribe(
           () => {
-            this.messages2 = [{severity:'success', summary:'Éxito', detail:'Contraseña restablecida'}];
+            this.messages2 = [{severity:'success', summary:'Éxito', detail:'Negocio registrado correctamente'}];
             setTimeout(() => {
               this.router.navigate(['/login']);
             }, 2000)  ; // Redirecciona después de 2 segundos 
