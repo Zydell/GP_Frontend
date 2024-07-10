@@ -1,0 +1,62 @@
+import { Component, HostListener, ViewEncapsulation  } from '@angular/core';
+import { AuthService } from '../../ModuloServiciosWeb/Servicio.Auth';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-pg-dashnegocio',
+  templateUrl: './pg-dashnegocio.component.html',
+  styleUrls: [ './pg-dashnegocio.component.css',
+    "./../../../assets/vendor/bootstrap-icons/bootstrap-icons.css"
+    ]//,
+    //encapsulation: ViewEncapsulation.ShadowDom
+})
+export class PgDashnegocioComponent {
+  title = 'GreenPoint';
+  negocio: any = {};
+  sidebarCollapsed = false;
+  cdn: any;
+
+  constructor(
+    public  authService: AuthService, 
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.negocio = this.authService.getNegocio(); // Obtiene la información del usuario al inicializar el componente
+    this.ListadoInformacion();
+    console.log('negocio info on init:', this.negocio); // Agregar log para debug
+  }
+
+  async ListadoInformacion() {
+    const data = await new Promise<any>(resolve => this.authService.getInfoNegocio(this.negocio.negocio_id).subscribe((translated:any) => { resolve(translated) }));
+    //console.log("INFOOOOOOOOOO " + data + "XD" + this.negocio.ciudadano_id)
+    console.log("INFOOOOOOOOOO " + JSON.stringify(data, null, 2) + "XD" + this.negocio.negocio_id);
+    if (data) {
+      this.cdn = data;
+    }
+  }
+  
+  toggleSidebar() {
+    this.sidebarCollapsed = !this.sidebarCollapsed;
+  }
+
+  menus: { [key: string]: boolean } = {};  
+
+  toggleMenu(menu: string, event: Event) {
+    this.menus[menu] = !this.menus[menu];
+    event.stopPropagation();
+  }
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event) {
+    Object.keys(this.menus).forEach(menu => {
+      this.menus[menu] = false;
+    });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+  
+}
+

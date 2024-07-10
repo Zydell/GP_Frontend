@@ -111,7 +111,7 @@ export class PgRegisterComponent {
         this.authService.registerNegocio(formData).subscribe(
           response => {
             console.log('Negocio registrado correctamente!', response);
-            this.router.navigate(['/user-menu']);
+            this.router.navigate(['/user-negocio']);
             //this.messages1 = [{severity:'success', summary:'Ok', detail:'Negocio registrado correctamente!'}];
           },
           err => {

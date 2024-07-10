@@ -66,6 +66,8 @@ import { GreenPointsMapComponent } from './green-points-map/green-points-map.com
 import { MessagesModule } from 'primeng/messages';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { PgRecuperarComponent } from './Template/pg-recuperar/pg-recuperar.component';
+import { PgDashnegocioComponent } from './ModuloNegocio/pg-dashnegocio/pg-dashnegocio.component';
+import { PgDashpuntosverdesnegocioComponent } from './ModuloNegocio/pg-dashpuntosverdesnegocio/pg-dashpuntosverdesnegocio.component';
 
 
 @NgModule({
@@ -98,7 +100,9 @@ import { PgRecuperarComponent } from './Template/pg-recuperar/pg-recuperar.compo
     PgDashuserComponent,
     PgPuntosverdesComponent,
     GreenPointsMapComponent,
-    PgRecuperarComponent
+    PgRecuperarComponent,
+    PgDashnegocioComponent,
+    PgDashpuntosverdesnegocioComponent
   ],
   imports: [
     BrowserModule,

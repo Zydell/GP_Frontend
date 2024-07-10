@@ -31,6 +31,7 @@ const routes: Routes = [
   },
   //{ path: 'protected', component: ProtectedComponent, canActivate: [AuthGuard] },
   { path: 'user-menu', component: PgDashuserComponent, canActivate: [AuthGuard] },
+  { path: 'user-negocio', component: PgDashuserComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: 'dashpublic',

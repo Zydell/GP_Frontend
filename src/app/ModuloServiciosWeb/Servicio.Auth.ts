@@ -84,6 +84,19 @@ export class AuthService {
     //return data;
   }
 
+  //---------------------------------------NEGOCIO------------------------------------------
+  getNegocio(): any {
+    const negocio = localStorage.getItem('negocio');
+    console.log('Retrieved user from localStorage:', negocio);
+        return negocio ? JSON.parse(negocio) : null; 
+  }
+
+  getInfoNegocio(id_neg:number): any {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/negocios/'+id_neg)
+  }
+
   isAuthenticated(): boolean {
     return !!this.getToken();
   }

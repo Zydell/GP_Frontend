@@ -51,7 +51,7 @@ export class PgLoginComponent {
           if (userType === 1) { //Ciudadano
             this.router.navigate(['/user-menu']);
           } else if (userType === 2) { //Negocio
-            this.router.navigate(['/']);
+            this.router.navigate(['/user-negocio']);
           } else if (userType === 3) { //Administrador
             this.router.navigate(['/dashadmin']);
           } else {
