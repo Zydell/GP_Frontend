@@ -34,9 +34,9 @@ export class PgPuntosverdesComponent implements OnInit {
 
         const map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
           center: { lat: userLat, lng: userLng },
-          zoom: 16,  // Aproximadamente un radio de 2km
+          zoom: 15,  // Aproximadamente un radio de 2km
         });
-
+        
         // Añadir marcador para la ubicación del usuario
         new google.maps.Marker({
           position: { lat: userLat, lng: userLng },
@@ -47,7 +47,7 @@ export class PgPuntosverdesComponent implements OnInit {
             scaledSize: new google.maps.Size(30, 30)
           }
         });
-
+        
         try {
           const response = await this.http.get<any[]>('http://localhost:5000/api/puntos_verdes').toPromise();
           if (!response) {
@@ -64,7 +64,7 @@ export class PgPuntosverdesComponent implements OnInit {
                     <div>
                       <p>${punto.descripcion}</p>
                       <p>${punto.direccion}</p>                      
-                      <p><b>Estas a :</b>${distancia} m.</p>
+                      <p><b>Estas a :</b>${distancia} Km.</p>
                     </div>
                   </div>`;
                 const infoWindow = new google.maps.InfoWindow({

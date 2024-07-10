@@ -40,6 +40,7 @@ const routes: Routes = [
     {
       path: 'dashadmin',
       component: DashboardadminComponent,
+      canActivate: [AuthGuard],
       children: [
         {
           path: 'inicioadmin',
