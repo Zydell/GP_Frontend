@@ -70,32 +70,61 @@
                       [draggable]="false"
                       [resizable]="false"
                     >
-                    <ng-template pTemplate="header">
-                      <span class="small mb-0 font-bold" style="font-size: 17px;">Ingresa el codigo enviado a tu correo (duración 1h)</span>
-                    </ng-template>
-                    <ng-template pTemplate="content">
-                      <div class="p-inputgroup">
-                        <span class="p-inputgroup-addon">
-                            <i class="pi pi-pencil"></i>
-                        </span>
-                        <input pInputText placeholder="Codigo" [(ngModel)]="email" class="p-inputtext-sm" (input)="email = email"/>
-                      </div>
-                      <div class="p-inputgroup" style="margin-top: 15px;">
-                        <span class="p-inputgroup-addon">
-                            <i class="pi pi-pencil"></i>
-                        </span>
-                        <input pInputText placeholder="Codigo" [(ngModel)]="email" class="p-inputtext-sm" (input)="email = email"/>
-                      </div>
-                    </ng-template>
                     
-                    <ng-template pTemplate="footer">
-                      <p-button icon="pi pi-save"  label="Registrar" styleClass="p-button-sm" (click)="onSubmit()"></p-button>
-                    </ng-template>
-                    
+                        <ng-template pTemplate="header">
+                        <span class="small mb-0 " style="font-size: 17px;">Ingresa el codigo enviado a tu correo (duración 1h)</span>
+                        </ng-template>
+                        <ng-template pTemplate="content">
+                            <form #form="ngForm"  (ngSubmit)="validateToken()" class="row g-3 needs-validation" novalidate>
+                                <!--
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon">
+                                        <i class="pi pi-pencil"></i>
+                                    </span>
+                                    <input pInputText placeholder="Codigo" [(ngModel)]="token" class="p-inputtext-sm" (input)="token = token"/>
+                                </div>
+                                -->
+                                <div class="input-group has-validation" style="margin-top: 19px;">
+                                    <input type="text" name="token" [(ngModel)]="token" class="form-control" id="token" required style="font-size: 13px;">
+                                    <div class="invalid-feedback floating-invalid-feedback">Ingrese el codigo.</div>
+                                  </div>
+
+                                <div class="col-12" style="margin-top: 10px;">
+                                    <button class="btn btn-primary w-100" type="submit" >Validar código</button>
+                                </div>
+                            </form>
+                        </ng-template>
                     </p-dialog>
 
-
                     </form>
+
+
+                    <form #form="ngForm" *ngIf="paso === 2" (ngSubmit)="changePassword(form)" class="row g-3 needs-validation" novalidate>
+    
+                        <div class="col-12 form-group">
+                          <!--
+                          <div class="input-group has-validation">
+                            <input type="password" name="password" [(ngModel)]="password" class="form-control" id="password" required style="font-size: 13px;">
+                            <div class="invalid-feedback floating-invalid-feedback">Ingrese una nueva contraseña.</div>
+                          </div>
+                          -->
+                          <div class="col-12 form-group" style="margin-top: -10px;">
+                            <label for="password" class="form-label" style="font-size: 14px;">Nueva Contraseña</label>
+                            <input minlength="8" maxlength="16" pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,16}$" type="password" name="password" [(ngModel)]="password" class="form-control" id="password" required style="font-size: 13px;">
+                            <div class="invalid-feedback floating-invalid-feedback">Contraseña incorrecta!</div>
+                          </div>
+
+                        </div>
+                        <div class="col-12" style="margin-top: 10px;">
+                          <button class="btn btn-primary w-100" type="submit" >Actualizar</button>
+                        </div>
+                        <div class="col-12" style="margin-top: -5px; margin-bottom: -30px;" >
+                          <p class="small mb-0" style="font-size: 13px; margin-top: 10px;">No tienes cuenta? <a href="/registro">Regístrate ahora!</a></p>
+                        </div> 
+  
+                      </form>
+
+
                   </div>
                 </div>
               </div>
@@ -106,7 +135,8 @@
     </div>
     
     <p-messages [(value)]="messages1" [enableService]="false" [closable]="true" class="floating-message"></p-messages>
-  </main><!-- End #main -->
+    <p-messages [(value)]="messages2" [enableService]="false" [closable]="true" class="floating-message"></p-messages>
+</main><!-- End #main -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

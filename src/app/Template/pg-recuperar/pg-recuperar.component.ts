@@ -15,15 +15,17 @@ import { ActivatedRoute } from '@angular/router';
 
 export class PgRecuperarComponent {
   paso: number = 1;
-  visibleNuevo: boolean=true;
+  visibleNuevo: boolean=false;
   email: string = '';
+  //email: string = 'cristhiantotoymorales@gmail.com';
   password: string = '';
   token: string = '';
   messages1: Message[] = [];
+  messages2: Message[] = [];
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private authService: AuthService) {
-    this.token = this.route.snapshot.queryParamMap.get('token') ?? '';
-    this.email = this.route.snapshot.queryParamMap.get('email') ?? '';
+    //this.token = this.route.snapshot.queryParamMap.get('token') ?? '';
+    //this.email = this.route.snapshot.queryParamMap.get('email') ?? '';
   }
 
   ngOnInit() {
@@ -31,20 +33,45 @@ export class PgRecuperarComponent {
   }
 
   ModalNuevoInformacion() {
-    this.email="";
+    //this.email="";
       this.visibleNuevo = true;
   }
 
-  onSubmit() {
-    this.http.post('http://localhost:5000/api/reset-password', { password: this.password, token: this.token, email: this.email })
+  validateToken() {
+    console.log("Verificar el correo y token: "+ this.email+" - "+this.token)
+    this.http.post('http://localhost:5000/api/validate-token', { token: this.token, correo_electronico: this.email })
       .subscribe(
         response => {
-          console.log('Contraseña restablecida', response);
+          console.log('Código válido', response);
+          this.messages2 = [{severity:'success', summary:'Éxito', detail:"Código válido"}];
+          this.paso = 2; // Cambia al paso 2 si el código es válido
         },
         error => {
-          console.error('Error al restablecer la contraseña', error);
+          console.error('Código inválido', error);
+          this.messages1 = [{severity:'error', summary:'Error', detail:"Código inválido"}];
         }
       );
+  }
+
+  changePassword(form: NgForm) {
+    if (form.valid) {
+      this.http.post('http://localhost:5000/api/reset-password', { password: this.password, token: this.token, correo_electronico: this.email })
+        .subscribe(
+            () => {
+              this.messages2 = [{severity:'success', summary:'Éxito', detail:'Contraseña restablecida'}];
+              setTimeout(() => {
+                this.router.navigate(['/login']);
+              }, 2000)  ; // Redirecciona después de 2 segundos 
+            },
+          error => {
+            console.error('Error al restablecer la contraseña', error);
+            this.messages1 = [{severity:'error', summary:'Error', detail:"Error al restablecer la contraseña"}];
+          }
+        );
+    } else {
+      console.error("Contraseña no válida");
+      this.messages1 = [{severity:'error', summary:'Error', detail:"Contraseña no válida"}];
+    }
   }
 
   addFormValidation() {
@@ -67,13 +94,15 @@ export class PgRecuperarComponent {
 
   recuperar(form: NgForm) {
     if (form.valid) {
-      this.authService.recuperar({ correo_electronico: this.email }).subscribe(
+      this.authService.recuperar(this.email).subscribe(
         response => {
           console.log("Correo enviado");
+          this.messages2 = [{severity:'success', summary:'Éxito', detail:"Correo enviado"}];
           this.ModalNuevoInformacion();
         },
         error => {
           console.error('Error al enviar el email de recuperación', error);
+          this.messages1 = [{severity:'error', summary:'Error', detail:"Error al enviar el email de recuperación"}];
         }
       );
     } else {
