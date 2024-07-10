@@ -100,4 +100,9 @@ export class AuthService {
         }
     });
   }
+
+  recuperar(correo_electronico: any): Observable<any> {
+    return this.hpptclient.post(this.urlServiciosTest + '/api/recuperar-password', correo_electronico);
+  }
+
 }

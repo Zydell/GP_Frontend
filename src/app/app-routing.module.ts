@@ -7,6 +7,7 @@ import { PortadainicialComponent } from './Template/templatePublico/portadainici
 import { PgPrincipaladministracionComponent } from './ModuloAdministracion/pg-principaladministracion/pg-principaladministracion.component';
 import { PgLoginComponent } from './Template/pg-login/pg-login.component';
 import { PgRegisterComponent } from './Template/pg-register/pg-register.component';
+import{ PgRecuperarComponent } from './Template/pg-recuperar/pg-recuperar.component';
 //import { ProtectedComponent } from './components/protected/protected.component';
 import { PgDashuserComponent } from './ModuloUsuario/pg-dashuser/pg-dashuser.component';
 import { AuthGuard } from './ModuloServiciosWeb/auth.guard';
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'registro',
     component: PgRegisterComponent
+  },
+  {
+    path: 'recuperar',
+    component: PgRecuperarComponent
   },
   //{ path: 'protected', component: ProtectedComponent, canActivate: [AuthGuard] },
   { path: 'user-menu', component: PgDashuserComponent, canActivate: [AuthGuard] },

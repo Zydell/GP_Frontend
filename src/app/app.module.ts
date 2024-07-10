@@ -65,6 +65,7 @@ import { PgPuntosverdesComponent } from './ModuloUsuario/pg-puntosverdes/pg-punt
 import { GreenPointsMapComponent } from './green-points-map/green-points-map.component';
 import { MessagesModule } from 'primeng/messages';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { PgRecuperarComponent } from './Template/pg-recuperar/pg-recuperar.component';
 
 
 @NgModule({
@@ -96,7 +97,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     PgRegisterComponent,
     PgDashuserComponent,
     PgPuntosverdesComponent,
-    GreenPointsMapComponent
+    GreenPointsMapComponent,
+    PgRecuperarComponent
   ],
   imports: [
     BrowserModule,
