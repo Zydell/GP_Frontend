@@ -29,6 +29,7 @@ export class PgRegisterComponent {
   t_negocio: string = '';
   direccion: string = '';
   messages1: Message[] = [];
+  messages2: Message[] = [];
   uploadedFiles: any[] = [];
   errorMessage: string = '';
   imageBase64: string | null = null;
@@ -109,10 +110,11 @@ export class PgRegisterComponent {
         }
 
         this.authService.registerNegocio(formData).subscribe(
-          response => {
-            console.log('Negocio registrado correctamente!', response);
-            this.router.navigate(['/user-negocio']);
-            //this.messages1 = [{severity:'success', summary:'Ok', detail:'Negocio registrado correctamente!'}];
+          () => {
+            this.messages2 = [{severity:'success', summary:'Éxito', detail:'Contraseña restablecida'}];
+            setTimeout(() => {
+              this.router.navigate(['/login']);
+            }, 2000)  ; // Redirecciona después de 2 segundos 
           },
           err => {
             console.error(err);
