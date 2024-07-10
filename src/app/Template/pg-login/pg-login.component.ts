@@ -60,11 +60,11 @@ export class PgLoginComponent {
         },
         err => {
           console.error(err);
-          this.messages1 = [{severity: 'error', summary: 'Error', detail: 'Usuario o contraseña incorrectos'}];
+          this.messages1 = [{severity: 'error', summary: 'Error', detail: 'Logueo inválido'}];
         }
       );
     } else {
-      this.messages1 = [];
+      this.messages1 = [{severity: 'error', summary: 'Error', detail: 'Usuario o contraseña incorrectos'}];
     }
   }
 }
