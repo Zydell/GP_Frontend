@@ -69,6 +69,7 @@ import { PgRecuperarComponent } from './Template/pg-recuperar/pg-recuperar.compo
 import { PgDashnegocioComponent } from './ModuloNegocio/pg-dashnegocio/pg-dashnegocio.component';
 import { PgDashpuntosverdesnegocioComponent } from './ModuloNegocio/pg-dashpuntosverdesnegocio/pg-dashpuntosverdesnegocio.component';
 import { PgDashcodigosofertasComponent } from './ModuloUsuario/pg-dashcodigosofertas/pg-dashcodigosofertas.component';
+import { PgAdministradoresComponent } from './ModuloAdministracion/pg-administradores/pg-administradores.component';
 
 
 @NgModule({
@@ -104,7 +105,8 @@ import { PgDashcodigosofertasComponent } from './ModuloUsuario/pg-dashcodigosofe
     PgRecuperarComponent,
     PgDashnegocioComponent,
     PgDashpuntosverdesnegocioComponent,
-    PgDashcodigosofertasComponent
+    PgDashcodigosofertasComponent,
+    PgAdministradoresComponent
   ],
   imports: [
     BrowserModule,
