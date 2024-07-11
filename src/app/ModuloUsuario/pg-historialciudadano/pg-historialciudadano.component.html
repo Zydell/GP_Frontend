@@ -1,0 +1,25 @@
+<div class="card-body">
+    <h5 class="card-title">Historial <span>| Ciudadano</span></h5>
+  
+    <table class="table table-borderless datatable">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Negocio</th>
+          <th scope="col">Punto Verde</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">GreenCoins</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cdn; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.tb_negocio.nombre }}</td>
+          <td>{{ item.tb_puntos_verde.direccion }}</td>
+          <td>{{ item.fecha }}</td>
+          <td>{{ item.greencoins_obtenidos }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

@@ -20,9 +20,9 @@
           <td>{{ item.fecha_inicio }}</td>
           <td>
             <span [ngClass]="{
-              'bg-warning': item.estado === 'CANJEADA',
-              'bg-success': item.estado === 'PENDIENTE',
-              'bg-danger': item.estado === 'generado'
+              'bg-warning': item.estado === 'EXPIRADO',
+              'bg-success': item.estado === 'GENERADO',
+              'bg-danger': item.estado === 'VALIDADO'
             }">{{ item.estado }}</span>
           </td>
           <td><i class="bi bi-eye-fill"></i></td>

@@ -103,6 +103,14 @@ export class AuthService {
     return this.hpptclient.get<any>(this.urlServiciosTest + '/api/ofertas_greencoins/historial-ofertas/'+ce_user)
   }
 
+  
+  getInfoHistorialReciclaje(id_cdn:number): any {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/reciclaje/historial/ciudadano/'+id_cdn)
+
+  }
+
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
