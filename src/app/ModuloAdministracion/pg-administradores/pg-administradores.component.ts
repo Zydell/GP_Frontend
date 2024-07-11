@@ -4,24 +4,18 @@ import { Mensajes } from '../../ModuloHerramientas/Mensajes.component';
 import { MessageService } from 'primeng/api';
 
 @Component({
-  selector: 'app-pg-oferta',
-  templateUrl: './pg-oferta.component.html',
-  styleUrls: ['./pg-oferta.component.css'],
+  selector: 'app-pg-administradores',
+  templateUrl: './pg-administradores.component.html',
+  styleUrls: ['./pg-administradores.component.css'],
   providers: [MessageService]
-})
-export class PgOfertaComponent implements OnInit{
 
+})
+export class PgAdministradoresComponent implements OnInit{
+  
   lsListado:any=[];
   objSeleccion:any="-1";
-  descripcion:any="";
-  gc_necesarios:any="";
-  negocio_id:any="";
-  fecha_inicio: Date = new Date();
-  minDate: string = '';
-
-  fecha_fin:Date=new Date(new Date().setDate(new Date().getDate() + 1));
-  estado:boolean=true;
-
+  intvalor:any="";
+  strnombre:any="";
   strEstado:any="";
   visibleEditar: boolean=false;
   visibleEstado: boolean=false;
@@ -35,12 +29,11 @@ export class PgOfertaComponent implements OnInit{
   ) { }
 async ngOnInit() {
  await this.ListadoInformacion();
- const today = new Date();
-  this.minDate = today.toISOString().split('T')[0];
 }
 
 ModalNuevoInformacion() {
-this.descripcion="";
+this.intvalor="";
+this.strnombre="";
     this.visibleNuevo = true;
 }
 ModalEditarInformacion(seleccion:any) {
@@ -50,7 +43,7 @@ ModalEditarInformacion(seleccion:any) {
 }
 ModalCambiarEstado(seleccion:any) {
   this.objSeleccion=seleccion;
-  if(this.objSeleccion.bl_estado){
+  if(this.objSeleccion.estado){
     this.strEstado="Desactivar";
   }else{
     this.strEstado="Activar";
@@ -59,21 +52,20 @@ ModalCambiarEstado(seleccion:any) {
   this.visibleEstado = true;
 }
   async ListadoInformacion() {
+    const data = await new Promise<any>(resolve => this.servicios.ListadoMaterial().subscribe(translated => { resolve(translated) }));
+    console.log(data)
 
-    const data = await new Promise<any>(resolve => this.servicios.ListadoOfertas().subscribe(translated => { resolve(translated) }));
-   console.log(data)
-
-    if (data.success) {
+    if (data) {
       this.lsListado=data;
     }
   }
   
   async RegistrarNuevo(){
-    if(this.descripcion!=""){
+    if(this.intvalor!="" && this.strnombre!=""){
       console.log("aqui")
-      const data = await new Promise<any>(resolve => this.servicios.NuevaOferta(this.descripcion,this.gc_necesarios,this.negocio_id,this.fecha_inicio,this.fecha_fin,this.estado).subscribe(translated => { resolve(translated) }));
+      const data = await new Promise<any>(resolve => this.servicios.NuevoMaterial(this.intvalor, this.strnombre).subscribe(translated => { resolve(translated) }));
       console.log(data)
-      if(data.success){
+      if(data){
         await this.ListadoInformacion();
         this.messageService.add({ severity: 'success', summary: 'Success', detail: this.mensajes.RegistroExitoso });
         this.visibleNuevo = false;
@@ -81,19 +73,17 @@ ModalCambiarEstado(seleccion:any) {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: this.mensajes.RegistroError });
       }
     }else{
-      this.messageService.add({ severity: 'info', summary: 'Info', detail: this.mensajes.RegistroError });
+      this.messageService.add({ severity: 'info', summary: 'Info', detail: this.mensajes.IngreseNombre });
       
     }
-
-
   }
+
   async RegistrarActualizacion(){
-    if(this.objSeleccion.int_valor!=""){
+    if(this.objSeleccion.tipo!="" && this.objSeleccion.valor_por_libra!=""){
       console.log("aqui")
-      const data = await new Promise<any>(resolve => this.servicios.ActualizacionDimension(this.objSeleccion.id_dimension,this.objSeleccion.int_valor).subscribe(translated => { resolve(translated) }));
-      //const data = await new Promise<any>(resolve => this.servicios.ActualizacionDimension(this.strEstado,this.objSeleccion.ounombre).subscribe(translated => { resolve(translated) }));
+      const data = await new Promise<any>(resolve => this.servicios.ActualizacionMaterial(this.objSeleccion.materiales_id,this.objSeleccion.tipo,this.objSeleccion.valor_por_libra).subscribe(translated => { resolve(translated) }));
       console.log(data)
-      if(data.success){
+      if(data){
         await this.ListadoInformacion();
         this.messageService.add({ severity: 'success', summary: 'Success', detail: this.mensajes.ActualizacionExitosa });
         this.visibleEditar = false;
@@ -104,18 +94,18 @@ ModalCambiarEstado(seleccion:any) {
       this.messageService.add({ severity: 'info', summary: 'Info', detail: this.mensajes.IngreseNombre }); 
     }
   }
+
   async EstadoCambiarActualizacion(){
     var estado:any;
-    if(this.objSeleccion.bl_estado){
+    if(this.objSeleccion.estado){
       estado=false;
     }else{
       estado=true;
     }
       console.log("aqui")
-      //const data = await new Promise<any>(resolve => this.servicios.EstadoCambiarDimension(this.objSeleccion.id_dimension,estado).subscribe(translated => { resolve(translated) }));
-      const data = await new Promise<any>(resolve => this.servicios.EstadoCambiarDimension(this.objSeleccion.id_dimension,estado).subscribe(translated => { resolve(translated) }));
+      const data = await new Promise<any>(resolve => this.servicios.EstadoCambiarMaterial(this.objSeleccion.materiales_id,estado).subscribe(translated => { resolve(translated) }));
       console.log(data)
-      if(data.success){
+      if(data){
         await this.ListadoInformacion();
         this.messageService.add({ severity: 'success', summary: 'Success', detail: this.mensajes.ActualizacionExitosa });
         this.visibleEstado = false;

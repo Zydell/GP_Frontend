@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UrlServicios } from './urlServiciosWeb.component';
+import { EmailValidator } from '@angular/forms';
 
 @Injectable({
     providedIn: 'root'
@@ -44,24 +45,90 @@ export class ServiciviosVarios {
      return this.hpptclient.put<any>(this.urlServiciosTest + '/api/materiales/'+idMaterial, parametros)
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-  ListadoDimensionActivos() {
+  //Ofertas
+  ListadoOfertas() {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-  //   let parametros = opcion + "/" + tipo + "/" + codCarrera + "/" + param;
-    return this.hpptclient.get<any>(this.urlServiciosTest + '/wsSimulador/rutadimension/ListadoDimensionActivo')
+ //   let parametros = opcion + "/" + tipo + "/" + codCarrera + "/" + param;
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/ofertas')
   }
+
+  NuevaOferta(descripcion: string, gc_necesarios: number, negocio_id: number, fecha_inicio: Date, fecha_fin: Date, estado: boolean = true){
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const parametros = { descripcion, gc_necesarios, negocio_id, fecha_inicio, fecha_fin, estado };
+    return this.http.post<any>(this.urlServiciosTest + '/api/ofertas', parametros, { headers });
+  }
+
+  EstadoCambiarOfertas(idOferta: number, estado: boolean) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const parametros = { estado: estado };
+    return this.hpptclient.put<any>(`${this.urlServiciosTest}/api/ofertas/${idOferta}`, parametros, { headers });
+  }
+  ActualizacionOfertas(idOferta: number, descripcion: string, gc_necesarios: number, negocio_id: number, fecha_inicio: Date, fecha_fin: Date, estado: boolean) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const parametros = { descripcion, gc_necesarios, negocio_id, fecha_inicio, fecha_fin, estado };
+    return this.hpptclient.put<any>(`${this.urlServiciosTest}/api/ofertas/${idOferta}`, parametros, { headers });
+  }
+  //Puntos verdes
+  // Listado de Puntos Verdes
+  ListadoPuntosVerdes(){
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/puntos_verdes')
+  }
+ 
+  // Crear un nuevo Punto Verde
+  NuevoPuntoVerde(descripcion: string, direccion: string, latitud: number, longitud: number, negocio_id: number, estado: boolean = true){
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    const parametros = { descripcion, direccion, latitud, longitud, negocio_id, estado };
+    return this.http.post<any>(`${this.urlServiciosTest}/api/puntos_verdes`, parametros, { headers });
+  }
+
+  // Cambiar el estado de un Punto Verde
+  EstadoCambiarPuntoVerde(idPuntoVerde: number, estado: boolean){
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const parametros = { estado };
+    return this.http.put<any>(`${this.urlServiciosTest}/api/puntos_verdes/${idPuntoVerde}`, parametros, { headers });
+  }
+
+  // Actualizar un Punto Verde
+  ActualizacionPuntoVerde(idPuntoVerde: number, descripcion: string, direccion: string, latitud: number, longitud: number, negocio_id: number, estado: boolean) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const parametros = { descripcion, direccion, latitud, longitud, negocio_id, estado };
+    return this.http.put<any>(`${this.urlServiciosTest}/api/puntos_verdes/${idPuntoVerde}`, parametros, { headers });
+  }
+
+  //Negocios
+  ListadoNegocios(){
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/negocios')
+  }
+ 
+
+  // Crear un nuevo Negocio
+  NuevoNegocio(formData: FormData ) {
+    return this.http.post<any>(`${this.urlServiciosTest}/api/auth/register/negocio/`, formData);
+  }
+
+  // Cambiar el estado de un Negocio
+  EstadoCambiarNegocio(idNegocio: number, estado: boolean) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const parametros = { estado };
+    return this.http.put<any>(`${this.urlServiciosTest}//api/auth/register/negocio/${idNegocio}`, parametros, { headers });
+  }
+
+  // Actualizar un Negocio
+  ActualizacionNegocio(idNegocio: number, ruc: string, nombre: string, propietario: string, tipo_negocio: string, direccion: string, telefono: string, fecharegistro: Date, image: Blob | null, estado: boolean) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const parametros = { ruc, nombre, propietario, tipo_negocio, direccion, telefono, fecharegistro, image, estado };
+    return this.http.put<any>(`${this.urlServiciosTest}/api/auth/register/negocio/${idNegocio}`, parametros, { headers });
+  }
+
+
+
+
     ListadoDimension() {
       let headers = new HttpHeaders();
       headers.append('Content-Type', 'application/json');
@@ -87,35 +154,5 @@ export class ServiciviosVarios {
      return this.hpptclient.post<any>(this.urlServiciosTest + '/wsSimulador/rutadimension/CrearDimension', parametros)
   }
 
-  //TEST
-  ListadoTest() {
-    let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.hpptclient.get<any>(this.urlServiciosTest + '/wsSimulador/rutatest/ListadoTestTodos')
-  }
-  ListadoTestActivos() {
-    let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-  //   let parametros = opcion + "/" + tipo + "/" + codCarrera + "/" + param;
-    return this.hpptclient.get<any>(this.urlServiciosTest + '/rutatest/ListadoTestActivo')
-  }
-  ActualizacionTest(idTest:number,strnombre:any,strdescripcion:any, selectedInstrucciones:any, selectedRecomendaciones:any) {
-    let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    let parametros = { str_nombre: strnombre, str_descripcion: strdescripcion, id_instruccion: selectedInstrucciones, id_recomendacion: selectedRecomendaciones } ;
-    console.log("VERIFICA: "+idTest, strnombre, strdescripcion, selectedInstrucciones, selectedRecomendaciones );
-    return this.hpptclient.put<any>(this.urlServiciosTest + '/wsSimulador/rutatest/ActualizarTest/'+idTest, parametros)
-  }
-  EstadoCambiarTest(idTest:number,estado:any) {
-    let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    let parametros = { bl_estado: estado } ;
-     return this.hpptclient.put<any>(this.urlServiciosTest + '/wsSimulador/rutatest/DesactivarTest/'+idTest, parametros)
-  }
-  NuevoTest(srtnombre:any, strdescripcion:any, selectedInstrucciones:any, selectedRecomendaciones:any) {
-    let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-     let parametros = {str_nombre: srtnombre, str_descripcion: strdescripcion, id_recomendacion: selectedRecomendaciones, id_instruccion: selectedInstrucciones} ;
-     return this.hpptclient.post<any>(this.urlServiciosTest + '/wsSimulador/rutatest/CrearTest', parametros)
-  }
+  
 }

@@ -68,6 +68,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { PgRecuperarComponent } from './Template/pg-recuperar/pg-recuperar.component';
 import { PgDashnegocioComponent } from './ModuloNegocio/pg-dashnegocio/pg-dashnegocio.component';
 import { PgDashpuntosverdesnegocioComponent } from './ModuloNegocio/pg-dashpuntosverdesnegocio/pg-dashpuntosverdesnegocio.component';
+import { PgAdministradoresComponent } from './ModuloAdministracion/pg-administradores/pg-administradores.component';
 
 
 @NgModule({
@@ -102,7 +103,8 @@ import { PgDashpuntosverdesnegocioComponent } from './ModuloNegocio/pg-dashpunto
     GreenPointsMapComponent,
     PgRecuperarComponent,
     PgDashnegocioComponent,
-    PgDashpuntosverdesnegocioComponent
+    PgDashpuntosverdesnegocioComponent,
+    PgAdministradoresComponent
   ],
   imports: [
     BrowserModule,

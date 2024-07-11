@@ -23,7 +23,20 @@ export class PgNegocioComponent implements OnInit{
 
   lsListado:any=[];
   objSeleccion:any="-1";
-  intvalor:any="";
+
+  nombre:any="";
+  propietario :any="";
+  tipo_negocio :any="";
+  direccion:any="";
+  telefono :any="";
+  fecharegistro: Date | null = null;
+  correo_electronico: string = "";
+  contrasena: string = "";
+
+  maxDate: string = '';
+  uploadedFiles: any[] = [];
+  imageBase64: string | null = null;
+
   strEstado:any="";
   visibleEditar: boolean=false;
   visibleEstado: boolean=false;
@@ -40,9 +53,25 @@ async ngOnInit() {
 }
 
 ModalNuevoInformacion() {
-this.intvalor="";
-    this.visibleNuevo = true;
+this.nombre="";
+this.propietario = "";
+this.tipo_negocio = "";
+this.direccion = "";
+this.telefono = "";
+this.fecharegistro = null;
+this.correo_electronico = "";
+this.contrasena = "";
+this.visibleNuevo = true;
+this.uploadedFiles = [];
+this.imageBase64 = null;
+const today = new Date();
+this.maxDate = today.toISOString().split('T')[0];
 }
+onUpload(event: any): void {
+  this.uploadedFiles = event.files;
+  console.log("XDXDXD "+ this.uploadedFiles);
+}
+
 ModalEditarInformacion(seleccion:any) {
   this.objSeleccion=seleccion;
   console.log(this.objSeleccion)
@@ -60,33 +89,57 @@ ModalCambiarEstado(seleccion:any) {
 }
   async ListadoInformacion() {
 
-    const data = await new Promise<any>(resolve => this.servicios.ListadoDimension().subscribe(translated => { resolve(translated) }));
+    const data = await new Promise<any>(resolve => this.servicios.ListadoNegocios().subscribe(translated => { resolve(translated) }));
    console.log(data)
 
-    if (data.success) {
-      this.lsListado=data.datos;
+    if (data) {
+      this.lsListado=data;
     }
   }
   
   async RegistrarNuevo(){
-    if(this.intvalor!=""){
+    if (this.nombre?.trim() && 
+    this.propietario?.trim() && 
+    this.tipo_negocio?.trim() && 
+    this.direccion?.trim() && 
+    this.telefono?.trim() && 
+    this.correo_electronico?.trim() && 
+    this.contrasena?.trim() &&
+    this.uploadedFiles.length > 0) {
       console.log("aqui")
-      const data = await new Promise<any>(resolve => this.servicios.NuevaDimension(this.intvalor).subscribe(translated => { resolve(translated) }));
-      console.log(data)
-      if(data.success){
-        await this.ListadoInformacion();
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: this.mensajes.RegistroExitoso });
-        this.visibleNuevo = false;
-      }else{
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: this.mensajes.RegistroError });
+      const formData = new FormData();
+      formData.append('nombre', this.nombre.trim());
+      formData.append('propietario', this.propietario.trim());
+      formData.append('tipo_negocio', this.tipo_negocio.trim());
+      formData.append('direccion', this.direccion.trim());
+      formData.append('telefono', this.telefono.trim());
+      if (this.fecharegistro) {
+        formData.append('fecharegistro', this.fecharegistro.toISOString());
       }
-    }else{
-      this.messageService.add({ severity: 'info', summary: 'Info', detail: this.mensajes.IngreseNombre });
+        // Agregar la imagen si se ha cargado
+        if (this.uploadedFiles.length > 0) {
+          formData.append('image', this.uploadedFiles[0], this.uploadedFiles[0].name);
+        }
+
+        const data = await new Promise<any>(resolve => {
+          this.servicios.NuevoNegocio(formData).subscribe(translated => {
+            resolve(translated);
+          });
+        });
+        console.log(data);
+        if (data.success) {
+          await this.ListadoInformacion();
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: this.mensajes.RegistroExitoso });
+          this.visibleNuevo = false;
+        } else {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: this.mensajes.RegistroError });
+        }
       
+    }else{
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: "Formulario inválido" });
     }
-
-
   }
+
   async RegistrarActualizacion(){
     if(this.objSeleccion.int_valor!=""){
       console.log("aqui")

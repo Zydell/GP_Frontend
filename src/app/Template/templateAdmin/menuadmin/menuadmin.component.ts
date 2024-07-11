@@ -14,7 +14,7 @@ export class MenuadminComponent implements OnInit{
           {
               label: 'Administración',
               icon: 'pi pi-fw pi-file',
-              url: './dashadmin/principaladmin'
+              //url: './dashadmin/principaladmin'
               /*items: [
                     {
                       label: 'Seccion',
@@ -165,14 +165,15 @@ export class MenuadminComponent implements OnInit{
                       ]
                   }
               ]
-          }*/,
+          },
           {
               separator: true
           },
           {
-              label: 'Quit',
-              icon: 'pi pi-fw pi-power-off'
-          }
+              label: 'Cerrar Sesión',
+              icon: 'pi pi-fw pi-power-off',
+              url: './dashadmin/principaladmin'
+          }*/
       ];
   }
 }
