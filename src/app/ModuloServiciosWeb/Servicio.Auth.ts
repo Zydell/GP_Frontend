@@ -86,7 +86,7 @@ export class AuthService {
 
   //---------------------------------------NEGOCIO------------------------------------------
   getNegocio(): any {
-    const negocio = localStorage.getItem('negocio');
+    const negocio = localStorage.getItem('user');
     console.log('Retrieved user from localStorage:', negocio);
         return negocio ? JSON.parse(negocio) : null; 
   }
