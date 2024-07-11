@@ -12,8 +12,11 @@ import { MessageService } from 'primeng/api';
 export class PgPuntoverdeComponent implements OnInit{
 
   lsListado:any=[];
+
   objSeleccion:any="-1";
-  intvalor:any="";
+  
+  descripcion:any="";
+
   strEstado:any="";
   visibleEditar: boolean=false;
   visibleEstado: boolean=false;
@@ -30,7 +33,7 @@ async ngOnInit() {
 }
 
 ModalNuevoInformacion() {
-this.intvalor="";
+this.descripcion="";
     this.visibleNuevo = true;
 }
 ModalEditarInformacion(seleccion:any) {
@@ -50,18 +53,18 @@ ModalCambiarEstado(seleccion:any) {
 }
   async ListadoInformacion() {
 
-    const data = await new Promise<any>(resolve => this.servicios.ListadoDimension().subscribe(translated => { resolve(translated) }));
-   console.log(data)
+    const data = await new Promise<any>(resolve => this.servicios.ListadoPuntosVerdes().subscribe(translated => { resolve(translated) }));
+    console.log(data)
 
-    if (data.success) {
-      this.lsListado=data.datos;
+    if (data) {
+      this.lsListado=data;
     }
   }
   
-  async RegistrarNuevo(){
-    if(this.intvalor!=""){
+  /*async RegistrarNuevo(){
+    if(this.descripcion!=""){
       console.log("aqui")
-      const data = await new Promise<any>(resolve => this.servicios.NuevaDimension(this.intvalor).subscribe(translated => { resolve(translated) }));
+      const data = await new Promise<any>(resolve => this.servicios.NuevoPuntoVerde(this.descripcion,this.).subscribe(translated => { resolve(translated) }));
       console.log(data)
       if(data.success){
         await this.ListadoInformacion();
@@ -76,9 +79,9 @@ ModalCambiarEstado(seleccion:any) {
     }
 
 
-  }
+  }*/
   async RegistrarActualizacion(){
-    if(this.objSeleccion.int_valor!=""){
+    if(this.objSeleccion.descripcion!=""){
       console.log("aqui")
       const data = await new Promise<any>(resolve => this.servicios.ActualizacionDimension(this.objSeleccion.id_dimension,this.objSeleccion.int_valor).subscribe(translated => { resolve(translated) }));
       //const data = await new Promise<any>(resolve => this.servicios.ActualizacionDimension(this.strEstado,this.objSeleccion.ounombre).subscribe(translated => { resolve(translated) }));
@@ -96,7 +99,7 @@ ModalCambiarEstado(seleccion:any) {
   }
   async EstadoCambiarActualizacion(){
     var estado:any;
-    if(this.objSeleccion.bl_estado){
+    if(this.objSeleccion.estado){
       estado=false;
     }else{
       estado=true;

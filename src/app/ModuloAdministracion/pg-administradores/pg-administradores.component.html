@@ -1,7 +1,7 @@
 <div class="card separador-componentes">
     <p-toolbar>
       <div class="p-toolbar-group-center">
-        <p>INFORMACIÓN PUNTOS VERDES</p>
+        <p>INFORMACIÓN MATERIALES</p>
       </div>
       <div class="p-toolbar-group-end">
         <p-button
@@ -26,27 +26,17 @@
       <ng-template pTemplate="header">
         <tr>
           <th >#</th>
-          <th pSortableColumn="code" >
-            DESCRIPCION <p-sortIcon field="code"></p-sortIcon>
-          </th>
-  
-          <th >DIRECCION</th>
-          <th >LATITUD</th>
-          <th >LONGITUD</th>
-          <th >NEGOCIO</th>
+          <th>NOMBRE</th>
+          <th >VALOR X LIBRA (GC)</th>
           <th >ESTADO</th>
           <th >ACCIONES</th>
-
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-customer>
         <tr>
-          <td>{{ customer.punto_verde_id }}</td>
-          <td>{{ customer.descripcion }}</td>
-          <td>{{ customer.direccion }}</td>
-          <td>{{ customer.latitud }}</td>
-          <td>{{ customer.longitud }}</td>
-          <td>{{ customer.negocio_id }}</td>
+          <td>{{ customer.materiales_id }}</td>
+          <td>{{ customer.tipo }}</td>
+          <td>{{ customer.valor_por_libra }}</td>
           <td>
           
             <p-tag *ngIf="customer.estado == false" severity="danger" [value]="'DESACTIVADO'"></p-tag>
@@ -81,19 +71,26 @@
     [resizable]="false"
   >
   <ng-template pTemplate="header">
-    <span class="text-xl font-bold">Nuevo Punto Verde</span>
+    <span class="text-xl font-bold">Nuevo</span>
   </ng-template>
   <ng-template pTemplate="content">
     <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">
+            <i class="pi pi-pencil"></i>
+        </span>
+        <input pInputText placeholder="Nombre" [(ngModel)]="strnombre" class="p-inputtext-sm" (input)="strnombre = strnombre"/>
+      </div>
+
+    <div class="p-inputgroup" style="margin-top: 15px;">
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input pInputText placeholder="Valor" [(ngModel)]="descripcion" class="p-inputtext-sm" (input)="descripcion = descripcion"/>
+      <input pInputText placeholder="Valor por libra" [(ngModel)]="intvalor" class="p-inputtext-sm" (input)="intvalor = intvalor"/>
     </div>
   </ng-template>
   
   <ng-template pTemplate="footer">
-    <p-button icon="pi pi-save"  label="Registrar" styleClass="p-button-sm" ></p-button>
+    <p-button icon="pi pi-save"  label="Registrar" styleClass="p-button-sm" (click)="RegistrarNuevo()"></p-button>
   </ng-template>
   
   </p-dialog>
@@ -114,8 +111,15 @@
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input pInputText placeholder="Valor" [(ngModel)]="objSeleccion.int_valor" class="p-inputtext-sm"/>
+      <input pInputText placeholder="Valor" [(ngModel)]="objSeleccion.tipo" class="p-inputtext-sm"/>
     </div>
+
+    <div class="p-inputgroup" style="margin-top: 15px;">
+        <span class="p-inputgroup-addon">
+            <i class="pi pi-pencil"></i>
+        </span>
+        <input pInputText placeholder="Valor" [(ngModel)]="objSeleccion.valor_por_libra" class="p-inputtext-sm"/>
+      </div>
   </ng-template>
   
   <ng-template pTemplate="footer">
@@ -140,7 +144,7 @@
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input pInputText placeholder="Estado" [(ngModel)]="objSeleccion.int_valor" class="p-inputtext-sm" readonly/>
+      <input pInputText placeholder="Estado" [(ngModel)]="objSeleccion.tipo" class="p-inputtext-sm" readonly/>
     </div>
   </ng-template>
   

@@ -53,7 +53,7 @@ export class PgLoginComponent {
           } else if (userType === 2) { //Negocio
             this.router.navigate(['/user-negocio']);
           } else if (userType === 3) { //Administrador
-            this.router.navigate(['/dashadmin']);
+            this.router.navigate(['/dashadmin/principaladmin']);
           } else {
             console.error('Unknown user type');
           }
