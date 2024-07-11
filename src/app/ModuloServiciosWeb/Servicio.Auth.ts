@@ -97,6 +97,12 @@ export class AuthService {
     return this.hpptclient.get<any>(this.urlServiciosTest + '/api/negocios/'+id_neg)
   }
 
+  getInfoHistorialOfertas(ce_user:any): any {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/ofertas_greencoins/historial-ofertas/'+ce_user)
+  }
+
   isAuthenticated(): boolean {
     return !!this.getToken();
   }

@@ -1,0 +1,33 @@
+<div class="card-body">
+    <h5 class="card-title">Códigos <span>| Ofertas</span></h5>
+  
+    <table class="table table-borderless datatable">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Negocio</th>
+          <th scope="col">Oferta</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Fecha Caducidad</th>
+          <th scope="col">Código</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of ofertas; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.negocio }}</td>
+          <td>{{ item.descripcion }}</td>
+          <td>{{ item.fecha_inicio }}</td>
+          <td>
+            <span [ngClass]="{
+              'bg-warning': item.estado === 'CANJEADA',
+              'bg-success': item.estado === 'PENDIENTE',
+              'bg-danger': item.estado === 'generado'
+            }">{{ item.estado }}</span>
+          </td>
+          <td><i class="bi bi-eye-fill"></i></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
