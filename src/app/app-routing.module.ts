@@ -10,6 +10,7 @@ import { PgRegisterComponent } from './Template/pg-register/pg-register.componen
 import{ PgRecuperarComponent } from './Template/pg-recuperar/pg-recuperar.component';
 //import { ProtectedComponent } from './components/protected/protected.component';
 import { PgDashuserComponent } from './ModuloUsuario/pg-dashuser/pg-dashuser.component';
+import { PgDashnegocioComponent } from './ModuloNegocio/pg-dashnegocio/pg-dashnegocio.component';
 import { AuthGuard } from './ModuloServiciosWeb/auth.guard';
 
 const routes: Routes = [
@@ -31,7 +32,7 @@ const routes: Routes = [
   },
   //{ path: 'protected', component: ProtectedComponent, canActivate: [AuthGuard] },
   { path: 'user-menu', component: PgDashuserComponent, canActivate: [AuthGuard] },
-  { path: 'user-negocio', component: PgDashuserComponent, canActivate: [AuthGuard] },
+  { path: 'user-negocio', component: PgDashnegocioComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: 'dashpublic',

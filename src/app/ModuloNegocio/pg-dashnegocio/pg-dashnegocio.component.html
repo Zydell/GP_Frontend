@@ -138,17 +138,23 @@
 
         </li><!-- End Notification Nav -->
         
-        <li class="nav-item dropdown pe-3">
+        <li class="nav-item dropdown pe-3"> 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" (click)="toggleMenu('profile', $event)" role="button">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">{{ negocio?.nombre }}</span>
+            <!--<img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <div *ngIf="imgbase64">
+              <img [src]="imgbase64" alt="Imagen Base64">
+            </div>-->
+            <div class="profile-image-container">
+              <img *ngIf="imgbase64" [src]="imgbase64" alt="Negocio" class="profile-image">
+            </div>
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{ ngc?.nombre }}</span>
           </a>
           <!-- End Profile Image Icon -->
         
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile" *ngIf="menus['profile']" style="right: 15px !important; top: 45px !important;">
             <li class="dropdown-header">
-              <h6>{{ negocio?.nombre }}</h6>
-              <span>Reciclador</span>
+              <h6>{{ ngc?.nombre }}</h6>
+              <span>Negocio</span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -517,7 +523,7 @@
                       <i class="bi bi-currency-dollar"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>{{"$"+cdn?.greencoins}}</h6>
+                      <h6>{{"$"+ngc?.negocio_id}}</h6>
                       <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                     </div>

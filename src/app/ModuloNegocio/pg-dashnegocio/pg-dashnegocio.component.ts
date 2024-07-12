@@ -14,7 +14,8 @@ export class PgDashnegocioComponent {
   title = 'GreenPoint';
   negocio: any = {};
   sidebarCollapsed = false;
-  cdn: any;
+  imgbase64: string = '';
+  ngc: any;
 
   constructor(
     public  authService: AuthService, 
@@ -30,10 +31,18 @@ export class PgDashnegocioComponent {
   async ListadoInformacion() {
     const data = await new Promise<any>(resolve => this.authService.getInfoNegocio(this.negocio.negocio_id).subscribe((translated:any) => { resolve(translated) }));
     //console.log("INFOOOOOOOOOO " + data + "XD" + this.negocio.ciudadano_id)
-    console.log("INFOOOOOOOOOO " + JSON.stringify(data, null, 2) + "XD" + this.negocio.negocio_id);
+    //console.log("INFOOOOOOOOOO " + JSON.stringify(data, null, 2) + "XD" + this.negocio.negocio_id);
     if (data) {
-      this.cdn = data;
+      console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+      this.ngc = data;
+      this.imgbase64 = this.convertBufferToBase64(data.image.data);     
     }
+  }
+
+  convertBufferToBase64(buffer: number[]): string {
+    const binary = buffer.reduce((acc, byte) => acc + String.fromCharCode(byte), '');
+    const base64String = btoa(binary);
+    return `data:image/png;base64,${base64String}`;
   }
   
   toggleSidebar() {

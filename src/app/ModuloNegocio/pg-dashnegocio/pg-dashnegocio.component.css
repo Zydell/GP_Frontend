@@ -1,3 +1,20 @@
+.profile-image-container {
+  width: 40px; /* Ajusta el tamaño según tus necesidades */
+  height: 50px; /* Asegúrate de que sea cuadrado */
+  border-radius: 50%; /* Hace que el contenedor sea redondo */
+  overflow: hidden; /* Oculta cualquier parte de la imagen que se desborde */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Asegura que la imagen se recorte correctamente si no es cuadrada */
+  border-radius: 50%; /* Hace la imagen redonda */
+}
+
 .sidebar {
     position: fixed;
     top: 60px;
