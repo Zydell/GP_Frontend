@@ -11,6 +11,7 @@ export class AuthService {
     urlServiciosTest: String="";
     user: any;
     authToken: any;
+    
     constructor(
       private http: HttpClient, 
       server: UrlServicios, 
@@ -26,15 +27,7 @@ export class AuthService {
           if (response && response.token) {
             localStorage.setItem('token', response.token);
             localStorage.setItem('user', JSON.stringify(response.user)); // Almacena la información del usuario
-          }/*
-            if (response && response.token) {
-              localStorage.setItem('token', response.token);
-              if (response.user) {
-                  localStorage.setItem('user', JSON.stringify(response.user)); // Almacena la información del usuario
-              } else {
-                  console.error('No user information in response');
-              }
-            }*/
+          }
         })
       );
   }
@@ -42,11 +35,7 @@ export class AuthService {
   registerCiudadano(user: { fecha_nac: Date, telefono: string, apellido: string, nombre: string, correo_electronico: string, contrasena: string }): Observable<any> {
     return this.http.post<any>(this.urlServiciosTest + '/api/auth/register/ciudadano', user);
   }
-  /*
-  registerNegocio(negocio: { nombre: string, correo_electronico: string, contrasena: string, propietario: string, tipo_negocio: string, direccion: string, telefono: string, fecha_creacion: Date, image: string | null }): Observable<any> {
-    return this.http.post<any>(`${this.urlServiciosTest}/api/auth/register/negocio`, negocio);
-  }
-  */
+
   registerNegocio(user: FormData): Observable<any> {
     return this.http.post<any>(this.urlServiciosTest + '/api/auth/register/negocio', user);
   }

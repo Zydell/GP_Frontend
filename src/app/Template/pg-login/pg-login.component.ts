@@ -16,6 +16,7 @@ import { EjecutarScript } from './../../../Herramientas/EjecutarScript';
 export class PgLoginComponent {
   email: string = '';
   password: string = '';
+  remember: boolean = false;
   messages1: Message[] = [];
 
   constructor(private authService: AuthService, private router: Router, private js:EjecutarScript) {}
