@@ -109,7 +109,7 @@
                       <div class="col-12 form-group" style="margin-top: 0px;">
                         <div class="form-check">
                           <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required required (change)="onTermsChange($event)">
-                          <label class="form-check-label" for="acceptTerms" style="font-size: 12px;">Estoy de acuerdo y acepto los <a href="#">términos y condiciones</a></label>
+                          <label class="form-check-label" for="acceptTerms" style="font-size: 12px;">Estoy de acuerdo y acepto los <a href="" (click)="ModalTerminosCondiciones($event)">términos y condiciones</a></label>
                           <div class="invalid-feedback floating-invalid-feedback">Debes aceptar antes de enviar.</div>
                         </div>
                       </div>
@@ -201,7 +201,7 @@
                       <div class="col-12 form-group" style="margin-top: 0px;">
                         <div class="form-check">
                           <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required required (change)="onTermsChange($event)">
-                          <label class="form-check-label" for="acceptTerms" style="font-size: 12px;">Estoy de acuerdo y acepto los <a href="#">términos y condiciones</a></label>
+                          <label class="form-check-label" for="acceptTerms" style="font-size: 12px;">Estoy de acuerdo y acepto los <a href="" (click)="ModalTerminosCondiciones($event)">términos y condiciones</a></label>
                           <div class="invalid-feedback floating-invalid-feedback">Debes aceptar antes de enviar.</div>
                         </div>
                       </div>
@@ -213,6 +213,72 @@
                         <p class="small mb-0" style="font-size: 13px;">Ya tienes una cuenta? <a href="/login">Inicia sesión</a></p>
                       </div>
                     </form>
+                    <!-- TERMINOS Y CONDICIONES -->
+                    <p-dialog
+                    header="Nuevo"
+                    [(visible)]="term_condiciones"
+                    [modal]="true"
+                    [style]="{ width: '50vw', height: '46vw' }"
+                    [draggable]="false"
+                    [resizable]="false"
+                    >
+                    <ng-template pTemplate="header">
+                      <span class="small mb-0" style="font-size: 18px;">Términos y Condiciones GreenPoint</span>
+                    </ng-template>
+                    <ng-template pTemplate="content">
+                      <div style="font-size: 14px;">
+                        <h6>1. Introducción</h6>
+                        <p>Bienvenido a GreenPoint, la aplicación que promueve el reciclaje mediante recompensas. Al registrarte como usuario (ya seas un negocio o un ciudadano), aceptas cumplir con estos términos y condiciones de uso.</p>
+                        
+                        <h6>2. Registro y Cuenta</h6>
+                        <h6>2.1. Elegibilidad</h6>
+                        <p>Para registrarte en GreenPoint, debes ser mayor de 18 años. Si eres un negocio, debes estar legalmente constituido y autorizado para operar en tu jurisdicción.</p>
+                        <h6>2.2. Información de Registro</h6>
+                        <p>Al crear una cuenta, te comprometes a proporcionar información veraz, completa y actualizada. Esto incluye, pero no se limita a, tu nombre, dirección de correo electrónico, número de teléfono, dirección y cualquier otra información necesaria.</p>
+                        <h6>2.3. Seguridad de la Cuenta</h6>
+                        <p>Eres responsable de mantener la confidencialidad de tu contraseña y cuenta. Notifícanos inmediatamente cualquier uso no autorizado de tu cuenta.</p>
+                        
+                        <h6>3. Uso de la Aplicación</h6>
+                        <h6>3.1. Propósito</h6>
+                        <p>GreenPoint se utiliza para promover el reciclaje y recompensar a los usuarios por la cantidad que reciclan.</p>
+                        <h6>3.2. Ubicación</h6>
+                        <p>Para brindarte un mejor servicio, GreenPoint utiliza la ubicación de tu dispositivo para ofrecerte geolocalización de puntos de reciclaje cercanos y eventos relacionados. Al aceptar estos términos, consientes el uso de tus datos de ubicación.</p>
+                        <h6>3.3. Datos de Negocios</h6>
+                        <p>Los negocios que se registren en GreenPoint deberán proporcionar datos precisos y verificables sobre su operación. GreenPoint se reserva el derecho de verificar la autenticidad de la información proporcionada y de eliminar cuentas fraudulentas.</p>
+                        
+                        <h6>4. Recompensas y Puntos</h6>
+                        <h6>4.1. Acumulación de Puntos</h6>
+                        <p>Los usuarios acumulan puntos por las actividades de reciclaje registradas en la aplicación. La cantidad de puntos depende del tipo y cantidad de material reciclado.</p>
+                        <h6>4.2. Canje de Recompensas</h6>
+                        <p>Los puntos acumulados pueden canjearse por recompensas disponibles en la aplicación. Las recompensas están sujetas a disponibilidad y pueden cambiar sin previo aviso.</p>
+                        
+                        <h6>5. Privacidad y Datos Personales</h6>
+                        <h6>5.1. Recopilación de Datos</h6>
+                        <p>GreenPoint recopila y utiliza datos personales para operar y mejorar la aplicación. Esto incluye información proporcionada durante el registro y datos de ubicación.</p>
+                        <h6>5.2. Uso de Datos</h6>
+                        <p>Tus datos personales se utilizan para validar tu identidad, ofrecerte servicios personalizados, y mejorar tu experiencia en GreenPoint. No compartimos tus datos personales con terceros sin tu consentimiento, salvo que sea requerido por la ley.</p>
+                        
+                        <h6>6. Conducta del Usuario</h6>
+                        <h6>6.1. Comportamiento Responsable</h6>
+                        <p>Te comprometes a utilizar GreenPoint de manera responsable y a no participar en actividades fraudulentas o ilegales.</p>
+                        <h6>6.2. Contenido Generado por el Usuario</h6>
+                        <p>Eres responsable del contenido que generes y publiques en GreenPoint. Esto incluye, pero no se limita a, comentarios, fotos y datos de reciclaje.</p>
+                        
+                        <h6>7. Modificaciones a los Términos y Condiciones</h6>
+                        <p>GreenPoint se reserva el derecho de modificar estos términos y condiciones en cualquier momento. Te notificaremos de cualquier cambio importante a través de la aplicación o por correo electrónico.</p>
+                        
+                        <h6>8. Terminación</h6>
+                        <h6>8.1. Terminación por Parte del Usuario</h6>
+                        <p>Puedes cerrar tu cuenta en cualquier momento. Los puntos no utilizados se perderán al cerrar la cuenta.</p>
+                        <h6>8.2. Terminación por Parte de GreenPoint</h6>
+                        <p>GreenPoint puede suspender o terminar tu cuenta si violas estos términos y condiciones o si se detecta actividad fraudulenta.</p>
+                        
+                        <h6>9. Contacto</h6>
+                        <p>Si tienes preguntas o comentarios sobre estos términos y condiciones, puedes contactarnos a través del soporte de GreenPoint en greenpoint7064@gmail.com o 0994011067.</p>
+                      </div>
+                    </ng-template>
+                    </p-dialog>
+
                   </div>
                 </div>
     

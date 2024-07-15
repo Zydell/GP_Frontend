@@ -5,7 +5,7 @@ import { EjecutarScript } from './../../../Herramientas/EjecutarScript';
 import { Message } from 'primeng/api';
 import { NgForm } from '@angular/forms';
 
-@Component({
+@Component({ 
   selector: 'app-pg-register',
   templateUrl: './pg-register.component.html',
   styleUrls: ['./pg-register.component.css'
@@ -18,6 +18,7 @@ export class PgRegisterComponent {
   telefono:  string = '';
   fechaNacimiento: Date = new Date();
   fechaCreacion: Date = new Date();
+  term_condiciones: boolean=false;
   //private _fechaCreacion: Date = new Date();
   maxDate: string = '';
   lastname: string = '';
@@ -49,6 +50,11 @@ export class PgRegisterComponent {
   onUpload(event: any): void {
     this.uploadedFiles = event.files;
     console.log("XDXDXD "+ this.uploadedFiles);
+  }
+
+  ModalTerminosCondiciones(event: Event) {
+    event.preventDefault();
+    this.term_condiciones = true;
   }
 
     addFormValidation() {
