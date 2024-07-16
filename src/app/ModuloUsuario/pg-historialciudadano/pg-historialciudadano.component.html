@@ -16,7 +16,7 @@
           <td>{{ i + 1 }}</td>
           <td>{{ item.tb_negocio.nombre }}</td>
           <td>{{ item.tb_puntos_verde.direccion }}</td>
-          <td>{{ item.fecha }}</td>
+          <td>{{ item.fecha | date:'yyyy-MM-dd | HH:mm:ss' }}</td>
           <td>{{ item.greencoins_obtenidos }}</td>
         </tr>
       </tbody>

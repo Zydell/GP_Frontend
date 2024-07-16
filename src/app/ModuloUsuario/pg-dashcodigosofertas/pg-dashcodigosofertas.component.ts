@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../ModuloServiciosWeb/Servicio.Auth';
 import { Router } from '@angular/router';
+declare var bootstrap: any; // Asegúrate de que Bootstrap está disponible
 
 @Component({
   selector: 'app-pg-dashcodigosofertas',
@@ -10,7 +11,8 @@ import { Router } from '@angular/router';
 export class PgDashcodigosofertasComponent implements OnInit {
   title = 'GreenPoint';
   user: any = {};
-  ofertas: any[] = []; // Ajustamos esto a un array para almacenar múltiples registros
+  ofertas: any[] = [];
+  selectedOffer: any = null; // Variable para almacenar la oferta seleccionada
 
   constructor(
     public authService: AuthService, 
@@ -18,17 +20,24 @@ export class PgDashcodigosofertasComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.user = this.authService.getUser(); // Obtiene la información del usuario al inicializar el componente
+    this.user = this.authService.getUser();
     this.listadoInformacion();
-    console.log('User info on init:', this.user); // Agregar log para debug
+    console.log('User info on init:', this.user);
   }
 
   async listadoInformacion() {
     const data = await new Promise<any>(resolve => this.authService.getInfoHistorialOfertas(this.user.correo_electronico).subscribe((translated: any) => { resolve(translated) }));
     console.log("INFOOOOOOOOOO " + JSON.stringify(data, null, 2) + "XD" + this.user.correo_electronico);
     if (data) {
-      this.ofertas = data; // Suponiendo que la respuesta de la API es un array de ofertas
+      this.ofertas = data;
       console.log("Ofertas:", this.ofertas);
     }
+  }
+
+  openModal(offer: any): void {
+    this.selectedOffer = offer;
+    const modalElement = document.getElementById('codeModal');
+    const modal = new bootstrap.Modal(modalElement);
+    modal.show();
   }
 }

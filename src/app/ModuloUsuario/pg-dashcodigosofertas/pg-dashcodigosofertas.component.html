@@ -1,37 +1,54 @@
 <div class="card-body">
-    <h5 class="card-title">Códigos <span>| Ofertas</span></h5>
-  
-    <table class="table table-borderless datatable">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Negocio</th>
-          <th scope="col">Oferta</th>
-          <th scope="col">Estado</th>
-          <th scope="col">Fecha Caducidad</th>
-          <th scope="col">Código</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of ofertas; let i = index">
-          <td>{{ i + 1 }}</td>
-          <td>{{ item.negocio }}</td>
-          <td>{{ item.descripcion }}</td>
-          <td>{{ item.fecha_inicio }}</td>
-          <td>
-            <span [ngClass]="{
-              'bg-warning': item.estado === 'EXPIRADO',
-              'bg-success': item.estado === 'GENERADO',
-              'bg-danger': item.estado === 'VALIDADO'
-            }">{{ item.estado }}</span>
-          </td>
-          <td><p-button
-            type="button"
-            icon="pi pi-eye"
-            styleClass="p-button-text"
-          ></p-button></td>
-        </tr>
-      </tbody>
-    </table>
+  <h5 class="card-title">Códigos <span>| Ofertas</span></h5>
+  <table class="table table-borderless datatable">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Negocio</th>
+        <th scope="col">Oferta</th>
+        <th scope="col">Fecha Caducidad</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Código</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of ofertas; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ item.negocio }}</td>
+        <td>{{ item.descripcion }}</td>
+        <td>{{ item.fecha_fin | date:'yyyy-MM-dd' }}</td>
+
+        <td>
+          <span [ngClass]="{
+            'bg-warning': item.estado === 'EXPIRADO',
+            'bg-success': item.estado === 'GENERADO',
+            'bg-danger': item.estado === 'VALIDADO'
+          }">{{ item.estado }}</span>
+        </td>
+        <td>
+          <button type="button" class="btn btn-link" (click)="openModal(item)">
+            <i class="pi pi-eye"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="codeModal" tabindex="-1" aria-labelledby="codeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="codeModalLabel">Código de la Oferta</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {{ selectedOffer?.codigo }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
   </div>
-  
+</div>
