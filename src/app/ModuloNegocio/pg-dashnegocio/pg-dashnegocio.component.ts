@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
     //encapsulation: ViewEncapsulation.ShadowDom
 })
 export class PgDashnegocioComponent {
+  seccion: string = '1';
   title = 'GreenPoint';
   negocio: any = {};
   sidebarCollapsed = false;
@@ -55,6 +56,7 @@ export class PgDashnegocioComponent {
     this.menus[menu] = !this.menus[menu];
     event.stopPropagation();
   }
+
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event) {
     Object.keys(this.menus).forEach(menu => {
@@ -65,6 +67,23 @@ export class PgDashnegocioComponent {
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  SeccionDashboard(event: Event){
+    event.preventDefault();
+    this.seccion = '1';
+  }
+  SeccionPuntosVerdes(event: Event){
+    event.preventDefault();
+    this.seccion = '2';
+  }
+  SeccionRegistroReciclaje(event: Event){
+    event.preventDefault();
+    this.seccion = '3';
+  }
+  SeccionHistorial(event: Event){
+    event.preventDefault();
+    this.seccion = '4';
   }
   
 }

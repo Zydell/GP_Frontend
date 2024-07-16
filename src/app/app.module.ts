@@ -71,6 +71,8 @@ import { PgDashpuntosverdesnegocioComponent } from './ModuloNegocio/pg-dashpunto
 import { PgDashcodigosofertasComponent } from './ModuloUsuario/pg-dashcodigosofertas/pg-dashcodigosofertas.component';
 import { PgAdministradoresComponent } from './ModuloAdministracion/pg-administradores/pg-administradores.component';
 import { PgHistorialciudadanoComponent } from './ModuloUsuario/pg-historialciudadano/pg-historialciudadano.component';
+import { PgRegistroreciclajeComponent } from './ModuloNegocio/pg-registroreciclaje/pg-registroreciclaje.component';
+import { PgHistorialnegocioComponent } from './ModuloNegocio/pg-historialnegocio/pg-historialnegocio.component';
 
 
 @NgModule({
@@ -108,7 +110,9 @@ import { PgHistorialciudadanoComponent } from './ModuloUsuario/pg-historialciuda
     PgDashpuntosverdesnegocioComponent,
     PgDashcodigosofertasComponent,
     PgAdministradoresComponent,
-    PgHistorialciudadanoComponent
+    PgHistorialciudadanoComponent,
+    PgRegistroreciclajeComponent,
+    PgHistorialnegocioComponent
   ],
   imports: [
     BrowserModule,
