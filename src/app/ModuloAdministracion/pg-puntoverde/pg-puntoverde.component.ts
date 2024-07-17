@@ -32,10 +32,6 @@ async ngOnInit() {
  await this.ListadoInformacion();
 }
 
-ModalNuevoInformacion() {
-this.descripcion="";
-    this.visibleNuevo = true;
-}
 ModalEditarInformacion(seleccion:any) {
   this.objSeleccion=seleccion;
   console.log(this.objSeleccion)

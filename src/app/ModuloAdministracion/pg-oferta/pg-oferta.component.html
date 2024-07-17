@@ -25,12 +25,14 @@
   >
       <ng-template pTemplate="header">
         <tr>
-          <th >#</th>
-          <th >
-            Descripcion <p-sortIcon></p-sortIcon>
+          <th pSortableColumn="ofertas_id" (click)="onSortChange('ofertas_id')"> 
+            # <p-sortIcon field="ofertas_id"></p-sortIcon>
           </th>
-          <th pSortableColumn="coin">
-            Green Coins Necesarios<p-sortIcon field="coin"></p-sortIcon>
+          <th >
+            Descripcion
+          </th>
+          <th pSortableColumn="gc_necesarios">
+            Green Coins Necesarios<p-sortIcon field="gc_necesarios" (click)="onSortChange('gc_necesarios')"></p-sortIcon>
           </th>
           <th pSortableColumn="neg">
             Negocio
@@ -114,11 +116,11 @@
     <label for="" class="form-label" style="font-size: 14px;">Negocio:  </label>
     <div class="p-inputgroup" style="margin-top: 15px;">
       <span class="p-inputgroup-addon">
-          <i class="pi pi-pencil"></i>
+        <i class="pi pi-pencil"></i>
       </span>
-      <select name="" id="">
-        <option value="">Elegir el Negocio</option>
-        <option value="1">Negocio 1</option>
+      <select name="" id="" required (change)="onNegocioChange($event)">
+        <option value="0" disabled [selected]="negocio_id === 0">Elegir el Negocio</option>
+        <option *ngFor="let negocio of negocios" [value]="negocio.negocio_id">{{ negocio.nombre }}</option>
       </select>
     </div>
 

@@ -48,15 +48,20 @@ export class PgLoginComponent {
     if (form.valid) {
       this.authService.login({ correo_electronico: this.email, contrasena: this.password }).subscribe(
         response => {
-          const userType = response.user.tipousuario; // Assuming the response contains user type info
-          if (userType === 1) { //Ciudadano
-            this.router.navigate(['/user-menu']);
-          } else if (userType === 2) { //Negocio
-            this.router.navigate(['/user-negocio']);
-          } else if (userType === 3) { //Administrador
-            this.router.navigate(['/dashadmin/principaladmin']);
-          } else {
-            console.error('Unknown user type');
+          try{
+            const userType = response.user.tipousuario; // Assuming the response contains user type info
+            if (userType === 1) { //Ciudadano
+              this.router.navigate(['/user-menu']);
+            } else if (userType === 2) { //Negocio
+              this.router.navigate(['/user-negocio']);
+            } else if (userType === 3) { //Administrador
+              this.router.navigate(['/dashadmin/principaladmin']);
+            } else {
+              console.error('Unknown user type');
+            }
+          }
+          catch{
+            this.messages1 = [{severity: 'error', summary: 'Error', detail: 'Logueo inválido'}];
           }
         },
         err => {

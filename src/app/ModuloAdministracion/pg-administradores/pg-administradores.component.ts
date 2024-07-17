@@ -14,9 +14,12 @@ export class PgAdministradoresComponent implements OnInit{
   
   lsListado:any=[];
   objSeleccion:any="-1";
-  intvalor:any="";
-  strnombre:any="";
+
+  nombre:any="";
+  correo:any="";
+  clave:any="";
   strEstado:any="";
+  
   visibleEditar: boolean=false;
   visibleEstado: boolean=false;
   visibleNuevo: boolean=false;
@@ -32,9 +35,10 @@ async ngOnInit() {
 }
 
 ModalNuevoInformacion() {
-this.intvalor="";
-this.strnombre="";
-    this.visibleNuevo = true;
+  this.nombre="";
+  this.correo="";
+  this.clave="";
+  this.visibleNuevo = true;
 }
 ModalEditarInformacion(seleccion:any) {
   this.objSeleccion=seleccion;
@@ -52,18 +56,32 @@ ModalCambiarEstado(seleccion:any) {
   this.visibleEstado = true;
 }
   async ListadoInformacion() {
-    const data = await new Promise<any>(resolve => this.servicios.ListadoMaterial().subscribe(translated => { resolve(translated) }));
+    const data = await new Promise<any>(resolve => this.servicios.ListadoAdministradores().subscribe(translated => { resolve(translated) }));
     console.log(data)
 
     if (data) {
+      for (let admin of data) {
+        const correoAdmin = await this.BuscarcorreoAdmin(admin.admin_id);
+        admin.correo_electronico = correoAdmin;
+      }
+  
       this.lsListado=data;
     }
   }
   
+  async BuscarcorreoAdmin(idAdmin: number): Promise<string> {
+    try {
+      const data = await this.servicios.CredencialIduserType(idAdmin, 3).toPromise();
+      return data.correo_electronico;
+    } catch (error) {
+      return 'Error al buscar el correo';
+    }
+  }
+
   async RegistrarNuevo(){
-    if(this.intvalor!="" && this.strnombre!=""){
+    if(this.nombre!="" && this.correo!=""){
       console.log("aqui")
-      const data = await new Promise<any>(resolve => this.servicios.NuevoMaterial(this.intvalor, this.strnombre).subscribe(translated => { resolve(translated) }));
+      const data = await new Promise<any>(resolve => this.servicios.NuevoAdmin(this.nombre, this.correo,this.clave).subscribe(translated => { resolve(translated) }));
       console.log(data)
       if(data){
         await this.ListadoInformacion();

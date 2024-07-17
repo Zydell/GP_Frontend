@@ -74,13 +74,14 @@
     <span class="text-xl font-bold">Nuevo</span>
   </ng-template>
   <ng-template pTemplate="content">
+    <label for="descripcion" class="form-label" style="font-size: 14px;">Nombre: </label>
     <div class="p-inputgroup">
         <span class="p-inputgroup-addon">
             <i class="pi pi-pencil"></i>
         </span>
         <input pInputText placeholder="Nombre" [(ngModel)]="strnombre" class="p-inputtext-sm" (input)="strnombre = strnombre"/>
       </div>
-
+      <label for="descripcion" class="form-label" style="font-size: 14px;">Valor por libra(Greencoins): </label>
     <div class="p-inputgroup" style="margin-top: 15px;">
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>

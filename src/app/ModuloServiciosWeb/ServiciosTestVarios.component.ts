@@ -139,9 +139,25 @@ export class ServiciviosVarios {
   // Actualizar un Negocio
   ActualizacionNegocio(idNegocio: any, formData: FormData) {
     return this.http.put<any>(`${this.urlServiciosTest}/api/negocios/${idNegocio}`, formData);
-}
+  }
 
+  //Administradores
+  ListadoAdministradores(){
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/admins')
+  }
+  
+  CredencialIduserType(usuario_id: number, tipousuario: number): Observable<any> {
+    return this.http.get<any>(`${this.urlServiciosTest}/api/credenciales/${usuario_id}/${tipousuario}`);
+  }
 
+  NuevoAdmin(nombre:any, correo:any, clave:any) {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    let parametros = { nombre: nombre, correo_electronico: correo,contrasena: clave } ;
+    return this.hpptclient.post<any>(this.urlServiciosTest + '/api/auth/register/admin', parametros)
+  }
 
 
 

@@ -66,7 +66,7 @@ ModalEditarInformacion(seleccion:any) {
 }
 
 ModalCambiarEstado(seleccion:any) {
-  this.objSeleccion=seleccion;
+  this.objSeleccion = { ...seleccion };
   if(this.objSeleccion.estado){
     this.strEstado="Desactivar";
   }else{
