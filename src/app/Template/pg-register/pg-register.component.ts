@@ -47,6 +47,15 @@ export class PgRegisterComponent {
     this.maxDate = today.toISOString().split('T')[0];
   }
 
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.uploadedFiles = [file];
+      //this.messages2 = [{severity:'success', summary:'Éxito', detail:'Imagen cargada correctamente con el nuevo xd'}];
+      //this.autoCloseMessages('messages2');
+    }
+  }
+  /*
   onUpload(event: any): void {
     this.uploadedFiles = event.files;
     console.log("XDXDXD "+ this.uploadedFiles);
@@ -55,7 +64,7 @@ export class PgRegisterComponent {
       this.autoCloseMessages('messages2');
     }
 
-  }
+  }*/
 
   autoCloseMessages(messageType: 'messages1' | 'messages2') {
     setTimeout(() => {
