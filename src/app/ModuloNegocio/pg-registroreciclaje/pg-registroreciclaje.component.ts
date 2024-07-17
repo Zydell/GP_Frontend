@@ -16,6 +16,7 @@ export class PgRegistroreciclajeComponent {
   seccion: string = '1';
   title = 'GreenPoint';
   email: string = '';
+  descripcion: string = 'Nada fuera de lo normal';
   negocio: any = {};
   sidebarCollapsed = false;
   imgbase64: string = '';
@@ -23,6 +24,8 @@ export class PgRegistroreciclajeComponent {
   messages1: Message[] = [];
   messages2: Message[] = [];
   materiales: any[] = [];
+  puntosverdes: any[] = [];
+  cantidad: number = 0;
 
   constructor(
     public  authService: AuthService, 
@@ -31,18 +34,18 @@ export class PgRegistroreciclajeComponent {
   ) {}
 
   async ngOnInit() {
-    await this.Obtener_Material_Pverde();
     this.negocio = this.authService.getNegocio(); // Obtiene la información del usuario al inicializar el componente
-    this.addFormValidation();
-    this.ListadoInformacion();
-    //console.log('negocio info on init:', this.negocio); // Agregar log para debug
+    await this.ListadoInformacion();
+    await this.Obtener_Materiales();
+    await this.Obtener_Pverde();
+    await this.addFormValidation();
   }
 
   async ListadoInformacion() {
     const data = await new Promise<any>(resolve => this.authService.getInfoNegocio(this.negocio.negocio_id).subscribe((translated:any) => { resolve(translated) }));
     if (data) {
       this.ngc = data;
-      //console.log("EEEEEEEEEEEEEEE"+ this.ngc.nombre);
+      //console.log("EEEEEEEEEEEEEEE"+ this.ngc.negocio_id);
       this.imgbase64 = this.convertBufferToBase64(data.image.data);     
     }
   }
@@ -67,7 +70,7 @@ export class PgRegistroreciclajeComponent {
     });
   }
 
-  addFormValidation() {
+  async addFormValidation() {
     setTimeout(() => {
       const forms = document.querySelectorAll('.needs-validation');
       Array.prototype.slice.call(forms).forEach((form: HTMLFormElement) => {
@@ -105,14 +108,14 @@ export class PgRegistroreciclajeComponent {
       }
   }
 
-  async Obtener_Material_Pverde(){
+  async Obtener_Materiales(){
     //Obtener los materiales activos
     try {
       const data = await this.variosServicios.ListadoMaterial().toPromise();
-      console.log("MATERIALES XD: ", JSON.stringify(data));
+      //console.log("MATERIALES XD: ", JSON.stringify(data));
   
       if (data) {
-        console.log("Materiales mapeados XXXXXXXXXXXXXX: ", this.materiales);
+        //console.log("Materiales mapeados XXXXXXXXXXXXXX: ", this.materiales);
         this.materiales = data.map((mat: any) => ({
           name: mat.tipo,
           code: mat.id_materiales
@@ -122,14 +125,25 @@ export class PgRegistroreciclajeComponent {
     } catch (error) {
       console.error("Error obteniendo materiales: ", error);
     }
-    //Obtener las secciones activas
-    /*const data1 = await new Promise<any>(resolve => this.servicios_ir.ListadoSeccionActivos().subscribe(translated => { resolve(translated) }));
-    if (data1.success) {
-      this.seccion = data1.datos.map((sec: any) => ({
-        name: sec.str_nombre,
-        code: sec.id_recomendacion
-      })); 
-    }*/
+  }
+
+  async Obtener_Pverde(){  
+    //Obtener los puntos verdes del negocio
+    try {
+      const data = await this.variosServicios.ListadoPuntoVerdeNegocio(this.ngc.negocio_id).toPromise();
+      //console.log("PUNTOS VERDES XD: ", JSON.stringify(data));
+  
+      if (data) {
+        this.puntosverdes = data.map((pv: any) => ({
+          name: pv.descripcion,
+          code: pv.punto_verde_id
+        }));
+        //console.log("Puntos verdes mapeados XXXXXXXXXXXXXX: ", this.puntosverdes);
+      }
+      
+    } catch (error) {
+      console.error("Error obteniendo los puntos verdes del negocio: ", error);
+    }
   }
 
   

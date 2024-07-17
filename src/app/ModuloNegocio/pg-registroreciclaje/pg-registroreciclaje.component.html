@@ -36,48 +36,44 @@
                       <label for="email" class="form-label" style="font-size: 14px;">Correo electrónico del ciudadano</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="email" [(ngModel)]="email" name="email" class="form-control" id="email" required style="font-size: 13px;">
+                        <input type="email" [(ngModel)]="email" name="email" class="form-control" id="email" required style="font-size: 13px;" placeholder="ciudadano@gmail.com">
                         <div class="invalid-feedback floating-invalid-feedback">Debes ingresar un correo electrónico!</div>
                       </div>
                     </div>
 
                     <div class="col-12 form-group" style="margin-top: -10px;">
-                        <label for="email" class="form-label" style="font-size: 14px;">Punto verde donde se recicla</label>
+                        <label for="puntosverdes" class="form-label" style="font-size: 14px;">Punto verde donde se recicla</label>
                         <div class="input-group has-validation">
-                          <input type="number" [(ngModel)]="email" name="email" class="form-control" id="email" required style="font-size: 13px;">
-                          <div class="invalid-feedback floating-invalid-feedback">Debes ingresar la cantidad reciclada!</div>
+                          <p-dropdown formControlName="selectedMaterial" [options]="puntosverdes" optionLabel="name" [style]="{ width: '100%' }"></p-dropdown>
+                          <div class="invalid-feedback floating-invalid-feedback">Debes seleccionar el punto verde donde registra!</div>
                         </div>
                     </div>
 
                     <div class="col-12 form-group" style="margin-top: -10px;">
-                        <label for="email" class="form-label" style="font-size: 14px;">Tipo de material reciclado</label>
+                        <label for="materiales" class="form-label" style="font-size: 14px;">Tipo de material reciclado</label>
                         <div class="input-group has-validation">
-                          <!--
-                            <input type="number" [(ngModel)]="email" name="email" class="form-control" id="email" required style="font-size: 13px;">
-                          -->
                           <p-dropdown formControlName="selectedMaterial" [options]="materiales" optionLabel="name" [style]="{ width: '100%' }"></p-dropdown>
-
-                          <div class="invalid-feedback floating-invalid-feedback">Debes ingresar la cantidad reciclada!</div>
+                          <div class="invalid-feedback floating-invalid-feedback">Debes seleccionar el tipo de material reciclado!</div>
                         </div>
                     </div>
 
                     <div class="col-12 form-group" style="margin-top: -10px;">
                         <label for="email" class="form-label" style="font-size: 14px;">Cantidad reciclada (libras)</label>
                         <div class="input-group has-validation">
-                          <input type="number" [(ngModel)]="email" name="email" class="form-control" id="email" required style="font-size: 13px;">
-                          <div class="invalid-feedback floating-invalid-feedback">Debes ingresar la cantidad reciclada!</div>
+                          <input type="number" [(ngModel)]="cantidad" name="cantidad" class="form-control"   id="cantidad" required style="font-size: 13px;" min="1" max="100" >
+                          <div class="invalid-feedback floating-invalid-feedback">Debes ingresar una cantidad reciclada valida (min 1 - max 100)!</div>
                         </div>
                     </div>
 
                     <div class="col-12 form-group" style="margin-top: -10px;">
                         <label for="email" class="form-label" style="font-size: 14px;">Descripción (opcional)</label>
                         <div class="input-group has-validation">
-                          <input type="text" [(ngModel)]="email" name="email" class="form-control" id="email" required style="font-size: 13px;">
+                          <input type="text" [(ngModel)]="descripcion" name="descripcion" class="form-control" id="descripcion" maxlength="200" required style="font-size: 13px;">
                         </div>
                     </div>
                     
                     <div class="col-12" style="margin-top: 10px;">
-                      <button class="btn btn-primary w-100" type="submit">Crear Cuenta</button>
+                      <button class="btn btn-primary w-100" type="submit">Registrar</button>
                     </div>
                   </form>
                 

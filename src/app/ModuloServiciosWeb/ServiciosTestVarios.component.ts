@@ -78,6 +78,14 @@ export class ServiciviosVarios {
     headers.append('Content-Type', 'application/json');
     return this.hpptclient.get<any>(this.urlServiciosTest + '/api/puntos_verdes')
   }
+
+  // Listado de un punto verde por el id de negocio
+  ListadoPuntoVerdeNegocio(id_negocio:any) {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+ //   let parametros = opcion + "/" + tipo + "/" + codCarrera + "/" + param;
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/puntos_verdes/negocio/'+ id_negocio,  { headers })
+  }
  
   // Crear un nuevo Punto Verde
   NuevoPuntoVerde(descripcion: string, direccion: string, latitud: number, longitud: number, negocio_id: number, estado: boolean = true){
