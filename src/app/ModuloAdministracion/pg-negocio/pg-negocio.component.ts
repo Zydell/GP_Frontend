@@ -35,7 +35,6 @@ export class PgNegocioComponent implements OnInit{
 
   maxDate: string = '';
   uploadedFiles: any[] = [];
-  imageBase64: string | null = null;
 
   strEstado:any="";
   visibleEditar: boolean=false;
@@ -49,37 +48,26 @@ export class PgNegocioComponent implements OnInit{
     private mensajes:Mensajes
   ) { }
 async ngOnInit() {
- await this.ListadoInformacion();
+  await this.ListadoInformacion();
+  const today = new Date(new Date().setDate(new Date().getDate() -1));
+  this.maxDate = this.formatDate(today);
 }
 
-ModalNuevoInformacion() {
-this.nombre="";
-this.propietario = "";
-this.tipo_negocio = "";
-this.direccion = "";
-this.telefono = "";
-this.fecharegistro = null;
-this.correo_electronico = "";
-this.contrasena = "";
-this.visibleNuevo = true;
-this.uploadedFiles = [];
-this.imageBase64 = null;
-const today = new Date();
-this.maxDate = today.toISOString().split('T')[0];
-}
 onUpload(event: any): void {
   this.uploadedFiles = event.files;
   console.log("XDXDXD "+ this.uploadedFiles);
 }
 
 ModalEditarInformacion(seleccion:any) {
-  this.objSeleccion=seleccion;
+  this.objSeleccion = { ...seleccion };
   console.log(this.objSeleccion)
+  this.objSeleccion.fecharegistro = this.objSeleccion.fecharegistro, 'yyyy-MM-dd';
     this.visibleEditar = true;
 }
+
 ModalCambiarEstado(seleccion:any) {
   this.objSeleccion=seleccion;
-  if(this.objSeleccion.bl_estado){
+  if(this.objSeleccion.estado){
     this.strEstado="Desactivar";
   }else{
     this.strEstado="Activar";
@@ -87,6 +75,7 @@ ModalCambiarEstado(seleccion:any) {
   console.log(this.objSeleccion)
   this.visibleEstado = true;
 }
+
   async ListadoInformacion() {
 
     const data = await new Promise<any>(resolve => this.servicios.ListadoNegocios().subscribe(translated => { resolve(translated) }));
@@ -97,66 +86,84 @@ ModalCambiarEstado(seleccion:any) {
     }
   }
   
-  async RegistrarNuevo(){
-    if (this.nombre?.trim() && 
-    this.propietario?.trim() && 
-    this.tipo_negocio?.trim() && 
-    this.direccion?.trim() && 
-    this.telefono?.trim() && 
-    this.correo_electronico?.trim() && 
-    this.contrasena?.trim() &&
-    this.uploadedFiles.length > 0) {
-      console.log("aqui")
+  formatDate(date: Date | string | null): string {
+    if (!date) {
+      return ''; // Retorna vacío si la fecha es null o undefined
+    }
+  
+    // Si date es una cadena, intenta convertirla a un objeto Date
+    if (typeof date === 'string') {
+      date = new Date(date);
+    }
+  
+    // Verifica que date sea realmente un objeto Date válido
+    if (!(date instanceof Date) || isNaN(date.getTime())) {
+      return ''; // Retorna vacío si no es una fecha válida
+    }
+  
+    // Convertir la fecha a formato deseado
+    const isoString = date.toISOString();
+    const datePart = isoString.split('T')[0]; // Obtener YYYY-MM-DD de la cadena ISO
+    return datePart;
+  }
+  async RegistrarActualizacion() {
+    if (this.objSeleccion.nombre?.trim() &&
+        this.objSeleccion.propietario?.trim() &&
+        this.objSeleccion.tipo_negocio?.trim() &&
+        this.objSeleccion.direccion?.trim() &&
+        this.objSeleccion.telefono?.trim()) {
+  
+      console.log("aqui");
+  
       const formData = new FormData();
-      formData.append('nombre', this.nombre.trim());
-      formData.append('propietario', this.propietario.trim());
-      formData.append('tipo_negocio', this.tipo_negocio.trim());
-      formData.append('direccion', this.direccion.trim());
-      formData.append('telefono', this.telefono.trim());
-      if (this.fecharegistro) {
-        formData.append('fecharegistro', this.fecharegistro.toISOString());
+      formData.append('nombre', this.objSeleccion.nombre.trim());
+      formData.append('propietario', this.objSeleccion.propietario.trim());
+      formData.append('tipo_negocio', this.objSeleccion.tipo_negocio.trim());
+      formData.append('direccion', this.objSeleccion.direccion.trim());
+      formData.append('telefono', this.objSeleccion.telefono.trim());
+  
+      if (!(this.objSeleccion.fecharegistro instanceof Date)) {
+        this.objSeleccion.fecharegistro = new Date(this.objSeleccion.fecharegistro);
       }
-        // Agregar la imagen si se ha cargado
-        if (this.uploadedFiles.length > 0) {
-          formData.append('image', this.uploadedFiles[0], this.uploadedFiles[0].name);
-        }
-
-        const data = await new Promise<any>(resolve => {
-          this.servicios.NuevoNegocio(formData).subscribe(translated => {
-            resolve(translated);
-          });
-        });
+  
+      if (this.objSeleccion.fecharegistro) {
+        formData.append('fecharegistro', this.objSeleccion.fecharegistro.toISOString());
+      }
+  
+      if (this.uploadedFiles.length > 0) {
+        formData.append('image', this.uploadedFiles[0], this.uploadedFiles[0].name);
+      }
+  
+      // Imprime el contenido del FormData para verificación
+      for (const pair of (formData as any).entries()) {
+        console.log(`${pair[0]}: ${pair[1]}`);
+      }
+  
+      try {
+        const data = await new Promise<any>(resolve => 
+          this.servicios.ActualizacionNegocio(this.objSeleccion.negocio_id, formData).subscribe(response => {
+            resolve(response);
+          })
+        );
+  
         console.log(data);
-        if (data.success) {
+  
+        if (data) {
           await this.ListadoInformacion();
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: this.mensajes.RegistroExitoso });
-          this.visibleNuevo = false;
+          this.messageService.add({ severity: 'success', summary: 'Éxito', detail: this.mensajes.ActualizacionExitosa });
+          this.visibleEditar = false;
         } else {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: this.mensajes.RegistroError });
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: this.mensajes.ActualizacionError });
         }
-      
-    }else{
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: "Formulario inválido" });
+      } catch (error) {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Ocurrió un error al actualizar el negocio' });
+        console.error(error);
+      }
+    } else {
+      this.messageService.add({ severity: 'info', summary: 'Info', detail: "Formulario Inválido" });
     }
   }
 
-  async RegistrarActualizacion(){
-    if(this.objSeleccion.int_valor!=""){
-      console.log("aqui")
-      const data = await new Promise<any>(resolve => this.servicios.ActualizacionDimension(this.objSeleccion.id_dimension,this.objSeleccion.int_valor).subscribe(translated => { resolve(translated) }));
-      //const data = await new Promise<any>(resolve => this.servicios.ActualizacionDimension(this.strEstado,this.objSeleccion.ounombre).subscribe(translated => { resolve(translated) }));
-      console.log(data)
-      if(data.success){
-        await this.ListadoInformacion();
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: this.mensajes.ActualizacionExitosa });
-        this.visibleEditar = false;
-      }else{
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: this.mensajes.ActualizacionError });
-      }
-    }else{
-      this.messageService.add({ severity: 'info', summary: 'Info', detail: this.mensajes.IngreseNombre }); 
-    }
-  }
   async EstadoCambiarActualizacion(){
     var estado:any;
     if(this.objSeleccion.bl_estado){
