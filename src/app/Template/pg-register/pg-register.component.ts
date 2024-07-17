@@ -50,6 +50,11 @@ export class PgRegisterComponent {
   onUpload(event: any): void {
     this.uploadedFiles = event.files;
     console.log("XDXDXD "+ this.uploadedFiles);
+    if (this.uploadedFiles){
+      this.messages2 = [{severity:'success', summary:'Éxito', detail:'Imagen cargada correctamente'}];
+      this.autoCloseMessages('messages2');
+    }
+
   }
 
   autoCloseMessages(messageType: 'messages1' | 'messages2') {
