@@ -55,9 +55,9 @@ export class ServiciviosVarios {
     return this.hpptclient.get<any>(this.urlServiciosTest + '/api/ofertas')
   }
 
-  NuevaOferta(descripcion: string, gc_necesarios: number, negocio_id: number, fecha_inicio: Date, fecha_fin: Date, estado: boolean = true){
+  NuevaOferta(descripcion: string, gc_necesarios: number, negocio_id: number, fecha_inicio: Date, fecha_fin: Date){
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const parametros = { descripcion, gc_necesarios, negocio_id, fecha_inicio, fecha_fin, estado };
+    const parametros = { descripcion, gc_necesarios, negocio_id, fecha_inicio, fecha_fin };
     return this.http.post<any>(this.urlServiciosTest + '/api/ofertas', parametros, { headers });
   }
 
@@ -107,26 +107,23 @@ export class ServiciviosVarios {
     headers.append('Content-Type', 'application/json');
     return this.hpptclient.get<any>(this.urlServiciosTest + '/api/negocios')
   }
- 
 
-  // Crear un nuevo Negocio
-  NuevoNegocio(formData: FormData ) {
-    return this.http.post<any>(`${this.urlServiciosTest}/api/auth/register/negocio/`, formData);
+  NegocioId(idNegocio: number){
+    return this.hpptclient.get<any>(`${this.urlServiciosTest}/api/negocios/${idNegocio}`);
   }
-
+  
   // Cambiar el estado de un Negocio
   EstadoCambiarNegocio(idNegocio: number, estado: boolean) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const parametros = { estado };
-    return this.http.put<any>(`${this.urlServiciosTest}//api/auth/register/negocio/${idNegocio}`, parametros, { headers });
+    return this.http.put<any>(`${this.urlServiciosTest}/api/negocios/${idNegocio}`, parametros, { headers });
   }
 
   // Actualizar un Negocio
-  ActualizacionNegocio(idNegocio: number, ruc: string, nombre: string, propietario: string, tipo_negocio: string, direccion: string, telefono: string, fecharegistro: Date, image: Blob | null, estado: boolean) {
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    const parametros = { ruc, nombre, propietario, tipo_negocio, direccion, telefono, fecharegistro, image, estado };
-    return this.http.put<any>(`${this.urlServiciosTest}/api/auth/register/negocio/${idNegocio}`, parametros, { headers });
-  }
+  ActualizacionNegocio(idNegocio: any, formData: FormData) {
+    return this.http.put<any>(`${this.urlServiciosTest}/api/negocios/${idNegocio}`, formData);
+}
+
 
 
 

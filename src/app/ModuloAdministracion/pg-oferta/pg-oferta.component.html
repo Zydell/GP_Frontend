@@ -14,15 +14,15 @@
     </p-toolbar>
   
     <p-table
-      [value]="lsListado"
-      [paginator]="true"
-      [rows]="10"
-      [showCurrentPageReport]="true"
-      [tableStyle]="{ 'min-width': '10rem' }"
-      styleClass="p-datatable-sm"
-      currentPageReportTemplate="Mostrar {first} - {last} de {totalRecords} elementos"
-      [rowsPerPageOptions]="[10, 25, 50]"
-    >
+    [value]="lsListado"
+    [paginator]="true"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    [tableStyle]="{ 'min-width': '10rem' }"
+    styleClass="p-datatable-sm"
+    currentPageReportTemplate="Mostrar {first} - {last} de {totalRecords} elementos"
+    [rowsPerPageOptions]="[10, 25, 50]"
+  >
       <ng-template pTemplate="header">
         <tr>
           <th >#</th>
@@ -56,9 +56,9 @@
           <td>{{ customer.ofertas_id }}</td>
           <td>{{ customer.descripcion }}</td>
           <td>{{ customer.gc_necesarios }}</td>
-          <td>{{ customer.negocio }}</td>
-          <td>{{ customer.fecha_inicio }}</td>
-          <td>{{ customer.fecha_fin }}</td>
+          <td>{{ (customer.negocioInfo) }}</td>
+          <td>{{ formatDate(customer.fecha_inicio)  }}</td>
+          <td>{{ formatDate(customer.fecha_fin) }}</td>
           <td>
           
             <p-tag *ngIf="customer.estado == false" severity="danger" [value]="'DESACTIVADO'"></p-tag>
@@ -88,7 +88,7 @@
     header="Nuevo"
     [(visible)]="visibleNuevo"
     [modal]="true"
-    [style]="{ width: '25vw' }"
+    [style]="{ width: '50vw', minWidth: '300px', maxWidth: '80vw' }"
     [draggable]="false"
     [resizable]="false"
   >
@@ -96,13 +96,14 @@
     <span class="text-xl font-bold">Nueva Oferta</span>
   </ng-template>
   <ng-template pTemplate="content">
+    <label for="descripcion" class="form-label" style="font-size: 14px;">Descripcion: </label>
     <div class="p-inputgroup">
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
       <input pInputText placeholder="Descripcion" [(ngModel)]="descripcion" class="p-inputtext-sm" (input)="descripcion = descripcion" required/>
     </div>
-
+    <label for="gc_necesarios" class="form-label" style="font-size: 14px;">Green Coins necesarios:  </label>
     <div class="p-inputgroup" style="margin-top: 15px;">
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
@@ -110,6 +111,7 @@
       <input pInputText placeholder="Green Coins Necesarios" [(ngModel)]="gc_necesarios" class="p-inputtext-sm" (input)="gc_necesarios = gc_necesarios" required/>
     </div>
 
+    <label for="" class="form-label" style="font-size: 14px;">Negocio:  </label>
     <div class="p-inputgroup" style="margin-top: 15px;">
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
@@ -120,26 +122,21 @@
       </select>
     </div>
 
+    <label for="" class="form-label" style="font-size: 14px;">Fecha Inicio:  </label>
     <div class="p-inputgroup" style="margin-top: 15px;">
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input type="date" placeholder="Fecha de inicio" [(ngModel)]="fecha_inicio" class="p-inputtext-sm" (input)="fecha_inicio = fecha_inicio" [min]="minDate" required/>
+      <input type="date" placeholder="Fecha de inicio" [(ngModel)]="fecha_inicio" class="p-inputtext-sm" (input)="fecha_inicio = fecha_inicio" [min]="minDate" [max]="(maxDate)" required/>
       <div class="invalid-feedback floating-invalid-feedback">Ingresa una fecha de inicio válida.</div>
     </div>
 
+    <label for="" class="form-label" style="font-size: 14px;">Fecha Finalizacion:  </label>
     <div class="p-inputgroup" style="margin-top: 15px;">
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input type="date" placeholder="Fecha de Finalizacion" [(ngModel)]="fecha_fin" class="p-inputtext-sm" (input)="fecha_fin = fecha_fin" required/>
-    </div>
-
-    <div class="p-inputgroup" style="margin-top: 15px;">
-      <span class="p-inputgroup-addon">
-          <i class="pi pi-pencil"></i>
-      </span>
-      <input pInputText placeholder="Descripcion" [(ngModel)]="descripcion" class="p-inputtext-sm" (input)="descripcion = descripcion"/>
+      <input type="date" placeholder="Fecha de Finalizacion" [(ngModel)]="fecha_fin" class="p-inputtext-sm" (input)="fecha_fin = fecha_fin" [min]="minDatefin" [max]="maxDate" required/>
     </div>
   </ng-template>
   
@@ -152,7 +149,7 @@
     header="Actualización"
     [(visible)]="visibleEditar"
     [modal]="true"
-    [style]="{ width: '25vw' }"
+    [style]="{ width: '50vw', minWidth: '300px', maxWidth: '80vw' }"
     [draggable]="false"
     [resizable]="false"
   >
@@ -178,7 +175,7 @@
     header="Estado"
     [(visible)]="visibleEstado"
     [modal]="true"
-    [style]="{ width: '25vw' }"
+    [style]="{ width: '50vw', minWidth: '300px', maxWidth: '80vw' }"
     [draggable]="false"
     [resizable]="false"
   >

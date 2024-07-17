@@ -13,7 +13,7 @@ export class PgMaterialComponent implements OnInit{
 
   lsListado:any=[];
   objSeleccion:any="-1";
-  intvalor:any="";
+  intvalor:number = 0;
   strnombre:any="";
   strEstado:any="";
   visibleEditar: boolean=false;
@@ -31,12 +31,12 @@ async ngOnInit() {
 }
 
 ModalNuevoInformacion() {
-this.intvalor="";
+this.intvalor=0;
 this.strnombre="";
     this.visibleNuevo = true;
 }
 ModalEditarInformacion(seleccion:any) {
-  this.objSeleccion=seleccion;
+  this.objSeleccion = { ...seleccion };
   console.log(this.objSeleccion)
     this.visibleEditar = true;
 }
@@ -60,7 +60,7 @@ ModalCambiarEstado(seleccion:any) {
   }
   
   async RegistrarNuevo(){
-    if(this.intvalor!="" && this.strnombre!=""){
+    if(this.intvalor>0 && this.strnombre!=""){
       console.log("aqui")
       const data = await new Promise<any>(resolve => this.servicios.NuevoMaterial(this.intvalor, this.strnombre).subscribe(translated => { resolve(translated) }));
       console.log(data)
@@ -72,13 +72,13 @@ ModalCambiarEstado(seleccion:any) {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: this.mensajes.RegistroError });
       }
     }else{
-      this.messageService.add({ severity: 'info', summary: 'Info', detail: this.mensajes.IngreseNombre });
+      this.messageService.add({ severity: 'info', summary: 'Info', detail: "Ingrese valores Validos" });
       
     }
   }
 
   async RegistrarActualizacion(){
-    if(this.objSeleccion.tipo!="" && this.objSeleccion.valor_por_libra!=""){
+    if(this.objSeleccion.tipo!="" && this.objSeleccion.valor_por_libra>0){
       console.log("aqui")
       const data = await new Promise<any>(resolve => this.servicios.ActualizacionMaterial(this.objSeleccion.materiales_id,this.objSeleccion.tipo,this.objSeleccion.valor_por_libra).subscribe(translated => { resolve(translated) }));
       console.log(data)

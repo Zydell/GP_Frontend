@@ -14,15 +14,15 @@
     </p-toolbar>
   
     <p-table
-      [value]="lsListado"
-      [paginator]="true"
-      [rows]="10"
-      [showCurrentPageReport]="true"
-      [tableStyle]="{ 'min-width': '10rem' }"
-      styleClass="p-datatable-sm"
-      currentPageReportTemplate="Mostrar {first} - {last} de {totalRecords} elementos"
-      [rowsPerPageOptions]="[10, 25, 50]"
-    >
+    [value]="lsListado"
+    [paginator]="true"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    [tableStyle]="{ 'min-width': '10rem' }"
+    styleClass="p-datatable-sm"
+    currentPageReportTemplate="Mostrar {first} - {last} de {totalRecords} elementos"
+    [rowsPerPageOptions]="[10, 25, 50]"
+  >
       <ng-template pTemplate="header">
         <tr>
           <th >#</th>
@@ -46,7 +46,7 @@
           <td>{{ customer.direccion }}</td>
           <td>{{ customer.latitud }}</td>
           <td>{{ customer.longitud }}</td>
-          <td>{{ customer.negocio_id }}</td>
+          <td>{{ customer.negocioInfo }}</td>
           <td>
           
             <p-tag *ngIf="customer.estado == false" severity="danger" [value]="'DESACTIVADO'"></p-tag>

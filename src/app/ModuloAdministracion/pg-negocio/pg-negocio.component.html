@@ -3,14 +3,7 @@
       <div class="p-toolbar-group-center">
         <p>INFORMACIÓN NEGOCIOS</p>
       </div>
-      <div class="p-toolbar-group-end">
-        <p-button
-          type="button"
-          icon="pi pi-plus"
-          styleClass="p-button-text"
-          (click)="ModalNuevoInformacion()"
-        ></p-button>
-      </div>
+      
     </p-toolbar>
   
     <p-table
@@ -35,7 +28,7 @@
           <th >DIRECCIÓN</th>
           <th >TELÉFONO</th>
           <th >IMAGEN</th>
-          <th >FECHA REGISTRO <br> (día/mes/año)</th>
+          <th >FECHA REGISTRO <br> (año/mes/día)</th>
           <th >ESTADO</th>
           <th >ACCIONES</th>
 
@@ -52,7 +45,7 @@
           <td>
             <img *ngIf="customer.image" [src]="'data:image/jpeg;base64,' + customer.image" alt="Imagen"  max-width="250rem" max-height="250rem" width="100%" height="100%">
           </td>
-          <td>{{ customer.fecharegistro | date:'dd/MM/yyyy'}}</td>
+          <td>{{ formatDate(customer.fecharegistro)}}</td>
 
           <td>
           
@@ -79,89 +72,7 @@
      
     </p-table>
   </div>
-  <p-dialog
-    header="Nuevo"
-    [(visible)]="visibleNuevo"
-    [modal]="true"
-    [style]="{ width: '50vw', minWidth: '300px', maxWidth: '80vw' }"
-    [draggable]="false"
-    [resizable]="false"
-  >
-  <ng-template pTemplate="header">
-    <span class="text-xl font-bold">Nuevo Negocio</span>
-  </ng-template>
-  <ng-template pTemplate="content">
-    <label for="Nombre" class="form-label" style="font-size: 14px;">Nombre: </label>
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">
-          <i class="pi pi-pencil"></i>
-      </span>
-      <input pInputText placeholder="Nombre" [(ngModel)]="nombre" class="p-inputtext-sm" (input)="nombre = nombre" required/>
-    </div>
-    <label for="propietario" class="form-label" style="font-size: 14px;">Propietario: </label>
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">
-          <i class="pi pi-pencil"></i>
-      </span>
-      <input pInputText placeholder="Propietario" [(ngModel)]="propietario" class="p-inputtext-sm" (input)="propietario = propietario" required/>
-    </div>
-    <label for="tipo_negocio" class="form-label" style="font-size: 14px;">Tipo Negocio: </label>
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">
-          <i class="pi pi-pencil"></i>
-      </span>
-      <input pInputText placeholder="Tipo Negocio" [(ngModel)]="tipo_negocio" class="p-inputtext-sm" (input)="tipo_negocio = tipo_negocio" required/>
-    </div>
-    <label for="direccion" class="form-label" style="font-size: 14px;">Dirección:</label>
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">
-          <i class="pi pi-pencil"></i>
-      </span>
-      <input pInputText placeholder="Dirección" [(ngModel)]="direccion" class="p-inputtext-sm" (input)="direccion = direccion" required/>
-    </div>
-    <label for="telefono" class="form-label" style="font-size: 14px;">Teléfono: </label>
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">
-          <i class="pi pi-pencil"></i>
-      </span>
-      <input type="text" name="telefono" [(ngModel)]="telefono" pattern="^09\d{8}$" class="form-control" id="telefono" required placeholder="Telefono" style="font-size: 14px;" maxlength="10" inputmode="numeric">
-      <div class="invalid-feedback floating-invalid-feedback">Ingresa tu número telefónico (10 dígitos)</div>    
-    </div>
-    <label for="fecharegistro" class="form-label" style="font-size: 14px;">Fecha de Registro: </label>
-    <div class="p-inputgroup">
-      <input type="date" [(ngModel)]="fecharegistro" class="form-control" (input)="fecharegistro = fecharegistro" [max]="maxDate" required style="font-size: 14px;"/>
-    </div>
-
-    <label for="image" class="form-label" style="font-size: 14px;">Foto del Negocio: </label>
-    <div class="p-inputgroup">
-      <p-fileUpload mode="basic" chooseLabel="Elegir" name="image" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" [maxFileSize]="1000000" (onUpload)="onUpload($event)"></p-fileUpload>
-      <div *ngIf="!imageBase64" class="invalid-feedback floating-invalid-feedback">Debes subir una imagen del negocio.</div>
-    </div>
-    
-    <label for="Correo Electronico" class="form-label" style="font-size: 14px;">Correo Electrónico: </label>
-    <div class="input-group has-validation">
-      <span class="p-inputgroup-addon">
-        <i class="pi pi-pencil"></i>
-      </span>
-      <input type="email" placeholder="Correo Electronico" class="form-control" [(ngModel)]="correo_electronico" (input)="correo_electronico = correo_electronico" required style="font-size: 14px;"/>
-      <div class="invalid-feedback floating-invalid-feedback">Debes ingresar el correo electrónico!</div>
-    </div>
-
-    <label for="Contraseña" class="form-label" style="font-size: 14px;">Contraseña : </label>
-    <div class="input-group has-validation">
-      <span class="p-inputgroup-addon">
-        <i class="pi pi-pencil"></i>
-      </span>
-      <input type="password" minlength="8" maxlength="16" pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,16}$" placeholder="Contraseña" [(ngModel)]="contrasena" (input)="contrasena = contrasena" class="form-control" required style="font-size: 14px;"/>
-      <div class="invalid-feedback floating-invalid-feedback">Debes ingresar tu contraseña valida (al menos una mayuscula y numero)!</div>
-    </div>
-  </ng-template>
   
-  <ng-template pTemplate="footer">
-    <p-button icon="pi pi-save"  label="Registrar" styleClass="p-button-sm" (click)="RegistrarNuevo()"></p-button>
-  </ng-template>
-  
-  </p-dialog>
   <p-dialog
     header="Actualización"
     [(visible)]="visibleEditar"
@@ -173,13 +84,56 @@
   <ng-template pTemplate="header">
     <span class="text-xl font-bold">Actualización</span>
   </ng-template>
-  
+  <label for="Nombre" class="form-label" style="font-size: 14px;">Nombre: </label>
   <ng-template pTemplate="content">
     <div class="p-inputgroup">
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input pInputText placeholder="Valor" [(ngModel)]="objSeleccion.int_valor" class="p-inputtext-sm"/>
+      <input pInputText placeholder="Nombre" [(ngModel)]="objSeleccion.nombre" class="p-inputtext-sm"/>
+    </div>
+    <label for="propietario" class="form-label" style="font-size: 14px;">Propietario: </label>
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon">
+          <i class="pi pi-pencil"></i>
+      </span>
+      <input pInputText placeholder="Propietario" [(ngModel)]="objSeleccion.propietario" class="p-inputtext-sm" required/>
+    </div>
+    
+    <label for="tipo_negocio" class="form-label" style="font-size: 14px;">Tipo Negocio: </label>
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon">
+          <i class="pi pi-pencil"></i>
+      </span>
+      <input pInputText placeholder="Tipo Negocio" [(ngModel)]="objSeleccion.tipo_negocio" class="p-inputtext-sm" required/>
+    </div>
+    
+    <label for="direccion" class="form-label" style="font-size: 14px;">Dirección:</label>
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon">
+          <i class="pi pi-pencil"></i>
+      </span>
+      <input pInputText placeholder="Dirección" [(ngModel)]="objSeleccion.direccion" class="p-inputtext-sm" required/>
+    </div>
+    
+    <label for="telefono" class="form-label" style="font-size: 14px;">Teléfono: </label>
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon">
+          <i class="pi pi-pencil"></i>
+      </span>
+      <input type="text" name="telefono" [(ngModel)]="objSeleccion.telefono" pattern="^09\d{8}$" class="form-control" id="telefono" required placeholder="Telefono" style="font-size: 14px;" maxlength="10" inputmode="numeric">
+      <div class="invalid-feedback floating-invalid-feedback">Ingresa tu número telefónico (10 dígitos)</div>    
+    </div>
+    
+    <label for="fecharegistro" class="form-label" style="font-size: 14px;">Fecha de Registro: </label>
+    <div class="p-inputgroup"> 
+      <input type="date" [(ngModel)]="objSeleccion.fecharegistro" class="form-control" required [max]="maxDate"/>
+    </div>
+
+    <label for="image" class="form-label" style="font-size: 14px;">Foto del Negocio: </label>
+    <div class="p-inputgroup">
+      <p-fileUpload mode="basic" chooseLabel="Elegir" name="image" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" [maxFileSize]="1000000" (onUpload)="onUpload($event)"></p-fileUpload>
+      <div *ngIf="!objSeleccion.image" class="invalid-feedback floating-invalid-feedback">Debes subir una imagen del negocio.</div>
     </div>
   </ng-template>
   
@@ -192,7 +146,7 @@
     header="Estado"
     [(visible)]="visibleEstado"
     [modal]="true"
-    [style]="{ width: '25vw' }"
+    [style]="{ width: '50vw', minWidth: '300px', maxWidth: '80vw' }"
     [draggable]="false"
     [resizable]="false"
   >
@@ -205,7 +159,7 @@
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input pInputText placeholder="Estado" [(ngModel)]="objSeleccion.int_valor" class="p-inputtext-sm" readonly/>
+      <input pInputText placeholder="Estado" [(ngModel)]="objSeleccion.nombre" class="p-inputtext-sm" readonly/>
     </div>
   </ng-template>
   

@@ -1,34 +1,104 @@
-<p-menubar >
-    <ng-template pTemplate="start">
-        <p-avatar image="/assets/img/gp.ico" shape="circle" />
-        <a href="/dashadmin/principaladmin" class="logo d-flex align-items-center">
-          <span class="d-none d-lg-block">GreenPoint</span>
-        </a>
-        <i class="bi bi-list toggle-sidebar-btn" (click)="toggleSidebar()"></i>
-    </ng-template>
-  <ng-template pTemplate="end">
-  
-      <a class="nav-link nav-profile d-flex align-items-center pe-0" (click)="toggleMenu('profile', $event)" role="button">
-        <p-avatar image="assets/img/profile-img.jpg" class="mr-2" shape="circle" />
-        <span class="d-none d-md-block dropdown-toggle ps-2">Administrador</span>
-      </a>
-      <!-- End Profile Image Icon -->
-    
-      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile" *ngIf="menus['profile']" style="right: 15px !important; top: 45px !important;">
-        <li class="dropdown-header">
-          <span>Administrador</span>
-        </li>
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
 
+  <div class="d-flex align-items-center justify-content-between">
+    <a href="/dashadmin/principaladmin">
+      <img src="assets/img/hero-imsg.png" height="50px" width="auto">
+    </a>
+    <a href="/dashadmin/principaladmin" class="logo d-flex align-items-center">
+      <span class="d-none d-lg-block">GreenPoint</span>
+    </a>
+    <!--</i><i class="bi bi-list toggle-sidebar-btn"></i>-->
+    
+    <i class="bi bi-list toggle-sidebar-btn" (click)="toggleSidebar()"></i>
+  </div><!-- End Logo -->
+
+  <nav class="header-nav ms-auto">
+    <ul class="d-flex align-items-center">
+
+      <li class="nav-item d-block d-lg-none">
+        <a class="nav-link nav-icon search-bar-toggle " href="#">
+          <i class="bi bi-search"></i>
+        </a>
+      </li><!-- End Search Icon-->
+      
+      <li class="nav-item dropdown pe-3">
+        <a class="nav-link nav-profile d-flex align-items-center pe-0" (click)="toggleMenu('profile', $event)" role="button">
+          <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+          <span class="d-none d-md-block dropdown-toggle ps-2">{{ user?.nombre }}</span>
+        </a>
+        <!-- End Profile Image Icon -->
+      
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile" *ngIf="menus['profile']" style="right: 15px !important; top: 45px !important;">
+          <li class="dropdown-header">
+            <h6>{{ user?.nombre }}</h6>
+            <span>Administrador</span>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li *ngIf="authService.isAuthenticated()">
+            <a (click)="logout()" class="dropdown-item d-flex align-items-center" role="button">
+              <i class="bi bi-box-arrow-right"></i>
+              <span>Cerrar Sesión</span>
+            </a>
+          </li>
+        </ul>
+        <!-- End Profile Dropdown Items -->
+      </li>
+      <!-- End Profile Nav -->
+    </ul>
+  </nav><!-- End Icons Navigation -->
+
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar" [class.collapsed]="sidebarCollapsed">
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+    <li class="nav-item">
+      <a class="nav-link " href="/dashadmin/principaladmin">
+        <i class="bi bi-grid"></i>
+        <span>Administración</span>
+      </a>
+    </li><!-- End Dashboard Nav -->
+<!--     
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-menu-button-wide"></i><span>Gestion</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-          <hr class="dropdown-divider">
-        </li>
-        <li *ngIf="authService.isAuthenticated()">
-          <a (click)="logout()" class="dropdown-item d-flex align-items-center" role="button">
-            <i class="bi bi-box-arrow-right"></i>
-            <span>Cerrar Sesión</span>
+          <a href="components-alerts.html">
+            <i class="bi bi-circle"></i><span>Alerts</span>
           </a>
         </li>
       </ul>
-      <!-- End Profile Dropdown Items -->
-  </ng-template>
-</p-menubar>
+    </li> -->
+    <!-- End Components Nav -->
+  </ul>
+
+</aside><!-- End Sidebar-->
+<main id="main" class="main" [class.toggle-sidebar]="sidebarCollapsed">
+
+  <div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/dashadmin/principaladmin">Home</a></li>
+        <li class="breadcrumb-item active">Dashboard</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section dashboard">
+    <div id="wrapper" class="main-container-app">
+      <div id="content-wrapper">
+       <router-outlet></router-outlet>
+      <app-spinner></app-spinner>
+      </div>
+    </div>    
+  </section>
+</main><!-- End #main -->
+
+

@@ -14,11 +14,12 @@ export class PgOfertaComponent implements OnInit{
   lsListado:any=[];
   objSeleccion:any="-1";
   descripcion:any="";
-  gc_necesarios:any="";
-  negocio_id:any="";
+  gc_necesarios:number=0;
+  negocio_id:number=0;
   fecha_inicio: Date = new Date();
   minDate: string = '';
-
+  minDatefin: string = this.minDate;
+  maxDate: string = '';
   fecha_fin:Date=new Date(new Date().setDate(new Date().getDate() + 1));
   estado:boolean=true;
 
@@ -35,13 +36,36 @@ export class PgOfertaComponent implements OnInit{
   ) { }
 async ngOnInit() {
  await this.ListadoInformacion();
- const today = new Date();
-  this.minDate = today.toISOString().split('T')[0];
+ const today = new Date(new Date().setDate(new Date().getDate() -1));
+  this.minDate = this.formatDate(today);
 }
+formatDate(date: Date | string | null): string {
+  if (!date) {
+    return ''; // Retorna vacío si la fecha es null o undefined
+  }
 
+  // Si date es una cadena, intenta convertirla a un objeto Date
+  if (typeof date === 'string') {
+    date = new Date(date);
+  }
+
+  // Verifica que date sea realmente un objeto Date válido
+  if (!(date instanceof Date) || isNaN(date.getTime())) {
+    return ''; // Retorna vacío si no es una fecha válida
+  }
+
+  // Convertir la fecha a formato deseado
+  const isoString = date.toISOString();
+  const datePart = isoString.split('T')[0]; // Obtener YYYY-MM-DD de la cadena ISO
+  return datePart;
+}
 ModalNuevoInformacion() {
-this.descripcion="";
-    this.visibleNuevo = true;
+  const today = new Date();
+  this.descripcion="";
+  this.gc_necesarios = 0;
+  this.fecha_inicio = new Date();
+  this.fecha_fin = new Date(new Date().setDate(new Date().getDate() + 1));
+  this.visibleNuevo = true;
 }
 ModalEditarInformacion(seleccion:any) {
   this.objSeleccion=seleccion;
@@ -59,19 +83,34 @@ ModalCambiarEstado(seleccion:any) {
   this.visibleEstado = true;
 }
   async ListadoInformacion() {
-
     const data = await new Promise<any>(resolve => this.servicios.ListadoOfertas().subscribe(translated => { resolve(translated) }));
-   console.log(data)
+    console.log(data)
+    for (let oferta of data) {
+      const negocioInfo = await this.Buscarnegocio(oferta.negocio_id);
+      oferta.negocioInfo = negocioInfo;
+    }
+    this.lsListado = data;
+  }
 
-    if (data.success) {
-      this.lsListado=data;
+  async Buscarnegocio(idNegocio: number): Promise<string> {
+    try {
+      const data = await new Promise<any>((resolve, reject) => {
+        this.servicios.NegocioId(idNegocio).subscribe({
+          next: (translated) => resolve(translated),
+          error: (err) => reject(err)
+        });
+      });
+      return `Nombre: ${data.nombre} - Propietario: ${data.propietario}`
+    } catch (error) {
+      return 'Error al buscar el negocio';
     }
   }
   
+
   async RegistrarNuevo(){
     if(this.descripcion!=""){
       console.log("aqui")
-      const data = await new Promise<any>(resolve => this.servicios.NuevaOferta(this.descripcion,this.gc_necesarios,this.negocio_id,this.fecha_inicio,this.fecha_fin,this.estado).subscribe(translated => { resolve(translated) }));
+      const data = await new Promise<any>(resolve => this.servicios.NuevaOferta(this.descripcion,this.gc_necesarios,this.negocio_id,this.fecha_inicio,this.fecha_fin).subscribe(translated => { resolve(translated) }));
       console.log(data)
       if(data.success){
         await this.ListadoInformacion();

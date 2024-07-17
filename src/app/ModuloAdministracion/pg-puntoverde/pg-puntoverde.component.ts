@@ -57,10 +57,27 @@ ModalCambiarEstado(seleccion:any) {
     console.log(data)
 
     if (data) {
+      for (let puntoverde of data) {
+        const negocioInfo = await this.Buscarnegocio(puntoverde.negocio_id);
+        puntoverde.negocioInfo = negocioInfo;
+      }
       this.lsListado=data;
     }
   }
-  
+  async Buscarnegocio(idNegocio: number): Promise<string> {
+    try {
+      const data = await new Promise<any>((resolve, reject) => {
+        this.servicios.NegocioId(idNegocio).subscribe({
+          next: (translated) => resolve(translated),
+          error: (err) => reject(err)
+        });
+      });
+      return `Nombre: ${data.nombre} - Propietario: ${data.propietario}`
+    } catch (error) {
+      console.error('Error al buscar el negocio:', error);
+      return 'Error al buscar el negocio';
+    }
+  }
   /*async RegistrarNuevo(){
     if(this.descripcion!=""){
       console.log("aqui")
