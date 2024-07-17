@@ -18,11 +18,20 @@ export class ServiciviosVarios {
   }
 
   // MATERIALES
+  // Se ontiene todos los materiales
   ListadoMaterial() {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
  //   let parametros = opcion + "/" + tipo + "/" + codCarrera + "/" + param;
     return this.hpptclient.get<any>(this.urlServiciosTest + '/api/materiales',  { headers })
+  }
+
+  // Se ontiene los materiales activos
+  ListadoMaterialActivos() {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+ //   let parametros = opcion + "/" + tipo + "/" + codCarrera + "/" + param;
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/materiales/activo',  { headers })
   }
 
   NuevoMaterial(intvalor:any, strnombre:any) {

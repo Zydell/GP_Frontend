@@ -130,7 +130,7 @@ export class PgRegistroreciclajeComponent {
   async Obtener_Materiales(){
     //Obtener los materiales activos
     try {
-      const data = await this.variosServicios.ListadoMaterial().toPromise();
+      const data = await this.variosServicios.ListadoMaterialActivos().toPromise();
       //console.log("MATERIALES XD: ", JSON.stringify(data));
   
       if (data) {
