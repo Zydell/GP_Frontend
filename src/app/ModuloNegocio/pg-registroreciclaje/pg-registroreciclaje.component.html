@@ -1,8 +1,9 @@
-
+<p-messages [(value)]="messages2" [enableService]="false" [closable]="false" class="floating-message"></p-messages>
+<p-messages [(value)]="messages1" [enableService]="false" [closable]="false" class="floating-message"></p-messages>
 <div class="pagetitle">
     <h1>Registro de reciclaje</h1>
   </div><!-- End Page Title -->
-
+  
   <section class="section dashboard">
     <div class="row">
 
@@ -44,7 +45,7 @@
                     <div class="col-12 form-group" style="margin-top: -10px;">
                         <label for="puntosverdes" class="form-label" style="font-size: 14px;">Punto verde donde se recicla</label>
                         <div class="input-group has-validation">
-                          <p-dropdown formControlName="selectedMaterial" [options]="puntosverdes" optionLabel="name" [style]="{ width: '100%' }"></p-dropdown>
+                          <p-dropdown [(ngModel)]="selectedPuntoVerde" name="puntoVerde" [options]="puntosverdes" optionLabel="name" [style]="{ width: '100%' }"></p-dropdown>
                           <div class="invalid-feedback floating-invalid-feedback">Debes seleccionar el punto verde donde registra!</div>
                         </div>
                     </div>
@@ -52,13 +53,13 @@
                     <div class="col-12 form-group" style="margin-top: -10px;">
                         <label for="materiales" class="form-label" style="font-size: 14px;">Tipo de material reciclado</label>
                         <div class="input-group has-validation">
-                          <p-dropdown formControlName="selectedMaterial" [options]="materiales" optionLabel="name" [style]="{ width: '100%' }"></p-dropdown>
+                          <p-dropdown [(ngModel)]="selectedMaterial" name="material" [options]="materiales" optionLabel="name" [style]="{ width: '100%' }"></p-dropdown>
                           <div class="invalid-feedback floating-invalid-feedback">Debes seleccionar el tipo de material reciclado!</div>
                         </div>
-                    </div>
+                      </div>
 
                     <div class="col-12 form-group" style="margin-top: -10px;">
-                        <label for="email" class="form-label" style="font-size: 14px;">Cantidad reciclada (libras)</label>
+                        <label for="cantidad" class="form-label" style="font-size: 14px;">Cantidad reciclada (libras)</label>
                         <div class="input-group has-validation">
                           <input type="number" [(ngModel)]="cantidad" name="cantidad" class="form-control"   id="cantidad" required style="font-size: 13px;" min="1" max="100" >
                           <div class="invalid-feedback floating-invalid-feedback">Debes ingresar una cantidad reciclada valida (min 1 - max 100)!</div>
@@ -87,8 +88,6 @@
 
         </div>
       </div><!-- End Left side columns -->
-
-
 
       <!-- Right side columns -->
       <div class="col-lg-4">

@@ -52,6 +52,16 @@ export class PgRegisterComponent {
     console.log("XDXDXD "+ this.uploadedFiles);
   }
 
+  autoCloseMessages(messageType: 'messages1' | 'messages2') {
+    setTimeout(() => {
+      if (messageType === 'messages1') {
+        this.messages1 = [];
+      } else if (messageType === 'messages2') {
+        this.messages2 = [];
+      }
+    }, 3000); // Tiempo en milisegundos (5000 ms = 5 segundos)
+  }
+
   ModalTerminosCondiciones(event: Event) {
     event.preventDefault();
     this.term_condiciones = true;
@@ -89,17 +99,20 @@ export class PgRegisterComponent {
         this.authService.registerCiudadano({ fecha_nac: this.fechaNacimiento, telefono: this.telefono, apellido: this.lastname, nombre: this.name, correo_electronico: this.email, contrasena: this.password })
         .subscribe(() => {
             this.messages2 = [{severity:'success', summary:'Éxito', detail:'Usuario registrado correctamente'}];
+            this.autoCloseMessages('messages2');
             setTimeout(() => {
               this.router.navigate(['/login']);
-            }, 2000)  ; // Redirecciona después de 2 segundos 
+            }, 1000)  ; // Redirecciona después de 2 segundos 
           },
           err => {
             console.error(err);
             this.messages1 = [{severity:'error', summary:'Error', detail:err.error.message}];
+            this.autoCloseMessages('messages1');
           }
         );
       }else{
         this.messages1 = [{severity:'error', summary:'Error', detail:'Formulario inválido'}];
+        this.autoCloseMessages('messages1');
       }
 
     }else if (this.tipo === 'negocio') {
@@ -122,20 +135,24 @@ export class PgRegisterComponent {
         this.authService.registerNegocio(formData).subscribe(
           () => {
             this.messages2 = [{severity:'success', summary:'Éxito', detail:'Negocio registrado correctamente'}];
+            this.autoCloseMessages('messages2');
             setTimeout(() => {
               this.router.navigate(['/login']);
-            }, 2000)  ; // Redirecciona después de 2 segundos 
+            }, 1000)  ; // Redirecciona después de 2 segundos 
           },
           err => {
             console.error(err);
             this.messages1 = [{severity:'error', summary:'Error', detail:err.error.message}];
+            this.autoCloseMessages('messages1');
           }
         );
       }else{
         if (form.valid && this.uploadedFiles.length == 0 && this.termsAccepted) {
           this.messages1 = [{severity:'error', summary:'Error', detail:'Debes subir una imagen del negocio'}];
+          this.autoCloseMessages('messages1');
         }else{
           this.messages1 = [{severity:'error', summary:'Error', detail:'Formulario inválido'}];
+          this.autoCloseMessages('messages1');
         } 
       }
     }

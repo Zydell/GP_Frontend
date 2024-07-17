@@ -37,6 +37,16 @@ export class PgRecuperarComponent {
       this.visibleNuevo = true;
   }
 
+  autoCloseMessages(messageType: 'messages1' | 'messages2') {
+    setTimeout(() => {
+      if (messageType === 'messages1') {
+        this.messages1 = [];
+      } else if (messageType === 'messages2') {
+        this.messages2 = [];
+      }
+    }, 3000); // Tiempo en milisegundos (5000 ms = 5 segundos)
+  }
+
   validateToken() {
     console.log("Verificar el correo y token: "+ this.email+" - "+this.token)
     this.http.post('http://localhost:5000/api/validate-token', { token: this.token, correo_electronico: this.email })
@@ -44,11 +54,13 @@ export class PgRecuperarComponent {
         response => {
           console.log('Código válido', response);
           this.messages2 = [{severity:'success', summary:'Éxito', detail:"Código válido"}];
+          this.autoCloseMessages('messages2');
           this.paso = 2; // Cambia al paso 2 si el código es válido
         },
         error => {
           console.error('Código inválido', error);
           this.messages1 = [{severity:'error', summary:'Error', detail:"Código inválido"}];
+          this.autoCloseMessages('messages1');
         }
       );
   }
@@ -59,18 +71,21 @@ export class PgRecuperarComponent {
         .subscribe(
             () => {
               this.messages2 = [{severity:'success', summary:'Éxito', detail:'Contraseña restablecida'}];
+              this.autoCloseMessages('messages2');
               setTimeout(() => {
                 this.router.navigate(['/login']);
-              }, 2000)  ; // Redirecciona después de 2 segundos 
+              }, 1000)  ; // Redirecciona después de 2 segundos 
             },
           error => {
             console.error('Error al restablecer la contraseña', error);
             this.messages1 = [{severity:'error', summary:'Error', detail:"Error al restablecer la contraseña"}];
+            this.autoCloseMessages('messages1');
           }
         );
     } else {
       console.error("Contraseña no válida");
       this.messages1 = [{severity:'error', summary:'Error', detail:"Contraseña no válida"}];
+      this.autoCloseMessages('messages1');
     }
   }
 
@@ -98,11 +113,13 @@ export class PgRecuperarComponent {
         response => {
           console.log("Correo enviado");
           this.messages2 = [{severity:'success', summary:'Éxito', detail:"Correo enviado"}];
+          this.autoCloseMessages('messages2');
           this.ModalNuevoInformacion();
         },
         error => {
           console.error('Error al enviar el email de recuperación', error);
           this.messages1 = [{severity:'error', summary:'Error', detail:"Error al enviar el email de recuperación"}];
+          this.autoCloseMessages('messages1');
         }
       );
     } else {

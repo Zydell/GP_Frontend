@@ -16,6 +16,8 @@ export class PgRegistroreciclajeComponent {
   seccion: string = '1';
   title = 'GreenPoint';
   email: string = '';
+  selectedPuntoVerde: any;
+  selectedMaterial: any;
   descripcion: string = 'Nada fuera de lo normal';
   negocio: any = {};
   sidebarCollapsed = false;
@@ -70,6 +72,16 @@ export class PgRegistroreciclajeComponent {
     });
   }
 
+  autoCloseMessages(messageType: 'messages1' | 'messages2') {
+    setTimeout(() => {
+      if (messageType === 'messages1') {
+        this.messages1 = [];
+      } else if (messageType === 'messages2') {
+        this.messages2 = [];
+      }
+    }, 3000); // Tiempo en milisegundos (5000 ms = 5 segundos)
+  }
+
   async addFormValidation() {
     setTimeout(() => {
       const forms = document.querySelectorAll('.needs-validation');
@@ -90,21 +102,28 @@ export class PgRegistroreciclajeComponent {
 
   RegistroReciclaje(form: NgForm) {
       if (form.valid){
-        //this.messages1 = [{severity:'error', summary:'Error', detail:'Form valido'}];
-        this.variosServicios.RegReciclaje({  correo_electronico: this.email })
+        const selectedPuntoVerdeCode = this.selectedPuntoVerde ? this.selectedPuntoVerde.code : null;
+        const selectedMaterialCode = this.selectedMaterial ? this.selectedMaterial.code : null;
+        //console.log("Punto verde seleccionado: " + selectedPuntoVerdeCode + " material: " + selectedMaterialCode);
+
+        this.variosServicios.RegReciclaje({  correo_electronico: this.email, negocio_id: this.ngc.negocio_id, punto_verde_id:selectedPuntoVerdeCode, cantidad:this.cantidad, material_id:selectedMaterialCode, descripcion:this.descripcion })
         .subscribe(() => {
-            this.messages2 = [{severity:'success', summary:'Éxito', detail:'Usuario registrado correctamente'}];
+            this.messages2 = [{severity:'success', summary:'Éxito', detail:'Reciclaje registrado exitosamente'}];
+            this.autoCloseMessages('messages2');
             setTimeout(() => {
-              this.router.navigate(['/login']);
+              //this.router.navigate(['/login']);
+              //this.email = '';
             }, 2000)  ; // Redirecciona después de 2 segundos 
           },
           err => {
             console.error(err);
-            this.messages1 = [{severity:'error', summary:'Error', detail:err.error.message}];
+            this.messages1 = [{severity:'error', summary:'Error', detail:"Correo electronico invalido"}];
+            this.autoCloseMessages('messages1');
           }
         );
       }else{
         this.messages1 = [{severity:'error', summary:'Error', detail:'Formulario inválido'}];
+        this.autoCloseMessages('messages1');
       }
   }
 
@@ -118,7 +137,7 @@ export class PgRegistroreciclajeComponent {
         //console.log("Materiales mapeados XXXXXXXXXXXXXX: ", this.materiales);
         this.materiales = data.map((mat: any) => ({
           name: mat.tipo,
-          code: mat.id_materiales
+          code: mat.materiales_id
         }));
       }
       

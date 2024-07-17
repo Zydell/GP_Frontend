@@ -197,7 +197,7 @@
                       <div class="col-12 form-group" style="margin-top: -10px;">
                         <label for="image" class="form-label" style="font-size: 14px;">Foto del Negocio</label>
                         <!--<p-fileUpload mode="basic" chooseLabel="Elegir" name="image" accept="image/*"  [maxFileSize]="1000000" (onUpload)="onUpload($event)"></p-fileUpload>-->
-                        <p-fileUpload mode="basic" chooseLabel="Elegir" name="image" url="https://www.primefaces.org/cdn/api/upload.php"  accept="image/*" [maxFileSize]="1000000" (onUpload)="onUpload($event)"></p-fileUpload>
+                        <p-fileUpload mode="basic" chooseLabel="Elegir" name="image" url="https://www.primefaces.org/cdn/api/upload.php" [auto]="true" accept="image/*" [maxFileSize]="1000000" (onUpload)="onUpload($event)"></p-fileUpload>
                         <div *ngIf="!imageBase64" class="invalid-feedback floating-invalid-feedback">Debes subir una imagen del negocio.</div>
                       </div>
 

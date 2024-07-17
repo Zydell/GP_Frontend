@@ -161,8 +161,8 @@ export class ServiciviosVarios {
      return this.hpptclient.post<any>(this.urlServiciosTest + '/wsSimulador/rutadimension/CrearDimension', parametros)
   }
 
-
-  RegReciclaje(user: {  correo_electronico: string }): Observable<any> {
-    return this.http.post<any>(this.urlServiciosTest + '/api/auth/register/ciudadano', user);
+  // Registro de un reciclaje
+  RegReciclaje(user: {  correo_electronico: string, negocio_id:any, punto_verde_id:any, cantidad:any, material_id:any, descripcion:any }): Observable<any> {
+    return this.http.post<any>(this.urlServiciosTest + '/api/reciclaje/registrar', user);
   }
 }

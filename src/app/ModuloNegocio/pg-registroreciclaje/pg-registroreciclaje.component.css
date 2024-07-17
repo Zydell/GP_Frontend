@@ -1,3 +1,23 @@
+.floating-message {
+  position: fixed;
+  top: 470px; /* Ajusta según sea necesario */
+  right: 20px; /* Ajusta según sea necesario */
+  z-index: 1050; /* Asegúrate de que esté por encima del modal */
+  width: auto;
+  max-width: 350px; /* Puedes ajustar esto también */
+}
+
+.card-wrapper {
+  position: relative;
+  padding-top: 80px; /* Espacio para el logo */
+}
+
+.logo-wrapper {
+  top: -80px; /* Ajusta según la altura del logo */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .profile-image-container {
     width: 40px; /* Ajusta el tamaño según tus necesidades */
     height: 50px; /* Asegúrate de que sea cuadrado */
