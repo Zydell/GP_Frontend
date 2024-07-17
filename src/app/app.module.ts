@@ -13,12 +13,12 @@ import { PortadainicialComponent } from './Template/templatePublico/portadainici
 import { SpinnerService } from './ModuloServiciosWeb/spinner.service';
 import { SpinnerInterceptor } from './ModuloServiciosWeb/InterceptorServicios.service';
 import {  SpinnerComponent } from './ModuloServiciosWeb/spinner.component';
-
+import { ListboxModule } from 'primeng/listbox';
 import { FooteradminComponent } from './Template/templateAdmin/footeradmin/footeradmin.component';
 import { HeaderadminComponent } from './Template/templateAdmin/headeradmin/headeradmin.component';
 import { MenuadminComponent } from './Template/templateAdmin/menuadmin/menuadmin.component';
 import { DashboardadminComponent } from './Template/templateAdmin/dashboardadmin/dashboardadmin.component';
-
+import { DropdownModule } from 'primeng/dropdown';
 import { AuthInterceptor } from './ModuloServiciosWeb/auth.interceptor';
 import { AuthService } from './ModuloServiciosWeb/Servicio.Auth';
 import { UrlServicios } from './ModuloServiciosWeb/urlServiciosWeb.component'; // Asegúrate de importar tu servicio UrlServicios
@@ -117,8 +117,8 @@ import { PgHistorialnegocioComponent } from './ModuloNegocio/pg-historialnegocio
   imports: [
     BrowserModule,
     MessagesModule, RadioButtonModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
+    HttpClientModule,DropdownModule,
+    BrowserAnimationsModule,ListboxModule,
     AppRoutingModule,ReactiveFormsModule,MultiSelectModule,
     FormsModule,SpinnerModule,MegaMenuModule,AvatarModule,MenuModule,
     CardModule,PanelMenuModule,TabViewModule,TableModule,ProgressSpinnerModule,AccordionModule,TagModule,ImageModule,
