@@ -1,5 +1,6 @@
 import { Component, HostListener, ViewEncapsulation  } from '@angular/core';
 import { AuthService } from '../../ModuloServiciosWeb/Servicio.Auth';
+import { ServiciviosVarios } from '../../ModuloServiciosWeb/ServiciosTestVarios.component';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,17 +17,35 @@ export class PgDashnegocioComponent {
   negocio: any = {};
   sidebarCollapsed = false;
   imgbase64: string = '';
+  cant_pvs: any;
   ngc: any;
 
   constructor(
     public  authService: AuthService, 
+    public  variosServicios: ServiciviosVarios,
     private router: Router
   ) {}
 
-  ngOnInit(): void {
-    this.negocio = this.authService.getNegocio(); // Obtiene la información del usuario al inicializar el componente
-    this.ListadoInformacion();
-    console.log('negocio info on init:', this.negocio); // Agregar log para debug
+  async ngOnInit() {
+    this.negocio = await this.authService.getNegocio(); // Obtiene la información del usuario al inicializar el componente
+    await this.ListadoInformacion();
+    await this.Cant_Pverde();
+    //console.log('negocio info on init:', this.negocio); // Agregar log para debug
+  }
+
+  async Cant_Pverde(){  
+    //Obtener los puntos verdes del negocio
+    try {
+      const data = await this.variosServicios.ListadoPuntoVerdeNegocio(this.ngc.negocio_id).toPromise();
+      console.log("PUNTOS VERDEEEEEE: "+ data)
+      
+      if (data) {
+        this.cant_pvs = data.length;
+      }
+      
+    } catch (error) {
+      console.error("Error obteniendo los puntos verdes del negocio: ", error);
+    }
   }
 
   async ListadoInformacion() {
