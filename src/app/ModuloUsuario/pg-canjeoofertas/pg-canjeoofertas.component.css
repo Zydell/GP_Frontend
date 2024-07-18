@@ -24,7 +24,7 @@
   color: #155724; /* Color de texto verde oscuro */
   font-size: 1rem; /* Tamaño de fuente */
   text-align: center; /* Para centrar el texto dentro del input */
-  font-weight: bold; /* Negrilla */
+  /*font-weight: bold;  Negrilla */
   padding: 5px 10px; /* Espaciado interno para mejorar apariencia */
   border-radius: 5px; /* Bordes redondeados */
   pointer-events: none; /* Evita que el cursor cambie al pasar por encima */

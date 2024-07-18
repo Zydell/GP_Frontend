@@ -34,8 +34,7 @@ export class PgDashuserComponent {
     await this.Cant_Codigos();
   }
 
-  async Cant_Codigos(){  
-    //Obtener los puntos verdes del negocio
+  async Cant_Codigos(){ 
     try {
       const data = await this.servicios.ListadoCodigosGenerado(this.cdn.ciudadano_id).toPromise();
       console.log("PUNTOS VERDEEEEEE: "+ data)
