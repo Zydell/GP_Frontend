@@ -12,7 +12,11 @@ import { Table } from 'primeng/table';
 })
 export class PgGestionofertasComponent {
   @ViewChild('dt1') table!: Table;
-
+  visibleEditar: boolean=false;
+  visibleEstado: boolean=false;
+  visibleNuevo: boolean=false;
+  newoferta: string  = '';
+  objSeleccion:any="-1";
   seccion: string = '1';
   title = 'GreenPoint';
   descripcion: string = 'Nada fuera de lo normal';
@@ -42,6 +46,33 @@ export class PgGestionofertasComponent {
     if (data) {
       this.ngc = data;
     }
+  }
+
+  ModalNuevoInformacion() {
+    //this.intvalor="";
+        this.visibleNuevo = true;
+    }
+    ModalEditarInformacion(seleccion:any) {
+      //this.objSeleccion=seleccion;
+      //console.log(this.objSeleccion)
+        this.visibleEditar = true;
+    }
+    ModalCambiarEstado(seleccion:any) {
+      //this.objSeleccion=seleccion;
+      //console.log(this.objSeleccion)
+      this.visibleEstado = true;
+    }
+
+  async RegistrarNuevo(){
+
+  }
+
+  async RegistrarActualizacion(){
+
+  }
+
+  async EstadoCambiarActualizacion(){
+
   }
 
   menus: { [key: string]: boolean } = {};
@@ -90,4 +121,5 @@ export class PgGestionofertasComponent {
   clear(table: Table) {
     table.clear();
   }
+
 }
