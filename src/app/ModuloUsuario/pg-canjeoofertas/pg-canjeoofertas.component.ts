@@ -1,10 +1,97 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, ViewChild } from '@angular/core';
+import { AuthService } from '../../ModuloServiciosWeb/Servicio.Auth';
+import { ServiciviosVarios } from '../../ModuloServiciosWeb/ServiciosTestVarios.component';
+import { Router } from '@angular/router';
+import { Message } from 'primeng/api';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-pg-canjeoofertas',
   templateUrl: './pg-canjeoofertas.component.html',
-  styleUrls: ['./pg-canjeoofertas.component.css']
+  styleUrls: ['./pg-canjeoofertas.component.css', './../../../assets/vendor/bootstrap-icons/bootstrap-icons.css']
 })
 export class PgCanjeoofertasComponent {
-  
+  @ViewChild('dt1') table!: Table;
+
+  seccion: string = '1';
+  title = 'GreenPoint';
+  descripcion: string = 'Nada fuera de lo normal';
+  user: any = {};
+  sidebarCollapsed = false;
+  cdn: any;
+  messages1: Message[] = [];
+  messages2: Message[] = [];
+  cantidad: number = 0;
+  all_ofertas: any[] = [];
+  loading: boolean = false;
+
+  constructor(
+    public authService: AuthService,
+    public variosServicios: ServiciviosVarios,
+    private router: Router
+  ) {}
+
+  async ngOnInit() {
+    this.user = this.authService.getUser();
+    await this.listadoInformacion();
+    await this.Obtener_Ofertas();
+  }
+
+  async listadoInformacion() {
+    const data = await new Promise<any>(resolve => this.authService.getInfo(this.user.ciudadano_id).subscribe((translated: any) => { resolve(translated) }));
+    console.log("INFOOOOOOOOOO " + JSON.stringify(data, null, 2) + "XD" + this.user.ciudadano_id);
+    if (data) {
+      this.cdn = data; // Suponiendo que la respuesta de la API es un array de ofertas
+      console.log("Ofertas:", this.cdn.greencoins);
+    }
+  }
+
+
+  menus: { [key: string]: boolean } = {};
+
+  toggleMenu(menu: string, event: Event) {
+    this.menus[menu] = !this.menus[menu];
+    event.stopPropagation();
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event) {
+    Object.keys(this.menus).forEach(menu => {
+      this.menus[menu] = false;
+    });
+  }
+
+  autoCloseMessages(messageType: 'messages1' | 'messages2') {
+    setTimeout(() => {
+      if (messageType === 'messages1') {
+        this.messages1 = [];
+      } else if (messageType === 'messages2') {
+        this.messages2 = [];
+      }
+    }, 3000); // Tiempo en milisegundos (3000 ms = 3 segundos)
+  }
+
+  async Obtener_Ofertas() {
+    this.loading = true;
+    try {
+      const data = await this.variosServicios.ListadoOfertasActivas().toPromise();
+      console.log("OFERTASSSS"+data);
+      this.all_ofertas = data;
+    } catch (error) {
+      console.error("Error obteniendo las ofertas: ", error);
+    } finally {
+      this.loading = false;
+    }
+  }
+
+  applyFilter(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input) {
+      this.table.filterGlobal(input.value, 'contains');
+    }
+  }
+
+  clear(table: Table) {
+    table.clear();
+  }
 }

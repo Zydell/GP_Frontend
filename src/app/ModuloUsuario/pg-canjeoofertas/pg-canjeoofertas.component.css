@@ -1,3 +1,47 @@
+.redeem-button {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  margin: 0;
+  border-radius: 0.25rem;
+  display: inline-block;
+}
+
+.flex {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  gap: 10px; /* Espacio entre los elementos */
+  width: 100%; /* Asegura que el contenedor flex ocupe el ancho completo */
+}
+
+.centered-input {
+  margin: 0 auto; /* Centra el input horizontalmente */
+}
+
+.readonly-input {
+  border: 2px solid #28a745; /* Color verde acorde a la interfaz */
+  background-color: #e9f7ef; /* Fondo verde claro */
+  color: #155724; /* Color de texto verde oscuro */
+  font-size: 1rem; /* Tamaño de fuente */
+  text-align: center; /* Para centrar el texto dentro del input */
+  font-weight: bold; /* Negrilla */
+  padding: 5px 10px; /* Espaciado interno para mejorar apariencia */
+  border-radius: 5px; /* Bordes redondeados */
+  pointer-events: none; /* Evita que el cursor cambie al pasar por encima */
+}
+
+.readonly-input:hover,
+.readonly-input:focus {
+  border: 2px solid #28a745; /* Mantén el mismo borde cuando se pasa el ratón por encima o se enfoca */
+  background-color: #e9f7ef; /* Mantén el fondo verde claro */
+  outline: none; /* Elimina el borde del foco */
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+
 /* Añade este estilo a tu archivo styles.css o styles.scss */
 .p-sortable-column .p-sortable-column-badge {
     display: none;
