@@ -95,10 +95,22 @@
                         {{ oferta.fecha_fin | date:'short' }}
                     </td>
                     <td>
-                        <button pButton label="CANJEAR" class="p-button-success redeem-button"></button>
+                        <!-- 
+                        <button pButton label="CANJEAR" class="p-button-success redeem-button" (click)="ModalInformacion()"></button>
+                         -->
+                        <p-button
+                        type="button"
+                        icon="pi pi-pencil"
+                        styleClass="p-button-text"
+                        (click)="ModalInformacion(oferta)"
+                      ></p-button>
                     </td>
                 </tr>
             </ng-template>
+            
+            
+
+
             <ng-template pTemplate="emptymessage">
                 <tr>
                     <td colspan="5">No se encontraron ofertas.</td>
@@ -114,6 +126,54 @@
 
       </div>
     
+
+      <!-- MODAL INFORMACIÓN OFERTA -->
+            
+      <p-dialog
+      header="Actualización"
+      [(visible)]="visibleNuevo"
+      [modal]="true"
+      [style]="{ width: 'auto' }"
+      [draggable]="false"
+      [resizable]="false"
+    >
+      <ng-template pTemplate="header">
+        <span class="text-xl">Oferta a canjear</span>
+      </ng-template>
+      
+      <ng-template pTemplate="content">
+        <div class="input-group has-validation">
+          <span class="p-inputgroup-addon">
+            DESCRIPCIÓN:
+          </span>
+          <input readonly type="text" [(ngModel)]="des_oferta" name="des_oferta" class="form-control" id="des_oferta" required style="font-size: 13px;" placeholder="Descripcion de la oferta">
+        </div>
+        <div class="input-group has-validation" style="margin-top: 2%;">
+          <span class="p-inputgroup-addon">
+            GREENCOINS:
+          </span>
+          <input readonly type="text" [(ngModel)]="gcn_oferta" name="gcn_oferta" class="form-control" id="gcn_oferta" required style="font-size: 13px;" placeholder="Descripcion de la oferta">
+        </div>
+        <div class="input-group has-validation" style="margin-top: 2%;">
+          <span class="p-inputgroup-addon">
+            NEGOCIO:
+          </span>
+          <input readonly type="text" [(ngModel)]="ngc_oferta" name="ngc_oferta" class="form-control" id="ngc_oferta" required style="font-size: 13px;" placeholder="Descripcion de la oferta">
+        </div>
+      </ng-template>
+      
+      <ng-template pTemplate="footer">
+        <div class="d-flex justify-content-center" style="width: 100%;">
+          <button type="button" pButton label="CANCELAR" icon="pi pi-times" class="p-button-text cancel-button" (click)="onCancel()"></button>
+          <button type="button" pButton label="CANJEAR" icon="pi pi-check" class="p-button accept-button" (click)="onRedeem()"></button>
+        </div>
+      </ng-template>
+    </p-dialog>
+    
+    
+    
+
+    <!-- FIN MODAL INFORMACIÓN OFERTAS -->
     
     <div class="row">
       <!-- Left side columns -->
