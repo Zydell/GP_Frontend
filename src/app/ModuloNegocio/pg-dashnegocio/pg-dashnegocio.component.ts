@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
     //encapsulation: ViewEncapsulation.ShadowDom
 })
 export class PgDashnegocioComponent {
-  seccion: string = '1';
+  seccion: string = '2';
   title = 'GreenPoint';
   negocio: any = {};
   sidebarCollapsed = false;

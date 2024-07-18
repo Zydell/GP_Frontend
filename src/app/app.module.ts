@@ -47,13 +47,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FileUploadModule } from 'primeng/fileupload';
 import { PgPrincipaladministracionComponent } from './ModuloAdministracion/pg-principaladministracion/pg-principaladministracion.component';
-//import { PgSeccionComponent } from './ModuloAdministracion/pg-seccion/pg-seccion.component';
-//import { PgDimensionComponent } from './ModuloAdministracion/pg-dimension/pg-dimension.component';
-//import { PgPrincipaltestComponent } from './ModuloAdministracion/pg-principaltest/pg-principaltest.component';
-//import { PgTestComponent } from './ModuloAdministracion/pg-test/pg-test.component';
-//import { PgInstruccionComponent } from './ModuloAdministracion/pg-instruccion/pg-instruccion.component';
-//import { PgRecomendacionComponent } from './ModuloAdministracion/pg-recomendacion/pg-recomendacion.component';
-//import { PgCiudadanoComponent } from './ModuloAdministracion/pg-ciudadano/pg-ciudadano.component';
 import { PgNegocioComponent } from './ModuloAdministracion/pg-negocio/pg-negocio.component';
 import { PgMaterialComponent } from './ModuloAdministracion/pg-material/pg-material.component';
 import { PgPuntoverdeComponent } from './ModuloAdministracion/pg-puntoverde/pg-puntoverde.component';
@@ -76,6 +69,7 @@ import { PgHistorialnegocioComponent } from './ModuloNegocio/pg-historialnegocio
 import { PgVerofertasComponent } from './ModuloNegocio/pg-verofertas/pg-verofertas.component';
 import { PgGestionofertasComponent } from './ModuloNegocio/pg-gestionofertas/pg-gestionofertas.component';
 import { PgCanjeoofertasComponent } from './ModuloUsuario/pg-canjeoofertas/pg-canjeoofertas.component';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 
 
 @NgModule({
@@ -124,7 +118,7 @@ import { PgCanjeoofertasComponent } from './ModuloUsuario/pg-canjeoofertas/pg-ca
     BrowserModule,
     MessagesModule, RadioButtonModule,
     HttpClientModule,DropdownModule,ConfirmDialogModule,
-    BrowserAnimationsModule,ListboxModule,
+    BrowserAnimationsModule,ListboxModule,ToggleButtonModule,
     AppRoutingModule,ReactiveFormsModule,MultiSelectModule,
     FormsModule,SpinnerModule,MegaMenuModule,AvatarModule,MenuModule,
     CardModule,PanelMenuModule,TabViewModule,TableModule,ProgressSpinnerModule,AccordionModule,TagModule,ImageModule,
