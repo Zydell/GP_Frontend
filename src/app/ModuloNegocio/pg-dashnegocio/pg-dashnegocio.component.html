@@ -245,13 +245,13 @@
         </a>
         <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="charts-chartjs.html">
+            <a href="" (click)="SeccionVerOfertas($event)">
               <i class="bi bi-circle"></i><span>Ver ofertas</span>
             </a>
           </li>
           <li>
-            <a href="charts-apexcharts.html">
-              <i class="bi bi-circle"></i><span>Nueva Oferta</span>
+            <a href="" (click)="SeccionGestionOfertas($event)">
+              <i class="bi bi-circle"></i><span>Gestionar mis Ofertas</span>
             </a>
           </li>
         </ul>
@@ -857,6 +857,14 @@
     <!-- Contenido para historial -->
     <div *ngIf="seccion === '4'">
       <app-pg-historialnegocio></app-pg-historialnegocio>
+    </div>
+    <!-- Contenido para historial -->
+    <div *ngIf="seccion === '5'">
+      <app-pg-verofertas></app-pg-verofertas>
+    </div>
+    <!-- Contenido para historial -->
+    <div *ngIf="seccion === '6'">
+      <app-pg-gestionofertas></app-pg-gestionofertas>
     </div>
 
   </main><!-- End #main -->

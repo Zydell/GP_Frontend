@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
     //encapsulation: ViewEncapsulation.ShadowDom
 })
 export class PgDashnegocioComponent {
-  seccion: string = '1';
+  seccion: string = '5';
   title = 'GreenPoint';
   negocio: any = {};
   sidebarCollapsed = false;
@@ -101,6 +101,14 @@ export class PgDashnegocioComponent {
   SeccionHistorial(event: Event){
     event.preventDefault();
     this.seccion = '4';
+  }
+  SeccionVerOfertas(event: Event){
+    event.preventDefault();
+    this.seccion = '5';
+  }
+  SeccionGestionOfertas(event: Event){
+    event.preventDefault();
+    this.seccion = '6';
   }
   
 }
