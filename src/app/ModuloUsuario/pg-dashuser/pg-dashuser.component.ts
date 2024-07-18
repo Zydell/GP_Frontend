@@ -1,5 +1,6 @@
 import { Component, HostListener, ViewEncapsulation  } from '@angular/core';
 import { AuthService } from '../../ModuloServiciosWeb/Servicio.Auth';
+import { ServiciosWeb } from '../../ModuloServiciosWeb/ServiciosTest.component';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,16 +16,34 @@ export class PgDashuserComponent {
   user: any = {};
   sidebarCollapsed = false;
   cdn: any;
+  cant_ofer: any;
 
   constructor(
     public  authService: AuthService, 
+    public servicios: ServiciosWeb,
     private router: Router
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.user = this.authService.getUser(); // Obtiene la información del usuario al inicializar el componente
-    this.ListadoInformacion();
+    await this.ListadoInformacion();
     console.log('User info on init:', this.user); // Agregar log para debug
+    await this.Cant_Ofertas();
+  }
+
+  async Cant_Ofertas(){  
+    //Obtener los puntos verdes del negocio
+    try {
+      const data = await this.servicios.ListadoOfertas();
+      console.log("PUNTOS VERDEEEEEE: "+ data)
+      
+      if (data) {
+        this.cant_ofer = data.length;
+      }
+      
+    } catch (error) {
+      console.error("Error obteniendo los puntos verdes del negocio: ", error);
+    }
   }
 
   async ListadoInformacion() {
