@@ -25,6 +25,7 @@
           <h5 class="card-title"> {{ngc.nombre}} <span>/{{ngc.propietario +" - "+ngc.direccion}}</span></h5>
           <!-- Tabla de todas las ofertas -->
 
+            <!--
           <p-table [value]="all_ofertas" [scrollable]="true" scrollHeight="500px" [tableStyle]="{ 'min-width': '50rem' }">
             <ng-template pTemplate="header">
               <tr>
@@ -43,7 +44,77 @@
               </tr>
             </ng-template>
           </p-table>
-                       
+          -->
+          <p-table
+          #dt1
+          [value]="all_ofertas"
+          dataKey="ofertas_id"
+          [rows]="10"
+          [showCurrentPageReport]="true"
+          [rowsPerPageOptions]="[10, 25, 50]"
+          [loading]="loading"
+          [paginator]="true"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [globalFilterFields]="['descripcion', 'gc_necesarios', 'negocio_id']"
+          [scrollable]="true"
+          scrollHeight="500px"
+          [tableStyle]="{ 'min-width': '50rem' }"
+      >
+          <ng-template pTemplate="caption">
+              <div class="flex">
+                  <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+                  <span class="p-input-icon-left ml-auto">
+                      <i class="pi pi-search"></i>
+                      <input pInputText type="text" (input)="applyFilter($event)" placeholder="Search keyword" />
+                  </span>
+              </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+              <tr>
+                  <th>
+                      <div class="flex align-items-center">
+                          Ofertas
+                          <p-columnFilter type="text" field="descripcion" display="menu"></p-columnFilter>
+                      </div>
+                  </th>
+                  <th>
+                      <div class="flex align-items-center">
+                          GC Necesarios
+                          <p-columnFilter type="numeric" field="gc_necesarios" display="menu"></p-columnFilter>
+                      </div>
+                  </th>
+                  <th>
+                      <div class="flex align-items-center">
+                          Negocio
+                          <p-columnFilter type="numeric" field="negocio_id" display="menu"></p-columnFilter>
+                      </div>
+                  </th>
+                  <th>
+                      <div class="flex align-items-center">
+                          Duración
+                          <p-columnFilter type="date" field="fecha_inicio" display="menu"></p-columnFilter>
+                      </div>
+                  </th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-oferta>
+              <tr>
+                  <td>{{ oferta.descripcion }}</td>
+                  <td>{{ oferta.gc_necesarios }}</td>
+                  <td>{{ oferta.negocio_id }}</td>
+                  <td style="font-size: 15px;">
+                      {{ oferta.fecha_inicio | date:'short' }} - {{ oferta.fecha_fin | date:'short' }}
+                  </td>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+              <tr>
+                  <td colspan="4">No se encontraron ofertas.</td>
+              </tr>
+          </ng-template>
+      </p-table>
+      
+
 
           <!-- Fin Tabla de todas las ofertas -->
         </div>

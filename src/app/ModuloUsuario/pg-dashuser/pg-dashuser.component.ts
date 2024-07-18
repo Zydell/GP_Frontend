@@ -38,7 +38,7 @@ export class PgDashuserComponent {
       console.log("PUNTOS VERDEEEEEE: "+ data)
       
       if (data) {
-        this.cant_ofer = data.length;
+        //this.cant_ofer = data.length;
       }
       
     } catch (error) {

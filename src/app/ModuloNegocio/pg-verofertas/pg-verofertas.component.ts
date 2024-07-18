@@ -1,18 +1,18 @@
-import { Component, HostListener  } from '@angular/core';
+import { Component, HostListener, ViewChild } from '@angular/core';
 import { AuthService } from '../../ModuloServiciosWeb/Servicio.Auth';
 import { ServiciviosVarios } from '../../ModuloServiciosWeb/ServiciosTestVarios.component';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
 import { Message } from 'primeng/api';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-pg-verofertas',
   templateUrl: './pg-verofertas.component.html',
-  styleUrls: [ './pg-verofertas.component.css',
-    "./../../../assets/vendor/bootstrap-icons/bootstrap-icons.css"
-    ]
+  styleUrls: ['./pg-verofertas.component.css', './../../../assets/vendor/bootstrap-icons/bootstrap-icons.css']
 })
 export class PgVerofertasComponent {
+  @ViewChild('dt1') table!: Table;
+
   seccion: string = '1';
   title = 'GreenPoint';
   descripcion: string = 'Nada fuera de lo normal';
@@ -22,29 +22,29 @@ export class PgVerofertasComponent {
   messages1: Message[] = [];
   messages2: Message[] = [];
   cantidad: number = 0;
-  all_ofertas: any=[];
+  all_ofertas: any[] = [];
+  loading: boolean = false;
 
   constructor(
-    public  authService: AuthService, 
-    public  variosServicios: ServiciviosVarios, 
+    public authService: AuthService,
+    public variosServicios: ServiciviosVarios,
     private router: Router
   ) {}
 
   async ngOnInit() {
     this.negocio = this.authService.getNegocio(); // Obtiene la información del usuario al inicializar el componente
     await this.ListadoInformacion();
-    await this.Obtener_Ofertas()
+    await this.Obtener_Ofertas();
   }
 
   async ListadoInformacion() {
-    const data = await new Promise<any>(resolve => this.authService.getInfoNegocio(this.negocio.negocio_id).subscribe((translated:any) => { resolve(translated) }));
+    const data = await new Promise<any>(resolve => this.authService.getInfoNegocio(this.negocio.negocio_id).subscribe((translated: any) => { resolve(translated); }));
     if (data) {
       this.ngc = data;
-      //console.log("EEEEEEEEEEEEEEE"+ this.ngc.negocio_id);    
     }
   }
 
-  menus: { [key: string]: boolean } = {};  
+  menus: { [key: string]: boolean } = {};
 
   toggleMenu(menu: string, event: Event) {
     this.menus[menu] = !this.menus[menu];
@@ -65,27 +65,29 @@ export class PgVerofertasComponent {
       } else if (messageType === 'messages2') {
         this.messages2 = [];
       }
-    }, 3000); // Tiempo en milisegundos (5000 ms = 5 segundos)
+    }, 3000); // Tiempo en milisegundos (3000 ms = 3 segundos)
   }
 
-  async Obtener_Ofertas(){  
-    //Obtener los puntos verdes del negocio
+  async Obtener_Ofertas() {
+    this.loading = true;
     try {
-      const data = await this.variosServicios.ListadoOfertas().toPromise();
-      console.log("OFERTAAAAAAAAAAASSSSSSS XD: ", (data));
+      const data = await this.variosServicios.ListadoOfertasActivas().toPromise();
       this.all_ofertas = data;
-      /*
-      if (data) {
-        this.all_ofertas = data.map((pv: any) => ({
-          name: pv.descripcion,
-          code: pv.punto_verde_id
-        }));
-      }*/
-      
     } catch (error) {
       console.error("Error obteniendo las ofertas: ", error);
+    } finally {
+      this.loading = false;
     }
   }
 
-  
+  applyFilter(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input) {
+      this.table.filterGlobal(input.value, 'contains');
+    }
+  }
+
+  clear(table: Table) {
+    table.clear();
+  }
 }

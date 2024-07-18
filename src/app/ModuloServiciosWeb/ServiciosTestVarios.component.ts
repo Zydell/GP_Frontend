@@ -64,6 +64,12 @@ export class ServiciviosVarios {
     return this.hpptclient.get<any>(this.urlServiciosTest + '/api/ofertas')
   }
 
+  ListadoOfertasActivas() {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/ofertas/active')
+  }
+
   NuevaOferta(descripcion: string, gc_necesarios: number, negocio_id: number, fecha_inicio: Date, fecha_fin: Date){
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const parametros = { descripcion, gc_necesarios, negocio_id, fecha_inicio, fecha_fin };
