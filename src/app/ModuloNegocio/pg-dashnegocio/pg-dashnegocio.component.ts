@@ -17,8 +17,8 @@ export class PgDashnegocioComponent {
   negocio: any = {};
   sidebarCollapsed = false;
   imgbase64: string = '';
-  cant_pvs: any;
-  cant_ofts: any;
+  cant_pvs: number = 0;
+  cant_ofts: number = 0;
   ngc: any;
 
   constructor(
@@ -57,9 +57,12 @@ export class PgDashnegocioComponent {
       console.log("PUNTOS VERDEEEEEE: "+ data)
       
       if (data) {
-        this.cant_ofts = data.length;
-      }else{
-        this.cant_ofts = 0;
+        
+        if(data.length){
+          this.cant_ofts = data.length;
+        }else{
+          this.cant_ofts = 0;
+        }
       }
       
     } catch (error) {
