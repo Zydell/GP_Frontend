@@ -3,14 +3,6 @@
       <div class="p-toolbar-group-center">
         <p>INFORMACIÓN PUNTOS VERDES</p>
       </div>
-      <div class="p-toolbar-group-end">
-        <p-button
-          type="button"
-          icon="pi pi-plus"
-          styleClass="p-button-text"
-          (click)="ModalNuevoInformacion()"
-        ></p-button>
-      </div>
     </p-toolbar>
   
     <p-table
@@ -79,23 +71,7 @@
     [style]="{ width: '25vw' }"
     [draggable]="false"
     [resizable]="false"
-  >
-  <ng-template pTemplate="header">
-    <span class="text-xl font-bold">Nuevo Punto Verde</span>
-  </ng-template>
-  <ng-template pTemplate="content">
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">
-          <i class="pi pi-pencil"></i>
-      </span>
-      <input pInputText placeholder="Valor" [(ngModel)]="descripcion" class="p-inputtext-sm" (input)="descripcion = descripcion"/>
-    </div>
-  </ng-template>
-  
-  <ng-template pTemplate="footer">
-    <p-button icon="pi pi-save"  label="Registrar" styleClass="p-button-sm" ></p-button>
-  </ng-template>
-  
+  >  
   </p-dialog>
   <p-dialog
     header="Actualización"

@@ -27,16 +27,16 @@
         <tr>
           <th >#</th>
           <th>NOMBRE</th>
-          <th >VALOR X LIBRA (GC)</th>
+          <th >CORREO ELECTRONICO</th>
           <th >ESTADO</th>
           <th >ACCIONES</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-customer>
         <tr>
-          <td>{{ customer.materiales_id }}</td>
-          <td>{{ customer.tipo }}</td>
-          <td>{{ customer.valor_por_libra }}</td>
+          <td>{{ customer.admin_id }}</td>
+          <td>{{ customer.nombre }}</td>
+          <td>{{ customer.correo_electronico }}</td>
           <td>
           
             <p-tag *ngIf="customer.estado == false" severity="danger" [value]="'DESACTIVADO'"></p-tag>
@@ -66,7 +66,7 @@
     header="Nuevo"
     [(visible)]="visibleNuevo"
     [modal]="true"
-    [style]="{ width: '25vw' }"
+    [style]="{ width: '50vw', minWidth: '300px', maxWidth: '80vw' }"
     [draggable]="false"
     [resizable]="false"
   >
@@ -74,18 +74,26 @@
     <span class="text-xl font-bold">Nuevo</span>
   </ng-template>
   <ng-template pTemplate="content">
+    <label for="descripcion" class="form-label" style="font-size: 14px;">Nombre: </label>
     <div class="p-inputgroup">
         <span class="p-inputgroup-addon">
             <i class="pi pi-pencil"></i>
         </span>
-        <input pInputText placeholder="Nombre" [(ngModel)]="strnombre" class="p-inputtext-sm" (input)="strnombre = strnombre"/>
+        <input pInputText placeholder="Nombre" [(ngModel)]="nombre" class="p-inputtext-sm" (input)="nombre = nombre"/>
       </div>
-
+      <label for="descripcion" class="form-label" style="font-size: 14px;">Correo Electronico: </label>
     <div class="p-inputgroup" style="margin-top: 15px;">
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input pInputText placeholder="Valor por libra" [(ngModel)]="intvalor" class="p-inputtext-sm" (input)="intvalor = intvalor"/>
+      <input pInputText placeholder="ejemplo@gmail.com" [(ngModel)]="correo" class="p-inputtext-sm" (input)="correo = correo"/>
+    </div>
+    <label for="descripcion" class="form-label" style="font-size: 14px;">Contraseña: </label>
+    <div class="p-inputgroup" style="margin-top: 15px;">
+      <span class="p-inputgroup-addon">
+          <i class="pi pi-pencil"></i>
+      </span>
+      <input type="password" placeholder="Contraseña" [(ngModel)]="clave" class="p-inputtext-sm" (input)="clave = clave"/>
     </div>
   </ng-template>
   
@@ -98,7 +106,7 @@
     header="Actualización"
     [(visible)]="visibleEditar"
     [modal]="true"
-    [style]="{ width: '25vw' }"
+    [style]="{ width: '50vw', minWidth: '300px', maxWidth: '80vw' }"
     [draggable]="false"
     [resizable]="false"
   >
@@ -131,7 +139,7 @@
     header="Estado"
     [(visible)]="visibleEstado"
     [modal]="true"
-    [style]="{ width: '25vw' }"
+    [style]="{ width: '50vw', minWidth: '300px', maxWidth: '80vw' }"
     [draggable]="false"
     [resizable]="false"
   >

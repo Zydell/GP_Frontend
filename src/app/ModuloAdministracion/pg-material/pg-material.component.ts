@@ -2,6 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { ServiciviosVarios } from '../../ModuloServiciosWeb/ServiciosTestVarios.component';
 import { Mensajes } from '../../ModuloHerramientas/Mensajes.component';
 import { MessageService } from 'primeng/api';
+import { SortingService } from '../../sorting.service'; // Adjust the path as needed
 
 @Component({
   selector: 'app-pg-material',
@@ -24,7 +25,8 @@ export class PgMaterialComponent implements OnInit{
   (
     private servicios: ServiciviosVarios,
     private messageService: MessageService,
-    private mensajes:Mensajes
+    private mensajes:Mensajes,
+    private sortingService: SortingService
   ) { }
 async ngOnInit() {
  await this.ListadoInformacion();
@@ -55,7 +57,7 @@ ModalCambiarEstado(seleccion:any) {
     console.log(data)
 
     if (data) {
-      this.lsListado=data;
+      this.lsListado = this.sortingService.ordenarPorIdAscendente(data, 'materiales_id'); // Default sorting by ID Ascending
     }
   }
   

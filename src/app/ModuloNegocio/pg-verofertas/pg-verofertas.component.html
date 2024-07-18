@@ -1,0 +1,65 @@
+<p-messages [(value)]="messages2" [enableService]="false" [closable]="true" class="floating-message"></p-messages>
+<p-messages [(value)]="messages1" [enableService]="false" [closable]="true" class="floating-message"></p-messages>
+<div class="pagetitle">
+    <h1>Registro de reciclaje</h1>
+  </div><!-- End Page Title -->
+  
+  <section class="section dashboard">
+    
+    <div class="card">
+
+        <div class="filter">
+          <a class="icon" data-bs-toggle="dropdown" (click)="toggleMenu('menu4', $event)" role="button"><i class="bi bi-three-dots"></i></a>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" *ngIf="menus['menu4']">
+            <li class="dropdown-header text-start">
+              <h6>Filter</h6>
+            </li>
+
+            <li><a class="dropdown-item" href="#">Today</a></li>
+            <li><a class="dropdown-item" href="#">This Month</a></li>
+            <li><a class="dropdown-item" href="#">This Year</a></li>
+          </ul>
+        </div>
+
+        <div class="card-body">
+          <h5 class="card-title"> {{ngc.nombre}} <span>/{{ngc.propietario +" - "+ngc.direccion}}</span></h5>
+          <!-- Tabla de todas las ofertas -->
+
+          <p-table [value]="all_ofertas" [tableStyle]="{ 'min-width': '50rem' }">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Ofertas</th>
+                <th>GC Necesarios</th>
+                <th>Negocio</th>
+                <th>Duración</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-oferta>
+              <tr>
+                <td>{{ oferta.descripcion }}</td>
+                <td>{{ oferta.gc_necesarios }}</td>
+                <td>{{ oferta.negocio_id }}</td>
+                <td style="font-size: 15px;">{{ oferta.fecha_inicio | date:'short' }} - {{ oferta.fecha_fin | date:'short' }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+                       
+
+          <!-- Fin Tabla de todas las ofertas -->
+        </div>
+
+      </div>
+    
+    
+    <div class="row">
+      <!-- Left side columns -->
+      <div class="col-lg-8">
+        <div class="row">
+          <!-- Reports -->
+          <div class="col-12">
+          </div><!-- End Reports -->
+        </div>
+      </div><!-- End Left side columns -->
+    </div>
+  </section>
+

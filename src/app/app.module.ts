@@ -73,6 +73,8 @@ import { PgAdministradoresComponent } from './ModuloAdministracion/pg-administra
 import { PgHistorialciudadanoComponent } from './ModuloUsuario/pg-historialciudadano/pg-historialciudadano.component';
 import { PgRegistroreciclajeComponent } from './ModuloNegocio/pg-registroreciclaje/pg-registroreciclaje.component';
 import { PgHistorialnegocioComponent } from './ModuloNegocio/pg-historialnegocio/pg-historialnegocio.component';
+import { PgVerofertasComponent } from './ModuloNegocio/pg-verofertas/pg-verofertas.component';
+import { PgGestionofertasComponent } from './ModuloNegocio/pg-gestionofertas/pg-gestionofertas.component';
 
 
 @NgModule({
@@ -112,7 +114,9 @@ import { PgHistorialnegocioComponent } from './ModuloNegocio/pg-historialnegocio
     PgAdministradoresComponent,
     PgHistorialciudadanoComponent,
     PgRegistroreciclajeComponent,
-    PgHistorialnegocioComponent
+    PgHistorialnegocioComponent,
+    PgVerofertasComponent,
+    PgGestionofertasComponent
   ],
   imports: [
     BrowserModule,
