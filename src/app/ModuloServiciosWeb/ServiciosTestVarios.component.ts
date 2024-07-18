@@ -63,11 +63,17 @@ export class ServiciviosVarios {
  //   let parametros = opcion + "/" + tipo + "/" + codCarrera + "/" + param;
     return this.hpptclient.get<any>(this.urlServiciosTest + '/api/ofertas')
   }
-
+  //Listado de todas las Ofertas activas
   ListadoOfertasActivas() {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.hpptclient.get<any>(this.urlServiciosTest + '/api/ofertas/active')
+  }
+  //Listado de todas las Ofertas activas de un negocio
+  ListadoOfertasActivasNegocio(negocio_id:number) {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/ofertas/active/'+negocio_id)
   }
 
   NuevaOferta(descripcion: string, gc_necesarios: number, negocio_id: number, fecha_inicio: Date, fecha_fin: Date){

@@ -18,6 +18,7 @@ export class PgDashnegocioComponent {
   sidebarCollapsed = false;
   imgbase64: string = '';
   cant_pvs: any;
+  cant_ofts: any;
   ngc: any;
 
   constructor(
@@ -30,6 +31,7 @@ export class PgDashnegocioComponent {
     this.negocio = await this.authService.getNegocio(); // Obtiene la información del usuario al inicializar el componente
     await this.ListadoInformacion();
     await this.Cant_Pverde();
+    await this.Cant_Ofertas();
     //console.log('negocio info on init:', this.negocio); // Agregar log para debug
   }
 
@@ -38,9 +40,22 @@ export class PgDashnegocioComponent {
     try {
       const data = await this.variosServicios.ListadoPuntoVerdeNegocio(this.ngc.negocio_id).toPromise();
       console.log("PUNTOS VERDEEEEEE: "+ data)
-      
       if (data) {
         this.cant_pvs = data.length;
+      }
+    } catch (error) {
+      console.error("Error obteniendo los puntos verdes del negocio: ", error);
+    }
+  }
+
+  async Cant_Ofertas(){  
+    //Obtener los puntos verdes del negocio
+    try {
+      const data = await this.variosServicios.ListadoOfertasActivasNegocio(this.ngc.negocio_id).toPromise();
+      console.log("PUNTOS VERDEEEEEE: "+ data)
+      
+      if (data) {
+        this.cant_ofts = data.length;
       }
       
     } catch (error) {

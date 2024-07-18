@@ -1,3 +1,9 @@
+/* Añade este estilo a tu archivo styles.css o styles.scss */
+.p-sortable-column .p-sortable-column-badge {
+  display: none;
+}
+
+
 .floating-message {
     position: fixed;
     top: 470px; /* Ajusta según sea necesario */
