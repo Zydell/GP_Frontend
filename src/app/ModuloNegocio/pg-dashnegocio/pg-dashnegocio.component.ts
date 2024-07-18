@@ -42,8 +42,6 @@ export class PgDashnegocioComponent {
       console.log("PUNTOS VERDEEEEEE: "+ data)
       if (data) {
         this.cant_pvs = data.length;
-      }else{
-        this.cant_pvs = 0;
       }
     } catch (error) {
       console.error("Error obteniendo los puntos verdes del negocio: ", error);
@@ -57,12 +55,7 @@ export class PgDashnegocioComponent {
       console.log("PUNTOS VERDEEEEEE: "+ data)
       
       if (data) {
-        
-        if(data.length){
-          this.cant_ofts = data.length;
-        }else{
-          this.cant_ofts = 0;
-        }
+        this.cant_ofts = data.length;
       }
       
     } catch (error) {
