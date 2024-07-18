@@ -1,4 +1,3 @@
-<p>pg-dashnegocio works!</p>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,15 +5,15 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard - Ciudadano</title>
+  <title>Dashboard - Negocio</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
   <link href="assets2/img/favicon.png" rel="icon">
   <link href="assets2/img/apple-touch-icon.png" rel="apple-touch-icon">
-  <!-- Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap CSS 
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">-->
   <!-- Optionally, you can include Popper.js for tooltips and popovers 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>-->
   <!-- Bootstrap JS 
@@ -294,9 +293,15 @@
   <main id="main" class="main" [class.toggle-sidebar]="sidebarCollapsed">
     <!-- Contenido para el dash del negocio -->
     <div *ngIf="seccion === '1'">  
+<<<<<<< HEAD
       <div class="pagetitle">
         <h1>Dashboard</h1>
       </div><!-- End Page Title -->
+=======
+    <div class="pagetitle">
+      <h1>Dashboard - {{ ngc?.nombre }}</h1>
+    </div><!-- End Page Title -->
+>>>>>>> c4f92bdeab07732cee59211132388b505a1ae9fd
 
       <section class="section dashboard">
       <div class="row">
