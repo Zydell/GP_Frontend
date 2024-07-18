@@ -75,6 +75,7 @@ import { PgRegistroreciclajeComponent } from './ModuloNegocio/pg-registrorecicla
 import { PgHistorialnegocioComponent } from './ModuloNegocio/pg-historialnegocio/pg-historialnegocio.component';
 import { PgVerofertasComponent } from './ModuloNegocio/pg-verofertas/pg-verofertas.component';
 import { PgGestionofertasComponent } from './ModuloNegocio/pg-gestionofertas/pg-gestionofertas.component';
+import { PgCanjeoofertasComponent } from './ModuloUsuario/pg-canjeoofertas/pg-canjeoofertas.component';
 
 
 @NgModule({
@@ -116,7 +117,8 @@ import { PgGestionofertasComponent } from './ModuloNegocio/pg-gestionofertas/pg-
     PgRegistroreciclajeComponent,
     PgHistorialnegocioComponent,
     PgVerofertasComponent,
-    PgGestionofertasComponent
+    PgGestionofertasComponent,
+    PgCanjeoofertasComponent
   ],
   imports: [
     BrowserModule,
