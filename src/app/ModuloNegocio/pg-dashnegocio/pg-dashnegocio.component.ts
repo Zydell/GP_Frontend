@@ -39,9 +39,10 @@ export class PgDashnegocioComponent {
     //Obtener los puntos verdes del negocio
     try {
       const data = await this.variosServicios.ListadoPuntoVerdeNegocio(this.ngc.negocio_id).toPromise();
-      console.log("PUNTOS VERDEEEEEE: "+ data)
+      //console.log("PUNTOS VERDEEEEEE: "+ data)
       if (data) {
         this.cant_pvs = data.length;
+        console.log("Cantidad de puntos verdes"+this.cant_pvs);
       }
     } catch (error) {
       console.error("Error obteniendo los puntos verdes del negocio: ", error);

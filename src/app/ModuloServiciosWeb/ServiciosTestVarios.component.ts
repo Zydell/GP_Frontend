@@ -111,7 +111,7 @@ export class ServiciviosVarios {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
  //   let parametros = opcion + "/" + tipo + "/" + codCarrera + "/" + param;
-    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/puntos_verdes/'+id_negocio, { headers })
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/puntos_verdes/negocio/'+id_negocio, { headers })
   }
  
   // Crear un nuevo Punto Verde
