@@ -12,11 +12,13 @@ import { Router } from '@angular/router';
     //encapsulation: ViewEncapsulation.ShadowDom
 })
 export class PgDashuserComponent {
+  seccion: string = '1';
   title = 'GreenPoint';
   user: any = {};
   sidebarCollapsed = false;
   cdn: any;
   cant_ofer: any;
+  cant_cod: any;
 
   constructor(
     public  authService: AuthService, 
@@ -29,22 +31,45 @@ export class PgDashuserComponent {
     await this.ListadoInformacion();
     console.log('User info on init:', this.user); // Agregar log para debug
     await this.Cant_Ofertas();
+    await this.Cant_Codigos();
   }
 
-  async Cant_Ofertas(){  
+  async Cant_Codigos(){  
     //Obtener los puntos verdes del negocio
     try {
-      const data = await this.servicios.ListadoOfertas();
+      const data = await this.servicios.ListadoCodigosGenerado(this.cdn.ciudadano_id).toPromise();
       console.log("PUNTOS VERDEEEEEE: "+ data)
-      
       if (data) {
-        //this.cant_ofer = data.length;
+        this.cant_cod = data.length;
       }
-      
     } catch (error) {
       console.error("Error obteniendo los puntos verdes del negocio: ", error);
     }
   }
+
+  async Cant_Ofertas() {  
+    // Obtener los puntos verdes del negocio
+    try {
+      const dataObservable = this.servicios.ListadoOfertas();
+      
+      dataObservable.subscribe(
+        (data: any[]) => {
+          console.log("OFERTASSSSS: ", data);
+          
+          if (data) {
+            this.cant_ofer = data.length;
+          }
+        },
+        (error: any) => {
+          console.error("Error obteniendo los puntos verdes del negocio: ", error);
+        }
+      );
+      
+    } catch (error) {
+      console.error("Error: ", error);
+    }
+  }
+    
 
   async ListadoInformacion() {
     const data = await new Promise<any>(resolve => this.authService.getInfo(this.user.ciudadano_id).subscribe((translated:any) => { resolve(translated) }));
@@ -79,5 +104,13 @@ export class PgDashuserComponent {
     this.router.navigate(['/login']);
   }
   
+  SeccionDashboard(event: Event){
+    event.preventDefault();
+    this.seccion = '1';
+  }
+  SeccionVerOfertas(event: Event){
+    event.preventDefault();
+    this.seccion = '2';
+  }
 }
 
