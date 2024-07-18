@@ -25,7 +25,7 @@
           <h5 class="card-title"> {{ngc.nombre}} <span>/{{ngc.propietario +" - "+ngc.direccion}}</span></h5>
           <!-- Tabla de todas las ofertas -->
 
-          <p-table [value]="all_ofertas" [tableStyle]="{ 'min-width': '50rem' }">
+          <p-table [value]="all_ofertas" [scrollable]="true" scrollHeight="500px" [tableStyle]="{ 'min-width': '50rem' }">
             <ng-template pTemplate="header">
               <tr>
                 <th>Ofertas</th>
