@@ -28,16 +28,8 @@ ListadoOfertas() {
 ListadoCodigosGenerado(id_ciudadano:any) {
   let headers = new HttpHeaders();
   headers.append('Content-Type', 'application/json');
-  return this.hpptclient.get<any>(this.urlServiciosTest + '/api/canjea_ofertas/estado/generado/', { headers })
+  return this.hpptclient.get<any>(this.urlServiciosTest + '/api/canjea_ofertas/estado/generado/' + id_ciudadano, { headers })
 }
-
-  // Listado de un punto verde por el id de negocio
-  ListadoPuntoVerdeNegocio(id_negocio:any) {
-    let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
- //   let parametros = opcion + "/" + tipo + "/" + codCarrera + "/" + param;
-    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/ofertas/', { headers })
-  }
 
 //ACTUALIZACION 
 ActualizacionSeccion(idSeccion:number,strNombre:any) {
