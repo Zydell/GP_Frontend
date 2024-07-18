@@ -24,6 +24,14 @@ export class PgCanjeoofertasComponent {
   cantidad: number = 0;
   all_ofertas: any[] = [];
   loading: boolean = false;
+  visibleNuevo: boolean=false;
+  objSeleccion:any="-1";
+  des_oferta: string  = '';
+  gcn_oferta: any="-1";
+  ngc_oferta: string = '';
+  fecha_inicio_oferta: string = '';
+  fecha_fin_oferta: string = '';
+
 
   constructor(
     public authService: AuthService,
@@ -37,6 +45,16 @@ export class PgCanjeoofertasComponent {
     await this.Obtener_Ofertas();
   }
 
+  ModalInformacion(seleccion:any) {
+    this.objSeleccion = seleccion;
+    this.des_oferta = this.objSeleccion.descripcion;
+    this.gcn_oferta = this.objSeleccion.gc_necesarios;
+    this.ngc_oferta = this.objSeleccion.negocio;
+    this.fecha_inicio_oferta = this.objSeleccion.fecha_inicio;
+    this.fecha_fin_oferta = this.objSeleccion.fecha_fin;
+    this.visibleNuevo = true;
+  }
+
   async listadoInformacion() {
     const data = await new Promise<any>(resolve => this.authService.getInfo(this.user.ciudadano_id).subscribe((translated: any) => { resolve(translated) }));
     console.log("INFOOOOOOOOOO " + JSON.stringify(data, null, 2) + "XD" + this.user.ciudadano_id);
@@ -48,6 +66,14 @@ export class PgCanjeoofertasComponent {
 
 
   menus: { [key: string]: boolean } = {};
+
+  onCancel() {
+    this.visibleNuevo = false;
+  }
+  
+  onRedeem() {
+    // Lógica para canjear la oferta
+  }
 
   toggleMenu(menu: string, event: Event) {
     this.menus[menu] = !this.menus[menu];

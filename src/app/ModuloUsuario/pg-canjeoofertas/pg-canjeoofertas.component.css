@@ -1,3 +1,36 @@
+.cancel-button {
+  color: #e75050;
+  border: none;
+  padding: 5px 10px;
+  font-size: 14px;
+  margin-left: 10px;
+  border-color: #e75050;
+  
+}
+
+.accept-button {
+  background-color: #2eca6a;
+  color: white;
+  border: solid 1px;
+  padding: 5px 10px;
+  font-size: 14px;
+  margin-left: 10px;
+  border-color: #2eca6a;
+}
+
+.cancel-button:hover, .accept-button:hover {
+  opacity: 0.8;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+
 .redeem-button {
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
