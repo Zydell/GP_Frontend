@@ -82,11 +82,17 @@ export class ServiciviosVarios {
     return this.http.post<any>(this.urlServiciosTest + '/api/ofertas', parametros, { headers });
   }
 
+  DesactivarOfert(idOferta: number) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.hpptclient.delete<any>(this.urlServiciosTest+'/api/ofertas/'+idOferta, { headers });
+  }
+
   EstadoCambiarOfertas(idOferta: number, estado: boolean) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const parametros = { estado: estado };
     return this.hpptclient.put<any>(`${this.urlServiciosTest}/api/ofertas/${idOferta}`, parametros, { headers });
   }
+  //Actualizacion de una oferta con las validaciones de fechas
   ActualizacionOfertas(idOferta: number, descripcion: string, gc_necesarios: number, negocio_id: number, fecha_inicio: Date, fecha_fin: Date, estado: boolean) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const parametros = { descripcion, gc_necesarios, negocio_id, fecha_inicio, fecha_fin, estado };

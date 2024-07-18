@@ -22,7 +22,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { AuthInterceptor } from './ModuloServiciosWeb/auth.interceptor';
 import { AuthService } from './ModuloServiciosWeb/Servicio.Auth';
 import { UrlServicios } from './ModuloServiciosWeb/urlServiciosWeb.component'; // Asegúrate de importar tu servicio UrlServicios
-
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { AvatarModule } from 'primeng/avatar';
 import { SlideMenuModule } from 'primeng/slidemenu';
 import { TableModule } from 'primeng/table';
@@ -123,7 +123,7 @@ import { PgCanjeoofertasComponent } from './ModuloUsuario/pg-canjeoofertas/pg-ca
   imports: [
     BrowserModule,
     MessagesModule, RadioButtonModule,
-    HttpClientModule,DropdownModule,
+    HttpClientModule,DropdownModule,ConfirmDialogModule,
     BrowserAnimationsModule,ListboxModule,
     AppRoutingModule,ReactiveFormsModule,MultiSelectModule,
     FormsModule,SpinnerModule,MegaMenuModule,AvatarModule,MenuModule,
