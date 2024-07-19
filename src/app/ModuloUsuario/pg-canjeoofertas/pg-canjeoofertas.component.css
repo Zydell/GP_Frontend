@@ -1,11 +1,16 @@
 .cancel-button {
+  background-color: #e75050;
   color: #e75050;
   border: none;
   padding: 5px 10px;
   font-size: 14px;
   margin-left: 10px;
-  border-color: #e75050;
-  
+  background-color: transparent;
+}
+
+.cancel-button:hover {
+  color: white;
+  background-color: #e75050;
 }
 
 .accept-button {
@@ -18,9 +23,11 @@
   border-color: #2eca6a;
 }
 
-.cancel-button:hover, .accept-button:hover {
-  opacity: 0.8;
+.accept-button:hover {
+  background-color: #19a44e;
+  border-color: #19a44e;
 }
+
 
 .d-flex {
   display: flex;

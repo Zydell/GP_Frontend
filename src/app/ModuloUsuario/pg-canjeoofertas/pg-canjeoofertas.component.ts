@@ -47,6 +47,7 @@ export class PgCanjeoofertasComponent {
     this.user = this.authService.getUser();
     await this.listadoInformacion();
     await this.Obtener_Ofertas();
+    await this.CanjearOferta();
   }
 
   ModalInformacion(seleccion:any) {

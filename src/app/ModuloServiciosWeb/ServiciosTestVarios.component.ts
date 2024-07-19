@@ -229,5 +229,4 @@ export class ServiciviosVarios {
     return this.http.post<any>(`${this.urlServiciosTest}/api/ofertas_greencoins/canjear-oferta`, parametros, { headers });
   }
 
-
 }
