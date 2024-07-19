@@ -222,6 +222,11 @@ export class ServiciviosVarios {
     return this.http.post<any>(this.urlServiciosTest + '/api/reciclaje/registrar', user);
   }
 
+  // Validar un codigo
+  ValCodigo(params: {  codigo: string, negocio_id:any}): Observable<any> {
+    return this.http.post<any>(this.urlServiciosTest + '/api/ofertas_greencoins/validar-codigo-canje', params);
+  }
+
   CanjearOferta(correo_electronico: any, ofertas_id: number) {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');

@@ -71,6 +71,7 @@ import { PgGestionofertasComponent } from './ModuloNegocio/pg-gestionofertas/pg-
 import { PgCanjeoofertasComponent } from './ModuloUsuario/pg-canjeoofertas/pg-canjeoofertas.component';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { PgMapapvnegocioComponent } from './ModuloNegocio/pg-mapapvnegocio/pg-mapapvnegocio.component';
+import { PgValidarcodigoComponent } from './ModuloNegocio/pg-validarcodigo/pg-validarcodigo.component';
 
 
 @NgModule({
@@ -114,7 +115,8 @@ import { PgMapapvnegocioComponent } from './ModuloNegocio/pg-mapapvnegocio/pg-ma
     PgVerofertasComponent,
     PgGestionofertasComponent,
     PgCanjeoofertasComponent,
-    PgMapapvnegocioComponent
+    PgMapapvnegocioComponent,
+    PgValidarcodigoComponent
   ],
   imports: [
     BrowserModule,

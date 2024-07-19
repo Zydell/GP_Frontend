@@ -127,6 +127,10 @@ export class PgDashnegocioComponent {
     event.preventDefault();
     this.seccion = '6';
   }
+  SeccionValidarCodigo(event: Event){
+    event.preventDefault();
+    this.seccion = '7';
+  }
   
 }
 
