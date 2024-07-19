@@ -69,6 +69,15 @@ export class ServiciviosVarios {
     headers.append('Content-Type', 'application/json');
     return this.hpptclient.get<any>(this.urlServiciosTest + '/api/ofertas/active')
   }
+
+  HistorialNegocio(negocio_id:number){
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/reciclaje/historial/negocio/'+negocio_id)
+  }
+
+
+
   //Listado de todas las Ofertas activas de un negocio
   ListadoOfertasActivasNegocio(negocio_id:number) {
     let headers = new HttpHeaders();
@@ -233,5 +242,6 @@ export class ServiciviosVarios {
     const parametros = { correo_electronico, ofertas_id };
     return this.http.post<any>(`${this.urlServiciosTest}/api/ofertas_greencoins/canjear-oferta`, parametros, { headers });
   }
+
 
 }

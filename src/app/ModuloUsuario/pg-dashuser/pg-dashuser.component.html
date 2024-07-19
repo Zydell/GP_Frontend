@@ -44,13 +44,13 @@
       
       <i class="bi bi-list toggle-sidebar-btn" (click)="toggleSidebar()"></i>
     </div><!-- End Logo -->
-
+<!-- 
     <div class="search-bar">
       <form class="search-form d-flex align-items-center" method="POST" action="#">
         <input type="text" name="query" placeholder="Search" title="Enter search keyword">
         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
       </form>
-    </div><!-- End Search Bar -->
+    </div> End Search Bar -->
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
@@ -330,19 +330,6 @@
               <div class="col-12">
                 <div class="card">
 
-                  <div class="filter">
-                    <a class="icon" data-bs-toggle="dropdown" (click)="toggleMenu('menu4', $event)" role="button"><i class="bi bi-three-dots"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" *ngIf="menus['menu4']">
-                      <li class="dropdown-header text-start">
-                        <h6>Filter</h6>
-                      </li>
-
-                      <li><a class="dropdown-item" href="#">Today</a></li>
-                      <li><a class="dropdown-item" href="#">This Month</a></li>
-                      <li><a class="dropdown-item" href="#">This Year</a></li>
-                    </ul>
-                  </div>
-
                   <div class="card-body">
                     <h5 class="card-title">Puntos Verdes <span>/Ecuador</span></h5>
                     <!-- Line Chart -->
@@ -379,21 +366,10 @@
 
             <!-- Recent Activity -->
             <div class="card">
-              <div class="filter">
-                <a class="icon" data-bs-toggle="dropdown" (click)="toggleMenu('menu7', $event)" role="button"><i class="bi bi-three-dots"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" *ngIf="menus['menu7']">
-                  <li class="dropdown-header text-start">
-                    <h6>Filter</h6>
-                  </li>
 
-                  <li><a class="dropdown-item" href="#">Día</a></li>
-                  <li><a class="dropdown-item" href="#">Mes</a></li>
-                  <li><a class="dropdown-item" href="#">Todos</a></li>
-                </ul>
-              </div>
 
               <div class="card-body">
-                <h5 class="card-title">Recent Activity <span>| Today</span></h5>
+                <h5 class="card-title">Historial <span>| Today</span></h5>
 
                 <div class="activity">
 
@@ -450,175 +426,11 @@
               </div>
             </div><!-- End Recent Activity -->
 
-            <!-- Budget Report -->
-            <div class="card">
-              <div class="filter">
-                <a class="icon" data-bs-toggle="dropdown" (click)="toggleMenu('menu8', $event)" role="button"><i class="bi bi-three-dots"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" *ngIf="menus['menu8']">
-                  <li class="dropdown-header text-start">
-                    <h6>Filter</h6>
-                  </li>
-
-                  <li><a class="dropdown-item" href="#">Todos</a></li>
-                  <li><a class="dropdown-item" href="#">Día</a></li>
-                  <li><a class="dropdown-item" href="#">Mes</a></li>
-                </ul>
-              </div>
-
-              <div class="card-body pb-0">
-                <h5 class="card-title">Budget Report <span>| This Month</span></h5>
-
-                <div id="budgetChart" style="min-height: 400px;" class="echart"></div>
-
-                <script>
-                  document.addEventListener("DOMContentLoaded", () => {
-                    var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
-                      legend: {
-                        data: ['Allocated Budget', 'Actual Spending']
-                      },
-                      radar: {
-                        // shape: 'circle',
-                        indicator: [{
-                            name: 'Sales',
-                            max: 6500
-                          },
-                          {
-                            name: 'Administration',
-                            max: 16000
-                          },
-                          {
-                            name: 'Information Technology',
-                            max: 30000
-                          },
-                          {
-                            name: 'Customer Support',
-                            max: 38000
-                          },
-                          {
-                            name: 'Development',
-                            max: 52000
-                          },
-                          {
-                            name: 'Marketing',
-                            max: 25000
-                          }
-                        ]
-                      },
-                      series: [{
-                        name: 'Budget vs spending',
-                        type: 'radar',
-                        data: [{
-                            value: [4200, 3000, 20000, 35000, 50000, 18000],
-                            name: 'Allocated Budget'
-                          },
-                          {
-                            value: [5000, 14000, 28000, 26000, 42000, 21000],
-                            name: 'Actual Spending'
-                          }
-                        ]
-                      }]
-                    });
-                  });
-                </script>
-
-              </div>
-            </div><!-- End Budget Report -->
-
-            <!-- Website Traffic -->
-            <div class="card">
-              <div class="filter">
-                <a class="icon"  data-bs-toggle="dropdown" (click)="toggleMenu('menu9', $event)" role="button"><i class="bi bi-three-dots"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" *ngIf="menus['menu9']">
-                  <li class="dropdown-header text-start">
-                    <h6>Filter</h6>
-                  </li>
-
-                  <li><a class="dropdown-item" href="#">Today</a></li>
-                  <li><a class="dropdown-item" href="#">This Month</a></li>
-                  <li><a class="dropdown-item" href="#">This Year</a></li>
-                </ul>
-              </div>
-
-              <div class="card-body pb-0">
-                <h5 class="card-title">Website Traffic <span>| Today</span></h5>
-
-                <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
-
-                <script>
-                  document.addEventListener("DOMContentLoaded", () => {
-                    echarts.init(document.querySelector("#trafficChart")).setOption({
-                      tooltip: {
-                        trigger: 'item'
-                      },
-                      legend: {
-                        top: '5%',
-                        left: 'center'
-                      },
-                      series: [{
-                        name: 'Access From',
-                        type: 'pie',
-                        radius: ['40%', '70%'],
-                        avoidLabelOverlap: false,
-                        label: {
-                          show: false,
-                          position: 'center'
-                        },
-                        emphasis: {
-                          label: {
-                            show: true,
-                            fontSize: '18',
-                            fontWeight: 'bold'
-                          }
-                        },
-                        labelLine: {
-                          show: false
-                        },
-                        data: [{
-                            value: 1048,
-                            name: 'Search Engine'
-                          },
-                          {
-                            value: 735,
-                            name: 'Direct'
-                          },
-                          {
-                            value: 580,
-                            name: 'Email'
-                          },
-                          {
-                            value: 484,
-                            name: 'Union Ads'
-                          },
-                          {
-                            value: 300,
-                            name: 'Video Ads'
-                          }
-                        ]
-                      }]
-                    });
-                  });
-                </script>
-
-              </div>
-            </div><!-- End Website Traffic -->
-
             <!-- News & Updates Traffic -->
             <div class="card">
-              <div class="filter">
-                <a class="icon" data-bs-toggle="dropdown" (click)="toggleMenu('menu10', $event)" role="button"><i class="bi bi-three-dots"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" *ngIf="menus['menu10']">
-                  <li class="dropdown-header text-start">
-                    <h6>Filter</h6>
-                  </li>
-
-                  <li><a class="dropdown-item" href="#">Today</a></li>
-                  <li><a class="dropdown-item" href="#">This Month</a></li>
-                  <li><a class="dropdown-item" href="#">This Year</a></li>
-                </ul>
-              </div>
 
               <div class="card-body pb-0">
-                <h5 class="card-title">News &amp; Updates <span>| Today</span></h5>
+                <h5 class="card-title">Publicidad <span>| Today</span></h5>
 
                 <div class="news">
                   <div class="post-item clearfix">

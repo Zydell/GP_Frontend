@@ -1,1 +1,90 @@
-<p>pg-historialnegocio works!</p>
+<p-messages [(value)]="messages2" [enableService]="false" [closable]="true" class="floating-message"></p-messages>
+<p-messages [(value)]="messages1" [enableService]="false" [closable]="true" class="floating-message"></p-messages>
+<div class="pagetitle">
+    <h1>Historial de ciudadanos que han reciclado en {{ ngc?.nombre }}</h1>
+</div><!-- End Page Title -->
+
+<section class="section dashboard">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title"> Historial <span>/Ciudadanos que han reciclado</span></h5>
+            <p-table
+                #dt1
+                [value]="all_historial"
+                dataKey="ofertas_id"
+                [rows]="10"
+                [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="[10, 25, 50]"
+                [loading]="loading"
+                [paginator]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [globalFilterFields]="['ciudadano', 'puntoVerde', 'greencoins', 'fecha']"
+                [scrollable]="true"
+                scrollHeight="500px"
+                [tableStyle]="{ 'min-width': '50rem' }"
+                [sortMode]="'single'"
+            >
+                <ng-template pTemplate="caption">
+                    <div class="flex">
+                        <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+                        <span class="p-input-icon-left ml-auto">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="applyFilter($event)" placeholder="Search keyword" />
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="ciudadano">
+                            <div class="flex align-items-center">
+                                Ciudadano <p-sortIcon field="ciudadano"></p-sortIcon>
+                                <p-columnFilter type="text" field="ciudadano" display="menu"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="puntoVerde">
+                            <div class="flex align-items-center">
+                                Punto verde <p-sortIcon field="puntoVerde"></p-sortIcon>
+                                <p-columnFilter type="numeric" field="puntoVerde" display="menu"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="greencoins">
+                            <div class="flex align-items-center">
+                                GreenCoins <p-sortIcon field="greencoins"></p-sortIcon>
+                                <p-columnFilter type="numeric" field="greencoins" display="menu"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th pSortableColumn="fecha">
+                            <div class="flex align-items-center">
+                                Fecha <p-sortIcon field="fecha"></p-sortIcon>
+                            </div>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-historial>
+                    <tr>
+                        <td>{{ historial.ciudadano }}</td>
+                        <td>{{ historial.puntoVerde }}</td>
+                        <td>{{ "₵ " + historial.greencoins }}</td>
+                        <td style="font-size: 15px;">
+                            {{ historial.fecha | date:'short' }}
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="5">Aún no han venido ciudadanos a reciclar.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-12">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
