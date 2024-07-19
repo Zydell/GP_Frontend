@@ -17,7 +17,7 @@ export class PgDashuserComponent {
   user: any = {};
   sidebarCollapsed = false;
   cdn: any;
-  cant_ofer: any;
+  cant_ofer: number=0;
   cant_cod: any;
 
   constructor(

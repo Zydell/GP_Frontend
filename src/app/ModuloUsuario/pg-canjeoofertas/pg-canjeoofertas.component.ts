@@ -4,6 +4,7 @@ import { ServiciviosVarios } from '../../ModuloServiciosWeb/ServiciosTestVarios.
 import { Router } from '@angular/router';
 import { Message } from 'primeng/api';
 import { Table } from 'primeng/table';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-pg-canjeoofertas',
@@ -31,6 +32,9 @@ export class PgCanjeoofertasComponent {
   ngc_oferta: string = '';
   fecha_inicio_oferta: string = '';
   fecha_fin_oferta: string = '';
+
+  
+  email: string = '';
 
 
   constructor(
@@ -71,9 +75,33 @@ export class PgCanjeoofertasComponent {
     this.visibleNuevo = false;
   }
   
-  onRedeem() {
-    // Lógica para canjear la oferta
+  async CanjearOferta() {
+    try {
+      const result = await new Promise<any>((resolve, reject) => {
+        this.variosServicios.CanjearOferta(this.user.correo_electronico, this.objSeleccion.ofertas_id)
+          .subscribe({
+            next: (translated: any) => resolve(translated),
+            error: (err: any) => reject(err)
+          });
+      });
+  
+      this.messages2 = [{ severity: 'success', summary: 'Éxito', detail: 'Oferta canjeada exitosamente' }];
+      this.autoCloseMessages('messages2');
+      await this.Obtener_Ofertas();
+      this.visibleNuevo = false;
+      this.listadoInformacion();
+    } catch (error) {
+      console.log("HOLAAAAAAAAAA");
+      console.error("Error canjeando la oferta: ", error);
+      if (error instanceof HttpErrorResponse) {
+        this.messages1 = [{ severity: 'error', summary: 'Error', detail: error.error.error }];
+      } else {
+        this.messages1 = [{ severity: 'error', summary: 'Error', detail: "Error desconocido" }];
+      }
+      this.autoCloseMessages('messages1');
+    }
   }
+  
 
   toggleMenu(menu: string, event: Event) {
     this.menus[menu] = !this.menus[menu];
