@@ -106,8 +106,8 @@
         </p-table>
           <!-- Fin Tabla de todas las ofertas -->
 
-
-          <app-pg-puntosverdes *ngIf="checked === true"></app-pg-puntosverdes>
+            <!-- Mapa con los puntos verdes del negocio -->
+          <app-pg-mapapvnegocio *ngIf="checked === true"></app-pg-mapapvnegocio>
 
           <p-dialog
             header="Nuevo"
@@ -123,7 +123,6 @@
           <ng-template pTemplate="content">
             
             <form #newPvsform="ngForm" (ngSubmit)="RegistrarNuevo(newPvsform)" class="row g-3 needs-validation" novalidate style="margin-top: 0px;">
-
               <div class="col-12 form-group" style="margin-top: -10px;">
                 <label for="newpvs" class="form-label" style="font-size: 14px;">Punto verde (descripción)</label>
                 <div class="input-group has-validation">
@@ -135,16 +134,28 @@
               <div class="col-12 form-group" style="margin-top: -10px;">
                   <label for="direccion" class="form-label" style="font-size: 14px;">Referencia de dirección</label>
                   <div class="input-group has-validation">
-                    <input type="text" [(ngModel)]="direccion" name="direccion" class="form-control"   id="direccion" required style="font-size: 13px;" min="1" max="1000" >
+                    <input type="text" [(ngModel)]="direccion" name="direccion" class="form-control"   id="direccion" required style="font-size: 13px;" placeholder="Direcciones guìas">
                     <div class="invalid-feedback floating-invalid-feedback">Debes ingresar una dirección!</div>
                   </div>
               </div>
+
+              <div class="col-12 form-group" style="margin-top: -10px;">
+                <label for="direccion" class="form-label" style="font-size: 14px;">Ubicacion Actual</label>
+                <div class="input-group has-validation">
+                    <!--
+                   <input readonly type="text" [(ngModel)]="userLat" name="userLat" class="form-control"  id="userLat" required style="font-size: 13px;" >
+                  <input readonly type="text" [(ngModel)]="userLng" name="userLng" class="form-control"  id="userLng" required style="font-size: 13px;" > 
+                    -->
+                  <input readonly type="text" [(ngModel)]="geodir" name="geodir" class="form-control"  id="geodir" required style="font-size: 13px;">
+                </div>
+                
+            </div>
               
               <div class="col-12" style="margin-top: 10px;">
                 <button class="btn btn-primary w-100" type="submit">Registrar</button>
               </div>
             </form>
-
+            <p style="font-size: 13px; margin-bottom: -15px;">*Para la creación de un punto verde <a style="color: red;">te debes encontrar en ese punto a la hora de crearlo</a></p>
           </ng-template>
         
           
@@ -181,7 +192,18 @@
                     <div class="invalid-feedback floating-invalid-feedback">Debes ingresar una cantidad reciclada valida (min 1 - max 1000)!</div>
                   </div>
               </div>
-              
+
+              <div class="col-12 form-group" style="margin-top: -10px;">
+                <label for="direccion" class="form-label" style="font-size: 14px;">Ubicacion Actual</label>
+                <div class="input-group has-validation">
+                    <!--
+                   <input readonly type="text" [(ngModel)]="userLat" name="userLat" class="form-control"  id="userLat" required style="font-size: 13px;" >
+                  <input readonly type="text" [(ngModel)]="userLng" name="userLng" class="form-control"  id="userLng" required style="font-size: 13px;" > 
+                    -->
+                  <input readonly type="text" [(ngModel)]="geodir" name="geodir" class="form-control"  id="geodir" required style="font-size: 13px;">
+                </div>
+             </div>
+
               <div class="col-12" style="margin-top: 10px;">
                 <button class="btn btn-primary w-100" type="submit">Actualizar</button>
               </div>
@@ -211,7 +233,7 @@
           </ng-template>
           
           <ng-template pTemplate="footer">
-            <p-button icon="pi pi-save"  label="Eliminar" styleClass="p-button-sm" (click)="DesactivarOferta()"></p-button>
+            <p-button icon="pi pi-save"  label="Eliminar" styleClass="p-button-sm" (click)="DesactivarPuntoVerde()"></p-button>
           </ng-template>
           
           </p-dialog>

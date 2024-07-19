@@ -79,7 +79,7 @@ export class PgRegistroreciclajeComponent {
       } else if (messageType === 'messages2') {
         this.messages2 = [];
       }
-    }, 3000); // Tiempo en milisegundos (5000 ms = 5 segundos)
+    }, 4000); // Tiempo en milisegundos (5000 ms = 5 segundos)
   }
 
   async addFormValidation() {
