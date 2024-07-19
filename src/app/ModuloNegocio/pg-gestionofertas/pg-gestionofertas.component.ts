@@ -150,6 +150,10 @@ export class PgGestionofertasComponent {
     try {
       console.log("ID DE LA OFERTA:"+this.objSeleccion.ofertas_id);
       const data = await this.variosServicios.DesactivarOfert(this.objSeleccion.ofertas_id).toPromise();
+      await this.Obtener_Ofertas();
+      this.messages2 = [{severity:'success', summary:'Éxito', detail:'Oferta eliminada exitosamente'}];
+      this.autoCloseMessages('messages2');
+      this.visibleEstado=false;
     } catch (error) {
       console.error("Error al desactivar la oferta: ", error);
     } finally {

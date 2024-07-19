@@ -130,10 +130,16 @@ export class ServiciviosVarios {
   }
 
   // Cambiar el estado de un Punto Verde
-  EstadoCambiarPuntoVerde(idPuntoVerde: number, estado: boolean){
+  EstadoCambiarPuntoVerde(idPuntoVerde: number, estadoo: boolean){
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    const parametros = { estado };
+    const parametros = { estado: estadoo };
     return this.http.put<any>(`${this.urlServiciosTest}/api/puntos_verdes/${idPuntoVerde}`, parametros, { headers });
+  }
+
+  //Eliminado logico de un Punto Verde
+  DesactivarPuntoVerde(idPuntoVerde: number){
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.delete<any>(this.urlServiciosTest+'/api/puntos_verdes/logico/'+idPuntoVerde, { headers });
   }
 
   // Actualizar un Punto Verde

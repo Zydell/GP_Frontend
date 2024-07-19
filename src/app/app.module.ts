@@ -70,6 +70,7 @@ import { PgVerofertasComponent } from './ModuloNegocio/pg-verofertas/pg-verofert
 import { PgGestionofertasComponent } from './ModuloNegocio/pg-gestionofertas/pg-gestionofertas.component';
 import { PgCanjeoofertasComponent } from './ModuloUsuario/pg-canjeoofertas/pg-canjeoofertas.component';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { PgMapapvnegocioComponent } from './ModuloNegocio/pg-mapapvnegocio/pg-mapapvnegocio.component';
 
 
 @NgModule({
@@ -112,7 +113,8 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
     PgHistorialnegocioComponent,
     PgVerofertasComponent,
     PgGestionofertasComponent,
-    PgCanjeoofertasComponent
+    PgCanjeoofertasComponent,
+    PgMapapvnegocioComponent
   ],
   imports: [
     BrowserModule,

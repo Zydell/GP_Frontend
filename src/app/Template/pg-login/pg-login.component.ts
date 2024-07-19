@@ -18,6 +18,7 @@ export class PgLoginComponent {
   password: string = '';
   remember: boolean = false;
   messages1: Message[] = [];
+  messages2: Message[] = [];
 
   constructor(private authService: AuthService, private router: Router, private js:EjecutarScript) {}
 
@@ -62,15 +63,28 @@ export class PgLoginComponent {
           }
           catch{
             this.messages1 = [{severity: 'error', summary: 'Error', detail: 'Logueo inválido'}];
+            this.autoCloseMessages('messages1');
           }
         },
         err => {
           console.error(err);
           this.messages1 = [{severity: 'error', summary: 'Error', detail: 'Logueo inválido'}];
+          this.autoCloseMessages('messages1');
         }
       );
     } else {
       this.messages1 = [{severity: 'error', summary: 'Error', detail: 'Usuario o contraseña incorrectos'}];
+      this.autoCloseMessages('messages1');
     }
+  }
+
+  autoCloseMessages(messageType: 'messages1' | 'messages2') {
+    setTimeout(() => {
+      if (messageType === 'messages1') {
+        this.messages1 = [];
+      } else if (messageType === 'messages2') {
+        this.messages2 = [];
+      }
+    }, 4000); // Tiempo en milisegundos (3000 ms = 3 segundos)
   }
 }
