@@ -3,6 +3,8 @@ import { ServiciviosVarios } from '../../ModuloServiciosWeb/ServiciosTestVarios.
 import { Mensajes } from '../../ModuloHerramientas/Mensajes.component';
 import { MessageService } from 'primeng/api';
 import { SortingService } from '../../sorting.service'; // Adjust the path as needed
+import { Message } from 'primeng/api';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-pg-material',
@@ -11,6 +13,11 @@ import { SortingService } from '../../sorting.service'; // Adjust the path as ne
   providers: [MessageService]
 })
 export class PgMaterialComponent implements OnInit{
+  //@ViewChild('dt1') table!: Table;
+  messages1: Message[] = [];
+  messages2: Message[] = [];
+  loading: boolean = false;
+
 
   lsListado:any=[];
   objSeleccion:any="-1";
@@ -31,7 +38,21 @@ export class PgMaterialComponent implements OnInit{
 async ngOnInit() {
  await this.ListadoInformacion();
 }
+menus: { [key: string]: boolean } = {};
 
+  toggleMenu(menu: string, event: Event) {
+    this.menus[menu] = !this.menus[menu];
+    event.stopPropagation();
+  }
+  applyFilter(event: Event) {
+    /*const input = event.target as HTMLInputElement;
+    if (input) {
+      this.table.filterGlobal(input.value, 'contains');
+    }*/
+  }
+  clear(table: Table) {
+    table.clear();
+  }
 ModalNuevoInformacion() {
 this.intvalor=0;
 this.strnombre="";

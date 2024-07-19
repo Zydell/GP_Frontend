@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
     "./../../../../assets/vendor/bootstrap-icons/bootstrap-icons.css"]
 })
 export class HeaderadminComponent implements OnInit {
+  seccion: string = '1';
   user: any = {};
   sidebarCollapsed = false;
   cdn: any;
@@ -54,4 +55,24 @@ export class HeaderadminComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
+  SeccionMateriales(event: Event){
+    event.preventDefault();
+    this.seccion = '2';
+  }
+  SeccionOfertas(event: Event){
+    event.preventDefault();
+    this.seccion = '3';
+  }  
+  SeccionPuntosVerdes(event: Event){
+    event.preventDefault();
+    this.seccion = '4';
+  }  
+  SeccionNegocios(event: Event){
+    event.preventDefault();
+    this.seccion = '5';
+  }  
+  SeccionAdmins(event: Event){
+    event.preventDefault();
+    this.seccion = '6';
+  }  
 }

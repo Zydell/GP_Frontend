@@ -56,43 +56,171 @@
         <span>Administración</span>
       </a>
     </li><!-- End Dashboard Nav -->
-<!--     
+   
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-menu-button-wide"></i><span>Gestion</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-          <a href="components-alerts.html">
-            <i class="bi bi-circle"></i><span>Alerts</span>
+          <a href="" (click)="SeccionMateriales($event)">
+            <i class="bi bi-circle"></i><span>Materiales</span>
+          </a>
+        </li>
+        <li>
+          <a href="" (click)="SeccionOfertas($event)">
+            <i class="bi bi-circle"></i><span>Ofertas </span>
+          </a>
+        </li>
+        <li>
+          <a href="" (click)="SeccionPuntosVerdes($event)">
+            <i class="bi bi-circle"></i><span>Puntos Verdes </span>
+          </a>
+        </li>
+        <li>
+          <a href="" (click)="SeccionNegocios($event)">
+            <i class="bi bi-circle"></i><span>Negocios </span>
+          </a>
+        </li>
+        <li>
+          <a href="" (click)="SeccionAdmins($event)">
+            <i class="bi bi-circle"></i><span>Administradores </span>
           </a>
         </li>
       </ul>
-    </li> -->
+    </li>
+    <li class="nav-heading">Páginas</li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="users-profile.html">
+          <i class="bi bi-person"></i>
+          <span>Perfil</span>
+        </a>
+      </li><!-- End Profile Page Nav --> 
     <!-- End Components Nav -->
   </ul>
 
 </aside><!-- End Sidebar-->
 <main id="main" class="main" [class.toggle-sidebar]="sidebarCollapsed">
+  <div *ngIf="seccion === '1'">
+    <div class="pagetitle">
+      <h1>Panel</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/dashadmin/principaladmin">Home</a></li>
+          <li class="breadcrumb-item active">Administración - {{ user?.nombre }}</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+  
+    <section class="section dashboard">
+      <!-- Left side columns -->
+      <div class="col-lg-8">
+        <div class="row">
 
-  <div class="pagetitle">
-    <h1>Panel</h1>
-    <nav>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/dashadmin/principaladmin">Home</a></li>
-        <li class="breadcrumb-item active">Administración </li>
-      </ol>
-    </nav>
-  </div><!-- End Page Title -->
+          <!-- Sales Card -->
+          <div class="col-xxl-4 col-md-6">
+            <div class="card info-card sales-card">
 
-  <section class="section dashboard">
-    <div id="wrapper" class="main-container-app">
-      <div id="content-wrapper">
-        <router-outlet></router-outlet>
-        <app-spinner></app-spinner>
-      </div>
-    </div>    
-  </section>
+              <div class="filter">
+                <a class="icon" data-bs-toggle="dropdown" (click)="toggleMenu('menu1', $event)" role="button"><i class="bi bi-three-dots"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" *ngIf="menus['menu1']">
+                  <li class="dropdown-header text-start">
+                    <h6>Filter</h6>
+                  </li>
+
+                  <li><a class="dropdown-item" href="#">Today</a></li>
+                  <li><a class="dropdown-item" href="#">This Month</a></li>
+                  <li><a class="dropdown-item" href="#">This Year</a></li>
+                </ul>
+              </div>
+
+              <div class="card-body">
+                <h5 class="card-title">Tus ofertas <span>| Tienes</span></h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-plus-slash-minus"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>{{+" "}}<span style="font-size: 20px;">ofertas</span></h6>
+                    <!-- <a href="" class="text-success small pt-1 fw-bold" (click)="SeccionGestionOfertas($event)">Agregar</a><span class="text-muted small pt-2 ps-1">ofertas</span> -->
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- End Sales Card -->
+
+          <!-- Revenue Card -->
+          <div class="col-xxl-4 col-md-6">
+            <div class="card info-card revenue-card">
+              <div class="card-body">
+                <h5 class="card-title">Tus puntos verdes </h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-geo-alt-fill"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>{{+" "}}<span style="font-size: 20px;">activos</span></h6>
+                    <!-- <a href="" class="text-success small pt-1 fw-bold" (click)="SeccionPuntosVerdes($event)">Agregar</a><span class="text-muted small pt-2 ps-1">PVs</span> -->
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- End Revenue Card -->
+
+          
+          <!-- Reports -->
+          <div class="col-12">
+            <div class="card">
+<!-- 
+              <div class="filter">
+                <a class="icon" data-bs-toggle="dropdown" (click)="toggleMenu('menu4', $event)" role="button"><i class="bi bi-three-dots"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" *ngIf="menus['menu4']">
+                  <li class="dropdown-header text-start">
+                    <h6>Filter</h6>
+                  </li>
+
+                  <li><a class="dropdown-item" href="#">Today</a></li>
+                  <li><a class="dropdown-item" href="#">This Month</a></li>
+                  <li><a class="dropdown-item" href="#">This Year</a></li>
+                </ul>
+              </div>
+-->
+             
+
+            </div>
+          </div><!-- End Reports -->              
+
+        </div>
+      </div><!-- End Left side columns -->
+         
+    </section>
+  </div>
+  <div *ngIf="seccion === '2'">
+    <app-pg-material></app-pg-material>
+  </div>
+  <div *ngIf="seccion === '3'">
+    <app-pg-oferta></app-pg-oferta>
+  </div>
+  <div *ngIf="seccion === '4'">
+    <app-pg-puntoverde></app-pg-puntoverde>
+  </div>
+  <div *ngIf="seccion === '5'">
+    <app-pg-negocio></app-pg-negocio>
+  </div>
+  <div *ngIf="seccion === '6'">
+    <app-pg-administradores></app-pg-administradores>
+  </div>
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>GreenPoint</span></strong>. Todos los derechos reservados
+    </div>
+  </footer><!-- End Footer -->
 </main><!-- End #main -->
 
 
