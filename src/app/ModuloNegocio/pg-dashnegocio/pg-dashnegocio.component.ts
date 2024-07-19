@@ -106,7 +106,8 @@ export class PgDashnegocioComponent {
     event.preventDefault();
     this.seccion = '1';
   }
-  SeccionPuntosVerdes(event: Event){
+  async SeccionPuntosVerdes(event: Event){
+    await this.ngOnInit();
     event.preventDefault();
     this.seccion = '2';
   }
