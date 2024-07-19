@@ -1,168 +1,218 @@
-<div class="card separador-componentes">
-    <p-toolbar>
-      <div class="p-toolbar-group-center">
-        <p>INFORMACIÓN NEGOCIOS</p>
-      </div>
-    </p-toolbar>
-    <p-table
-      [value]="lsListado"
-      [paginator]="true"
-      [rows]="10"
-      [showCurrentPageReport]="true"
-      [tableStyle]="{ 'min-width': '10rem' }"
-      styleClass="p-datatable-sm"
-      currentPageReportTemplate="Mostrar {first} - {last} de {totalRecords} elementos"
-      [rowsPerPageOptions]="[10, 25, 50]"
-    >
-      <ng-template pTemplate="header">
-        <tr>
-          <th >#</th>
-          <th pSortableColumn="code" >
-            NOMBRE <p-sortIcon field="code"></p-sortIcon>
-          </th>
-  
-          <th >PROPIETARIO</th>
-          <th >TIPO NEGOCIO</th>
-          <th >DIRECCIÓN</th>
-          <th >TELÉFONO</th>
-          <th >IMAGEN</th>
-          <th >FECHA REGISTRO <br> (año/mes/día)</th>
-          <th >ESTADO</th>
-          <th >ACCIONES</th>
-
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-customer>
-        <tr>
-          <td>{{ customer.negocio_id }}</td>
-          <td>{{ customer.nombre }}</td>
-          <td>{{ customer.propietario }}</td>
-          <td>{{ customer.tipo_negocio }}</td>
-          <td>{{ customer.direccion }}</td>
-          <td>{{ customer.telefono }}</td>
-          <td>
-            <img *ngIf="customer.image" [src]="'data:image/jpeg;base64,' + customer.image" alt="Imagen"  max-width="250rem" max-height="250rem" width="100%" height="100%">
-          </td>
-          <td>{{ formatDate(customer.fecharegistro)}}</td>
-
-          <td>
-          
-            <p-tag *ngIf="customer.estado == false" severity="danger" [value]="'DESACTIVADO'"></p-tag>
-            <p-tag *ngIf="customer.estado == true" severity="success" [value]="'ACTIVO'"></p-tag>
-           
-          <td>
-            <p-button
-              type="button"
-              icon="pi pi-pencil"
-              styleClass="p-button-text"
-              (click)="ModalEditarInformacion(customer)"
-            ></p-button>
-            <p-button
-              type="button"
-              icon="pi pi-trash"
-              styleClass="p-button-text"
-              (click)="ModalCambiarEstado(customer)"
-            ></p-button>
-          </td>
-        </tr>
-      </ng-template>
-     
-     
-    </p-table>
+  <div class="pagetitle">
+    <h1>Gestion de Materiales</h1>
   </div>
-  <p-dialog
-    header="Actualización"
-    [(visible)]="visibleEditar"
-    [modal]="true"
-    [style]="{ width: '50vw', minWidth: '300px', maxWidth: '80vw' }"
-    [draggable]="false"
-    [resizable]="false"
-  >
-  <ng-template pTemplate="header">
-    <span class="text-xl font-bold">Actualización</span>
-  </ng-template>
-  <label for="Nombre" class="form-label" style="font-size: 14px;">Nombre: </label>
-  <ng-template pTemplate="content">
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">
-          <i class="pi pi-pencil"></i>
-      </span>
-      <input pInputText placeholder="Nombre" [(ngModel)]="objSeleccion.nombre" class="p-inputtext-sm"/>
-    </div>
-    <label for="propietario" class="form-label" style="font-size: 14px;">Propietario: </label>
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">
-          <i class="pi pi-pencil"></i>
-      </span>
-      <input pInputText placeholder="Propietario" [(ngModel)]="objSeleccion.propietario" class="p-inputtext-sm" required/>
-    </div>
-    
-    <label for="tipo_negocio" class="form-label" style="font-size: 14px;">Tipo Negocio: </label>
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">
-          <i class="pi pi-pencil"></i>
-      </span>
-      <input pInputText placeholder="Tipo Negocio" [(ngModel)]="objSeleccion.tipo_negocio" class="p-inputtext-sm" required/>
-    </div>
-    
-    <label for="direccion" class="form-label" style="font-size: 14px;">Dirección:</label>
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">
-          <i class="pi pi-pencil"></i>
-      </span>
-      <input pInputText placeholder="Dirección" [(ngModel)]="objSeleccion.direccion" class="p-inputtext-sm" required/>
-    </div>
-    
-    <label for="telefono" class="form-label" style="font-size: 14px;">Teléfono: </label>
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">
-          <i class="pi pi-pencil"></i>
-      </span>
-      <input type="text" name="telefono" [(ngModel)]="objSeleccion.telefono" pattern="^09\d{8}$" class="form-control" id="telefono" required placeholder="Telefono" style="font-size: 14px;" maxlength="10" inputmode="numeric">
-      <div class="invalid-feedback floating-invalid-feedback">Ingresa tu número telefónico (10 dígitos)</div>    
-    </div>
-    
-    <label for="fecharegistro" class="form-label" style="font-size: 14px;">Fecha de Registro: </label>
-    <div class="p-inputgroup"> 
-      <input type="date" [(ngModel)]="objSeleccion.fecharegistro" class="form-control" required [max]="maxDate"/>
-    </div>
+  <section class="section dashboard">
+    <div class="card separador-componentes">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Materiales</h5>
+          <p-table
+            #dt1
+            [value]="lsListado"
+            [rows]="10"
+            [showCurrentPageReport]="true"
+            [rowsPerPageOptions]="[10, 25, 50]"
+            [paginator]="true"
+            currentPageReportTemplate="Mostrar {first} - {last} de {totalRecords} elementos"
+            [globalFilterFields]="['nombre', 'propietario','tipo_negocio','direccion','telefono','fecharegistro', 'estado']"
+            [scrollable]="true"
+            scrollHeight="500px"
+            [tableStyle]="{ 'min-width': '20rem' }"
+            [sortMode]="'single'"
+          >
+            <ng-template pTemplate="caption">
+              <div class="flex">
+                <button pButton label="Limpiar" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+                <span class="p-input-icon-left ml-auto">
+                  <i class="pi pi-search"></i>
+                  <input pInputText type="text" (input)="applyFilter($event)" placeholder="Buscar" />
+                </span>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                  <th pSortableColumn="nombre">
+                      <div class="flex align-items-center">
+                          Negocios <p-sortIcon field="nombre"></p-sortIcon>
+                      </div>
+                  </th>
+                  <th pSortableColumn="propietario">
+                      <div class="flex align-items-center">
+                          Propietario <p-sortIcon field="propietario"></p-sortIcon>
+                      </div>
+                  </th>
+                  <th pSortableColumn="tipo_negocio">
+                      <div class="flex align-items-center">
+                        Tipo de negocio <p-sortIcon field="tipo_negocio"></p-sortIcon>
+                      </div>
+                  </th>
+                  <th pSortableColumn="direccion">
+                      <div class="flex align-items-center">
+                        Dirección<p-sortIcon field="direccion"></p-sortIcon>
+                      </div>
+                  </th>
+                  <th pSortableColumn="telefono">
+                    <div class="flex align-items-center">
+                      Teléfono<p-sortIcon field="telefono"></p-sortIcon>
+                    </div>
+                  </th>
+                  <th pSortableColumn="direccion">
+                    <div class="flex align-items-center">
+                      Imagen/logo
+                    </div>
+                  </th>
+                  <th pSortableColumn="direccion">
+                    <div class="flex align-items-center">
+                      Fecha de Registro <p-sortIcon field="telefono"></p-sortIcon>
+                    </div>
+                  </th>
+                  <th pSortableColumn="estado">
+                    <div class="flex align-items-center">
+                      Estado <p-sortIcon field="estado"></p-sortIcon>
+                    </div>
+                  </th>
+                  <th>
+                    <div class="flex align-items-center">
+                        Gestión 
+                    </div>
+                </th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-customer>
+            <tr>
+              <td>{{ customer.nombre }}</td>
+              <td>{{ customer.propietario }}</td>
+              <td>{{ customer.tipo_negocio }}</td>
+              <td>{{ customer.direccion }}</td>
+              <td>{{ customer.telefono }}</td>
+              <td>
+                <img *ngIf="customer.image" [src]="'data:image/jpeg;base64,' + customer.image" alt="Imagen"  max-width="250rem" max-height="250rem" width="100%" height="100%">
+              </td>
+              <td>{{ customer.fecharegistro | date:'short'}}</td>
 
-    <label for="image" class="form-label" style="font-size: 14px;">Foto del Negocio: </label>
-    <div class="p-inputgroup">
-      <p-fileUpload mode="basic" chooseLabel="Elegir" name="image" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" [maxFileSize]="1000000" (onUpload)="onUpload($event)"></p-fileUpload>
-      <div *ngIf="!objSeleccion.image" class="invalid-feedback floating-invalid-feedback">Debes subir una imagen del negocio.</div>
-    </div>
-  </ng-template>
+              <td>
+              
+                <p-tag *ngIf="customer.estado == false" severity="danger" [value]="'DESACTIVADO'"></p-tag>
+                <p-tag *ngIf="customer.estado == true" severity="success" [value]="'ACTIVO'"></p-tag>
+              
+              <td>
+                <p-button
+                  type="button"
+                  icon="pi pi-pencil"
+                  styleClass="p-button-text"
+                  (click)="ModalEditarInformacion(customer)"
+                ></p-button>
+                <p-button
+                  type="button"
+                  icon="pi pi-trash"
+                  styleClass="p-button-text"
+                  (click)="ModalCambiarEstado(customer)"
+                ></p-button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="5">No se encontraron Negocios.</td>
+            </tr>
+          </ng-template>    
+    </p-table>
+        </div>
+      </div>
+      <p-dialog
+      header="Actualización"
+      [(visible)]="visibleEditar"
+      [modal]="true"
+      [style]="{ width: '50vw', minWidth: '300px', maxWidth: '80vw' }"
+      [draggable]="false"
+      [resizable]="false"
+    >
+    <ng-template pTemplate="header">
+      <span class="text-xl font-bold">Actualización</span>
+    </ng-template>
+    <label for="Nombre" class="form-label" style="font-size: 14px;">Nombre: </label>
+    <ng-template pTemplate="content">
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">
+            <i class="pi pi-pencil"></i>
+        </span>
+        <input pInputText placeholder="Nombre" [(ngModel)]="objSeleccion.nombre" class="p-inputtext-sm"/>
+      </div>
+      <label for="propietario" class="form-label" style="font-size: 14px;">Propietario: </label>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">
+            <i class="pi pi-pencil"></i>
+        </span>
+        <input pInputText placeholder="Propietario" [(ngModel)]="objSeleccion.propietario" class="p-inputtext-sm" required/>
+      </div>
+      
+      <label for="tipo_negocio" class="form-label" style="font-size: 14px;">Tipo Negocio: </label>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">
+            <i class="pi pi-pencil"></i>
+        </span>
+        <input pInputText placeholder="Tipo Negocio" [(ngModel)]="objSeleccion.tipo_negocio" class="p-inputtext-sm" required/>
+      </div>
+      
+      <label for="direccion" class="form-label" style="font-size: 14px;">Dirección:</label>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">
+            <i class="pi pi-pencil"></i>
+        </span>
+        <input pInputText placeholder="Dirección" [(ngModel)]="objSeleccion.direccion" class="p-inputtext-sm" required/>
+      </div>
+      
+      <label for="telefono" class="form-label" style="font-size: 14px;">Teléfono: </label>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">
+            <i class="pi pi-pencil"></i>
+        </span>
+        <input type="text" name="telefono" [(ngModel)]="objSeleccion.telefono" pattern="^09\d{8}$" class="form-control" id="telefono" required placeholder="Telefono" style="font-size: 14px;" maxlength="10" inputmode="numeric">
+        <div class="invalid-feedback floating-invalid-feedback">Ingresa tu número telefónico (10 dígitos)</div>    
+      </div>
+      
+      <label for="fecharegistro" class="form-label" style="font-size: 14px;">Fecha de Registro: </label>
+      <div class="p-inputgroup"> 
+        <input type="date" [(ngModel)]="objSeleccion.fecharegistro" class="form-control" required [max]="maxDate"/>
+      </div>
   
-  <ng-template pTemplate="footer">
-    <p-button icon="pi pi-save"  label="Actualizar" styleClass="p-button-sm" (click)="RegistrarActualizacion()"></p-button>
-  </ng-template>
-  
-  </p-dialog>
-  <p-dialog
-    header="Estado"
-    [(visible)]="visibleEstado"
-    [modal]="true"
-    [style]="{ width: '50vw', minWidth: '300px', maxWidth: '80vw' }"
-    [draggable]="false"
-    [resizable]="false"
-  >
-  <ng-template pTemplate="header">
-    <span class="text-xl font-bold">{{strEstado}}</span>
-  </ng-template>
-  
-  <ng-template pTemplate="content">
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">
-          <i class="pi pi-pencil"></i>
-      </span>
-      <input pInputText placeholder="Estado" [(ngModel)]="objSeleccion.nombre" class="p-inputtext-sm" readonly/>
-    </div>
-  </ng-template>
-  
-  <ng-template pTemplate="footer">
-    <p-button icon="pi pi-save"  label="Guardar" styleClass="p-button-sm" (click)="EstadoCambiarActualizacion()"></p-button>
-  </ng-template>
-  
+      <label for="image" class="form-label" style="font-size: 14px;">Foto del Negocio: </label>
+      <div class="p-inputgroup">
+        <p-fileUpload mode="basic" chooseLabel="Elegir" name="image" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" [maxFileSize]="1000000" (onUpload)="onUpload($event)"></p-fileUpload>
+        <div *ngIf="!objSeleccion.image" class="invalid-feedback floating-invalid-feedback">Debes subir una imagen del negocio.</div>
+      </div>
+    </ng-template>
+    
+    <ng-template pTemplate="footer">
+      <p-button icon="pi pi-save"  label="Actualizar" styleClass="p-button-sm" (click)="RegistrarActualizacion()"></p-button>
+    </ng-template>
+    
+    </p-dialog>
+    <p-dialog
+      header="Estado"
+      [(visible)]="visibleEstado"
+      [modal]="true"
+      [style]="{ width: '50vw', minWidth: '300px', maxWidth: '80vw' }"
+      [draggable]="false"
+      [resizable]="false"
+    >
+    <ng-template pTemplate="header">
+      <span class="text-xl font-bold">{{strEstado}}</span>
+    </ng-template>
+    
+    <ng-template pTemplate="content">
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">
+            <i class="pi pi-pencil"></i>
+        </span>
+        <input pInputText placeholder="Estado" [(ngModel)]="objSeleccion.nombre" class="p-inputtext-sm" readonly/>
+      </div>
+    </ng-template>
+    
+    <ng-template pTemplate="footer">
+      <p-button icon="pi pi-save"  label="Guardar" styleClass="p-button-sm" (click)="EstadoCambiarActualizacion()"></p-button>
+    </ng-template>
   </p-dialog>
   <p-toast></p-toast>
+  </div>
+  </section>

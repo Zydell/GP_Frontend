@@ -1,17 +1,9 @@
-/*import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-pg-negocio',
-  templateUrl: './pg-negocio.component.html',
-  styleUrls: ['./pg-negocio.component.css']
-})
-export class PgNegocioComponent {
-
-}*/
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServiciviosVarios } from '../../ModuloServiciosWeb/ServiciosTestVarios.component';
 import { Mensajes } from '../../ModuloHerramientas/Mensajes.component';
 import { MessageService } from 'primeng/api';
+import { SortingService } from '../../sorting.service'; // Adjust the path as needed
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-pg-negocio',
@@ -20,6 +12,7 @@ import { MessageService } from 'primeng/api';
   providers: [MessageService]
 })
 export class PgNegocioComponent implements OnInit{
+  @ViewChild('dt1') table!: Table;
 
   lsListado:any=[];
   objSeleccion:any="-1";
@@ -47,34 +40,44 @@ export class PgNegocioComponent implements OnInit{
     private messageService: MessageService,
     private mensajes:Mensajes
   ) { }
-async ngOnInit() {
-  await this.ListadoInformacion();
-  const today = new Date(new Date().setDate(new Date().getDate() -1));
-  this.maxDate = this.formatDate(today);
-}
-
-onUpload(event: any): void {
-  this.uploadedFiles = event.files;
-  console.log("XDXDXD "+ this.uploadedFiles);
-}
-
-ModalEditarInformacion(seleccion:any) {
-  this.objSeleccion = { ...seleccion };
-  console.log(this.objSeleccion)
-  this.objSeleccion.fecharegistro = this.objSeleccion.fecharegistro, 'yyyy-MM-dd';
-    this.visibleEditar = true;
-}
-
-ModalCambiarEstado(seleccion:any) {
-  this.objSeleccion = { ...seleccion };
-  if(this.objSeleccion.estado){
-    this.strEstado="Desactivar";
-  }else{
-    this.strEstado="Activar";
+  async ngOnInit() {
+    await this.ListadoInformacion();
+    const today = new Date(new Date().setDate(new Date().getDate() -1));
+    this.maxDate = this.formatDate(today);
   }
-  console.log(this.objSeleccion)
-  this.visibleEstado = true;
-}
+  applyFilter(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input) {
+      this.table.filterGlobal(input.value, 'contains');
+    }
+  }
+
+  clear(table: Table) {
+    table.clear();
+  }
+
+  onUpload(event: any): void {
+    this.uploadedFiles = event.files;
+    console.log("XDXDXD "+ this.uploadedFiles);
+  }
+
+  ModalEditarInformacion(seleccion:any) {
+    this.objSeleccion = { ...seleccion };
+    console.log(this.objSeleccion)
+    this.objSeleccion.fecharegistro = this.objSeleccion.fecharegistro, 'yyyy-MM-dd';
+      this.visibleEditar = true;
+  }
+
+  ModalCambiarEstado(seleccion:any) {
+    this.objSeleccion = { ...seleccion };
+    if(this.objSeleccion.estado){
+      this.strEstado="Desactivar";
+    }else{
+      this.strEstado="Activar";
+    }
+    console.log(this.objSeleccion)
+    this.visibleEstado = true;
+  }
 
   async ListadoInformacion() {
 
