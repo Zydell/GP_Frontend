@@ -108,6 +108,9 @@ export class PgRegistroreciclajeComponent {
 
         this.variosServicios.RegReciclaje({  correo_electronico: this.email, negocio_id: this.ngc.negocio_id, punto_verde_id:selectedPuntoVerdeCode, cantidad:this.cantidad, material_id:selectedMaterialCode, descripcion:this.descripcion })
         .subscribe(() => {
+            this.email = '';
+            this.cantidad = 0;
+            this.descripcion = 'Nada fuera de lo normal';
             this.messages2 = [{severity:'success', summary:'Éxito', detail:'Reciclaje registrado exitosamente'}];
             this.autoCloseMessages('messages2');
             setTimeout(() => {
