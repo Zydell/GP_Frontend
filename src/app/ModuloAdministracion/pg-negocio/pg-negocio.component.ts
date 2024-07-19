@@ -106,6 +106,7 @@ ModalCambiarEstado(seleccion:any) {
     const datePart = isoString.split('T')[0]; // Obtener YYYY-MM-DD de la cadena ISO
     return datePart;
   }
+  
   async RegistrarActualizacion() {
     if (this.objSeleccion.nombre?.trim() &&
         this.objSeleccion.propietario?.trim() &&

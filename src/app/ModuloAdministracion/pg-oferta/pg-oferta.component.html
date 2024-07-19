@@ -29,25 +29,25 @@
             # <p-sortIcon field="ofertas_id"></p-sortIcon>
           </th>
           <th >
-            Descripcion
+            DESCRIPCIÓN
           </th>
           <th pSortableColumn="gc_necesarios">
-            Green Coins Necesarios<p-sortIcon field="gc_necesarios" (click)="onSortChange('gc_necesarios')"></p-sortIcon>
+            GREEN COINS NECESARIOS<p-sortIcon field="gc_necesarios" (click)="onSortChange('gc_necesarios')"></p-sortIcon>
           </th>
           <th pSortableColumn="neg">
-            Negocio
+            NEGOCIO
             <p-sortIcon field="neg"></p-sortIcon>
           </th>
           <th pSortableColumn="fec_ini">
-            Fecha de Inicio
+            FECHA DE INICIO
             <p-sortIcon field="fec_ini"></p-sortIcon>
           </th>
           <th pSortableColumn="fec_fin">
-            Fecha de Finalizacion
+            FECHA DE FINALIZACIÓN
             <p-sortIcon field="fec_fin"></p-sortIcon>
           </th>
           <th pSortableColumn="est">
-            Estado
+            ESTADO
             <p-sortIcon field="est"></p-sortIcon>
           </th>
           <th >ACCIONES </th>
@@ -98,47 +98,47 @@
     <span class="text-xl font-bold">Nueva Oferta</span>
   </ng-template>
   <ng-template pTemplate="content">
-    <label for="descripcion" class="form-label" style="font-size: 14px;">Descripcion: </label>
+    <label for="descripcion" class="form-label" style="font-size: 14px;">Descripción: </label>
     <div class="p-inputgroup">
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
       <input pInputText placeholder="Descripcion" [(ngModel)]="descripcion" class="p-inputtext-sm" (input)="descripcion = descripcion" required/>
     </div>
-    <label for="gc_necesarios" class="form-label" style="font-size: 14px;">Green Coins necesarios:  </label>
+    <label for="gc_necesarios" class="form-label" style="font-size: 14px;">Green coins necesarios:  </label>
     <div class="p-inputgroup" style="margin-top: 15px;">
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input pInputText placeholder="Green Coins Necesarios" [(ngModel)]="gc_necesarios" class="p-inputtext-sm" (input)="gc_necesarios = gc_necesarios" required/>
+      <input type="number" placeholder="Green Coins Necesarios" [(ngModel)]="gc_necesarios" class="p-inputtext-sm" (input)="gc_necesarios = gc_necesarios" required/>
     </div>
 
     <label for="" class="form-label" style="font-size: 14px;">Negocio:  </label>
-    <div class="p-inputgroup" style="margin-top: 15px;">
+    <div class="p-inputgroup">
       <span class="p-inputgroup-addon">
         <i class="pi pi-pencil"></i>
       </span>
-      <select name="" id="" required (change)="onNegocioChange($event)">
-        <option value="0" disabled [selected]="negocio_id === 0">Elegir el Negocio</option>
+      <select name="" id="" required (change)="onNegocioChange($event)" [(ngModel)]="negocio_id">
+        <option value="0" disabled [selected]="negocio_id === 0">Elegir Negocio</option>
         <option *ngFor="let negocio of negocios" [value]="negocio.negocio_id">{{ negocio.nombre }}</option>
       </select>
     </div>
 
-    <label for="" class="form-label" style="font-size: 14px;">Fecha Inicio:  </label>
+    <label for="" class="form-label" style="font-size: 14px;">Fecha de Inicio:  </label>
     <div class="p-inputgroup" style="margin-top: 15px;">
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input type="date" placeholder="Fecha de inicio" [(ngModel)]="fecha_inicio" class="p-inputtext-sm" (input)="fecha_inicio = fecha_inicio" [min]="minDate" [max]="(maxDate)" required/>
+      <input type="date" (change)="onFechaInicioChange($event)" [(ngModel)]="fecha_inicio" class="p-inputtext-sm" (input)="fecha_inicio = fecha_inicio" [min]="minDate" [max]="maxDate" required/>
       <div class="invalid-feedback floating-invalid-feedback">Ingresa una fecha de inicio válida.</div>
     </div>
 
-    <label for="" class="form-label" style="font-size: 14px;">Fecha Finalizacion:  </label>
+    <label for="" class="form-label" style="font-size: 14px;">Fecha de Finalización: </label>
     <div class="p-inputgroup" style="margin-top: 15px;">
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input type="date" placeholder="Fecha de Finalizacion" [(ngModel)]="fecha_fin" class="p-inputtext-sm" (input)="fecha_fin = fecha_fin" [min]="minDatefin" [max]="maxDate" required/>
+      <input type="date" [(ngModel)]="fecha_fin" class="p-inputtext-sm" (input)="fecha_fin = fecha_fin" [min]="minDatefin" [max]="maxDatefin" required/>
     </div>
   </ng-template>
   
@@ -156,18 +156,50 @@
     [resizable]="false"
   >
   <ng-template pTemplate="header">
-    <span class="text-xl font-bold">Actualización</span>
+    <span class="text-xl font-bold">Actualización Oferta</span>
   </ng-template>
-  
-  <ng-template pTemplate="content">
+
+  <label for="Descripcion" class="form-label" style="font-size: 14px;">Descripción:  </label>
+  <div class="p-inputgroup">
+    <span class="p-inputgroup-addon">
+        <i class="pi pi-pencil"></i>
+    </span>
+    <input pInputText placeholder="Descripcion" [(ngModel)]="objSeleccion.descripcion" class="p-inputtext-sm" (input)="descripcion = descripcion" required/>
+  </div>
+  <label for="gc_necesarios" class="form-label" style="font-size: 14px;">Green Coins Necesarios: </label>
     <div class="p-inputgroup">
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input pInputText placeholder="Valor" [(ngModel)]="objSeleccion.int_valor" class="p-inputtext-sm"/>
+      <input pInputText placeholder="Green Coins Necesarios" id="gc_necesarios" [(ngModel)]="objSeleccion.gc_necesarios" class="p-inputtext-sm"/>
     </div>
-  </ng-template>
-  
+
+  <label for="" class="form-label" style="font-size: 14px;">Negocio:  </label>
+  <div class="p-inputgroup">
+    <span class="p-inputgroup-addon">
+      <i class="pi pi-pencil"></i>
+    </span>
+    <select required (change)="onNegocioChangeAct($event)" >
+      <option value="0" disabled [selected]="negocio_id === 0">Elegir Negocio</option>
+      <option *ngFor="let negocio of negocios" [value]="negocio.negocio_id">{{ negocio.nombre }}</option>
+    </select>
+  </div>
+
+  <label for="" class="form-label" style="font-size: 14px;">Fecha Inicio: </label>
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon">
+          <i class="pi pi-pencil"></i>
+      </span>
+      <input type="date" (change)="onFechaInicioChangeAct($event)"  [(ngModel)]="objSeleccion.fecha_inicio" class="p-inputtext-sm" [min]="minDate" [max]="maxDate"/>
+    </div>
+
+  <label for="" class="form-label" style="font-size: 14px;">Fecha Finalización: </label>
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon">
+          <i class="pi pi-pencil"></i>
+      </span>
+      <input type="date" [(ngModel)]="objSeleccion.fecha_fin" class="p-inputtext-sm" [min]="minDatefin" [max]="maxDatefin"/>
+    </div>
   <ng-template pTemplate="footer">
     <p-button icon="pi pi-save"  label="Actualizar" styleClass="p-button-sm" (click)="RegistrarActualizacion()"></p-button>
   </ng-template>
@@ -184,13 +216,13 @@
   <ng-template pTemplate="header">
     <span class="text-xl font-bold">{{strEstado}}</span>
   </ng-template>
-  
+  <label for="Descripcion" class="form-label" style="font-size: 14px;">Descripción: </label>
   <ng-template pTemplate="content">
     <div class="p-inputgroup">
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input pInputText placeholder="Estado" [(ngModel)]="objSeleccion.int_valor" class="p-inputtext-sm" readonly/>
+      <input pInputText placeholder="Descripcion" [(ngModel)]="objSeleccion.descripcion" class="p-inputtext-sm" readonly/>
     </div>
   </ng-template>
   
