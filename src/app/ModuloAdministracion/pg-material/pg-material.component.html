@@ -1,48 +1,32 @@
-<p-messages [(value)]="messages2" [enableService]="false" [closable]="true" class="floating-message"></p-messages>
-<p-messages [(value)]="messages1" [enableService]="false" [closable]="true" class="floating-message"></p-messages>
 <div class="pagetitle">
   <h1>Gestion de Materiales</h1>
 </div>
 <section class="section dashboard">
   <div class="card separador-componentes">
     <div class="card">
-      <div class="filter">
-        <a class="icon" data-bs-toggle="dropdown" (click)="toggleMenu('menu4', $event)" role="button"><i class="bi bi-three-dots"></i></a>
-        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" *ngIf="menus['menu4']">
-          <li class="dropdown-header text-start">
-            <h6>Filter</h6>
-          </li>
-
-          <li><a class="dropdown-item" href="#">Today</a></li>
-          <li><a class="dropdown-item" href="#">This Month</a></li>
-          <li><a class="dropdown-item" href="#">This Year</a></li>
-        </ul>
-      </div>
-
       <div class="card-body">
         <h5 class="card-title">Materiales</h5>
         <p-table
         #dt1
         [value]="lsListado"
-        dataKey="ofertas_id"
+        dataKey="materiales_id"
         [rows]="10"
         [showCurrentPageReport]="true"
         [rowsPerPageOptions]="[10, 25, 50]"
-        [loading]="loading"
         [paginator]="true"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        [globalFilterFields]="['descripcion', 'gc_necesarios', 'negocio_id']"
+        currentPageReportTemplate="Mostrar {first} - {last} de {totalRecords} elementos"
+        [globalFilterFields]="['tipo', 'valor_por_libra', 'estado']"
         [scrollable]="true"
         scrollHeight="500px"
         [tableStyle]="{ 'min-width': '20rem' }"
         [sortMode]="'single'"
-                  >
+        >
         <ng-template pTemplate="caption">
           <div class="flex">
-              <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+              <button pButton label="Limpiar" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
               <span class="p-input-icon-left ml-auto">
                   <i class="pi pi-search"></i>
-                  <input pInputText type="text" (input)="applyFilter($event)" placeholder="Search keyword" />
+                  <input pInputText type="text" (input)="applyFilter($event)" placeholder="Buscar" />
                 </span>
               <div class="p-toolbar-group-end">
                 <p-button
@@ -56,21 +40,19 @@
         </ng-template>
         <ng-template pTemplate="header">
           <tr>
-              <th pSortableColumn="descripcion">
+              <th pSortableColumn="tipo">
                   <div class="flex align-items-center">
-                      Nombre <p-sortIcon field="descripcion"></p-sortIcon>
-                      <p-columnFilter type="text" field="descripcion" display="menu"></p-columnFilter>
+                      Nombre <p-sortIcon field="tipo"></p-sortIcon>
                   </div>
               </th>
-              <th pSortableColumn="gc_necesarios">
+              <th pSortableColumn="valor_por_libra">
                   <div class="flex align-items-center">
-                      Valor por libra (GC) <p-sortIcon field="gc_necesarios"></p-sortIcon>
-                      <p-columnFilter type="numeric" field="gc_necesarios" display="menu"></p-columnFilter>
+                      Valor por libra (GC) <p-sortIcon field="valor_por_libra"></p-sortIcon>
                   </div>
               </th>
-              <th pSortableColumn="fecha_inicio">
+              <th pSortableColumn="estado">
                   <div class="flex align-items-center">
-                      Estado <p-sortIcon field="fecha_inicio"></p-sortIcon>
+                      Estado <p-sortIcon field="estado"></p-sortIcon>
                   </div>
               </th>
               <th>
@@ -107,7 +89,7 @@
         </ng-template>
         <ng-template pTemplate="emptymessage">
           <tr>
-              <td colspan="5">No se encontraron ofertas.</td>
+              <td colspan="5">No se encontraron Materiales.</td>
           </tr>
       </ng-template>
       </p-table>
@@ -126,19 +108,20 @@
       <span class="text-xl font-bold">Nuevo Material</span>
     </ng-template>
     <ng-template pTemplate="content">
-      <label for="descripcion" class="form-label" style="font-size: 14px;">Nombre: </label>
-      <div class="p-inputgroup">
-          <span class="p-inputgroup-addon">
-              <i class="pi pi-pencil"></i>
-          </span>
-          <input pInputText placeholder="Nombre" [(ngModel)]="strnombre" class="p-inputtext-sm" (input)="strnombre = strnombre"/>
-        </div>
-        <label for="descripcion" class="form-label" style="font-size: 14px;">Valor por libra(Greencoins): </label>
+      <label for="descripcion" class="form-label" style="font-size: 14px;">Nombre </label>
+      <div class="input-group">
+        <span class="p-inputgroup-addon">
+          <i class="pi pi-pencil"></i>
+        </span>
+        <input pInputText placeholder="Nombre" id="descripcion" [(ngModel)]="strnombre" class="form-control" (input)="strnombre = strnombre" required style="font-size: 14px;"/>
+      </div>
+
+      <label for="valor" class="form-label" style="font-size: 14px;">Valor por libra(Greencoins): </label>
       <div class="p-inputgroup">
         <span class="p-inputgroup-addon">
             <i class="pi pi-pencil"></i>
         </span>
-        <input type="number" placeholder="Valor por libra" [(ngModel)]="intvalor" class="p-inputtext-sm" (input)="intvalor = intvalor"/>
+        <input type="number" placeholder="Valor por libra" id="valor" [(ngModel)]="intvalor" class="form-control" (input)="intvalor = intvalor" required style="font-size: 14px;"/>
       </div>
     </ng-template>
     
@@ -165,7 +148,7 @@
         <span class="p-inputgroup-addon">
             <i class="pi pi-pencil"></i>
         </span>
-        <input pInputText placeholder="Nombre" [(ngModel)]="objSeleccion.tipo" class="p-inputtext-sm" />
+        <input pInputText placeholder="Nombre" id="Nombre" [(ngModel)]="objSeleccion.tipo" class="form-control" required style="font-size: 14px;"/>
       </div>
   
       <label for="Valor" class="form-label" style="font-size: 14px;">Valor por libra (Greencoins):  </label>
@@ -173,7 +156,7 @@
           <span class="p-inputgroup-addon">
               <i class="pi pi-pencil"></i>
           </span>
-          <input type="number" placeholder="Valor" [(ngModel)]="objSeleccion.valor_por_libra" class="p-inputtext-sm"style="font-size: 14px;"/>
+          <input type="number" placeholder="Valor por libra en greencoins" id="Valor" [(ngModel)]="objSeleccion.valor_por_libra" class="form-control" required style="font-size: 14px;"/>
         </div>
     </ng-template>
     
