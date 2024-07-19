@@ -103,7 +103,8 @@ export class PgDashuserComponent {
     this.router.navigate(['/login']);
   }
   
-  SeccionDashboard(event: Event){
+  async SeccionDashboard(event: Event){
+    await this.ngOnInit();
     event.preventDefault();
     this.seccion = '1';
   }
