@@ -104,8 +104,8 @@ export class PgDashuserComponent {
   }
   
   async SeccionDashboard(event: Event){
-    await this.ngOnInit();
     event.preventDefault();
+    await this.ngOnInit();
     this.seccion = '1';
   }
   SeccionVerOfertas(event: Event){
