@@ -40,7 +40,7 @@ this.strnombre="";
 ModalEditarInformacion(seleccion:any) {
   this.objSeleccion = { ...seleccion };
   console.log(this.objSeleccion)
-    this.visibleEditar = true;
+  this.visibleEditar = true;
 }
 ModalCambiarEstado(seleccion:any) {
   this.objSeleccion=seleccion;
@@ -74,7 +74,7 @@ ModalCambiarEstado(seleccion:any) {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: this.mensajes.RegistroError });
       }
     }else{
-      this.messageService.add({ severity: 'info', summary: 'Info', detail: "Ingrese valores Validos" });
+      this.messageService.add({ severity: 'info', summary: 'Info',detail: "Valores Validos" });
       
     }
   }

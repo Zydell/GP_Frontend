@@ -76,10 +76,16 @@ export class ServiciviosVarios {
     return this.hpptclient.get<any>(this.urlServiciosTest + '/api/ofertas/active/'+negocio_id)
   }
 
-  NuevaOferta(descripcion: string, gc_necesarios: number, negocio_id: number, fecha_inicio: Date, fecha_fin: Date){
+  NuevaOferta(descripcion: string, gc_necesarios: number, negocio_id: number, fecha_inicio: any, fecha_fin: any){
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const parametros = { descripcion, gc_necesarios, negocio_id, fecha_inicio, fecha_fin };
     return this.http.post<any>(this.urlServiciosTest + '/api/ofertas', parametros, { headers });
+  }
+
+  ActualizarOferta(idOferta: number, descripcion: string, gc_necesarios: number, negocio_id: number, fecha_inicio: Date, fecha_fin: Date) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const parametros = { descripcion, gc_necesarios, negocio_id, fecha_inicio, fecha_fin };
+    return this.hpptclient.put<any>(`${this.urlServiciosTest}/api/ofertas/${idOferta}`, parametros, { headers });
   }
 
   DesactivarOfert(idOferta: number) {
@@ -98,6 +104,7 @@ export class ServiciviosVarios {
     const parametros = { descripcion, gc_necesarios, negocio_id, fecha_inicio, fecha_fin, estado };
     return this.hpptclient.put<any>(`${this.urlServiciosTest}/api/ofertas/${idOferta}`, parametros, { headers });
   }
+
   //Puntos verdes
   // Listado de Puntos Verdes
   ListadoPuntosVerdes(){
