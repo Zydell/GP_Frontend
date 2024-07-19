@@ -33,10 +33,11 @@ async ngOnInit() {
 }
 
 ModalEditarInformacion(seleccion:any) {
-  this.objSeleccion=seleccion;
+  this.objSeleccion = { ...seleccion };
   console.log(this.objSeleccion)
     this.visibleEditar = true;
 }
+
 ModalCambiarEstado(seleccion:any) {
   this.objSeleccion=seleccion;
   if(this.objSeleccion.bl_estado){
@@ -47,6 +48,7 @@ ModalCambiarEstado(seleccion:any) {
   console.log(this.objSeleccion)
   this.visibleEstado = true;
 }
+
   async ListadoInformacion() {
 
     const data = await new Promise<any>(resolve => this.servicios.ListadoPuntosVerdes().subscribe(translated => { resolve(translated) }));
@@ -60,6 +62,7 @@ ModalCambiarEstado(seleccion:any) {
       this.lsListado=data;
     }
   }
+
   async Buscarnegocio(idNegocio: number): Promise<string> {
     try {
       const data = await new Promise<any>((resolve, reject) => {
@@ -68,7 +71,7 @@ ModalCambiarEstado(seleccion:any) {
           error: (err) => reject(err)
         });
       });
-      return `Nombre: ${data.nombre} - Propietario: ${data.propietario}`
+      return `${data.nombre} - Propietario: ${data.propietario} - Dirección: ${data.direccion}`
     } catch (error) {
       console.error('Error al buscar el negocio:', error);
       return 'Error al buscar el negocio';

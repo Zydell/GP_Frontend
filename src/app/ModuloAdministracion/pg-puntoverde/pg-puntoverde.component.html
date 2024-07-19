@@ -65,32 +65,49 @@
     </p-table>
   </div>
   <p-dialog
-    header="Nuevo"
-    [(visible)]="visibleNuevo"
-    [modal]="true"
-    [style]="{ width: '25vw' }"
-    [draggable]="false"
-    [resizable]="false"
-  >  
-  </p-dialog>
-  <p-dialog
     header="Actualización"
     [(visible)]="visibleEditar"
     [modal]="true"
-    [style]="{ width: '25vw' }"
+    [style]="{ width: '50vw', minWidth: '300px', maxWidth: '80vw' }"
     [draggable]="false"
     [resizable]="false"
   >
   <ng-template pTemplate="header">
-    <span class="text-xl font-bold">Actualización</span>
+    <span class="text-xl font-bold">Actualización Punto Verde</span>
   </ng-template>
   
   <ng-template pTemplate="content">
+    <label for="descripcion" class="form-label" style="font-size: 14px;">Descripción: </label>
     <div class="p-inputgroup">
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input pInputText placeholder="Valor" [(ngModel)]="objSeleccion.int_valor" class="p-inputtext-sm"/>
+      <input pInputText placeholder="Descripcion" [(ngModel)]="objSeleccion.descripcion" class="p-inputtext-sm"/>
+    </div>
+    <label for="Direccion" class="form-label" style="font-size: 14px;" readonly>Dirección: </label>
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon">
+          <i class="pi pi-pencil"></i>
+      </span>
+      <input pInputText placeholder="Direccion" [(ngModel)]="objSeleccion.direccion" class="p-inputtext-sm" readonly/>
+    </div>
+    <label for="descripcion" class="form-label" style="font-size: 14px;">Latitud: </label>
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon">
+          <i class="pi pi-pencil"></i>
+      </span>
+      <input pInputText placeholder="Latitud" [(ngModel)]="objSeleccion.latitud" class="p-inputtext-sm" readonly/>
+    </div>
+    <label for="descripcion" class="form-label" style="font-size: 14px;">Longitud: </label>
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon">
+          <i class="pi pi-pencil"></i>
+      </span>
+      <input pInputText placeholder="Longitud" [(ngModel)]="objSeleccion.longitud" class="p-inputtext-sm" readonly/>
+    </div>
+    <label for="descripcion" class="form-label" style="font-size: 14px;">Seleccione la nueva dirección: </label>
+    <div class="p-inputgroup">
+
     </div>
   </ng-template>
   
@@ -103,7 +120,7 @@
     header="Estado"
     [(visible)]="visibleEstado"
     [modal]="true"
-    [style]="{ width: '25vw' }"
+    [style]="{ width: '50vw', minWidth: '300px', maxWidth: '80vw' }"
     [draggable]="false"
     [resizable]="false"
   >
@@ -116,7 +133,7 @@
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input pInputText placeholder="Estado" [(ngModel)]="objSeleccion.int_valor" class="p-inputtext-sm" readonly/>
+      <input pInputText placeholder="Estado" [(ngModel)]="objSeleccion.descripcion" class="p-inputtext-sm" readonly/>
     </div>
   </ng-template>
   
