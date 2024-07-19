@@ -214,4 +214,13 @@ export class ServiciviosVarios {
   RegReciclaje(user: {  correo_electronico: string, negocio_id:any, punto_verde_id:any, cantidad:any, material_id:any, descripcion:any }): Observable<any> {
     return this.http.post<any>(this.urlServiciosTest + '/api/reciclaje/registrar', user);
   }
+
+  CanjearOferta(correo_electronico: any, ofertas_id: number) {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    const parametros = { correo_electronico, ofertas_id };
+    return this.http.post<any>(`${this.urlServiciosTest}/api/ofertas_greencoins/canjear-oferta`, parametros, { headers });
+  }
+
+
 }
