@@ -75,4 +75,8 @@ export class HeaderadminComponent implements OnInit {
     event.preventDefault();
     this.seccion = '6';
   }  
+  SeccionCiudadanos(event: Event){
+    event.preventDefault();
+    this.seccion = '7';
+  }  
 }

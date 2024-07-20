@@ -78,6 +78,11 @@
           </a>
         </li>
         <li>
+          <a href="" (click)="SeccionCiudadanos($event)">
+            <i class="bi bi-circle"></i><span>Ciudadanos </span>
+          </a>
+        </li>
+        <li>
           <a href="" (click)="SeccionNegocios($event)">
             <i class="bi bi-circle"></i><span>Negocios </span>
           </a>
@@ -215,6 +220,9 @@
   </div>
   <div *ngIf="seccion === '6'">
     <app-pg-administradores></app-pg-administradores>
+  </div>
+  <div *ngIf="seccion === '7'">
+    <app-pg-ciudadanos></app-pg-ciudadanos>
   </div>
   <footer id="footer" class="footer">
     <div class="copyright">

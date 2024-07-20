@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServiciviosVarios } from '../../ModuloServiciosWeb/ServiciosTestVarios.component';
 import { Mensajes } from '../../ModuloHerramientas/Mensajes.component';
 import { MessageService } from 'primeng/api';
-import { SortingService } from '../../sorting.service'; // Adjust the path as needed
 import { Table } from 'primeng/table';
 
 @Component({
@@ -40,11 +39,13 @@ export class PgNegocioComponent implements OnInit{
     private messageService: MessageService,
     private mensajes:Mensajes
   ) { }
+  
   async ngOnInit() {
     await this.ListadoInformacion();
     const today = new Date(new Date().setDate(new Date().getDate() -1));
     this.maxDate = this.formatDate(today);
   }
+
   applyFilter(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input) {
@@ -56,16 +57,21 @@ export class PgNegocioComponent implements OnInit{
     table.clear();
   }
 
-  onUpload(event: any): void {
-    this.uploadedFiles = event.files;
-    console.log("XDXDXD "+ this.uploadedFiles);
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.uploadedFiles = [file];
+      //this.messages2 = [{:'success', 'Éxito', 'Imagen cargada correctamente con el nuevo xd'}];
+      //this.autoCloseMessages('messages2');
+    }
   }
 
   ModalEditarInformacion(seleccion:any) {
     this.objSeleccion = { ...seleccion };
+    this.objSeleccion.fecharegistro = this.formatDate(this.objSeleccion.fecharegistro);
+    this.uploadedFiles = [];
     console.log(this.objSeleccion)
-    this.objSeleccion.fecharegistro = this.objSeleccion.fecharegistro, 'yyyy-MM-dd';
-      this.visibleEditar = true;
+    this.visibleEditar = true;
   }
 
   ModalCambiarEstado(seleccion:any) {
@@ -154,17 +160,17 @@ export class PgNegocioComponent implements OnInit{
   
         if (data) {
           await this.ListadoInformacion();
-          this.messageService.add({ severity: 'success', summary: 'Éxito', detail: this.mensajes.ActualizacionExitosa });
+          this.showMessage(  'success',  'Éxito',  this.mensajes.ActualizacionExitosa );
           this.visibleEditar = false;
         } else {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: this.mensajes.ActualizacionError });
+          this.showMessage( 'error',  'Error',  this.mensajes.ActualizacionError );
         }
       } catch (error) {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Ocurrió un error al actualizar el negocio' });
+        this.showMessage('error',  'Error',  'Ocurrió un error al actualizar el negocio' );
         console.error(error);
       }
     } else {
-      this.messageService.add({ severity: 'info', summary: 'Info', detail: "Formulario Inválido" });
+      this.showMessage('info',  'Info',  "Formulario Inválido" );
     }
   }
 
@@ -181,12 +187,16 @@ export class PgNegocioComponent implements OnInit{
       console.log(data)
       if(data.success){
         await this.ListadoInformacion();
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: this.mensajes.ActualizacionExitosa });
+        this.showMessage('success',  'Success',  this.mensajes.ActualizacionExitosa );
         this.visibleEstado = false;
       }else{
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: this.mensajes.ActualizacionError });
+        this.showMessage( 'error',  'Error',  this.mensajes.ActualizacionError);
       }
  
+  }
+  showMessage(severity: string, summary: string, detail: string) {
+    this.messageService.clear();
+    this.messageService.add({ severity, summary, detail, life: 3000 });
   }
 }
 

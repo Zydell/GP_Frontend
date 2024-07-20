@@ -1,66 +1,95 @@
-<div class="card separador-componentes">
-    <p-toolbar>
-      <div class="p-toolbar-group-center">
-        <p>INFORMACIÓN OFERTAS</p>
-      </div>
-      <div class="p-toolbar-group-end">
-        <p-button
-          type="button"
-          icon="pi pi-plus"
-          styleClass="p-button-text"
-          (click)="ModalNuevoInformacion()"
-        ></p-button>
-      </div>
-    </p-toolbar>
-  
-    <p-table
-    [value]="lsListado"
-    [paginator]="true"
-    [rows]="10"
-    [showCurrentPageReport]="true"
-    [tableStyle]="{ 'min-width': '10rem' }"
-    styleClass="p-datatable-sm"
-    currentPageReportTemplate="Mostrar {first} - {last} de {totalRecords} elementos"
-    [rowsPerPageOptions]="[10, 25, 50]"
-  >
-      <ng-template pTemplate="header">
-        <tr>
-          <th pSortableColumn="ofertas_id" (click)="onSortChange('ofertas_id')"> 
-            # <p-sortIcon field="ofertas_id"></p-sortIcon>
-          </th>
-          <th >
-            DESCRIPCIÓN
-          </th>
-          <th pSortableColumn="gc_necesarios">
-            GREEN COINS NECESARIOS<p-sortIcon field="gc_necesarios" (click)="onSortChange('gc_necesarios')"></p-sortIcon>
-          </th>
-          <th pSortableColumn="neg">
-            NEGOCIO
-            <p-sortIcon field="neg"></p-sortIcon>
-          </th>
-          <th pSortableColumn="fec_ini">
-            FECHA DE INICIO
-            <p-sortIcon field="fec_ini"></p-sortIcon>
-          </th>
-          <th pSortableColumn="fec_fin">
-            FECHA DE FINALIZACIÓN
-            <p-sortIcon field="fec_fin"></p-sortIcon>
-          </th>
-          <th pSortableColumn="est">
-            ESTADO
-            <p-sortIcon field="est"></p-sortIcon>
-          </th>
-          <th >ACCIONES </th>
-        </tr>
-      </ng-template>
+<div class="pagetitle">
+  <h1>Gestion de Ofertas</h1>
+</div>
+<section class="section dashboard">
+  <div class="card separador-componentes">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Ofertas</h5>
+        <p-table
+          #dt1
+          [value]="lsListado"
+          dataKey="ofertas_id"
+          [rows]="10"
+          [showCurrentPageReport]="true"
+          [rowsPerPageOptions]="[10, 25, 50]"
+          [paginator]="true"
+          currentPageReportTemplate="Mostrar {first} - {last} de {totalRecords} elementos"
+          [globalFilterFields]="['ofertas_id ','descripcion', 'gc_necesarios','negocioInfo','fecha_inicio','fecha_fin','estado']"
+          [scrollable]="true"
+          scrollHeight="500px"
+          [tableStyle]="{ 'min-width': '20rem' }"
+          [sortMode]="'single'"
+        >
+            <ng-template pTemplate="caption">
+            <div class="flex">
+              <button pButton label="Limpiar" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+              <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="applyFilter($event)" placeholder="Buscar" />
+              </span>
+              <div class="p-toolbar-group-end">
+                <p-button
+                  type="button"
+                  icon="pi pi-plus"
+                  styleClass="p-button-text"
+                  (click)="ModalNuevoInformacion()"
+                ></p-button>
+              </div>          
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="ofertas_id">
+                    <div class="flex align-items-center">
+                        Id <p-sortIcon field="ofertas_id"></p-sortIcon>
+                    </div>
+                </th>
+                <th pSortableColumn="descripcion">
+                  <div class="flex align-items-center">
+                      Ofertas <p-sortIcon field="descripcion"></p-sortIcon>
+                  </div>
+                </th>
+                <th pSortableColumn="gc_necesarios">
+                    <div class="flex align-items-center">
+                        Coste <p-sortIcon field="gc_necesarios"></p-sortIcon>
+                    </div>
+                </th>
+                <th pSortableColumn="negocioInfo">
+                  <div class="flex align-items-center">
+                      Negocio <p-sortIcon field="negocioInfo"></p-sortIcon>
+                  </div>
+              </th>
+                <th pSortableColumn="fecha_inicio">
+                    <div class="flex align-items-center">
+                        Inicio <p-sortIcon field="fecha_inicio"></p-sortIcon>
+                    </div>
+                </th>
+                <th pSortableColumn="fecha_fin">
+                    <div class="flex align-items-center">
+                        Fin <p-sortIcon field="fecha_fin"></p-sortIcon>
+                    </div>
+                </th>
+                <th pSortableColumn="estado">
+                  <div class="flex align-items-center">
+                      Estado <p-sortIcon field="estado"></p-sortIcon>
+                  </div>
+              </th>
+                <th>
+                  <div class="flex align-items-center">
+                      Gestión
+                  </div>
+              </th>
+            </tr>
+        </ng-template>
       <ng-template pTemplate="body" let-customer>
-        <tr>          
-          <td>{{ customer.ofertas_id }}</td>
+        <tr>
+          <td>{{ customer.ofertas_id  }}</td>
           <td>{{ customer.descripcion }}</td>
-          <td>{{ customer.gc_necesarios }}</td>
+          <td>{{ "₵ "+customer.gc_necesarios }}</td>
           <td>{{ (customer.negocioInfo) }}</td>
-          <td>{{ formatDate(customer.fecha_inicio)  }}</td>
-          <td>{{ formatDate(customer.fecha_fin) }}</td>
+          <td>{{ customer.fecha_inicio | date:'short' }}</td>
+          <td>{{ customer.fecha_fin | date:'short' }}</td>
           <td>
           
             <p-tag *ngIf="customer.estado == false" severity="danger" [value]="'DESACTIVADO'"></p-tag>
@@ -82,8 +111,11 @@
           </td>
         </tr>
       </ng-template>
-     
-     
+      <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="5">No se encontraron ofertas.</td>
+        </tr>
+      </ng-template>
     </p-table>
   </div>
   <p-dialog
@@ -103,42 +135,42 @@
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input pInputText placeholder="Descripcion" [(ngModel)]="descripcion" class="p-inputtext-sm" (input)="descripcion = descripcion" required/>
+      <input pInputText id="descripcion" placeholder="Descripcion" [(ngModel)]="descripcion" class="form-control" (input)="descripcion = descripcion" required/>
     </div>
-    <label for="gc_necesarios" class="form-label" style="font-size: 14px;">Green coins necesarios:  </label>
-    <div class="p-inputgroup" style="margin-top: 15px;">
+    <label for="greencoin" class="form-label" style="font-size: 14px;">Green coins necesarios:  </label>
+    <div class="p-inputgroup" >
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input type="number" placeholder="Green Coins Necesarios" [(ngModel)]="gc_necesarios" class="p-inputtext-sm" (input)="gc_necesarios = gc_necesarios" required/>
+      <input type="number" id="greencoin" placeholder="Green Coins Necesarios" [(ngModel)]="gc_necesarios" class="form-control" (input)="gc_necesarios = gc_necesarios" required/>
     </div>
 
-    <label for="" class="form-label" style="font-size: 14px;">Negocio:  </label>
+    <label for="negocio" class="form-label" style="font-size: 14px;">Negocio:  </label>
     <div class="p-inputgroup">
       <span class="p-inputgroup-addon">
         <i class="pi pi-pencil"></i>
       </span>
-      <select name="" id="" required (change)="onNegocioChange($event)" [(ngModel)]="negocio_id">
+      <select id="negocio" required (change)="onNegocioChange($event)" [(ngModel)]="negocio_id" class="form-control">
         <option value="0" disabled [selected]="negocio_id === 0">Elegir Negocio</option>
         <option *ngFor="let negocio of negocios" [value]="negocio.negocio_id">{{ negocio.nombre }}</option>
       </select>
     </div>
 
-    <label for="" class="form-label" style="font-size: 14px;">Fecha de Inicio:  </label>
-    <div class="p-inputgroup" style="margin-top: 15px;">
+    <label for="fechainicio" class="form-label" style="font-size: 14px;">Fecha de Inicio:  </label>
+    <div class="p-inputgroup" >
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input type="date" (change)="onFechaInicioChange($event)" [(ngModel)]="fecha_inicio" class="p-inputtext-sm" (input)="fecha_inicio = fecha_inicio" [min]="minDate" [max]="maxDate" required/>
+      <input type="datetime-local" id="fechainicio" (change)="onFechaInicioChange($event)" [(ngModel)]="fecha_inicio" class="form-control" (input)="fecha_inicio = fecha_inicio" [min]="minDate" [max]="maxDate" required/>
       <div class="invalid-feedback floating-invalid-feedback">Ingresa una fecha de inicio válida.</div>
     </div>
 
-    <label for="" class="form-label" style="font-size: 14px;">Fecha de Finalización: </label>
-    <div class="p-inputgroup" style="margin-top: 15px;">
+    <label for="fechafin" class="form-label" style="font-size: 14px;">Fecha de Finalización: </label>
+    <div class="p-inputgroup" >
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input type="date" [(ngModel)]="fecha_fin" class="p-inputtext-sm" (input)="fecha_fin = fecha_fin" [min]="minDatefin" [max]="maxDatefin" required/>
+      <input type="datetime-local" id="fechafin" [(ngModel)]="fecha_fin" class="form-control" (input)="fecha_fin = fecha_fin" [min]="minDatefin" [max]="maxDatefin" required  [disabled]="isFechaFinDisabled"/>
     </div>
   </ng-template>
   
@@ -159,46 +191,46 @@
     <span class="text-xl font-bold">Actualización Oferta</span>
   </ng-template>
 
-  <label for="Descripcion" class="form-label" style="font-size: 14px;">Descripción:  </label>
+  <label for="descripact" class="form-label" style="font-size: 14px;">Descripción:  </label>
   <div class="p-inputgroup">
     <span class="p-inputgroup-addon">
         <i class="pi pi-pencil"></i>
     </span>
-    <input pInputText placeholder="Descripcion" [(ngModel)]="objSeleccion.descripcion" class="p-inputtext-sm" (input)="descripcion = descripcion" required/>
+    <input pInputText id="descripact" placeholder="Descripcion" [(ngModel)]="objSeleccion.descripcion" class="form-control" (input)="descripcion = descripcion" required/>
   </div>
   <label for="gc_necesarios" class="form-label" style="font-size: 14px;">Green Coins Necesarios: </label>
     <div class="p-inputgroup">
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input pInputText placeholder="Green Coins Necesarios" id="gc_necesarios" [(ngModel)]="objSeleccion.gc_necesarios" class="p-inputtext-sm"/>
+      <input pInputText id="gc_necesarios" placeholder="Green Coins Necesarios" id="gc_necesarios" [(ngModel)]="objSeleccion.gc_necesarios" class="form-control" required/>
     </div>
 
-  <label for="" class="form-label" style="font-size: 14px;">Negocio:  </label>
+  <label for="negocioact" class="form-label" style="font-size: 14px;">Negocio:  </label>
   <div class="p-inputgroup">
     <span class="p-inputgroup-addon">
       <i class="pi pi-pencil"></i>
     </span>
-    <select required (change)="onNegocioChangeAct($event)" >
+    <select required id="negocioact" (change)="onNegocioChangeAct($event)" >
       <option value="0" disabled [selected]="negocio_id === 0">Elegir Negocio</option>
       <option *ngFor="let negocio of negocios" [value]="negocio.negocio_id">{{ negocio.nombre }}</option>
     </select>
   </div>
 
-  <label for="" class="form-label" style="font-size: 14px;">Fecha Inicio: </label>
+  <label for="fechainiact" class="form-label" style="font-size: 14px;">Fecha Inicio: </label>
     <div class="p-inputgroup">
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input type="date" (change)="onFechaInicioChangeAct($event)"  [(ngModel)]="objSeleccion.fecha_inicio" class="p-inputtext-sm" [min]="minDate" [max]="maxDate"/>
+      <input type="datetime-local" id="fechainiact" (change)="onFechaInicioChangeAct($event)"  [(ngModel)]="objSeleccion.fecha_inicio" class="p-inputtext-sm" [min]="minDate" [max]="maxDate"/>
     </div>
 
-  <label for="" class="form-label" style="font-size: 14px;">Fecha Finalización: </label>
+  <label for="fechafinact" class="form-label" style="font-size: 14px;">Fecha Finalización: </label>
     <div class="p-inputgroup">
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input type="date" [(ngModel)]="objSeleccion.fecha_fin" class="p-inputtext-sm" [min]="minDatefin" [max]="maxDatefin"/>
+      <input id="fechafinact" type="datetime-local" [(ngModel)]="objSeleccion.fecha_fin" class="p-inputtext-sm" [min]="minDatefin" [max]="maxDatefin"/>
     </div>
   <ng-template pTemplate="footer">
     <p-button icon="pi pi-save"  label="Actualizar" styleClass="p-button-sm" (click)="RegistrarActualizacion()"></p-button>

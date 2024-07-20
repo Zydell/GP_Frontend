@@ -72,6 +72,7 @@ import { PgCanjeoofertasComponent } from './ModuloUsuario/pg-canjeoofertas/pg-ca
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { PgMapapvnegocioComponent } from './ModuloNegocio/pg-mapapvnegocio/pg-mapapvnegocio.component';
 import { PgValidarcodigoComponent } from './ModuloNegocio/pg-validarcodigo/pg-validarcodigo.component';
+import { PgCiudadanosComponent } from './ModuloAdministracion/pg-ciudadanos/pg-ciudadanos.component';
 
 
 @NgModule({
@@ -116,7 +117,8 @@ import { PgValidarcodigoComponent } from './ModuloNegocio/pg-validarcodigo/pg-va
     PgGestionofertasComponent,
     PgCanjeoofertasComponent,
     PgMapapvnegocioComponent,
-    PgValidarcodigoComponent
+    PgValidarcodigoComponent,
+    PgCiudadanosComponent
   ],
   imports: [
     BrowserModule,

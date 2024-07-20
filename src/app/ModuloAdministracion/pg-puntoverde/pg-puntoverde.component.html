@@ -1,35 +1,78 @@
-<div class="card separador-componentes">
-    <p-toolbar>
-      <div class="p-toolbar-group-center">
-        <p>INFORMACIÓN PUNTOS VERDES</p>
-      </div>
-    </p-toolbar>
-  
-    <p-table
-    [value]="lsListado"
-    [paginator]="true"
-    [rows]="10"
-    [showCurrentPageReport]="true"
-    [tableStyle]="{ 'min-width': '10rem' }"
-    styleClass="p-datatable-sm"
-    currentPageReportTemplate="Mostrar {first} - {last} de {totalRecords} elementos"
-    [rowsPerPageOptions]="[10, 25, 50]"
-  >
-      <ng-template pTemplate="header">
-        <tr>
-          <th >#</th>
-          <th pSortableColumn="code" >
-            DESCRIPCION <p-sortIcon field="code"></p-sortIcon>
-          </th>
-  
-          <th >DIRECCION</th>
-          <th >LATITUD</th>
-          <th >LONGITUD</th>
-          <th >NEGOCIO</th>
-          <th >ESTADO</th>
-          <th >ACCIONES</th>
-
-        </tr>
+<div class="pagetitle">
+  <h1>Gestion de Puntos Verdes</h1>
+</div>
+<section class="section dashboard">
+  <div class="card separador-componentes">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Puntos Verdes</h5>
+        <p-table
+          #dt1
+          [value]="lsListado"
+          dataKey="punto_verde_id"
+          [rows]="10"
+          [showCurrentPageReport]="true"
+          [rowsPerPageOptions]="[10, 25, 50]"
+          [paginator]="true"
+          currentPageReportTemplate="Mostrar {first} - {last} de {totalRecords} elementos"
+          [globalFilterFields]="['punto_verde_id','descripcion', 'direccion','negocioInfo']"
+          [scrollable]="true"
+          scrollHeight="500px"
+          [tableStyle]="{ 'min-width': '20rem' }"
+          [sortMode]="'single'"
+        >
+        <ng-template pTemplate="caption">
+          <div class="flex">
+            <button pButton label="Limpiar" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+            <span class="p-input-icon-left ml-auto">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" (input)="applyFilter($event)" placeholder="Buscar" />
+            </span>          
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+              <th pSortableColumn="punto_verde_id">
+                <div class="flex align-items-center">
+                    Id <p-sortIcon field="punto_verde_id"></p-sortIcon>
+                </div>
+              </th>
+              <th pSortableColumn="descripcion">
+                  <div class="flex align-items-center">
+                      Descripcion <p-sortIcon field="descripcion"></p-sortIcon>
+                  </div>
+              </th>
+              <th pSortableColumn="direccion">
+                  <div class="flex align-items-center">
+                      Dirección <p-sortIcon field="gc_necesarios"></p-sortIcon>
+                  </div>
+              </th>
+              <th pSortableColumn="latitud">
+                <div class="flex align-items-center">
+                    Latitud <p-sortIcon field="latitud"></p-sortIcon>
+                </div>
+            </th>
+              <th pSortableColumn="longitud">
+                  <div class="flex align-items-center">
+                      Longitud<p-sortIcon field="longitud"></p-sortIcon>
+                  </div>
+              </th>
+              <th pSortableColumn="negocioInfo">
+                  <div class="flex align-items-center">
+                      Negocio <p-sortIcon field="negocioInfo"></p-sortIcon>
+                  </div>
+              </th>
+              <th pSortableColumn="estado">
+                <div class="flex align-items-center">
+                    Estado <p-sortIcon field="estado"></p-sortIcon>
+                </div>
+            </th>
+              <th>
+                <div class="flex align-items-center">
+                    Gestión
+                </div>
+            </th>
+          </tr>
       </ng-template>
       <ng-template pTemplate="body" let-customer>
         <tr>
@@ -45,12 +88,12 @@
             <p-tag *ngIf="customer.estado == true" severity="success" [value]="'ACTIVO'"></p-tag>
            
           <td>
-            <p-button
+            <!-- <p-button
               type="button"
               icon="pi pi-pencil"
               styleClass="p-button-text"
               (click)="ModalEditarInformacion(customer)"
-            ></p-button>
+            ></p-button> -->
             <p-button
               type="button"
               icon="pi pi-trash"
@@ -60,11 +103,15 @@
           </td>
         </tr>
       </ng-template>
-     
+      <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="5">No se encontraron Puntos Verdes.</td>
+        </tr>
+      </ng-template>
      
     </p-table>
   </div>
-  <p-dialog
+  <!-- <p-dialog
     header="Actualización"
     [(visible)]="visibleEditar"
     [modal]="true"
@@ -113,9 +160,9 @@
   
   <ng-template pTemplate="footer">
     <p-button icon="pi pi-save"  label="Actualizar" styleClass="p-button-sm" (click)="RegistrarActualizacion()"></p-button>
-  </ng-template>
+  </ng-template> 
   
-  </p-dialog>
+  </p-dialog>-->
   <p-dialog
     header="Estado"
     [(visible)]="visibleEstado"
@@ -129,11 +176,17 @@
   </ng-template>
   
   <ng-template pTemplate="content">
-    <div class="p-inputgroup">
+    <div class="p-inputgroup" style="margin-top: 15px;">
       <span class="p-inputgroup-addon">
-          <i class="pi pi-pencil"></i>
+        <label for="descripcion" class="form-label" style="font-size: 14px;">Descripción: </label>
       </span>
-      <input pInputText placeholder="Estado" [(ngModel)]="objSeleccion.descripcion" class="p-inputtext-sm" readonly/>
+      <input pInputText id="descripcion" placeholder="descripcion" [(ngModel)]="objSeleccion.descripcion" class="p-inputtext-sm" readonly/>
+    </div>
+    <div class="p-inputgroup" style="margin-top: 15px;">
+      <span class="p-inputgroup-addon">
+        <label for="negocio" class="form-label" style="font-size: 14px;">Negocio: </label>
+      </span>
+      <input pInputText id="negocio" placeholder="Estado" [(ngModel)]="objSeleccion.negocioInfo" class="p-inputtext-sm" readonly/>
     </div>
   </ng-template>
   

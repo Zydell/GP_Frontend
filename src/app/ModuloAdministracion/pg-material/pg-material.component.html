@@ -15,7 +15,7 @@
         [rowsPerPageOptions]="[10, 25, 50]"
         [paginator]="true"
         currentPageReportTemplate="Mostrar {first} - {last} de {totalRecords} elementos"
-        [globalFilterFields]="['tipo', 'valor_por_libra', 'estado']"
+        [globalFilterFields]="['materiales_id','tipo', 'valor_por_libra']"
         [scrollable]="true"
         scrollHeight="500px"
         [tableStyle]="{ 'min-width': '20rem' }"
@@ -40,30 +40,36 @@
         </ng-template>
         <ng-template pTemplate="header">
           <tr>
-              <th pSortableColumn="tipo">
-                  <div class="flex align-items-center">
-                      Nombre <p-sortIcon field="tipo"></p-sortIcon>
-                  </div>
-              </th>
-              <th pSortableColumn="valor_por_libra">
-                  <div class="flex align-items-center">
-                      Valor por libra (GC) <p-sortIcon field="valor_por_libra"></p-sortIcon>
-                  </div>
-              </th>
-              <th pSortableColumn="estado">
-                  <div class="flex align-items-center">
-                      Estado <p-sortIcon field="estado"></p-sortIcon>
-                  </div>
-              </th>
-              <th>
+            <th pSortableColumn="materiales_id">
+              <div class="flex align-items-center">
+                  Id <p-sortIcon field="materiales_id"></p-sortIcon>
+              </div>
+            </th>
+            <th pSortableColumn="tipo">
                 <div class="flex align-items-center">
-                    Gestión
+                    Materiales<p-sortIcon field="tipo"></p-sortIcon>
                 </div>
             </th>
+            <th pSortableColumn="valor_por_libra">
+                <div class="flex align-items-center">
+                    Valor por libra (GC) <p-sortIcon field="valor_por_libra"></p-sortIcon>
+                </div>
+            </th>
+            <th pSortableColumn="estado">
+                <div class="flex align-items-center">
+                    Estado <p-sortIcon field="estado"></p-sortIcon>
+                </div>
+            </th>
+            <th>
+              <div class="flex align-items-center">
+                  Gestión
+              </div>
+          </th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-customer>
           <tr>
+            <td>{{ customer.materiales_id }}</td>
             <td>{{ customer.tipo }}</td>
             <td>{{"₵ "+ customer.valor_por_libra }}</td>
             <td>

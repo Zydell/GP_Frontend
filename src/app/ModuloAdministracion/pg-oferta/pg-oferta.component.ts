@@ -1,9 +1,10 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServiciviosVarios } from '../../ModuloServiciosWeb/ServiciosTestVarios.component';
 import { Mensajes } from '../../ModuloHerramientas/Mensajes.component';
 import { MessageService } from 'primeng/api';
 import { SortingService } from '../../sorting.service'; // Adjust the path as needed
 import { HttpErrorResponse } from '@angular/common/http'; // Import HttpErrorResponse
+import { Table } from 'primeng/table';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http'; // Import HttpErrorRes
   providers: [MessageService]
 })
 export class PgOfertaComponent implements OnInit{
+  @ViewChild('dt1') table!: Table;
 
   lsListado:any=[];
   sortOrder: number = 1; // 1 for asc, -1 for desc
@@ -35,7 +37,8 @@ export class PgOfertaComponent implements OnInit{
   negocios: any[] = [];
 
   strEstado:any="";
-  
+  isFechaFinDisabled: boolean = true;
+
   visibleEditar: boolean=false;
   visibleEstado: boolean=false;
   visibleNuevo: boolean=false;
@@ -55,6 +58,17 @@ async ngOnInit() {
   //minDate = this.formatDate(this.today);
   this.minDate = this.formatDate(today); // Format today to yyyy-MM-dd
   this.maxDate = this.formatDate(maxtoday);
+}
+
+applyFilter(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (input) {
+    this.table.filterGlobal(input.value, 'contains');
+  }
+}
+
+clear(table: Table) {
+  table.clear();
 }
 
 onNegocioChange(event: any) {
@@ -80,10 +94,14 @@ formatDate(date: Date | string | null): string {
     return ''; // Retorna vacío si no es una fecha válida
   }
 
-  // Convertir la fecha a formato deseado
-  const isoString = date.toISOString();
-  const datePart = isoString.split('T')[0]; // Obtener YYYY-MM-DD de la cadena ISO
-  return datePart;
+  // Extrae la parte de la fecha y la hora del objeto Date
+  const year = date.getFullYear();
+  const month = ('0' + (date.getMonth() + 1)).slice(-2); // Añade un cero delante y toma los últimos dos dígitos
+  const day = ('0' + date.getDate()).slice(-2); // Añade un cero delante y toma los últimos dos dígitos
+  const hours = ('0' + date.getHours()).slice(-2); // Añade un cero delante y toma los últimos dos dígitos
+  const minutes = ('0' + date.getMinutes()).slice(-2); // Añade un cero delante y toma los últimos dos dígitos
+
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
 }
 
 async cargarNegocios() {
@@ -95,6 +113,7 @@ async cargarNegocios() {
       });
     });
   } catch (error) {
+    
     console.error('Error al cargar los negocios:', error);
   }
 }
@@ -116,6 +135,7 @@ onFechaInicioChange(event: any): void {
   const maxDate = new Date(selectedDate);
   maxDate.setDate(maxDate.getDate() + 83);
   this.maxDatefin = this.formatDate(maxDate);
+  this.isFechaFinDisabled = false;
 }
 
 onFechaInicioChangeAct(event: any): void {
@@ -161,20 +181,6 @@ ModalCambiarEstado(seleccion:any) {
     this.lsListado = this.sortingService.ordenarPorIdAscendente(data, 'ofertas_id'); // Default sorting by ID Ascending
   }
 
-  onSortChange(field: string) {
-    if (this.sortField !== field) {
-      this.sortOrder = this.sortOrder * -1; // Toggle sort order
-    } else {
-      this.sortField = field;
-      this.sortOrder = 1; // Default to ascending
-    }
-    if (this.sortOrder === 1) {
-      this.lsListado = this.sortingService.ordenarPorIdAscendente(this.lsListado, 'this.sortField');
-    } else {
-      this.lsListado = this.sortingService.ordenarPorIdDescendente(this.lsListado, 'this.sortField');
-    }
-  }
-
   async Buscarnegocio(idNegocio: number): Promise<string> {
     try {
       const data = await new Promise<any>((resolve, reject) => {
@@ -201,29 +207,28 @@ ModalCambiarEstado(seleccion:any) {
           this.descripcion,
           this.gc_necesarios,
           this.negocio_id,
-          this.fecha_inicio,
-          this.fecha_fin
-          /*fechaIniISO,
-          fechaFinISO*/
+          //this.fecha_inicio,
+          //this.fecha_fin
+          fechaIniISO,
+          fechaFinISO
         ).toPromise();
   
         if (response) {
           await this.ListadoInformacion();
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: this.mensajes.RegistroExitoso });
+          this.showMessage( 'success',  'Success',  this.mensajes.RegistroExitoso );
           this.visibleNuevo = false;
         } else {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: this.mensajes.RegistroError });
+          this.showMessage( 'error',  'Error',  this.mensajes.RegistroError );
         }
       } catch (error) {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al registrar la oferta' });
+        this.showMessage( 'error',  'Error',  'Error al registrar la oferta' );
         console.error('Error al registrar la oferta:', error);
         console.log(this.fecha_inicio+"+"+this.fecha_fin+"-");
       }
     } else {
-      this.messageService.add({ severity: 'info', summary: 'Info', detail: 'Por favor complete todos los campos' });
+      this.showMessage( 'info',  'Info',  'Por favor complete todos los campos' );
     }
   }
-  
 
   async RegistrarActualizacion() {
     if (this.objSeleccion.descripcion && this.objSeleccion.gc_necesarios && this.objSeleccion.negocio_id && this.objSeleccion.fecha_inicio) {
@@ -240,32 +245,32 @@ ModalCambiarEstado(seleccion:any) {
           ).subscribe({
             next: (translated) => resolve(translated),
             error: (err) => reject(err)
-          });
         });
+      });
   
         console.log(data);
         if (data) {
           await this.ListadoInformacion();
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: this.mensajes.ActualizacionExitosa });
+          this.showMessage( 'success',  'Success',  this.mensajes.ActualizacionExitosa );
           this.visibleEditar = false;
         } else {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: this.mensajes.ActualizacionError });
+          this.showMessage( 'error',  'Error',  this.mensajes.ActualizacionError );
         }
       } catch (error) {
         // Verificar si el error tiene las propiedades que esperamos
         if (this.isHttpErrorResponse(error)) {
           if (error.status === 400 && error.error.message) {
-            this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.message });
+            this.showMessage( 'error',  'Error',  error.error.message );
           } else {
-            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al actualizar la oferta' });
+            this.showMessage( 'error',  'Error',  'Error al actualizar la oferta' );
           }
         } else {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al actualizar la oferta' });
+          this.showMessage( 'error',  'Error',  'Error al actualizar la oferta' );
         }
         console.error('Error al actualizar la oferta:', error);
       }
     } else {
-      this.messageService.add({ severity: 'info', summary: 'Info', detail: this.mensajes.IngreseNombre });
+      this.showMessage( 'info',  'Info',  this.mensajes.IngreseNombre );
     }
   }
   
@@ -292,11 +297,10 @@ ModalCambiarEstado(seleccion:any) {
       
       if (fechaFin <= today) {
         // If fecha_fin is not greater than today's date, show an error message
-        this.messageService.add({ 
-          severity: 'error', 
-          summary: 'Error', 
-          detail: 'Actualice la fecha para poder Activarlo' 
-        });
+        this.showMessage('error', 
+           'Error', 
+           'Actualice la fecha para poder Activarlo' 
+        );
         return; // Exit the function early
       }
     }
@@ -308,10 +312,16 @@ ModalCambiarEstado(seleccion:any) {
     console.log(data)
     if(data){
       await this.ListadoInformacion();
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: this.mensajes.ActualizacionExitosa });
+      this.showMessage( 'success',  'Success',  this.mensajes.ActualizacionExitosa );
       this.visibleEstado = false;
     }else{
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: this.mensajes.ActualizacionError });
+      this.showMessage( 'error',  'Error',  this.mensajes.ActualizacionError );
     }
   }
+
+  showMessage(severity: string, summary: string, detail: string) {
+    this.messageService.clear();
+    this.messageService.add({ severity, summary, detail, life: 3000 });
+  }
+
 }  

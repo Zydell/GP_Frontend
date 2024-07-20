@@ -1,7 +1,10 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServiciviosVarios } from '../../ModuloServiciosWeb/ServiciosTestVarios.component';
 import { Mensajes } from '../../ModuloHerramientas/Mensajes.component';
 import { MessageService } from 'primeng/api';
+import { Table } from 'primeng/table';
+import { SortingService } from '../../sorting.service'; // Adjust the path as needed
+
 
 @Component({
   selector: 'app-pg-puntoverde',
@@ -10,6 +13,7 @@ import { MessageService } from 'primeng/api';
   providers: [MessageService]
 })
 export class PgPuntoverdeComponent implements OnInit{
+  @ViewChild('dt1') table!: Table;
 
   lsListado:any=[];
 
@@ -26,21 +30,34 @@ export class PgPuntoverdeComponent implements OnInit{
   (
     private servicios: ServiciviosVarios,
     private messageService: MessageService,
-    private mensajes:Mensajes
+    private mensajes:Mensajes,
+    private sortingService: SortingService
   ) { }
+
 async ngOnInit() {
  await this.ListadoInformacion();
 }
 
-ModalEditarInformacion(seleccion:any) {
+applyFilter(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (input) {
+    this.table.filterGlobal(input.value, 'contains');
+  }
+}
+
+clear(table: Table) {
+  table.clear();
+}
+
+/*ModalEditarInformacion(seleccion:any) {
   this.objSeleccion = { ...seleccion };
   console.log(this.objSeleccion)
     this.visibleEditar = true;
-}
+}*/
 
 ModalCambiarEstado(seleccion:any) {
   this.objSeleccion=seleccion;
-  if(this.objSeleccion.bl_estado){
+  if(this.objSeleccion.estado){
     this.strEstado="Desactivar";
   }else{
     this.strEstado="Activar";
@@ -59,7 +76,7 @@ ModalCambiarEstado(seleccion:any) {
         const negocioInfo = await this.Buscarnegocio(puntoverde.negocio_id);
         puntoverde.negocioInfo = negocioInfo;
       }
-      this.lsListado=data;
+      this.lsListado=this.sortingService.ordenarPorIdAscendente(data,'punto_verde_id');
     }
   }
 
@@ -95,7 +112,7 @@ ModalCambiarEstado(seleccion:any) {
     }
 
 
-  }*/
+  }
   async RegistrarActualizacion(){
     if(this.objSeleccion.descripcion!=""){
       console.log("aqui")
@@ -112,7 +129,7 @@ ModalCambiarEstado(seleccion:any) {
     }else{
       this.messageService.add({ severity: 'info', summary: 'Info', detail: this.mensajes.IngreseNombre }); 
     }
-  }
+  }*/
   async EstadoCambiarActualizacion(){
     var estado:any;
     if(this.objSeleccion.estado){
@@ -122,9 +139,9 @@ ModalCambiarEstado(seleccion:any) {
     }
       console.log("aqui")
       //const data = await new Promise<any>(resolve => this.servicios.EstadoCambiarDimension(this.objSeleccion.id_dimension,estado).subscribe(translated => { resolve(translated) }));
-      const data = await new Promise<any>(resolve => this.servicios.EstadoCambiarDimension(this.objSeleccion.id_dimension,estado).subscribe(translated => { resolve(translated) }));
+      const data = await new Promise<any>(resolve => this.servicios.EstadoCambiarPuntoVerde(this.objSeleccion.punto_verde_id,estado).subscribe(translated => { resolve(translated) }));
       console.log(data)
-      if(data.success){
+      if(data){
         await this.ListadoInformacion();
         this.messageService.add({ severity: 'success', summary: 'Success', detail: this.mensajes.ActualizacionExitosa });
         this.visibleEstado = false;
