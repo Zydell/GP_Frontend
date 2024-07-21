@@ -15,7 +15,7 @@
           [rowsPerPageOptions]="[10, 25, 50]"
           [paginator]="true"
           currentPageReportTemplate="Mostrar {first} - {last} de {totalRecords} elementos"
-          [globalFilterFields]="['ofertas_id ','descripcion', 'gc_necesarios','negocioInfo','fecha_inicio','fecha_fin','estado']"
+          [globalFilterFields]="['ofertas_id ','descripcion', 'gc_necesarios','negocioInfo','fecha_inicio','fecha_fin']"
           [scrollable]="true"
           scrollHeight="500px"
           [tableStyle]="{ 'min-width': '20rem' }"
@@ -116,7 +116,9 @@
             <td colspan="5">No se encontraron ofertas.</td>
         </tr>
       </ng-template>
-    </p-table>
+      
+      </p-table>
+    </div> 
   </div>
   <p-dialog
     header="Nuevo"
@@ -135,14 +137,14 @@
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input pInputText id="descripcion" placeholder="Descripcion" [(ngModel)]="descripcion" class="form-control" (input)="descripcion = descripcion" required/>
+      <input pInputText id="descripcion" placeholder="Descripcion" minlength="10" [(ngModel)]="descripcion" class="form-control" (input)="descripcion = descripcion" required/>
     </div>
     <label for="greencoin" class="form-label" style="font-size: 14px;">Green coins necesarios:  </label>
     <div class="p-inputgroup" >
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input type="number" id="greencoin" placeholder="Green Coins Necesarios" [(ngModel)]="gc_necesarios" class="form-control" (input)="gc_necesarios = gc_necesarios" required/>
+      <input type="number" id="greencoin" placeholder="Green Coins Necesarios" [(ngModel)]="gc_necesarios" class="form-control" (input)="gc_necesarios = gc_necesarios" min="5" max="10000" required/>
     </div>
 
     <label for="negocio" class="form-label" style="font-size: 14px;">Negocio:  </label>
@@ -162,7 +164,6 @@
           <i class="pi pi-pencil"></i>
       </span>
       <input type="datetime-local" id="fechainicio" (change)="onFechaInicioChange($event)" [(ngModel)]="fecha_inicio" class="form-control" (input)="fecha_inicio = fecha_inicio" [min]="minDate" [max]="maxDate" required/>
-      <div class="invalid-feedback floating-invalid-feedback">Ingresa una fecha de inicio válida.</div>
     </div>
 
     <label for="fechafin" class="form-label" style="font-size: 14px;">Fecha de Finalización: </label>
@@ -172,6 +173,7 @@
       </span>
       <input type="datetime-local" id="fechafin" [(ngModel)]="fecha_fin" class="form-control" (input)="fecha_fin = fecha_fin" [min]="minDatefin" [max]="maxDatefin" required  [disabled]="isFechaFinDisabled"/>
     </div>
+    
   </ng-template>
   
   <ng-template pTemplate="footer">
@@ -196,14 +198,14 @@
     <span class="p-inputgroup-addon">
         <i class="pi pi-pencil"></i>
     </span>
-    <input pInputText id="descripact" placeholder="Descripcion" [(ngModel)]="objSeleccion.descripcion" class="form-control" (input)="descripcion = descripcion" required/>
+    <input pInputText id="descripact" placeholder="Descripcion" [(ngModel)]="objSeleccion.descripcion" class="form-control" (input)="descripcion = descripcion" minlength="10" required/>
   </div>
   <label for="gc_necesarios" class="form-label" style="font-size: 14px;">Green Coins Necesarios: </label>
     <div class="p-inputgroup">
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input pInputText id="gc_necesarios" placeholder="Green Coins Necesarios" id="gc_necesarios" [(ngModel)]="objSeleccion.gc_necesarios" class="form-control" required/>
+      <input pInputText id="gc_necesarios" placeholder="Green Coins Necesarios" id="gc_necesarios" [(ngModel)]="objSeleccion.gc_necesarios" class="form-control" required min="5" max="10000"/>
     </div>
 
   <label for="negocioact" class="form-label" style="font-size: 14px;">Negocio:  </label>
@@ -264,3 +266,5 @@
   
   </p-dialog>
   <p-toast></p-toast>
+  </div>
+</section>

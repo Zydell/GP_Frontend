@@ -114,20 +114,19 @@
       <span class="text-xl font-bold">Nuevo Material</span>
     </ng-template>
     <ng-template pTemplate="content">
-      <label for="descripcion" class="form-label" style="font-size: 14px;">Nombre </label>
+      <label for="descripcion" class="form-label" style="font-size: 14px;">Material: </label>
       <div class="input-group">
         <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
         </span>
-        <input pInputText placeholder="Nombre" id="descripcion" [(ngModel)]="strnombre" class="form-control" (input)="strnombre = strnombre" required style="font-size: 14px;"/>
+        <input pInputText placeholder="Nombre Material" id="descripcion" [(ngModel)]="strnombre" class="form-control" (input)="strnombre = strnombre" minlength="5" required style="font-size: 14px;"/>
       </div>
-
       <label for="valor" class="form-label" style="font-size: 14px;">Valor por libra(Greencoins): </label>
       <div class="p-inputgroup">
         <span class="p-inputgroup-addon">
             <i class="pi pi-pencil"></i>
         </span>
-        <input type="number" placeholder="Valor por libra" id="valor" [(ngModel)]="intvalor" class="form-control" (input)="intvalor = intvalor" required style="font-size: 14px;"/>
+        <input type="number" placeholder="Valor por libra" id="valor" [(ngModel)]="intvalor" class="form-control" min="5" max="10000" (input)="intvalor = intvalor" required style="font-size: 14px;"/>
       </div>
     </ng-template>
     
@@ -154,7 +153,7 @@
         <span class="p-inputgroup-addon">
             <i class="pi pi-pencil"></i>
         </span>
-        <input pInputText placeholder="Nombre" id="Nombre" [(ngModel)]="objSeleccion.tipo" class="form-control" required style="font-size: 14px;"/>
+        <input pInputText placeholder="Nombre" id="Nombre" [(ngModel)]="objSeleccion.tipo" class="form-control" required style="font-size: 14px;" minlength="5"/>
       </div>
   
       <label for="Valor" class="form-label" style="font-size: 14px;">Valor por libra (Greencoins):  </label>
@@ -162,7 +161,7 @@
           <span class="p-inputgroup-addon">
               <i class="pi pi-pencil"></i>
           </span>
-          <input type="number" placeholder="Valor por libra en greencoins" id="Valor" [(ngModel)]="objSeleccion.valor_por_libra" class="form-control" required style="font-size: 14px;"/>
+          <input type="number" placeholder="Valor por libra en greencoins" id="Valor" [(ngModel)]="objSeleccion.valor_por_libra" class="form-control" min="5" max="10000" required style="font-size: 14px;"/>
         </div>
     </ng-template>
     

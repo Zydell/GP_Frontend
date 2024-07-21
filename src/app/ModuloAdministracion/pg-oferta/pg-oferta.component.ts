@@ -196,7 +196,7 @@ ModalCambiarEstado(seleccion:any) {
   }
   
   async RegistrarNuevo() {
-    if (this.descripcion && this.gc_necesarios > 0 && this.negocio_id && this.fecha_inicio && this.fecha_fin) {
+    if (this.descripcion.length > 10 && this.gc_necesarios > 4 && this.gc_necesarios <10000  && this.negocio_id!= 0 && this.fecha_inicio && this.fecha_fin) {
       try {
         const fechaFinISO = new Date(this.fecha_fin).toISOString(); // Add current time and convert to ISO 8601 format
         const fechaIniISO = new Date(this.fecha_inicio).toISOString();
@@ -231,7 +231,7 @@ ModalCambiarEstado(seleccion:any) {
   }
 
   async RegistrarActualizacion() {
-    if (this.objSeleccion.descripcion && this.objSeleccion.gc_necesarios && this.objSeleccion.negocio_id && this.objSeleccion.fecha_inicio) {
+    if (this.objSeleccion.descripcion.length >10 && this.objSeleccion.gc_necesarios <10000 && this.objSeleccion.gc_necesarios >4 && this.objSeleccion.negocio_id && this.objSeleccion.fecha_inicio) {
       try {
         console.log("aqui");
         const data = await new Promise<any>((resolve, reject) => {
@@ -278,8 +278,6 @@ ModalCambiarEstado(seleccion:any) {
   private isHttpErrorResponse(error: any): error is HttpErrorResponse {
     return error && error.status !== undefined && error.error !== undefined;
   }
-  
-  
 
   async EstadoCambiarActualizacion() {
     let estado: boolean;
