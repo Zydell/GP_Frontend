@@ -35,7 +35,8 @@ export class PgAdministradoresComponent implements OnInit{
     public  authService: AuthService, 
     private servicios: ServiciviosVarios,
     private messageService: MessageService,
-    private mensajes:Mensajes
+    private mensajes:Mensajes,
+    private sortingService:SortingService
   ) { }
 
   async ngOnInit() {
@@ -115,7 +116,7 @@ export class PgAdministradoresComponent implements OnInit{
             filteredData.push(admin);
           }
         }
-        this.lsListado = filteredData;
+        this.lsListado = this.sortingService.ordenarPorIdAscendente(filteredData,'admin_id') ;
       }
     } catch (error) {
       console.error('Error in ListadoInformacion:', error);
