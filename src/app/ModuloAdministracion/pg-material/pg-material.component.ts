@@ -43,6 +43,7 @@ export class PgMaterialComponent implements OnInit {
 
   clear(table: Table) {
     table.clear();
+    this.ListadoInformacion()
   }
 
   ModalNuevoInformacion() {

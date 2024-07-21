@@ -39,7 +39,7 @@
                 </th>
                   <th pSortableColumn="nombre">
                       <div class="flex align-items-center">
-                          Negocios <p-sortIcon field="nombre"></p-sortIcon>
+                          Negocio <p-sortIcon field="nombre"></p-sortIcon>
                       </div>
                   </th>
                   <th pSortableColumn="propietario">
@@ -62,9 +62,14 @@
                       Teléfono<p-sortIcon field="telefono"></p-sortIcon>
                     </div>
                   </th>
-                  <th pSortableColumn="image">
+                  <th pSortableColumn="correo">
                     <div class="flex align-items-center">
-                      Imagen/logo<p-sortIcon field="image"></p-sortIcon>
+                      Correo Electrónico<p-sortIcon field="correo"></p-sortIcon>
+                    </div>
+                  </th>
+                  <th>
+                    <div class="flex align-items-center">
+                      Imagen/logo
                     </div>
                   </th>
                   <th pSortableColumn="fecharegistro">
@@ -92,6 +97,7 @@
               <td>{{ customer.tipo_negocio }}</td>
               <td>{{ customer.direccion }}</td>
               <td>{{ customer.telefono }}</td>
+              <td>{{ customer.correo }}</td>
               <td>
                 <img *ngIf="customer.image" [src]="'data:image/jpeg;base64,' + customer.image" alt="Imagen" min-width="175rem" max-width="125rem" width="200rem" height="150rem">
               </td>
@@ -135,15 +141,15 @@
       [resizable]="false"
     >
     <ng-template pTemplate="header">
-      <span class="text-xl font-bold">Actualización</span>
+      <span class="text-xl font-bold">Actualización del Negocio</span>
     </ng-template>
-    <label for="Nombre" class="form-label" style="font-size: 14px;">Nombre: </label>
+    <label for="Nombre" class="form-label" style="font-size: 14px;">Negocio: </label>
     <ng-template pTemplate="content">
       <div class="p-inputgroup">
         <span class="p-inputgroup-addon">
             <i class="pi pi-pencil"></i>
         </span>
-        <input pInputText placeholder="Nombre" [(ngModel)]="objSeleccion.nombre" class="p-inputtext-sm"/>
+        <input pInputText placeholder="Negocio" id="Nombre" [(ngModel)]="objSeleccion.nombre" class="p-inputtext-sm"/>
       </div>
       <label for="propietario" class="form-label" style="font-size: 14px;">Propietario: </label>
       <div class="p-inputgroup">
@@ -203,15 +209,33 @@
       [resizable]="false"
     >
     <ng-template pTemplate="header">
-      <span class="text-xl font-bold">{{strEstado}}</span>
+      <span class="text-xl font-bold">{{strEstado}} Negocio</span>
     </ng-template>
     
-    <ng-template pTemplate="content">
-      <div class="p-inputgroup">
+    <ng-template pTemplate="content" style="margin-top: 10px;">
+      <div class="p-inputgroup" style="margin-top: 10px;">
         <span class="p-inputgroup-addon">
-            <i class="pi pi-pencil"></i>
+          <label for="image" class="form-label" style="font-size: 14px;">Negocio: </label>
         </span>
-        <input pInputText placeholder="Estado" [(ngModel)]="objSeleccion.nombre" class="p-inputtext-sm" readonly/>
+        <input pInputText [(ngModel)]="objSeleccion.nombre" class="p-inputtext-sm" readonly/>
+      </div>
+      <div class="p-inputgroup" style="margin-top: 10px;">
+        <span class="p-inputgroup-addon">
+          <label for="image" class="form-label" style="font-size: 14px;">Propietario: </label>
+        </span>
+        <input pInputText [(ngModel)]="objSeleccion.propietario" class="p-inputtext-sm" readonly/>
+      </div>
+      <div class="p-inputgroup" style="margin-top: 10px;">
+        <span class="p-inputgroup-addon">
+          <label for="image" class="form-label" style="font-size: 14px;">Tipo negocio: </label>
+        </span>
+        <input pInputText [(ngModel)]="objSeleccion.tipo_negocio" class="p-inputtext-sm" readonly/>
+      </div>
+      <div class="p-inputgroup" style="margin-top: 10px;">
+        <span class="p-inputgroup-addon">
+          <label for="image" class="form-label" style="font-size: 14px;">Dirección: </label>
+        </span>
+        <input pInputText [(ngModel)]="objSeleccion.direccion" class="p-inputtext-sm" readonly/>
       </div>
     </ng-template>
     

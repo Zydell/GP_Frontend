@@ -3,6 +3,8 @@ import { ServiciviosVarios } from '../../ModuloServiciosWeb/ServiciosTestVarios.
 import { Mensajes } from '../../ModuloHerramientas/Mensajes.component';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
+import { SortingService } from '../../sorting.service'; // Adjust the path as needed
+
 
 @Component({
   selector: 'app-pg-negocio',
@@ -37,7 +39,8 @@ export class PgNegocioComponent implements OnInit{
   (
     private servicios: ServiciviosVarios,
     private messageService: MessageService,
-    private mensajes:Mensajes
+    private mensajes:Mensajes,
+    private sortingService: SortingService
   ) { }
   
   async ngOnInit() {
@@ -55,6 +58,7 @@ export class PgNegocioComponent implements OnInit{
 
   clear(table: Table) {
     table.clear();
+    this.ListadoInformacion();
   }
 
   onFileSelected(event: any) {
@@ -86,15 +90,34 @@ export class PgNegocioComponent implements OnInit{
   }
 
   async ListadoInformacion() {
-
     const data = await new Promise<any>(resolve => this.servicios.ListadoNegocios().subscribe(translated => { resolve(translated) }));
-   console.log(data)
-
+    console.log(data)
     if (data) {
-      this.lsListado=data;
+      for (let negocio of data) {
+        // Buscar el correo del admin
+        const correo = await this.BuscarcorreoNegocio(negocio.negocio_id);
+        if (correo) {
+          negocio.correo = correo.correo_electronico;
+          negocio.idcredencial = correo.credencial_id;
+        } else {
+          negocio.correo = 'No email found';
+          negocio.idcredencial = 'No credential found';
+        }
+      }
+      this.lsListado= this.sortingService.ordenarPorIdAscendente(data,'negocio_id') ;
     }
   }
   
+  async BuscarcorreoNegocio(id: number): Promise<any> {
+    try {
+      const data = await this.servicios.CredencialIduserType(id,2).toPromise();
+      return data;
+    } catch (error) {
+      console.error('Error in Busca rcorreo :', error);
+      return null;
+    }
+  }
+
   formatDate(date: Date | string | null): string {
     if (!date) {
       return ''; // Retorna vacío si la fecha es null o undefined
@@ -176,16 +199,17 @@ export class PgNegocioComponent implements OnInit{
 
   async EstadoCambiarActualizacion(){
     var estado:any;
-    if(this.objSeleccion.bl_estado){
+    if(this.objSeleccion.estado){
       estado=false;
     }else{
       estado=true;
     }
       console.log("aqui")
-      //const data = await new Promise<any>(resolve => this.servicios.EstadoCambiarDimension(this.objSeleccion.id_dimension,estado).subscribe(translated => { resolve(translated) }));
-      const data = await new Promise<any>(resolve => this.servicios.EstadoCambiarDimension(this.objSeleccion.id_dimension,estado).subscribe(translated => { resolve(translated) }));
+      const formData = new FormData();
+      formData.append('estado', estado);
+      const data = await new Promise<any>(resolve => this.servicios.EstadoCambiarNegocio(this.objSeleccion.credencial_id,this.objSeleccion.negocio_id,formData).subscribe(translated => { resolve(translated) }));
       console.log(data)
-      if(data.success){
+      if(data){
         await this.ListadoInformacion();
         this.showMessage('success',  'Success',  this.mensajes.ActualizacionExitosa );
         this.visibleEstado = false;

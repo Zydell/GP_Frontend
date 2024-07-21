@@ -170,10 +170,11 @@ export class ServiciviosVarios {
   }
   
   // Cambiar el estado de un Negocio
-  EstadoCambiarNegocio(idNegocio: number, estado: boolean) {
+  EstadoCambiarNegocio(idcredencial:number,idNegocio: number, formData: FormData) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    const parametros = { estado };
-    return this.http.put<any>(`${this.urlServiciosTest}/api/negocios/${idNegocio}`, parametros, { headers });
+    const parametros = { estado: formData.get('estado') }; // Assuming 'estado' is a field in formData
+    this.http.put<any>(`${this.urlServiciosTest}/api/credenciales/${idcredencial}`, parametros, { headers });
+    return this.http.put<any>(`${this.urlServiciosTest}/api/negocios/${idNegocio}`, formData);
   }
 
   // Actualizar un Negocio
