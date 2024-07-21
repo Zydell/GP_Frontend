@@ -64,13 +64,13 @@ export class PgLoginComponent {
             }
           }
           catch{
-            this.messages1 = [{severity: 'error', summary: 'Error', detail: 'Logueo inválido'}];
+            this.messages1 = [{severity: 'error', summary: 'Error', detail: 'Logueo inválidas'}];
             this.autoCloseMessages('messages1');
           }
         },
         err => {
           console.error(err);
-          this.messages1 = [{severity: 'error', summary: 'Error', detail: 'Logueo inválido'}];
+          this.messages1 = [{severity: 'error', summary: 'Error', detail: err.error.message}];
           this.autoCloseMessages('messages1');
         }
       );
