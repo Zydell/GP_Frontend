@@ -22,7 +22,6 @@ export class PgMaterialComponent implements OnInit {
   visibleEditar: boolean = false;
   visibleEstado: boolean = false;
   visibleNuevo: boolean = false;
-  selectedSize: any = 'p-datatable-sm';
 
   constructor(
     private servicios: ServiciviosVarios,
@@ -122,9 +121,9 @@ export class PgMaterialComponent implements OnInit {
     console.log("aqui")
     const data = await new Promise<any>(resolve => this.servicios.EstadoCambiarMaterial(this.objSeleccion.materiales_id, estado).subscribe(translated => { resolve(translated) }));
     console.log(data)
-    this.showMessage('success', 'Success', this.mensajes.ActualizacionExitosa);
     if (data) {
       await this.ListadoInformacion();
+      this.showMessage('success', 'Success', this.mensajes.ActualizacionExitosa);
       this.visibleEstado = false;
     } else {
       this.showMessage('error', 'Error', this.mensajes.ActualizacionError);

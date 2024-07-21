@@ -1,36 +1,76 @@
-<div class="card separador-componentes">
-    <p-toolbar>
-      <div class="p-toolbar-group-center">
-        <p>INFORMACIÓN MATERIALES</p>
-      </div>
-      <div class="p-toolbar-group-end">
-        <p-button
-          type="button"
-          icon="pi pi-plus"
-          styleClass="p-button-text"
-          (click)="ModalNuevoInformacion()"
-        ></p-button>
-      </div>
-    </p-toolbar>
-  
-    <p-table
-      [value]="lsListado"
-      [paginator]="true"
-      [rows]="10"
-      [showCurrentPageReport]="true"
-      [tableStyle]="{ 'min-width': '10rem' }"
-      styleClass="p-datatable-sm"
-      currentPageReportTemplate="Mostrar {first} - {last} de {totalRecords} elementos"
-      [rowsPerPageOptions]="[10, 25, 50]"
-    >
-      <ng-template pTemplate="header">
-        <tr>
-          <th >#</th>
-          <th>NOMBRE</th>
-          <th >CORREO ELECTRONICO</th>
-          <th >ESTADO</th>
-          <th >ACCIONES</th>
-        </tr>
+<div class="pagetitle">
+  <h1>Gestion de Administradores</h1>
+</div>
+<section class="section dashboard">
+  <div class="card separador-componentes">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Administradores</h5>
+        <p-table
+          #dt1
+          [value]="lsListado"
+          dataKey="admin_id"
+          [rows]="10"
+          [showCurrentPageReport]="true"
+          [rowsPerPageOptions]="[10, 25, 50]"
+          [paginator]="true"
+          currentPageReportTemplate="Mostrar {first} - {last} de {totalRecords} elementos"
+          [globalFilterFields]="['admin_id','nombre', 'correo_electronico']"
+          [scrollable]="true"
+          scrollHeight="500px"
+          [tableStyle]="{ 'min-width': '20rem' }"
+          [sortMode]="'single'"
+        >
+        <ng-template pTemplate="caption">
+          <div class="flex">
+            <button pButton label="Limpiar" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+            <span class="p-input-icon-left ml-auto">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" (input)="applyFilter($event)" placeholder="Buscar" />
+            </span>  
+            <div class="p-toolbar-group-end">
+              <p-button
+                type="button"
+                icon="pi pi-plus"
+                styleClass="p-button-text"
+                (click)="ModalNuevoInformacion()"
+              ></p-button>
+            </div>        
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+              <th pSortableColumn="admin_id">
+                <div class="flex align-items-center">
+                    Id <p-sortIcon field="admin_id"></p-sortIcon>
+                </div>
+              </th>
+              <th pSortableColumn="nombre">
+                  <div class="flex align-items-center">
+                      Nombres <p-sortIcon field="nombre"></p-sortIcon>
+                  </div>
+              </th>
+              <th pSortableColumn="correo_electronico">
+                  <div class="flex align-items-center">
+                      Correo Electrónico <p-sortIcon field="correo_electronico"></p-sortIcon>
+                  </div>
+              </th>
+              <th pSortableColumn="estado">
+                <div class="flex align-items-center">
+                    Estado <p-sortIcon field="estado"></p-sortIcon>
+                </div>
+              </th>
+              <th>
+                  <div class="flex align-items-center">
+                    Gestión
+                  </div>
+              </th>
+              <th>
+                <div class="flex align-items-center">
+                    Eliminar
+                </div>
+              </th>
+          </tr>
       </ng-template>
       <ng-template pTemplate="body" let-customer>
         <tr>
@@ -56,9 +96,21 @@
               (click)="ModalCambiarEstado(customer)"
             ></p-button>
           </td>
+          <td>
+            <p-button
+              type="button"
+              icon="pi pi-trash"
+              styleClass="p-button-text"
+              (click)="ModalEliminar(customer)"
+            ></p-button>
+          </td>
         </tr>
       </ng-template>
-     
+      <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="5">No se encontraron Administradores.</td>
+        </tr>
+      </ng-template>
      
     </p-table>
   </div>
@@ -71,7 +123,7 @@
     [resizable]="false"
   >
   <ng-template pTemplate="header">
-    <span class="text-xl font-bold">Nuevo</span>
+    <span class="text-xl font-bold">Nuevo Administrador</span>
   </ng-template>
   <ng-template pTemplate="content">
     <label for="descripcion" class="form-label" style="font-size: 14px;">Nombre: </label>
@@ -79,21 +131,23 @@
         <span class="p-inputgroup-addon">
             <i class="pi pi-pencil"></i>
         </span>
-        <input pInputText placeholder="Nombre" [(ngModel)]="nombre" class="p-inputtext-sm" (input)="nombre = nombre"/>
-      </div>
-      <label for="descripcion" class="form-label" style="font-size: 14px;">Correo Electronico: </label>
-    <div class="p-inputgroup" style="margin-top: 15px;">
-      <span class="p-inputgroup-addon">
-          <i class="pi pi-pencil"></i>
-      </span>
-      <input pInputText placeholder="ejemplo@gmail.com" [(ngModel)]="correo" class="p-inputtext-sm" (input)="correo = correo"/>
+        <input pInputText placeholder="Nombre" [(ngModel)]="nombre" class="form-control" (input)="nombre = nombre" required/>
     </div>
-    <label for="descripcion" class="form-label" style="font-size: 14px;">Contraseña: </label>
-    <div class="p-inputgroup" style="margin-top: 15px;">
+
+    <label for="email" class="form-label" style="font-size: 14px;">Correo Electronico: </label>
+    <div class="p-inputgroup" >
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input type="password" placeholder="Contraseña" [(ngModel)]="clave" class="p-inputtext-sm" (input)="clave = clave"/>
+      <input type="email" [(ngModel)]="correo" class="form-control" id="email" required placeholder="ejemplo@gmail.com" (input)="correo = correo" style="font-size: 14px;" >
+    </div>
+
+    <label for="password" class="form-label" style="font-size: 14px;">Contraseña: </label>
+    <div class="p-inputgroup" >
+      <span class="p-inputgroup-addon">
+          <i class="pi pi-pencil"></i>
+      </span>
+      <input minlength="8" maxlength="16" pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,16}$" type="password" name="password" [(ngModel)]="clave" id="password" required (input)="clave = clave" style="font-size: 14px;">
     </div>
   </ng-template>
   
@@ -115,18 +169,19 @@
   </ng-template>
   
   <ng-template pTemplate="content">
+    <label for="nombre" class="form-label" style="font-size: 14px;">Nombres : </label>
     <div class="p-inputgroup">
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input pInputText placeholder="Valor" [(ngModel)]="objSeleccion.tipo" class="p-inputtext-sm"/>
+      <input pInputText id="nombre" placeholder="Nombres" [(ngModel)]="objSeleccion.nombre" class="form-control" required />
     </div>
-
-    <div class="p-inputgroup" style="margin-top: 15px;">
+    <label for="Correo" class="form-label" style="font-size: 14px;">Correo : </label>
+    <div class="p-inputgroup">
         <span class="p-inputgroup-addon">
             <i class="pi pi-pencil"></i>
         </span>
-        <input pInputText placeholder="Valor" [(ngModel)]="objSeleccion.valor_por_libra" class="p-inputtext-sm"/>
+        <input pInputText placeholder="Correo" [(ngModel)]="objSeleccion.correo_electronico" class="form-control" readonly/>
       </div>
   </ng-template>
   
@@ -144,15 +199,21 @@
     [resizable]="false"
   >
   <ng-template pTemplate="header">
-    <span class="text-xl font-bold">{{strEstado}}</span>
+    <span class="text-xl font-bold">{{strEstado}} Administrador</span>
   </ng-template>
   
   <ng-template pTemplate="content">
-    <div class="p-inputgroup">
+    <div class="p-inputgroup" style="margin-top: 15px;">
       <span class="p-inputgroup-addon">
-          <i class="pi pi-pencil"></i>
+        <label  class="form-label" style="font-size: 14px;">Nombres : </label>
       </span>
-      <input pInputText placeholder="Estado" [(ngModel)]="objSeleccion.tipo" class="p-inputtext-sm" readonly/>
+      <input pInputText [(ngModel)]="objSeleccion.nombre" class="p-inputtext-sm" readonly/>
+    </div>
+    <div class="p-inputgroup" style="margin-top: 15px;">
+      <span class="p-inputgroup-addon">
+        <label  class="form-label" style="font-size: 14px;">Correo : </label>
+      </span>
+      <input pInputText  [(ngModel)]="objSeleccion.correo_electronico" class="p-inputtext-sm" readonly/>
     </div>
   </ng-template>
   
@@ -161,4 +222,39 @@
   </ng-template>
   
   </p-dialog>
+
+  <p-dialog
+    header="Eliminar"
+    [(visible)]="visibleEliminar"
+    [modal]="true"
+    [style]="{ width: '50vw', minWidth: '300px', maxWidth: '80vw' }"
+    [draggable]="false"
+    [resizable]="false"
+  >
+  <ng-template pTemplate="header">
+    <span class="text-xl font-bold">Elimina Definitivamente al administrador</span>
+  </ng-template>
+  
+  <ng-template pTemplate="content">
+    <div class="p-inputgroup" style="margin-top: 15px;">
+      <span class="p-inputgroup-addon">
+        <label  class="form-label" style="font-size: 14px;">Nombres : </label>
+      </span>
+      <input pInputText [(ngModel)]="objSeleccion.nombre" class="p-inputtext-sm" readonly/>
+    </div>
+    <div class="p-inputgroup" style="margin-top: 15px;">
+      <span class="p-inputgroup-addon">
+        <label  class="form-label" style="font-size: 14px;">Correo : </label>
+      </span>
+      <input pInputText  [(ngModel)]="objSeleccion.correo_electronico" class="p-inputtext-sm" readonly/>
+    </div>
+  </ng-template>
+    
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-delete"  label="Eliminar" styleClass="p-button-sm" severity="danger" (click)="EliminarAdministrador()"></p-button>
+  </ng-template> 
+  
+  </p-dialog>
   <p-toast></p-toast>
+</div>
+

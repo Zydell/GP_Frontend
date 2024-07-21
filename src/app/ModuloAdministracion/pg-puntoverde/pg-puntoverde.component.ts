@@ -143,11 +143,16 @@ ModalCambiarEstado(seleccion:any) {
       console.log(data)
       if(data){
         await this.ListadoInformacion();
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: this.mensajes.ActualizacionExitosa });
+        this.showMessage( 'success',  'Success', this.mensajes.ActualizacionExitosa );
         this.visibleEstado = false;
       }else{
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: this.mensajes.ActualizacionError });
+        this.showMessage( 'error', 'Error',  this.mensajes.ActualizacionError );
       }
  
+  }
+
+  showMessage(severity: string, summary: string, detail: string) {
+    this.messageService.clear();
+    this.messageService.add({ severity, summary, detail, life: 3000 });
   }
 }
