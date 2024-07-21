@@ -124,11 +124,27 @@
                       </div>
                     </form>
                     
+                      
+                      <div class="col-12 form-group" *ngIf="tipo === 'negocio'">
+                        <label for="ruc" class="form-label" style="font-size: 14px;">Ingrese el RUC del negocio</label>
+                        <div class="p-inputgroup">
+                          <input name="ruc" id="ruc" [(ngModel)]="ruc" type="text" pInputText placeholder="RUC" style="height: 40px;" />
+                          <button type="button" pButton styleClass="p-button-warn" style="height: 40px;" (click)="validateRuc()">
+                            <i *ngIf="!isLoading" class="pi pi-check"></i>
+                            <i *ngIf="isLoading" class="pi pi-spin pi-cog" style="font-size: 1rem"></i>
+                          </button>
+                        </div>
+                        <div class="invalid-feedback floating-invalid-feedback">Debes ingresar el RUC del negocio!</div>
+                        <div class="col-12" style="margin-top: 5px; margin-bottom: -30px;">
+                          <p class="small mb-0" style="font-size: 13px;">Ya tienes una cuenta? <a href="/login">Inicia sesión</a></p>
+                        </div>
+                      </div>
+                    
+                    <form #negocioform="ngForm" *ngIf="tipo === 'negocio-valido'" (ngSubmit)="register(negocioform)" class="row g-3 needs-validation" novalidate style="margin-top: -15px;">
 
-                    <form #negocioform="ngForm" *ngIf="tipo === 'negocio'" (ngSubmit)="register(negocioform)" class="row g-3 needs-validation" novalidate style="margin-top: -15px;">
                       <div class="col-12 form-group">
-                        <label for="name" class="form-label" style="font-size: 14px;">Nombre del negocio</label>
-                        <input type="text" name="name" [(ngModel)]="name" class="form-control" id="name" required style="font-size: 13px;">
+                        <label for="name_neg" class="form-label" style="font-size: 14px;">Nombre del negocio</label>
+                        <input type="text" name="name_neg" [(ngModel)]="name_neg" class="form-control" id="name" required style="font-size: 13px;">
                         <div class="invalid-feedback floating-invalid-feedback">Debes ingresar tus nombres!</div>
                       </div>
 
@@ -162,7 +178,7 @@
                           <input type="date" name="fechaCreacion" [(ngModel)]="fechaCreacion" class="form-control" id="fechaCreacion" [max]="maxDate" required style="font-size: 13px;">
                           <div class="invalid-feedback floating-invalid-feedback">Ingresa una fecha de creación válida.</div>
                         </div>
-                      </div>
+                      </div>                      
 
                       <div class="col-12 form-group" style="margin-top: -10px;">
                         <label for="telefono" class="form-label" style="font-size: 14px;">Teléfono</label>
@@ -220,6 +236,7 @@
                         <p class="small mb-0" style="font-size: 13px;">Ya tienes una cuenta? <a href="/login">Inicia sesión</a></p>
                       </div>
                     </form>
+                    
                     <!-- TERMINOS Y CONDICIONES -->
                     <p-dialog
                     header="Nuevo"

@@ -68,6 +68,10 @@ export class AuthService {
         return negocio ? JSON.parse(negocio) : null; 
   }
 
+  validateRuc(ruc: string): Observable<any> {
+    return this.http.post<any>(this.urlServiciosTest+'/api/auth/validate-ruc', { ruc });
+  }
+
   getInfoNegocio(id_neg:number): any {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');

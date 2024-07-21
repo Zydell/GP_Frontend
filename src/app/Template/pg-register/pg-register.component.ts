@@ -17,12 +17,15 @@ export class PgRegisterComponent {
   @ViewChild('negocioform') negocioform!: NgForm;
   telefono:  string = '';
   fechaNacimiento: Date = new Date();
-  fechaCreacion: Date = new Date();
+  //fechaCreacion: Date = new Date();
+  //fechaCreacion: Date | null = null;
+  fechaCreacion: string = '';
   term_condiciones: boolean=false;
   //private _fechaCreacion: Date = new Date();
   maxDate: string = '';
   lastname: string = '';
   name: string = '';
+  name_neg: string = '';
   email: string = '';
   password: string = '';
   tipo: string = '';
@@ -35,13 +38,16 @@ export class PgRegisterComponent {
   errorMessage: string = '';
   imageBase64: string | null = null;
   termsAccepted: boolean = false;
+  ruc: string = '';
+  rucData: any = null;
+  isLoading: boolean = false; // Estado de carga
   // Otros campos si es necesario
 
   constructor(private authService: AuthService, private router: Router, private js:EjecutarScript) {}
 
-  ngOnInit() {
-    this.js.CargarScriptLogin();
-    this.addFormValidation();
+  async ngOnInit() {
+    //this.js.CargarScriptLogin();
+    await this.addFormValidation();
     // Establece la fecha máxima permitida a la fecha actual
     const today = new Date();
     this.maxDate = today.toISOString().split('T')[0];
@@ -81,7 +87,7 @@ export class PgRegisterComponent {
     this.term_condiciones = true;
   }
 
-    addFormValidation() {
+    async addFormValidation() {
       setTimeout(() => {
         const forms = document.querySelectorAll('.needs-validation');
         Array.prototype.slice.call(forms).forEach((form: HTMLFormElement) => {
@@ -120,7 +126,7 @@ export class PgRegisterComponent {
           },
           err => {
             console.error(err);
-            this.messages1 = [{severity:'error', summary:'Error', detail:err.error.message}];
+            this.messages1 = [{severity:'error', summary:'Error', detail:err.error.error}];
             this.autoCloseMessages('messages1');
           }
         );
@@ -129,10 +135,10 @@ export class PgRegisterComponent {
         this.autoCloseMessages('messages1');
       }
 
-    }else if (this.tipo === 'negocio') {
+    }else if (this.tipo === 'negocio-valido') {
       if (form.valid && this.termsAccepted && this.uploadedFiles.length > 0){
         const formData = new FormData();
-        formData.append('nombre', this.name);
+        formData.append('nombre', this.name_neg);
         formData.append('correo_electronico', this.email);
         formData.append('contrasena', this.password);
         formData.append('propietario', this.propietario);
@@ -156,7 +162,7 @@ export class PgRegisterComponent {
           },
           err => {
             console.error(err);
-            this.messages1 = [{severity:'error', summary:'Error', detail:err.error.message}];
+            this.messages1 = [{severity:'error', summary:'Error', detail:err.error.error}];
             this.autoCloseMessages('messages1');
           }
         );
@@ -176,4 +182,31 @@ export class PgRegisterComponent {
     this.termsAccepted = event.target.checked;
   }
 
+  async validateRuc() {
+    await this.addFormValidation();
+    this.isLoading = true;
+    this.authService.validateRuc(this.ruc).subscribe(
+      (data) => {
+        this.rucData = data;
+        this.fechaCreacion = data.fechaCreacion ? new Date(data.fechaCreacion).toISOString().split('T')[0] : '';
+        this.name_neg = data.nombreNegocio || '';
+        this.propietario = data.propietario || '';
+        this.t_negocio = data.tipoNegocio || '';
+        this.direccion = data.direccion || '';
+        this.tipo = 'negocio-valido';
+        this.messages2 = [{severity:'success', summary:'Éxito', detail:'RUC validada'}];
+        this.autoCloseMessages('messages2');
+        this.isLoading = false;
+        //this.errorMessage = '';
+      },
+      (error) => {
+        this.isLoading = false;
+        this.rucData = null;
+        //this.errorMessage = 'Error validating RUC';
+        console.error(error);
+        this.messages1 = [{severity:'error', summary:'Error', detail:error.error.error}];
+        this.autoCloseMessages('messages1');
+      }
+    );
+  }
 }
