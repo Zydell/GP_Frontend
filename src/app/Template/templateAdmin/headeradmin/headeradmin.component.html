@@ -53,7 +53,7 @@
     <li class="nav-item">
       <a class="nav-link " href="/dashadmin/principaladmin">
         <i class="bi bi-grid"></i>
-        <span>Administración</span>
+        <span>Panel Principal</span>
       </a>
     </li><!-- End Dashboard Nav -->
    
@@ -87,7 +87,7 @@
             <i class="bi bi-circle"></i><span>Negocios </span>
           </a>
         </li>
-        <li>
+        <li *ngIf="user.admin_id === 1 || user.admin_id === 2">
           <a href="" (click)="SeccionAdmins($event)">
             <i class="bi bi-circle"></i><span>Administradores </span>
           </a>
@@ -109,7 +109,7 @@
 <main id="main" class="main" [class.toggle-sidebar]="sidebarCollapsed">
   <div *ngIf="seccion === '1'">
     <div class="pagetitle">
-      <h1>Panel</h1>
+      <h1>Panel Principal</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="/dashadmin/principaladmin">Home</a></li>

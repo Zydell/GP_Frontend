@@ -24,9 +24,12 @@ export class AuthService {
     return this.hpptclient.post<any>(this.urlServiciosTest + '/api/auth/login', credentials)
       .pipe(
         tap(response => {
-          if (response && response.token) {
+          if (response && response.token && response.user.estado) {
             localStorage.setItem('token', response.token);
             localStorage.setItem('user', JSON.stringify(response.user)); // Almacena la información del usuario
+          }
+          else{
+            response.user.tipousuario = 4
           }
         })
       );

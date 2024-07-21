@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UrlServicios } from './urlServiciosWeb.component';
 import { EmailValidator } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -192,11 +192,46 @@ export class ServiciviosVarios {
     return this.http.get<any>(`${this.urlServiciosTest}/api/credenciales/${usuario_id}/${tipousuario}`);
   }
 
-  NuevoAdmin(nombre:any, correo:any, clave:any) {
+  NuevoAdmin(nombre:any, correo:any, clave:any): Observable<any> {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     let parametros = { nombre: nombre, correo_electronico: correo,contrasena: clave } ;
     return this.hpptclient.post<any>(this.urlServiciosTest + '/api/auth/register/admin', parametros)
+  }
+
+  ActualizacionAdmin(idAdmin: number,nombre:number){
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const parametros = { nombre };
+    return this.http.put<any>(`${this.urlServiciosTest}/api/admins/${idAdmin}`, parametros, { headers });
+  }
+
+  ActualizacionEstadoAdmin(idcredencial: number,idAdmin:number,estado:boolean){
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    let parametros = { estado } ;
+    this.http.put<any>(`${this.urlServiciosTest}/api/credenciales/${idcredencial}`, parametros, { headers });
+    return this.http.put<any>(`${this.urlServiciosTest}/api/admins/${idAdmin}`, parametros, { headers });
+  }
+
+  EliminarAdmin(idcredencial: number, idAdmin: number){
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.delete<any>(`${this.urlServiciosTest}/api/admins/delete/${idcredencial}/${idAdmin}`);
+  }
+
+  //Ciudadanos
+  ListadoCiudadanos() {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/ciudadanos')
+  }
+
+  ActualizacionEstadoCiudadano(idcredencial: number,idCiudadano:number,estado:boolean){
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    let parametros = { estado } ;
+    this.http.put<any>(`${this.urlServiciosTest}/api/credenciales/${idcredencial}`, parametros, { headers });
+    return this.http.put<any>(`${this.urlServiciosTest}/api/ciudadanos/${idCiudadano}`, parametros, { headers });
   }
 
 

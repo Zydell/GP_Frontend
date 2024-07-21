@@ -58,6 +58,8 @@ export class PgLoginComponent {
             } else if (userType === 3) { //Administrador
               this.router.navigate(['/dashadmin/principaladmin']);
             } else {
+              this.messages1 = [{severity: 'error', summary: 'Error', detail: 'Cuenta Desactivada'}];
+              this.autoCloseMessages('messages1');
               console.error('Unknown user type');
             }
           }
