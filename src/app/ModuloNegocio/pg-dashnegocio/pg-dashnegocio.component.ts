@@ -1,4 +1,4 @@
-import { Component, HostListener, ViewEncapsulation  } from '@angular/core';
+import { Component, HostListener, OnInit   } from '@angular/core';
 import { AuthService } from '../../ModuloServiciosWeb/Servicio.Auth';
 import { ServiciviosVarios } from '../../ModuloServiciosWeb/ServiciosTestVarios.component';
 import { Router } from '@angular/router';
@@ -8,9 +8,8 @@ import { Router } from '@angular/router';
   templateUrl: './pg-dashnegocio.component.html',
   styleUrls: [ './pg-dashnegocio.component.css',
     "./../../../assets/vendor/bootstrap-icons/bootstrap-icons.css"
-    ]//,
-    //encapsulation: ViewEncapsulation.ShadowDom
-})
+    ]
+  })
 export class PgDashnegocioComponent {
   seccion: string = '1';
   title = 'GreenPoint';
@@ -79,7 +78,8 @@ export class PgDashnegocioComponent {
     return `data:image/png;base64,${base64String}`;
   }
   
-  toggleSidebar() {
+  toggleSidebar(event: Event) {
+    event.stopPropagation();
     this.sidebarCollapsed = !this.sidebarCollapsed;
   }
 
@@ -92,6 +92,12 @@ export class PgDashnegocioComponent {
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event) {
+    if (window.innerWidth <= 1199) {
+      if (this.sidebarCollapsed) {
+        this.sidebarCollapsed = false;
+      }
+    }
+
     Object.keys(this.menus).forEach(menu => {
       this.menus[menu] = false;
     });
@@ -133,4 +139,3 @@ export class PgDashnegocioComponent {
   }
   
 }
-

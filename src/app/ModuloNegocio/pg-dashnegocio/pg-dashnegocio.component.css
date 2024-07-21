@@ -16,60 +16,60 @@
 }
 
 .sidebar {
-    position: fixed;
-    top: 60px;
-    left: 0;
-    bottom: 0;
-    width: 300px;
-    z-index: 996;
-    transition: all 0.3s;
-    padding: 20px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #aab7cf transparent;
-    box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
-    background-color: #fff;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  bottom: 0;
+  width: 300px;
+  z-index: 996;
+  transition: all 0.3s;
+  padding: 20px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #aab7cf transparent;
+  box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
+  background-color: #fff;
+}
+
+
+@media (max-width: 1199px) {
+  .sidebar {
+    display: block; /* Mostrar el sidebar en pantallas pequeñas */
+    left: -300px; /* Colapsado por defecto */
+    z-index: 999; /* Asegurar que esté por encima del contenido */
   }
-  
-  
-  @media (max-width: 1199px) {
-    .sidebar {
-      display: block; /* Mostrar el sidebar en pantallas pequeñas */
-      left: -300px; /* Colapsado por defecto */
-      z-index: 999; /* Asegurar que esté por encima del contenido */
-    }
-  
-    .sidebar.collapsed {
-      left: -0px; /* Posición colapsada del sidebar */
-    }
-  
-    #main {
-      margin-left: 0; /* Asegurarse de que el contenido principal no esté desplazado */
-    }
-  
-    #main.toggle-sidebar {
-      margin-left: 0; /* Asegurarse de que el contenido principal no esté desplazado */
-    }
+
+  .sidebar.collapsed {
+    left: -0px; /* Posición colapsada del sidebar */
   }
-  
-  @media (min-width: 1200px) {
-    .sidebar {
-      display: block; /* Mostrar el sidebar en pantallas grandes */
-      z-index: 996; /* Ajustar según sea necesario */
-    }
-  
-    .sidebar.collapsed {
-      left: -300px; /* Posición colapsada del sidebar */
-    }
-  
-    #main {
-      margin-left: 300px; /* Ajustar el contenido principal al ancho del sidebar expandido */
-    }
-  
-    #main.toggle-sidebar {
-      margin-left: 0px; /* Ancho comprimido del sidebar */
-    }
+
+  #main {
+    margin-left: 0; /* Asegurarse de que el contenido principal no esté desplazado */
   }
+
+  #main.toggle-sidebar {
+    margin-left: 0; /* Asegurarse de que el contenido principal no esté desplazado */
+  }
+}
+
+@media (min-width: 1200px) {
+  .sidebar {
+    display: block; /* Mostrar el sidebar en pantallas grandes */
+    z-index: 996; /* Ajustar según sea necesario */
+  }
+
+  .sidebar.collapsed {
+    left: -300px; /* Posición colapsada del sidebar */
+  }
+
+  #main {
+    margin-left: 300px; /* Ajustar el contenido principal al ancho del sidebar expandido */
+  }
+
+  #main.toggle-sidebar {
+    margin-left: 0px; /* Ancho comprimido del sidebar */
+  }
+}
   
   /*
   .nav-profile {
