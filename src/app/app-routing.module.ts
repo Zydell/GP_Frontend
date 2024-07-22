@@ -31,8 +31,16 @@ const routes: Routes = [
     component: PgRecuperarComponent
   },
   //{ path: 'protected', component: ProtectedComponent, canActivate: [AuthGuard] },
-  { path: 'user-menu', component: PgDashuserComponent, canActivate: [AuthGuard] },
-  { path: 'user-negocio', component: PgDashnegocioComponent, canActivate: [AuthGuard] },
+  { path: 'user-menu', 
+    component: PgDashuserComponent, 
+    canActivate: [AuthGuard] ,
+    data: { expectedUserType: 1 } 
+  },
+  { path: 'user-negocio', 
+    component: PgDashnegocioComponent, 
+    canActivate: [AuthGuard] ,
+    data: { expectedUserType: 2 } 
+  },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: 'dashpublic',
@@ -44,27 +52,22 @@ const routes: Routes = [
       }     
     ]
     },
-    {
-      path: 'dashadmin',
-      component: DashboardadminComponent,
-      canActivate: [AuthGuard],
-      children: [
-        {
-          path: 'inicioadmin',
-          component: PortadainicialComponent
-        },
-        {
-          path: 'principaladmin',
-          component: PgPrincipaladministracionComponent
-        }/*,
-        {
-          path: 'principaltest',
-          component: PgPrincipaltestComponent
-        }*/
-      ]
-      }
-  
-
+    { 
+      path: 'dashadmin/principaladmin', 
+      component: DashboardadminComponent, 
+      canActivate: [AuthGuard], 
+      data: { expectedUserType: 3 } 
+    },
+    { 
+      path: 'dashadmin', 
+      component: DashboardadminComponent, 
+      canActivate: [AuthGuard], 
+      data: { expectedUserType: 3 } 
+    },
+    { 
+      path: '**', 
+      redirectTo: '/' 
+    }
 ];
 
 @NgModule({
