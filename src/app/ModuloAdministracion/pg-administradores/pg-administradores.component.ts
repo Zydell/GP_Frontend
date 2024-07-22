@@ -134,10 +134,19 @@ export class PgAdministradoresComponent implements OnInit{
     }
   }
   
+  validatePassword(password: string): boolean {
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,16}$/;
+    return passwordRegex.test(password);
+  }
+
+  validateEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
 
   async RegistrarNuevo(){
     try {
-      if(this.nombre.trim() && this.correo.trim() && this.clave.trim()){
+      if (this.nombre.length > 3 && this.validateEmail(this.correo) && this.validatePassword(this.clave)) {
         console.log("aqui")
         this.servicios.NuevoAdmin(this.nombre, this.correo,this.clave)
         .subscribe(() => {
@@ -159,7 +168,7 @@ export class PgAdministradoresComponent implements OnInit{
   }
 
   async RegistrarActualizacion(){
-    if(this.objSeleccion.nombre.trim()){
+    if(this.objSeleccion.nombre.length > 3){
       console.log("aqui")
       const data = await new Promise<any>(resolve => this.servicios.ActualizacionAdmin(this.objSeleccion.admin_id,this.objSeleccion.nombre).subscribe(translated => { resolve(translated) }));
       console.log(data)

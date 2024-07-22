@@ -73,6 +73,7 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { PgMapapvnegocioComponent } from './ModuloNegocio/pg-mapapvnegocio/pg-mapapvnegocio.component';
 import { PgValidarcodigoComponent } from './ModuloNegocio/pg-validarcodigo/pg-validarcodigo.component';
 import { PgCiudadanosComponent } from './ModuloAdministracion/pg-ciudadanos/pg-ciudadanos.component';
+import { PgPerfilAdminComponent } from './ModuloAdministracion/pg-perfil-admin/pg-perfil-admin.component';
 
 
 @NgModule({
@@ -118,7 +119,8 @@ import { PgCiudadanosComponent } from './ModuloAdministracion/pg-ciudadanos/pg-c
     PgCanjeoofertasComponent,
     PgMapapvnegocioComponent,
     PgValidarcodigoComponent,
-    PgCiudadanosComponent
+    PgCiudadanosComponent,
+    PgPerfilAdminComponent
   ],
   imports: [
     BrowserModule,

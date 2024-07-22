@@ -51,59 +51,57 @@
 
   <ul class="sidebar-nav" id="sidebar-nav">
     <li class="nav-item">
-      <a class="nav-link " href="/dashadmin/principaladmin">
-        <i class="bi bi-grid"></i>
+      <a class="nav-link " [ngClass]="{'collapsed': collapsed}" href="/dashadmin/principaladmin">        <i class="bi bi-grid"></i>
         <span>Panel Principal</span>
       </a>
     </li><!-- End Dashboard Nav -->
-   
+  
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-menu-button-wide"></i><span>Gestion</span><i class="bi bi-chevron-down ms-auto"></i>
+        <i class="bi bi-menu-button-wide"></i><span>Gestión</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
-      <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
         <li>
-          <a href="" (click)="SeccionMateriales($event)">
+          <a href="" (click)="SeccionMateriales($event)" [ngClass]="{'active': activeSection === 'materiales'}">
             <i class="bi bi-circle"></i><span>Materiales</span>
           </a>
         </li>
         <li>
-          <a href="" (click)="SeccionOfertas($event)">
-            <i class="bi bi-circle"></i><span>Ofertas </span>
+          <a href="" (click)="SeccionOfertas($event)" [ngClass]="{'active': activeSection === 'ofertas'}">
+            <i class="bi bi-circle"></i><span>Ofertas</span>
           </a>
         </li>
         <li>
-          <a href="" (click)="SeccionPuntosVerdes($event)">
-            <i class="bi bi-circle"></i><span>Puntos Verdes </span>
+          <a href="" (click)="SeccionPuntosVerdes($event)" [ngClass]="{'active': activeSection === 'puntosverdes'}">
+            <i class="bi bi-circle"></i><span>Puntos Verdes</span>
           </a>
         </li>
         <li>
-          <a href="" (click)="SeccionCiudadanos($event)">
-            <i class="bi bi-circle"></i><span>Ciudadanos </span>
+          <a href="" (click)="SeccionCiudadanos($event)" [ngClass]="{'active': activeSection === 'ciudadanos'}">
+            <i class="bi bi-circle"></i><span>Ciudadanos</span>
           </a>
         </li>
         <li>
-          <a href="" (click)="SeccionNegocios($event)">
-            <i class="bi bi-circle"></i><span>Negocios </span>
+          <a href="" (click)="SeccionNegocios($event)" [ngClass]="{'active': activeSection === 'negocios'}">
+            <i class="bi bi-circle"></i><span>Negocios</span>
           </a>
         </li>
         <li *ngIf="user.admin_id === 1 || user.admin_id === 2">
-          <a href="" (click)="SeccionAdmins($event)">
-            <i class="bi bi-circle"></i><span>Administradores </span>
+          <a href="" (click)="SeccionAdmins($event)" [ngClass]="{'active': activeSection === 'admins'}">
+            <i class="bi bi-circle"></i><span>Administradores</span>
           </a>
         </li>
       </ul>
     </li>
     <li class="nav-heading">Páginas</li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
-          <i class="bi bi-person"></i>
-          <span>Perfil</span>
-        </a>
-      </li><!-- End Profile Page Nav --> 
-    <!-- End Components Nav -->
+  
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{'collapsed': activeMenu !== 'profile'}" href="" (click)="SeccionPerfil($event)">        <i class="bi bi-person"></i>
+        <span>Perfil</span>
+      </a>
+    </li><!-- End Profile Page Nav -->
   </ul>
+  
 
 </aside><!-- End Sidebar-->
 <main id="main" class="main" [class.toggle-sidebar]="sidebarCollapsed">
@@ -223,6 +221,9 @@
   </div>
   <div *ngIf="seccion === '7'">
     <app-pg-ciudadanos></app-pg-ciudadanos>
+  </div>
+  <div *ngIf="seccion === '8'">
+    <app-pg-perfil-admin></app-pg-perfil-admin>
   </div>
   <footer id="footer" class="footer">
     <div class="copyright">

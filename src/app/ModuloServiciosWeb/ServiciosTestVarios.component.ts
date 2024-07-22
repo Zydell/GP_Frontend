@@ -206,6 +206,10 @@ export class ServiciviosVarios {
     return this.http.put<any>(`${this.urlServiciosTest}/api/admins/${idAdmin}`, parametros, { headers });
   }
 
+  AdminPorId(idAdmin: number){
+    return this.http.get<any>(`${this.urlServiciosTest}/api/admins/${idAdmin}`);
+  }
+
   ActualizacionEstadoAdmin(idcredencial: number,idAdmin:number,estado:boolean){
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
@@ -218,6 +222,10 @@ export class ServiciviosVarios {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.delete<any>(`${this.urlServiciosTest}/api/admins/delete/${idcredencial}/${idAdmin}`);
+  }
+
+  CambiarContrasena(correo: any,claveActual:any,NuevaClave:any){
+    return this.http.post<any>(`${this.urlServiciosTest}/api/cambiar-password`, { correo_electronico: correo, currentPassword: claveActual, newPassword: NuevaClave });
   }
 
   //Ciudadanos
@@ -237,30 +245,30 @@ export class ServiciviosVarios {
 
 
 
-    ListadoDimension() {
-      let headers = new HttpHeaders();
-      headers.append('Content-Type', 'application/json');
-   //   let parametros = opcion + "/" + tipo + "/" + codCarrera + "/" + param;
-      return this.hpptclient.get<any>(this.urlServiciosTest + '/wsSimulador/rutadimension/ListadoDimensionTodos')
-    }
-  ActualizacionDimension(idDimension:number,intvalor:any) {
-    let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    let parametros = { int_valor: intvalor } ;
-     return this.hpptclient.put<any>(this.urlServiciosTest + '/wsSimulador/rutadimension/ActualizarDimension/'+idDimension, parametros)
-  }
-  EstadoCambiarDimension(idDimension:number,estado:any) {
-    let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    let parametros = { bl_estado: estado } ;
-     return this.hpptclient.put<any>(this.urlServiciosTest + '/wsSimulador/rutadimension/DesactivarDimension/'+idDimension, parametros)
-  }
-  NuevaDimension(intvalor:any) {
-    let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-     let parametros = { int_valor: intvalor } ;
-     return this.hpptclient.post<any>(this.urlServiciosTest + '/wsSimulador/rutadimension/CrearDimension', parametros)
-  }
+  //   ListadoDimension() {
+  //     let headers = new HttpHeaders();
+  //     headers.append('Content-Type', 'application/json');
+  //  //   let parametros = opcion + "/" + tipo + "/" + codCarrera + "/" + param;
+  //     return this.hpptclient.get<any>(this.urlServiciosTest + '/wsSimulador/rutadimension/ListadoDimensionTodos')
+  //   }
+  // ActualizacionDimension(idDimension:number,intvalor:any) {
+  //   let headers = new HttpHeaders();
+  //   headers.append('Content-Type', 'application/json');
+  //   let parametros = { int_valor: intvalor } ;
+  //    return this.hpptclient.put<any>(this.urlServiciosTest + '/wsSimulador/rutadimension/ActualizarDimension/'+idDimension, parametros)
+  // }
+  // EstadoCambiarDimension(idDimension:number,estado:any) {
+  //   let headers = new HttpHeaders();
+  //   headers.append('Content-Type', 'application/json');
+  //   let parametros = { bl_estado: estado } ;
+  //    return this.hpptclient.put<any>(this.urlServiciosTest + '/wsSimulador/rutadimension/DesactivarDimension/'+idDimension, parametros)
+  // }
+  // NuevaDimension(intvalor:any) {
+  //   let headers = new HttpHeaders();
+  //   headers.append('Content-Type', 'application/json');
+  //    let parametros = { int_valor: intvalor } ;
+  //    return this.hpptclient.post<any>(this.urlServiciosTest + '/wsSimulador/rutadimension/CrearDimension', parametros)
+  // }
 
   // Registro de un reciclaje
   RegReciclaje(user: {  correo_electronico: string, negocio_id:any, punto_verde_id:any, cantidad:any, material_id:any, descripcion:any }): Observable<any> {

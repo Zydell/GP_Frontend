@@ -147,7 +147,7 @@
       <span class="p-inputgroup-addon">
           <i class="pi pi-pencil"></i>
       </span>
-      <input minlength="8" maxlength="16" pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,16}$" type="password" name="password" [(ngModel)]="clave" id="password" required (input)="clave = clave" style="font-size: 14px;">
+      <input minlength="8" maxlength="16" class="form-control" pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,16}$" type="password" name="password" [(ngModel)]="clave" id="password" required (input)="clave = clave" style="font-size: 14px;">
     </div>
   </ng-template>
   
