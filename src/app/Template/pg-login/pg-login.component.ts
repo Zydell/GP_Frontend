@@ -70,7 +70,11 @@ export class PgLoginComponent {
         },
         err => {
           console.error(err);
-          this.messages1 = [{severity: 'error', summary: 'Error', detail: err.error.message}];
+          if (err.error.message == 'Usuario no encontrado'){
+            this.messages1 = [{severity: 'error', summary: 'Error', detail: err.error.message}];
+          }else{
+            this.messages1 = [{severity: 'error', summary: 'Error', detail: 'Error con la conexion al servidor'}];
+          }
           this.autoCloseMessages('messages1');
         }
       );
