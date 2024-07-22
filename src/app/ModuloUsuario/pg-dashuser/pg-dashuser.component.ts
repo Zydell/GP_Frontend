@@ -112,5 +112,12 @@ export class PgDashuserComponent {
     event.preventDefault();
     this.seccion = '2';
   }
+  SeccionPuntosVerdes(event: Event){
+    event.preventDefault();
+    this.seccion = '3';
+  }
+  SeccionHistorialReciclaje(event: Event){
+    event.preventDefault();
+    this.seccion = '4';
+  }
 }
-
