@@ -231,7 +231,7 @@ ModalCambiarEstado(seleccion:any) {
   }
 
   async RegistrarActualizacion() {
-    if (this.objSeleccion.descripcion.length >10 && this.objSeleccion.gc_necesarios <10000 && this.objSeleccion.gc_necesarios >4 && this.objSeleccion.negocio_id && this.objSeleccion.fecha_inicio) {
+    if (this.objSeleccion.descripcion.length >10 && this.objSeleccion.gc_necesarios <10000 && this.objSeleccion.gc_necesarios >4 && this.objSeleccion.negocio_id !== 0 && this.objSeleccion.fecha_inicio && this.objSeleccion.fecha_fin) {
       try {
         console.log("aqui");
         const data = await new Promise<any>((resolve, reject) => {
@@ -270,7 +270,7 @@ ModalCambiarEstado(seleccion:any) {
         console.error('Error al actualizar la oferta:', error);
       }
     } else {
-      this.showMessage( 'info',  'Info',  this.mensajes.IngreseNombre );
+      this.showMessage( 'info',  'Info',  'Por favor complete todos los campos' );
     }
   }
   

@@ -79,7 +79,7 @@ export class PgMaterialComponent implements OnInit {
   }
 
   async RegistrarNuevo() {
-    if (this.intvalor > 4 && this.intvalor < 10000 &&this.strnombre.length > 5) {
+    if (this.intvalor > 4 && this.intvalor < 1000 &&this.strnombre.length > 5) {
       console.log("aqui")
       const data = await new Promise<any>(resolve => this.servicios.NuevoMaterial(this.intvalor, this.strnombre).subscribe(translated => { resolve(translated) }));
       console.log(data)
@@ -96,7 +96,7 @@ export class PgMaterialComponent implements OnInit {
   }
 
   async RegistrarActualizacion() {
-    if (this.objSeleccion.tipo.length >5 && this.objSeleccion.valor_por_libra > 4 && this.objSeleccion.valor_por_libra <10000) {
+    if (this.objSeleccion.tipo.length >5 && this.objSeleccion.valor_por_libra > 4 && this.objSeleccion.valor_por_libra <1000) {
       console.log("aqui")
       const data = await new Promise<any>(resolve => this.servicios.ActualizacionMaterial(this.objSeleccion.materiales_id, this.objSeleccion.tipo, this.objSeleccion.valor_por_libra).subscribe(translated => { resolve(translated) }));
       console.log(data)

@@ -23,6 +23,8 @@ export class PgCiudadanosComponent {
   clave:string="";
   strEstado:any="";
   
+  combinedName: string="";
+
   visibleEditar: boolean=false;
   visibleEstado: boolean=false;
   visibleNuevo: boolean=false;
@@ -64,6 +66,7 @@ export class PgCiudadanosComponent {
     }else{
       this.strEstado="Activar";
     }
+    this.combinedName = `${this.objSeleccion.nombre} ${this.objSeleccion.apellido}`;
     console.log(this.objSeleccion)
     this.visibleEstado = true;
   }

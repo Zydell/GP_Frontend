@@ -140,20 +140,20 @@ export class PgNegocioComponent implements OnInit{
   }
   
   async RegistrarActualizacion() {
-    if (this.objSeleccion.nombre?.trim() &&
-        this.objSeleccion.propietario?.trim() &&
-        this.objSeleccion.tipo_negocio?.trim() &&
-        this.objSeleccion.direccion?.trim() &&
-        this.objSeleccion.telefono?.trim()) {
+    if (this.objSeleccion.nombre.length>9 &&
+        this.objSeleccion.propietario.length>9 &&
+        this.objSeleccion.tipo_negocio.length>5 &&
+        this.objSeleccion.direccion.length>5 &&
+        this.objSeleccion.telefono.length == 10) {
   
       console.log("aqui");
   
       const formData = new FormData();
-      formData.append('nombre', this.objSeleccion.nombre.trim());
-      formData.append('propietario', this.objSeleccion.propietario.trim());
-      formData.append('tipo_negocio', this.objSeleccion.tipo_negocio.trim());
-      formData.append('direccion', this.objSeleccion.direccion.trim());
-      formData.append('telefono', this.objSeleccion.telefono.trim());
+      formData.append('nombre', this.objSeleccion.nombre);
+      formData.append('propietario', this.objSeleccion.propietario);
+      formData.append('tipo_negocio', this.objSeleccion.tipo_negocio);
+      formData.append('direccion', this.objSeleccion.direccion);
+      formData.append('telefono', this.objSeleccion.telefono);
   
       if (!(this.objSeleccion.fecharegistro instanceof Date)) {
         this.objSeleccion.fecharegistro = new Date(this.objSeleccion.fecharegistro);
@@ -193,7 +193,7 @@ export class PgNegocioComponent implements OnInit{
         console.error(error);
       }
     } else {
-      this.showMessage('info',  'Info',  "Formulario Inválido" );
+      this.showMessage( 'info',  'Info',  'Por favor complete todos los campos' );
     }
   }
 

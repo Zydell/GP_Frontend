@@ -96,7 +96,7 @@ export class PgPerfilAdminComponent implements OnInit{
         this.showMessage('error', 'Error', 'Error en la actualización');
       }
     } else {
-      this.showMessage('info', 'Info', 'Formulario Inválido');
+      this.showMessage( 'info',  'Info',  'Por favor complete todos los campos' );
     }
   }
 

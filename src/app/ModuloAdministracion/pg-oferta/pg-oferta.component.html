@@ -146,7 +146,9 @@
       </span>
       <input type="number" id="greencoin" placeholder="Green Coins Necesarios" [(ngModel)]="gc_necesarios" class="form-control" (input)="gc_necesarios = gc_necesarios" min="5" max="10000" required/>
     </div>
-
+    <div>
+      <label for="Valor" class="form-label" style="font-size: 10px;">(min 5- max 10000)  </label>
+    </div>
     <label for="negocio" class="form-label" style="font-size: 14px;">Negocio:  </label>
     <div class="p-inputgroup">
       <span class="p-inputgroup-addon">
@@ -207,7 +209,9 @@
       </span>
       <input pInputText id="gc_necesarios" placeholder="Green Coins Necesarios" id="gc_necesarios" [(ngModel)]="objSeleccion.gc_necesarios" class="form-control" required min="5" max="10000"/>
     </div>
-
+  <div>
+    <label for="Valor" class="form-label" style="font-size: 10px;">(min 5- max 10000)  </label>
+  </div>
   <label for="negocioact" class="form-label" style="font-size: 14px;">Negocio:  </label>
   <div class="p-inputgroup">
     <span class="p-inputgroup-addon">
@@ -248,15 +252,26 @@
     [resizable]="false"
   >
   <ng-template pTemplate="header">
-    <span class="text-xl font-bold">{{strEstado}}</span>
+    <span class="text-xl font-bold">{{strEstado}} Oferta</span>
   </ng-template>
-  <label for="Descripcion" class="form-label" style="font-size: 14px;">Descripción: </label>
   <ng-template pTemplate="content">
-    <div class="p-inputgroup">
+    <div class="p-inputgroup" style="margin-top: 15px;">
       <span class="p-inputgroup-addon">
-          <i class="pi pi-pencil"></i>
+        Descripción:
       </span>
-      <input pInputText placeholder="Descripcion" [(ngModel)]="objSeleccion.descripcion" class="p-inputtext-sm" readonly/>
+      <input pInputText  [(ngModel)]="objSeleccion.descripcion" class="p-inputtext-sm" readonly/>
+    </div>
+    <div class="p-inputgroup" style="margin-top: 15px;">
+      <span class="p-inputgroup-addon">
+        Costo:
+      </span>
+      <input pInputText  [(ngModel)]="objSeleccion.gc_necesarios" class="p-inputtext-sm" readonly/>
+    </div>
+    <div class="p-inputgroup" style="margin-top: 15px;">
+      <span class="p-inputgroup-addon">
+        Negocio:
+      </span>
+      <input pInputText [(ngModel)]="objSeleccion.negocioInfo" class="p-inputtext-sm" readonly/>
     </div>
   </ng-template>
   

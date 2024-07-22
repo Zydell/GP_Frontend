@@ -160,10 +160,10 @@ export class PgAdministradoresComponent implements OnInit{
         }
       );        
       }else{
-        this.showMessage( 'info',  'Info',  'Formulario Invalido');
+        this.showMessage( 'info',  'Info',  'Por favor complete todos los campos' );
       }
     } catch (error) {
-      this.showMessage( 'info',  'Info',  'Formulario Invalido');
+      this.showMessage( 'info',  'Info',  'Por favor complete todos los campos' );
     }
   }
 
@@ -180,7 +180,7 @@ export class PgAdministradoresComponent implements OnInit{
         this.showMessage( 'error', 'Error',  this.mensajes.ActualizacionError );
       }
     }else{
-      this.showMessage( 'info',  'Info',  'Formulario Invalido' ); 
+      this.showMessage( 'info',  'Info',  'Por favor complete todos los campos' );
     }
   }
 

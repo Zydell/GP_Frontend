@@ -170,21 +170,19 @@
     [resizable]="false"
   >
   <ng-template pTemplate="header">
-    <span class="text-xl font-bold">{{strEstado}} Administrador</span>
+    <span class="text-xl font-bold">{{strEstado}} Ciudadano </span>
   </ng-template>
   
   <ng-template pTemplate="content">
-      <label for="nombre" class="form-label" style="font-size: 14px;">Ciudadano: </label>
-      <div class="p-inputgroup">
+      <div class="p-inputgroup" style="margin-top: 15px;">
         <span class="p-inputgroup-addon">
-            <i class="pi pi-pencil"></i>
+          Ciudadano:
         </span>
-        <input pInputText id="nombre" placeholder="Nombres" [(ngModel)]="objSeleccion.nombre" class="form-control" required />
+        <input pInputText id="nombre" placeholder="Nombres" [(ngModel)]="combinedName" class="form-control" required />
       </div>
-      <label for="Correo" class="form-label" style="font-size: 14px;">Correo : </label>
-      <div class="p-inputgroup">
+      <div class="p-inputgroup" style="margin-top: 15px;">
           <span class="p-inputgroup-addon">
-              <i class="pi pi-pencil"></i>
+            Correo :
           </span>
           <input pInputText placeholder="Correo" [(ngModel)]="objSeleccion.correo" class="form-control" readonly/>
       </div>
