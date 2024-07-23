@@ -141,7 +141,7 @@
           </div><!-- End Sales Card -->
           <!-- Sales Card -->
           <div class="col-xxl-4 col-md-6">
-            <div class="card info-card sales-card">
+            <div class="card info-card customers-card">
               <div class="card-body">
                 <h5 class="card-title">Ofertas <span>| Inactivas</span></h5>
 
@@ -179,7 +179,7 @@
           </div><!-- End Sales Card -->
           <!-- Sales Card -->
           <div class="col-xxl-4 col-md-6">
-            <div class="card info-card sales-card">
+            <div class="card info-card customers-card">
               <div class="card-body">
                 <h5 class="card-title">Puntos Verdes <span>| Inactivas</span></h5>
 
@@ -190,6 +190,78 @@
                   <div class="ps-3">
                     <h6>{{PuntoIna}}<span style="font-size: 20px;">Puntos Verdes</span></h6>
                     <a href="" class="text-success small pt-1 fw-bold" (click)="SeccionPuntosVerdes($event)">Gestión Puntos</a>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Sales Card --> 
+          <div class="col-xxl-4 col-md-6">
+            <div class="card info-card revenue-card">
+              <div class="card-body">
+                <h5 class="card-title">Negocios <span>| Activos</span></h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class='bx bx-store-alt'></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>{{negocioAct}}<span style="font-size: 20px;">Negocios</span></h6>
+                    <a href="" class="text-success small pt-1 fw-bold" (click)="SeccionNegocios($event)">Gestión Negocios</a>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Sales Card -->
+          <!-- Sales Card -->
+          <div class="col-xxl-4 col-md-6">
+            <div class="card info-card customers-card">
+              <div class="card-body">
+                <h5 class="card-title">Negocios <span>| Inactivas</span></h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class='bx bx-store-alt'></i>                  </div>
+                  <div class="ps-3">
+                    <h6>{{negocioIna}}<span style="font-size: 20px;">Negocios</span></h6>
+                    <a href="" class="text-success small pt-1 fw-bold" (click)="SeccionNegocios($event)">Gestión Negocios</a>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Sales Card --> 
+          <div class="col-xxl-4 col-md-6">
+            <div class="card info-card revenue-card">
+              <div class="card-body">
+                <h5 class="card-title">Ciudadanos <span>| Activos</span></h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class='bx bx-user-check'></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>{{ciudadanoAct}}<span style="font-size: 20px;">Ciudadanos</span></h6>
+                    <a href="" class="text-success small pt-1 fw-bold" (click)="SeccionCiudadanos($event)">Gestión Ciudadanos</a>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- End Sales Card -->
+          <!-- Sales Card -->
+          <div class="col-xxl-4 col-md-6">
+            <div class="card info-card customers-card">
+              <div class="card-body">
+                <h5 class="card-title">Ciudadanos<span>| Inactivas</span></h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class='bx bx-user-x'></i>                  </div>
+                  <div class="ps-3">
+                    <h6>{{ciudadanoIna}}<span style="font-size: 20px;">Ciudadanos</span></h6>
+                    <a href="" class="text-success small pt-1 fw-bold" (click)="SeccionCiudadanos($event)">Gestión Ciudadanos</a>
 
                   </div>
                 </div>
@@ -228,5 +300,6 @@
     </div>
   </footer><!-- End Footer -->
 </main><!-- End #main -->
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 

@@ -189,6 +189,18 @@ export class ServiciviosVarios {
     return this.hpptclient.get<any>(this.urlServiciosTest + '/api/negocios')
   }
 
+  ListadoNegociosActive() {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/negocios/active')
+  }
+
+  ListadoNegociosInactive() {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/negocios/inactive')
+  }
+
   NegocioId(idNegocio: number){
     return this.hpptclient.get<any>(`${this.urlServiciosTest}/api/negocios/${idNegocio}`);
   }
@@ -205,6 +217,8 @@ export class ServiciviosVarios {
   ActualizacionNegocio(idNegocio: any, formData: FormData) {
     return this.http.put<any>(`${this.urlServiciosTest}/api/negocios/${idNegocio}`, formData);
   }
+
+
 
   //Administradores
   ListadoAdministradores(){
@@ -257,6 +271,18 @@ export class ServiciviosVarios {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.hpptclient.get<any>(this.urlServiciosTest + '/api/ciudadanos')
+  }
+
+  ListadoCiudadanossActive() {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/ciudadanos/active')
+  }
+
+  ListadoCiudadanossInactive() {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/ciudadanos/inactive')
   }
 
   ActualizacionEstadoCiudadano(idcredencial: number,idCiudadano:number,estado:boolean){
