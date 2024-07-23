@@ -49,7 +49,7 @@ export class PgPuntosverdesComponent implements OnInit {
         });
         
         try {
-          const response = await this.http.get<any[]>('http://localhost:5000/api/puntos_verdes').toPromise();
+          const response = await this.http.get<any[]>('http://localhost:5000/api/puntos_verdes/activos').toPromise();
           if (!response) {
             throw new Error('Error al obtener los puntos verdes');
           }
