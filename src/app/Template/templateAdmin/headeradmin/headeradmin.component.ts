@@ -23,6 +23,10 @@ export class HeaderadminComponent implements OnInit {
   ofertIna: number = 0;
   PuntoAct: number = 0;
   PuntoIna: number = 0;
+  negocioAct: number = 0;
+  negocioIna: number = 0;
+  ciudadanoAct: number = 0;
+  ciudadanoIna: number = 0;
 
   sidebarCollapsed = false;
   cdn: any;
@@ -41,6 +45,13 @@ export class HeaderadminComponent implements OnInit {
     this.collapsed = !this.collapsed;
     this.loadOfertas(); // Cargar las ofertas
     this.loadPuntos();
+    this.loadNegocios();
+    this.loadCiudadanos();
+  }
+
+  loadCiudadanos() {
+    this.CiudadanosAct();
+    this.CiudadanosIna();
   }
 
   loadOfertas() {
@@ -52,12 +63,65 @@ export class HeaderadminComponent implements OnInit {
     this.PuntosVerdesAct();
     this.PuntosVerdesIna();
   }
+  loadNegocios() {
+    this.NegociosAct();
+    this.NegociosIna();
+  }
+
+  CiudadanosAct() {
+    this.servicios.ListadoCiudadanossActive().subscribe(
+      (response) => {
+        this.ciudadanoAct = response.length;
+        console.log('Ofertas activas:', this.ciudadanoAct);
+      },
+      (error) => {
+        console.error('Error fetching active offers:', error);
+      }
+    );
+  }
+
+  CiudadanosIna() {
+    this.servicios.ListadoCiudadanossInactive().subscribe(
+      (response) => {
+        this.ciudadanoIna = response.length;
+        console.log('Ofertas inactivas:', this.ciudadanoIna);
+      },
+      (error) => {
+        console.error('Error fetching inactive offers:', error);
+      }
+    );
+  }
+
+
+  NegociosAct() {
+    this.servicios.ListadoNegociosActive().subscribe(
+      (response) => {
+        this.negocioAct = response.length;
+        console.log('Ofertas activas:', this.negocioAct);
+      },
+      (error) => {
+        console.error('Error fetching active offers:', error);
+      }
+    );
+  }
+
+  NegociosIna() {
+    this.servicios.ListadoNegociosInactive().subscribe(
+      (response) => {
+        this.negocioIna = response.length;
+        console.log('Ofertas inactivas:', this.negocioIna);
+      },
+      (error) => {
+        console.error('Error fetching inactive offers:', error);
+      }
+    );
+  }
 
   OfertasAct() {
     this.servicios.ListadoOfertasActivas().subscribe(
       (response) => {
         this.ofertAct = response.length;
-        console.log('Ofertas activas:', this.ofertAct);
+        //console.log('Ofertas activas:', this.ofertAct);
       },
       (error) => {
         console.error('Error fetching active offers:', error);
@@ -69,18 +133,18 @@ export class HeaderadminComponent implements OnInit {
     this.servicios.ListadoOfertasInactivas().subscribe(
       (response) => {
         this.ofertIna = response.length;
-        console.log('Ofertas inactivas:', this.ofertIna);
+        //console.log('Ofertas inactivas:', this.ofertIna);
       },
       (error) => {
         console.error('Error fetching inactive offers:', error);
       }
     );
   }
+
   PuntosVerdesAct() {
     this.servicios.ListadoPuntosActivas().subscribe(
       (response) => {
         this.PuntoAct = response.length;
-        console.log('Ofertas activas:', this.PuntoAct);
       },
       (error) => {
         console.error('Error fetching active offers:', error);
@@ -92,7 +156,6 @@ export class HeaderadminComponent implements OnInit {
     this.servicios.ListadoPuntosInactivas().subscribe(
       (response) => {
         this.PuntoIna = response.length;
-        console.log('Ofertas inactivas:', this.PuntoIna);
       },
       (error) => {
         console.error('Error fetching inactive offers:', error);
