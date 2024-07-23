@@ -1,3 +1,39 @@
+.bg-warning {
+  background-color: yellow;
+  color: black;
+  border-radius: 8px; /* Borde redondeado */
+  padding: 5px 10px; /* Espaciado interno */
+  display: inline-block;
+}
+
+.bg-success {
+  background-color: green;
+  color: white;
+  border-radius: 8px; /* Borde redondeado */
+  padding: 5px 10px; /* Espaciado interno */
+  display: inline-block;
+}
+
+.bg-danger {
+  background-color: red;
+  color: white;
+  border-radius: 8px; /* Borde redondeado */
+  padding: 5px 10px; /* Espaciado interno */
+  display: inline-block;
+}
+
+.bg-info-light {
+  background-color: #cff4fc;
+  border-color: #cff4fc;
+}
+
+.bg-dark-light {
+  background-color: #d3d3d4;
+  border-color: #d3d3d4;
+}
+
+
+
 
 .floating-message {
     position: fixed;

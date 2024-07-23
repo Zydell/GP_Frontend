@@ -1,7 +1,7 @@
 <p-messages [(value)]="messages2" [enableService]="false" [closable]="true" class="floating-message"></p-messages>
 <p-messages [(value)]="messages1" [enableService]="false" [closable]="true" class="floating-message"></p-messages>
 <div class="pagetitle">
-    <h1>Gestion de Puntos Verdes</h1>
+    <h1>Gestión de Puntos Verdes</h1>
   </div><!-- End Page Title -->
   
   <section class="section dashboard">
@@ -68,6 +68,11 @@
                             Fecha de creación <p-sortIcon field="fecha_inicio"></p-sortIcon>
                         </div>
                     </th>
+                    <th pSortableColumn="fecha_inicio">
+                      <div class="flex align-items-center">
+                          Estado <p-sortIcon field="fecha_inicio"></p-sortIcon>
+                      </div>
+                  </th>
                     <th>
                       <div class="flex align-items-center">
                           Gestión
@@ -78,9 +83,15 @@
             <ng-template pTemplate="body" let-pvs>
                 <tr>
                     <td>{{ pvs.descripcion }}</td>
-                    <td>{{ "₵ "+pvs.direccion+""}}</td>
+                    <td>{{ pvs.direccion}}</td>
                     <td style="font-size: 15px;">
                         {{ pvs.fechacreacion | date:'shortDate' }}
+                    </td>
+                    <td>
+                      <span [ngClass]="{
+                        'bg-danger': !pvs.estado,
+                        'bg-success': pvs.estado
+                      }">{{ pvs.estado ? 'Activado' : 'Desactivado' }}</span>
                     </td>
                     <td>
                       <p-button
@@ -126,7 +137,7 @@
               <div class="col-12 form-group" style="margin-top: -10px;">
                 <label for="newpvs" class="form-label" style="font-size: 14px;">Punto verde (descripción)</label>
                 <div class="input-group has-validation">
-                  <input type="text" [(ngModel)]="newpvs" name="newpvs" class="form-control" id="newpvs" required style="font-size: 13px;" placeholder="Descripcion de la oferta">
+                  <input type="text" [(ngModel)]="newpvs" name="newpvs" class="form-control" id="newpvs" required style="font-size: 13px;" placeholder="Descripcion del punto verde">
                   <div class="invalid-feedback floating-invalid-feedback">Debes ingresar una descripción</div>
                 </div>
               </div>
@@ -171,7 +182,7 @@
             [resizable]="false"
           >
           <ng-template pTemplate="header">
-            <span class="text-xl">Actualización de oferta</span>
+            <span class="text-xl">Actualización del punto verde</span>
           </ng-template>
           
           <ng-template pTemplate="content">
@@ -180,7 +191,7 @@
               <div class="col-12 form-group" style="margin-top: -10px;">
                 <label for="newpvs" class="form-label" style="font-size: 14px;">Punto verde</label>
                 <div class="input-group has-validation">
-                  <input type="text" [(ngModel)]="newpvs" name="newpvs" class="form-control" id="newpvs" required style="font-size: 13px;" placeholder="Descripcion de la oferta">
+                  <input type="text" [(ngModel)]="newpvs" name="newpvs" class="form-control" id="newpvs" required style="font-size: 13px;" placeholder="Descripcion del punto verde">
                   <div class="invalid-feedback floating-invalid-feedback">Debes ingresar una descripción!</div>
                 </div>
               </div>
@@ -214,7 +225,7 @@
 
 
           <p-dialog
-            header="Eliminación"
+            header="Activar/Desactivar"
             [(visible)]="visibleEstado"
             [modal]="true"
             [style]="{ width: '25vw' }"
@@ -223,17 +234,17 @@
           >
           
           <ng-template pTemplate="content" >
-            <span class=" " style="font-size: 15px;">¿Estas seguro de eliminar este punto verde?</span> <br><br>
+            <span class=" " style="font-size: 15px;">¿Estas seguro de activar o desactivar este punto verde?</span> <br><br>
             <div class="col-12 form-group" style="margin-top: -20px;">
                 <div class="input-group has-validation">
-                  <input readonly type="text" [(ngModel)]="newpvs" name="newpvs" class="form-control" id="newpvs" required style="font-size: 13px;" placeholder="Descripcion de la oferta">
+                  <input readonly type="text" [(ngModel)]="newpvs" name="newpvs" class="form-control" id="newpvs" required style="font-size: 13px;" placeholder="Descripcion del punto verde">
                   <div class="invalid-feedback floating-invalid-feedback">Debes ingresar una descripción!</div>
                 </div>
               </div>
           </ng-template>
           
           <ng-template pTemplate="footer">
-            <p-button icon="pi pi-save"  label="Eliminar" styleClass="p-button-sm" (click)="DesactivarPuntoVerde()"></p-button>
+            <p-button icon="pi pi-save"  label="Confirmar" styleClass="p-button-sm" (click)="DesactivarPuntoVerde()"></p-button>
           </ng-template>
           
           </p-dialog>

@@ -30,6 +30,7 @@ export class PgDashpuntosverdesnegocioComponent {
   messages1: Message[] = [];
   messages2: Message[] = [];
   loading: boolean = false;
+  estado: boolean = true;
   ngc_pvs: any;
   userLat: any;
   userLng: any;
@@ -131,7 +132,11 @@ export class PgDashpuntosverdesnegocioComponent {
     ModalCambiarEstado(seleccion:any) {
       this.objSeleccion=seleccion;
       this.newpvs = this.objSeleccion.descripcion;
-      //console.log(this.objSeleccion)
+      if(this.objSeleccion.estado){
+        this.estado = false;
+      }else{
+        this.estado = true;
+      }
       this.visibleEstado = true;
     }
 
@@ -205,9 +210,9 @@ export class PgDashpuntosverdesnegocioComponent {
   async DesactivarPuntoVerde(){
     try {
       console.log("ID DE LA Punto verde:"+this.objSeleccion.punto_verde_id);
-      const data = await this.variosServicios.DesactivarPuntoVerde(this.objSeleccion.punto_verde_id).toPromise();
+      const data = await this.variosServicios.EstadoCambiarPuntoVerde(this.objSeleccion.punto_verde_id, this.estado).toPromise();
       await this.PverdesNegocio();
-      this.messages2 = [{severity:'success', summary:'Éxito', detail:'Punto verde eliminado exitosamente'}];
+      this.messages2 = [{severity:'success', summary:'Éxito', detail:'Cambio de estado exitosamente'}];
       this.autoCloseMessages('messages2');
       this.visibleEstado=false;
     } catch (error) {
