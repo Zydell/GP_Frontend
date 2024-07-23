@@ -70,6 +70,12 @@ export class ServiciviosVarios {
     return this.hpptclient.get<any>(this.urlServiciosTest + '/api/ofertas/active')
   }
 
+  ListadoOfertasInactivas() {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/ofertas/inactive')
+  }
+
   HistorialNegocio(negocio_id:number){
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
@@ -157,6 +163,19 @@ export class ServiciviosVarios {
     const parametros = { descripcion, direccion, latitud, longitud, negocio_id, estado };
     return this.http.put<any>(`${this.urlServiciosTest}/api/puntos_verdes/${idPuntoVerde}`, parametros, { headers });
   }
+
+  ListadoPuntosActivas() {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/puntos_verdes/activos')
+  }
+
+  ListadoPuntosInactivas() {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/puntos_verdes/inactivos')
+  }
+
 
   //Negocios
   ListadoNegocios(){

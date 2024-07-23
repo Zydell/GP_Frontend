@@ -18,6 +18,12 @@ export class HeaderadminComponent implements OnInit {
   activeSection: string = ''; // Variable para rastrear la sección activa
   dato: any = {};
   user: any = {};
+
+  ofertAct: number = 0;
+  ofertIna: number = 0;
+  PuntoAct: number = 0;
+  PuntoIna: number = 0;
+
   sidebarCollapsed = false;
   cdn: any;
   showProfileMenu = false; // Variable para controlar la visibilidad del dropdown
@@ -33,8 +39,66 @@ export class HeaderadminComponent implements OnInit {
     this.loadUserData(this.dato.admin_id);
     console.log('User info on init:', this.user); // Agregar log para debug
     this.collapsed = !this.collapsed;
+    this.loadOfertas(); // Cargar las ofertas
+    this.loadPuntos();
   }
 
+  loadOfertas() {
+    this.OfertasAct();
+    this.OfertasIna();
+  }
+
+  loadPuntos() {
+    this.PuntosVerdesAct();
+    this.PuntosVerdesIna();
+  }
+
+  OfertasAct() {
+    this.servicios.ListadoOfertasActivas().subscribe(
+      (response) => {
+        this.ofertAct = response.length;
+        console.log('Ofertas activas:', this.ofertAct);
+      },
+      (error) => {
+        console.error('Error fetching active offers:', error);
+      }
+    );
+  }
+
+  OfertasIna() {
+    this.servicios.ListadoOfertasInactivas().subscribe(
+      (response) => {
+        this.ofertIna = response.length;
+        console.log('Ofertas inactivas:', this.ofertIna);
+      },
+      (error) => {
+        console.error('Error fetching inactive offers:', error);
+      }
+    );
+  }
+  PuntosVerdesAct() {
+    this.servicios.ListadoPuntosActivas().subscribe(
+      (response) => {
+        this.PuntoAct = response.length;
+        console.log('Ofertas activas:', this.PuntoAct);
+      },
+      (error) => {
+        console.error('Error fetching active offers:', error);
+      }
+    );
+  }
+
+  PuntosVerdesIna() {
+    this.servicios.ListadoPuntosInactivas().subscribe(
+      (response) => {
+        this.PuntoIna = response.length;
+        console.log('Ofertas inactivas:', this.PuntoIna);
+      },
+      (error) => {
+        console.error('Error fetching inactive offers:', error);
+      }
+    );
+  }
   async loadUserData(id: number): Promise<void> {
     try {
       const data = await this.servicios.AdminPorId(id).toPromise();
@@ -68,7 +132,12 @@ export class HeaderadminComponent implements OnInit {
        this.showProfileMenu = false;
      }
    }
-
+   private setActiveMenu(menu: string) {
+    this.activeMenu = menu;
+  }
+  private setActiveSection(section: string) {
+    this.activeSection = section;
+  }
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
@@ -124,10 +193,6 @@ SeccionPerfil(event: Event) {
   this.collapsed = true; // Colapsa la sección de gestión
   this.seccion = '8';
 }
-  private setActiveMenu(menu: string) {
-    this.activeMenu = menu;
-  }
-  private setActiveSection(section: string) {
-    this.activeSection = section;
-  }
+
+  
 }
