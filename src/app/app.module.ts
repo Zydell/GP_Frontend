@@ -125,7 +125,7 @@ import { ServerErrorComponent } from './server-error/server-error.component';
     PgPerfilnegocioComponent,
     PgPerfilusuarioComponent,
     PgMapaPuntosVerdesAdminComponent,
-    ServerErrorComponent // Añadir esta línea
+    ServerErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -169,7 +169,7 @@ import { ServerErrorComponent } from './server-error/server-error.component';
     SpinnerService,
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true } // Añadir esta línea
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
