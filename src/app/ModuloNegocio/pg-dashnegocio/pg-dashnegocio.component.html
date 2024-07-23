@@ -156,7 +156,7 @@
             </li>
         
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="" (click)="SeccionPerfil($event)">
                 <i class="bi bi-person"></i>
                 <span>Mi Perfil</span>
               </a>
@@ -164,17 +164,7 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-        
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Configuraciones de la cuenta</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-        
+
             <li>
               <a class="dropdown-item d-flex align-items-center" href="" (click)="SeccionFaq($event)">
                 <i class="bi bi-question-circle"></i>
@@ -260,7 +250,7 @@
       <li class="nav-heading">Páginas</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="" (click)="SeccionHistorial($event)" >
+        <a class="nav-link collapsed" href="" (click)="SeccionPerfil($event)" >
           <i class="bi bi-person"></i>
           <span>Perfil</span>
         </a>
@@ -519,6 +509,11 @@
   <div *ngIf="seccion === '9'">
     <app-pg-contacto></app-pg-contacto>
   </div>
+  <!-- Contenido para Perfil -->
+  <div *ngIf="seccion === '10'">
+    <app-pg-perfilnegocio></app-pg-perfilnegocio>
+  </div>
+
 
   </main><!-- End #main -->
 

@@ -1,16 +1,19 @@
+
 import { Component, HostListener, OnInit   } from '@angular/core';
 import { AuthService } from '../../ModuloServiciosWeb/Servicio.Auth';
 import { ServiciviosVarios } from '../../ModuloServiciosWeb/ServiciosTestVarios.component';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { Message } from 'primeng/api';
 
 @Component({
-  selector: 'app-pg-dashnegocio',
-  templateUrl: './pg-dashnegocio.component.html',
-  styleUrls: [ './pg-dashnegocio.component.css',
+  selector: 'app-pg-perfilnegocio',
+  templateUrl: './pg-perfilnegocio.component.html',
+  styleUrls: [ './pg-perfilnegocio.component.css',
     "./../../../assets/vendor/bootstrap-icons/bootstrap-icons.css"
     ]
   })
-export class PgDashnegocioComponent {
+export class PgPerfilnegocioComponent {
   seccion: string = '1';
   title = 'GreenPoint';
   negocio: any = {};
@@ -29,45 +32,16 @@ export class PgDashnegocioComponent {
   async ngOnInit() {
     this.negocio = await this.authService.getNegocio(); // Obtiene la información del usuario al inicializar el componente
     await this.ListadoInformacion();
-    await this.Cant_Pverde();
-    await this.Cant_Ofertas();
     //console.log('negocio info on init:', this.negocio); // Agregar log para debug
   }
 
-  async Cant_Pverde(){  
-    //Obtener los puntos verdes del negocio
-    try {
-      const data = await this.variosServicios.ListadoPuntoVerdeNegocio(this.ngc.negocio_id).toPromise();
-      //console.log("PUNTOS VERDEEEEEE: "+ data)
-      if (data) {
-        this.cant_pvs = data.length;
-        console.log("Cantidad de puntos verdes"+this.cant_pvs);
-      }
-    } catch (error) {
-      console.error("Error obteniendo los puntos verdes del negocio: ", error);
-    }
-  }
-
-  async Cant_Ofertas(){  
-    //Obtener los puntos verdes del negocio
-    try {
-      const data = await this.variosServicios.ListadoOfertasActivasNegocio(this.ngc.negocio_id).toPromise();
-      console.log("PUNTOS VERDEEEEEE: "+ data)
-      
-      if (data) {
-        this.cant_ofts = data.length;
-      }
-      
-    } catch (error) {
-      console.error("Error obteniendo los puntos verdes del negocio: ", error);
-    }
-  }
 
   async ListadoInformacion() {
     const data = await new Promise<any>(resolve => this.authService.getInfoNegocio(this.negocio.negocio_id).subscribe((translated:any) => { resolve(translated) }));
     if (data) {
       //console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
       this.ngc = data;
+      console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+JSON.stringify(this.ngc, null, 2));
       this.imgbase64 = this.convertBufferToBase64(data.image.data);     
     }
   }
@@ -103,51 +77,5 @@ export class PgDashnegocioComponent {
     });
   }
 
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
-  }
 
-  SeccionDashboard(event: Event){
-    event.preventDefault();
-    this.seccion = '1';
-  }
-  async SeccionPuntosVerdes(event: Event){
-    event.preventDefault();
-    await this.ngOnInit();
-    this.seccion = '2';
-  }
-  SeccionRegistroReciclaje(event: Event){
-    event.preventDefault();
-    this.seccion = '3';
-  }
-  SeccionHistorial(event: Event){
-    event.preventDefault();
-    this.seccion = '4';
-  }
-  SeccionVerOfertas(event: Event){
-    event.preventDefault();
-    this.seccion = '5';
-  }
-  SeccionGestionOfertas(event: Event){
-    event.preventDefault();
-    this.seccion = '6';
-  }
-  SeccionValidarCodigo(event: Event){
-    event.preventDefault();
-    this.seccion = '7';
-  }
-  SeccionFaq(event: Event){
-    event.preventDefault();
-    this.seccion = '8';
-  }
-  SeccionContacto(event: Event){
-    event.preventDefault();
-    this.seccion = '9';
-  }
-  SeccionPerfil(event: Event){
-    event.preventDefault();
-    this.seccion = '10';
-  }
-  
 }

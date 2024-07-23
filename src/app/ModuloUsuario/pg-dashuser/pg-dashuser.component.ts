@@ -129,4 +129,8 @@ export class PgDashuserComponent {
     event.preventDefault();
     this.seccion = '9';
   }
+  SeccionPerfil(event: Event){
+    event.preventDefault();
+    this.seccion = '10';
+  }
 }

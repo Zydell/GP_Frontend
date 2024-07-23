@@ -76,6 +76,8 @@ import { PgCiudadanosComponent } from './ModuloAdministracion/pg-ciudadanos/pg-c
 import { PgPerfilAdminComponent } from './ModuloAdministracion/pg-perfil-admin/pg-perfil-admin.component';
 import { PgFaqComponent } from './ModuloNegocio/pg-faq/pg-faq.component';
 import { PgContactoComponent } from './ModuloNegocio/pg-contacto/pg-contacto.component';
+import { PgPerfilnegocioComponent } from './ModuloNegocio/pg-perfilnegocio/pg-perfilnegocio.component';
+import { PgPerfilusuarioComponent } from './ModuloUsuario/pg-perfilusuario/pg-perfilusuario.component';
 
 
 @NgModule({
@@ -124,7 +126,9 @@ import { PgContactoComponent } from './ModuloNegocio/pg-contacto/pg-contacto.com
     PgCiudadanosComponent,
     PgPerfilAdminComponent,
     PgFaqComponent,
-    PgContactoComponent
+    PgContactoComponent,
+    PgPerfilnegocioComponent,
+    PgPerfilusuarioComponent
   ],
   imports: [
     BrowserModule,
