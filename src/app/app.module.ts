@@ -78,6 +78,7 @@ import { PgFaqComponent } from './ModuloNegocio/pg-faq/pg-faq.component';
 import { PgContactoComponent } from './ModuloNegocio/pg-contacto/pg-contacto.component';
 import { PgPerfilnegocioComponent } from './ModuloNegocio/pg-perfilnegocio/pg-perfilnegocio.component';
 import { PgPerfilusuarioComponent } from './ModuloUsuario/pg-perfilusuario/pg-perfilusuario.component';
+import { PgMapaPuntosVerdesAdminComponent } from './ModuloAdministracion/pg-mapa-puntos-verdes-admin/pg-mapa-puntos-verdes-admin.component';
 
 
 @NgModule({
@@ -128,7 +129,8 @@ import { PgPerfilusuarioComponent } from './ModuloUsuario/pg-perfilusuario/pg-pe
     PgFaqComponent,
     PgContactoComponent,
     PgPerfilnegocioComponent,
-    PgPerfilusuarioComponent
+    PgPerfilusuarioComponent,
+    PgMapaPuntosVerdesAdminComponent
   ],
   imports: [
     BrowserModule,

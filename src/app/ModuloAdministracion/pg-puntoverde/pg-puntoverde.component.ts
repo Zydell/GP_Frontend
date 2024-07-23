@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, ViewChild, Renderer2 } from '@angular/core';
 import { ServiciviosVarios } from '../../ModuloServiciosWeb/ServiciosTestVarios.component';
 import { Mensajes } from '../../ModuloHerramientas/Mensajes.component';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { SortingService } from '../../sorting.service'; // Adjust the path as needed
+import { HttpClient } from '@angular/common/http';
 
+let openInfoWindows: any[] = []; // Declare openInfoWindows as an array of google.maps.InfoWindow
 
 @Component({
   selector: 'app-pg-puntoverde',
@@ -12,9 +14,9 @@ import { SortingService } from '../../sorting.service'; // Adjust the path as ne
   styleUrls: ['./pg-puntoverde.component.css'],
   providers: [MessageService]
 })
-export class PgPuntoverdeComponent implements OnInit{
+export class PgPuntoverdeComponent{
   @ViewChild('dt1') table!: Table;
-
+  checked: boolean = false;
   lsListado:any=[];
 
   objSeleccion:any="-1";
@@ -26,11 +28,18 @@ export class PgPuntoverdeComponent implements OnInit{
   visibleEstado: boolean=false;
   visibleNuevo: boolean=false;
   selectedSize: any = 'p-datatable-sm';
+
+  geodir: string = '';
+  userLat: any;
+  userLng: any;
+
   constructor
   (
     private servicios: ServiciviosVarios,
     private messageService: MessageService,
     private mensajes:Mensajes,
+    private http: HttpClient,
+    private renderer: Renderer2,
     private sortingService: SortingService
   ) { }
 
