@@ -137,5 +137,13 @@ export class PgDashnegocioComponent {
     event.preventDefault();
     this.seccion = '7';
   }
+  SeccionFaq(event: Event){
+    event.preventDefault();
+    this.seccion = '8';
+  }
+  SeccionContacto(event: Event){
+    event.preventDefault();
+    this.seccion = '9';
+  }
   
 }

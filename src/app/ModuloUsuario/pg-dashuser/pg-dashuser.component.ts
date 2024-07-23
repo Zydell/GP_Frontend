@@ -120,4 +120,13 @@ export class PgDashuserComponent {
     event.preventDefault();
     this.seccion = '4';
   }
+
+  SeccionFaq(event: Event){
+    event.preventDefault();
+    this.seccion = '8';
+  }
+  SeccionContacto(event: Event){
+    event.preventDefault();
+    this.seccion = '9';
+  }
 }

@@ -176,7 +176,7 @@
             </li>
         
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+              <a class="dropdown-item d-flex align-items-center" href="" (click)="SeccionFaq($event)">
                 <i class="bi bi-question-circle"></i>
                 <span>¿Necesitas Ayuda?</span>
               </a>
@@ -260,21 +260,21 @@
       <li class="nav-heading">Páginas</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
+        <a class="nav-link collapsed" href="" (click)="SeccionHistorial($event)" >
           <i class="bi bi-person"></i>
           <span>Perfil</span>
         </a>
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-faq.html">
+        <a class="nav-link collapsed" href="" (click)="SeccionFaq($event)">
           <i class="bi bi-question-circle"></i>
           <span>F.A.Q</span>
         </a>
       </li><!-- End F.A.Q Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-contact.html">
+        <a class="nav-link collapsed" href="" (click)="SeccionContacto($event)">
           <i class="bi bi-envelope"></i>
           <span>Contacto</span>
         </a>
@@ -511,6 +511,14 @@
     <div *ngIf="seccion === '7'">
       <app-pg-validarcodigo></app-pg-validarcodigo>
     </div>
+  <!-- Contenido para FAQ -->
+  <div *ngIf="seccion === '8'">
+    <app-pg-faq></app-pg-faq>
+  </div>
+  <!-- Contenido para Contacto -->
+  <div *ngIf="seccion === '9'">
+    <app-pg-contacto></app-pg-contacto>
+  </div>
 
   </main><!-- End #main -->
 
