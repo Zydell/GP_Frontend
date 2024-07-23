@@ -1,4 +1,3 @@
-// src/app/server-error/server-error.component.ts
 import { Component } from '@angular/core';
 
 @Component({
