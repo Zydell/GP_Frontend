@@ -3,7 +3,6 @@ import { Component, HostListener, OnInit   } from '@angular/core';
 import { AuthService } from '../../ModuloServiciosWeb/Servicio.Auth';
 import { ServiciviosVarios } from '../../ModuloServiciosWeb/ServiciosTestVarios.component';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
 import { Message } from 'primeng/api';
 
 @Component({
@@ -22,6 +21,11 @@ export class PgPerfilnegocioComponent {
   cant_pvs: number = 0;
   cant_ofts: number = 0;
   ngc: any;
+  currentPassword: string = '';
+  newPassword: string = '';
+  renewPassword: string = '';
+  messages1: Message[] = [];
+  messages2: Message[] = [];
 
   constructor(
     public  authService: AuthService, 
@@ -35,6 +39,11 @@ export class PgPerfilnegocioComponent {
     //console.log('negocio info on init:', this.negocio); // Agregar log para debug
   }
 
+  async cambiarclave(): Promise<void> {
+    this.currentPassword = '';
+    this.newPassword = '';
+    this.renewPassword = '';
+  }  
 
   async ListadoInformacion() {
     const data = await new Promise<any>(resolve => this.authService.getInfoNegocio(this.negocio.negocio_id).subscribe((translated:any) => { resolve(translated) }));
@@ -77,5 +86,67 @@ export class PgPerfilnegocioComponent {
     });
   }
 
+  autoCloseMessages(messageType: 'messages1' | 'messages2') {
+    setTimeout(() => {
+      if (messageType === 'messages1') {
+        this.messages1 = [];
+      } else if (messageType === 'messages2') {
+        this.messages2 = [];
+      }
+    }, 4000); // Tiempo en milisegundos (5000 ms = 5 segundos)
+  }
+
+  validatePassword(password: string): boolean {
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,16}$/;
+    return passwordRegex.test(password);
+  }
+
+  CambioClave(): void {
+    if (!this.validatePassword(this.newPassword)) {
+      this.messages1 = [{severity:'error', summary:'Error', detail:"Contraseña nueva inválida (al menos una mayuscula y numero - 8 caracteres)"}];
+        this.autoCloseMessages('messages1');
+      return;
+    }
+
+    if (this.newPassword !== this.renewPassword) {
+      this.messages1 = [{severity:'error', summary:'Error', detail:"Las contraseñas nuevas no coinciden"}];
+        this.autoCloseMessages('messages1');
+      return;
+    }
+
+    if (this.newPassword === this.currentPassword) {
+      this.messages1 = [{severity:'error', summary:'Error', detail:"La contraseña actual es Incorrecta"}];
+      this.autoCloseMessages('messages1');
+      return;
+    }
+
+    this.CambiarContrasena(this.negocio.correo_electronico, this.currentPassword, this.newPassword);
+  }
+
+  CambiarContrasena(correo: string, claveActual: string, nuevaClave: string): void {
+    this.variosServicios.CambiarContrasena(correo, claveActual, nuevaClave).subscribe(
+      response => {
+        //this.showMessage('success', 'Success', 'Contraseña actualizada con éxito');
+        this.messages2 = [{severity:'success', summary:'Éxito', detail:'Contraseña actualizada con éxito'}];
+        this.autoCloseMessages('messages2');
+        this.logout();
+      },
+      error => {
+        //this.showMessage('error', 'Error', 'La contraseña actual es Incorrecta');
+        this.messages1 = [{severity:'error', summary:'Error', detail:"La contraseña actual es Incorrecta"}];
+        this.autoCloseMessages('messages1');
+      }
+    );
+  }
+
+  logout() {
+    this.authService.logout();
+    //this.showMessage('success', 'Success', 'Contraseña actualizada con éxito');
+    this.messages2 = [{severity:'success', summary:'Éxito', detail:'Contraseña actualizada con éxito'}];
+    this.autoCloseMessages('messages2');
+    setTimeout(() => {
+      this.router.navigate(['/login']);
+    }, 1500) 
+  }
 
 }

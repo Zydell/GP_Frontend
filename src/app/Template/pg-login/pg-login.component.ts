@@ -72,6 +72,8 @@ export class PgLoginComponent {
           console.error(err);
           if (err.error.message == 'Usuario no encontrado'){
             this.messages1 = [{severity: 'error', summary: 'Error', detail: err.error.message}];
+          }else if(err.error.message == 'Contraseña incorrecta'){
+            this.messages1 = [{severity: 'error', summary: 'Error', detail: err.error.message}];
           }else{
             this.messages1 = [{severity: 'error', summary: 'Error', detail: 'Error con la conexion al servidor'}];
           }
