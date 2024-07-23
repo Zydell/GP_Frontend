@@ -12,6 +12,7 @@ import{ PgRecuperarComponent } from './Template/pg-recuperar/pg-recuperar.compon
 import { PgDashuserComponent } from './ModuloUsuario/pg-dashuser/pg-dashuser.component';
 import { PgDashnegocioComponent } from './ModuloNegocio/pg-dashnegocio/pg-dashnegocio.component';
 import { AuthGuard } from './ModuloServiciosWeb/auth.guard';
+import { ServerErrorComponent } from './server-error/server-error.component'; // Añadir esta línea
 
 const routes: Routes = [
   {
@@ -63,6 +64,10 @@ const routes: Routes = [
       component: DashboardadminComponent, 
       canActivate: [AuthGuard], 
       data: { expectedUserType: 3 } 
+    },
+    { 
+      path: 'server-error', // Añadir esta ruta
+      component: ServerErrorComponent
     },
     { 
       path: '**', 

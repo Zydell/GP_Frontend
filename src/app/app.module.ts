@@ -12,7 +12,7 @@ import { DashboardpublicoComponent } from './Template/templatePublico/dashboardp
 import { PortadainicialComponent } from './Template/templatePublico/portadainicial/portadainicial.component';
 import { SpinnerService } from './ModuloServiciosWeb/spinner.service';
 import { SpinnerInterceptor } from './ModuloServiciosWeb/InterceptorServicios.service';
-import {  SpinnerComponent } from './ModuloServiciosWeb/spinner.component';
+import { SpinnerComponent } from './ModuloServiciosWeb/spinner.component';
 import { ListboxModule } from 'primeng/listbox';
 import { FooteradminComponent } from './Template/templateAdmin/footeradmin/footeradmin.component';
 import { HeaderadminComponent } from './Template/templateAdmin/headeradmin/headeradmin.component';
@@ -79,7 +79,8 @@ import { PgContactoComponent } from './ModuloNegocio/pg-contacto/pg-contacto.com
 import { PgPerfilnegocioComponent } from './ModuloNegocio/pg-perfilnegocio/pg-perfilnegocio.component';
 import { PgPerfilusuarioComponent } from './ModuloUsuario/pg-perfilusuario/pg-perfilusuario.component';
 import { PgMapaPuntosVerdesAdminComponent } from './ModuloAdministracion/pg-mapa-puntos-verdes-admin/pg-mapa-puntos-verdes-admin.component';
-
+import { ErrorInterceptor } from './interceptors/error-interceptor'; // Asegúrate de importar esto
+import { ServerErrorComponent } from './server-error/server-error.component'; // Añadir esta línea
 
 @NgModule({
   declarations: [
@@ -95,13 +96,6 @@ import { PgMapaPuntosVerdesAdminComponent } from './ModuloAdministracion/pg-mapa
     MenuadminComponent,
     DashboardadminComponent,
     PgPrincipaladministracionComponent,
-    //PgSeccionComponent,
-    //PgDimensionComponent,
-    //PgPrincipaltestComponent,
-    //PgTestComponent,
-    //PgInstruccionComponent,
-    //PgRecomendacionComponent,
-    //PgCiudadanoComponent,
     PgNegocioComponent,
     PgMaterialComponent,
     PgPuntoverdeComponent,
@@ -130,22 +124,53 @@ import { PgMapaPuntosVerdesAdminComponent } from './ModuloAdministracion/pg-mapa
     PgContactoComponent,
     PgPerfilnegocioComponent,
     PgPerfilusuarioComponent,
-    PgMapaPuntosVerdesAdminComponent
+    PgMapaPuntosVerdesAdminComponent,
+    ServerErrorComponent // Añadir esta línea
   ],
   imports: [
     BrowserModule,
-    MessagesModule, RadioButtonModule,
-    HttpClientModule,DropdownModule,ConfirmDialogModule,
-    BrowserAnimationsModule,ListboxModule,ToggleButtonModule,
-    AppRoutingModule,ReactiveFormsModule,MultiSelectModule,
-    FormsModule,SpinnerModule,MegaMenuModule,AvatarModule,MenuModule,
-    CardModule,PanelMenuModule,TabViewModule,TableModule,ProgressSpinnerModule,AccordionModule,TagModule,ImageModule,
-    InputTextModule,ToolbarModule,ButtonModule,MenubarModule,SlideMenuModule,DialogModule,DividerModule,ToastModule,FileUploadModule
+    MessagesModule, 
+    RadioButtonModule,
+    HttpClientModule,
+    DropdownModule,
+    ConfirmDialogModule,
+    BrowserAnimationsModule,
+    ListboxModule,
+    ToggleButtonModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    MultiSelectModule,
+    FormsModule,
+    SpinnerModule,
+    MegaMenuModule,
+    AvatarModule,
+    MenuModule,
+    CardModule,
+    PanelMenuModule,
+    TabViewModule,
+    TableModule,
+    ProgressSpinnerModule,
+    AccordionModule,
+    TagModule,
+    ImageModule,
+    InputTextModule,
+    ToolbarModule,
+    ButtonModule,
+    MenubarModule,
+    SlideMenuModule,
+    DialogModule,
+    DividerModule,
+    ToastModule,
+    FileUploadModule
   ],
-  providers: [AuthService, UrlServicios, SpinnerService,
+  providers: [
+    AuthService, 
+    UrlServicios, 
+    SpinnerService,
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
-  ],// Agrega el interceptor HTTP],
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true } // Añadir esta línea
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
