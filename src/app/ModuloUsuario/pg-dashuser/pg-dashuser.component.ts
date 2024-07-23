@@ -42,7 +42,7 @@ export class PgDashuserComponent {
         this.cant_cod = data.length;
       }
     } catch (error) {
-      console.error("Error obteniendo los puntos verdes del negocio: ", error);
+      console.error("Error obteniendo los codigos: ", error);
     }
   }
 
@@ -60,7 +60,7 @@ export class PgDashuserComponent {
           }
         },
         (error: any) => {
-          console.error("Error obteniendo los puntos verdes del negocio: ", error);
+          console.error("Error obteniendo las ofertas: ", error);
         }
       );
       
