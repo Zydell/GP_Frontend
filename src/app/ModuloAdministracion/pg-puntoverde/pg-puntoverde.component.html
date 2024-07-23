@@ -4,9 +4,12 @@
 <section class="section dashboard">
   <div class="card separador-componentes">
     <div class="card">
+      <div class="filter" style="margin-right: 3%; margin-top: -8px;">
+        <p-toggleButton [(ngModel)]="checked" onLabel="Gestión" offLabel="Mapa"></p-toggleButton>
+      </div>
       <div class="card-body">
         <h5 class="card-title">Puntos Verdes</h5>
-        <p-table
+        <p-table *ngIf="checked === false"
           #dt1
           [value]="lsListado"
           dataKey="punto_verde_id"
@@ -110,7 +113,9 @@
       </ng-template>
      
     </p-table>
-  </div>
+    <app-pg-mapa-puntos-verdes-admin *ngIf="checked === true"></app-pg-mapa-puntos-verdes-admin>
+  </div>    
+
   <!-- <p-dialog
     header="Actualización"
     [(visible)]="visibleEditar"
