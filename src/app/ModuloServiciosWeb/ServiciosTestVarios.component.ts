@@ -88,6 +88,12 @@ export class ServiciviosVarios {
     return this.hpptclient.get<any>(this.urlServiciosTest + '/api/reciclaje/historial/ciudadano/'+id_cdn)
   }
 
+  HistorialOfertas(ce_user:any): any {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.hpptclient.get<any>(this.urlServiciosTest + '/api/ofertas_greencoins/historial-ofertas/'+ce_user)
+  }
+
 
   //Listado de todas las Ofertas activas de un negocio
   ListadoOfertasActivasNegocio(negocio_id:number) {
