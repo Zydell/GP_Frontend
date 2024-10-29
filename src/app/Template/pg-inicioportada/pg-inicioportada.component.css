@@ -112,7 +112,7 @@ body {
     padding: 15px 0;
   }
   #header.header-scrolled, #header.header-inner-pages {
-    background: rgba(40, 90, 45, 0.9);
+    background: rgba(48, 108, 54, 0.9);
   }
   #header .logo {
     font-size: 30px;
@@ -166,7 +166,7 @@ body {
     margin-left: 5px;
   }
   .navbar a:hover, .navbar .active, .navbar .active:focus, .navbar li:hover > a {
-    color: #000000;
+    color: #053511;     /* Hover de los botones sin presionar del header  */
   }
   .navbar .getstarted, .navbar .getstarted:focus {
     padding: 8px 20px;
@@ -179,7 +179,7 @@ body {
   }
   .navbar .getstarted:hover, .navbar .getstarted:focus:hover {
     color: #fff;
-    background: #31a9e1;
+    background: #e8e8e8;  /* Fondo del boton de registro  */
   }
   .navbar .dropdown ul {
     display: block;
