@@ -36,7 +36,7 @@
                     <div class="col-12 form-group" style="margin-top: -10px;">
                       <label for="email" class="form-label" style="font-size: 14px;">Correo electrónico del ciudadano</label>
                       <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
+                        <span class="input-group-text" id="inputGroupPrepend">&#79;</span>
                         <input type="email" [(ngModel)]="email" name="email" class="form-control" id="email" required style="font-size: 13px;" placeholder="ciudadano@gmail.com">
                         <div class="invalid-feedback floating-invalid-feedback">Debes ingresar un correo electrónico!</div>
                       </div>
@@ -59,7 +59,7 @@
                       </div>
 
                     <div class="col-12 form-group" style="margin-top: -10px;">
-                        <label for="cantidad" class="form-label" style="font-size: 14px;">Cantidad reciclada (libras)</label>
+                        <label for="cantidad" class="form-label" style="font-size: 14px;">Cantidad bolsas recicladas (35cm x 40cm)</label>
                         <div class="input-group has-validation">
                           <input type="number" [(ngModel)]="cantidad" name="cantidad" class="form-control"   id="cantidad" required style="font-size: 13px;" min="1" max="100" >
                           <div class="invalid-feedback floating-invalid-feedback">Debes ingresar una cantidad reciclada valida (min 1 - max 100)!</div>

@@ -52,7 +52,7 @@
             </th>
             <th pSortableColumn="valor_por_libra">
                 <div class="flex align-items-center">
-                    Valor por libra (GC) <p-sortIcon field="valor_por_libra"></p-sortIcon>
+                    Valor por Bolsa (GC) <p-sortIcon field="valor_por_libra"></p-sortIcon>
                 </div>
             </th>
             <th pSortableColumn="estado">
@@ -121,7 +121,7 @@
         </span>
         <input pInputText placeholder="Nombre Material" id="descripcion" [(ngModel)]="strnombre" class="form-control" (input)="strnombre = strnombre" minlength="5" required style="font-size: 14px;"/>
       </div>
-      <label for="valor" class="form-label" style="font-size: 14px;">Valor por libra(Greencoins): </label>
+      <label for="valor" class="form-label" style="font-size: 14px;">Valor por Bolsa (Greencoins): </label>
       <div class="p-inputgroup">
         <span class="p-inputgroup-addon">
             <i class="pi pi-pencil"></i>
@@ -158,7 +158,7 @@
         <input pInputText placeholder="Nombre" id="Nombre" [(ngModel)]="objSeleccion.tipo" class="form-control" required style="font-size: 14px;" minlength="5"/>
       </div>
   
-      <label for="Valor" class="form-label" style="font-size: 14px;">Valor por libra (Greencoins):  </label>
+      <label for="Valor" class="form-label" style="font-size: 14px;">Valor por Bolsa (Greencoins):  </label>
       <div class="p-inputgroup" >
           <span class="p-inputgroup-addon">
               <i class="pi pi-pencil"></i>
@@ -194,7 +194,7 @@
       </div>
       <div class="p-inputgroup" style="margin-top: 10px;">
         <span class="p-inputgroup-addon" >
-          <label for="Descripcion" class="form-label" style="font-size: 14px;">Valor por Libra(GC): </label>
+          <label for="Descripcion" class="form-label" style="font-size: 14px;">Valor por Bolsa(GC): </label>
         </span>
         <input pInputText [(ngModel)]="objSeleccion.valor_por_libra" class="p-inputtext-sm" readonly/>
       </div>

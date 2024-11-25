@@ -56,13 +56,13 @@ const routes: Routes = [
     { 
       path: 'dashadmin/principaladmin', 
       component: DashboardadminComponent, 
-      canActivate: [AuthGuard], 
+      //canActivate: [AuthGuard], 
       data: { expectedUserType: 3 } 
     },
     { 
       path: 'dashadmin', 
       component: DashboardadminComponent, 
-      canActivate: [AuthGuard], 
+      //canActivate: [AuthGuard], 
       data: { expectedUserType: 3 } 
     },
     { 
