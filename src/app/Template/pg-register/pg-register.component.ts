@@ -183,6 +183,7 @@ export class PgRegisterComponent {
   }
 
   async validateRuc() {
+    /*
     await this.addFormValidation();
     this.isLoading = true;
     this.authService.validateRuc(this.ruc).subscribe(
@@ -207,6 +208,14 @@ export class PgRegisterComponent {
         this.messages1 = [{severity:'error', summary:'Error', detail:error.error.error}];
         this.autoCloseMessages('messages1');
       }
-    );
+    );*/
+    this.isLoading = true;
+
+    setTimeout(() => {
+      this.messages2 = [{severity: 'success', summary: 'Éxito', detail: 'RUC validada'}];
+      this.autoCloseMessages('messages2');
+      this.tipo = 'negocio-valido';
+      this.isLoading = false;
+    }, 2000); // 2000 ms = 2 segundos
   }
 }

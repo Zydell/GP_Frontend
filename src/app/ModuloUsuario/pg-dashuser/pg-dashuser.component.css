@@ -3,7 +3,7 @@
   top: 60px;
   left: 0;
   bottom: 0;
-  width: 300px;
+  width: 100px;
   z-index: 996;
   transition: all 0.3s;
   padding: 20px;
@@ -46,11 +46,11 @@
   }
 
   #main {
-    margin-left: 300px; /* Ajustar el contenido principal al ancho del sidebar expandido */
+    margin-left: 100px; /* Ajustar el contenido principal al ancho del sidebar expandido */
   }
 
   #main.toggle-sidebar {
-    margin-left: 0px; /* Ancho comprimido del sidebar */
+    margin-left: 50px; /* Ancho comprimido del sidebar */
   }
 }
 
@@ -133,7 +133,7 @@ h6 {
 --------------------------------------------------------------*/
 #main {
   margin-top: 60px;
-  padding: 20px 30px;
+  padding: 20px 0px;  /* se queda pegado al*/
   transition: all 0.3s;
 }
 
@@ -693,7 +693,7 @@ h6 {
   top: 60px;
   left: 0;
   bottom: 0;
-  width: 300px;
+  width: 250px;
   z-index: 996;
   transition: all 0.3s;
   padding: 20px;
