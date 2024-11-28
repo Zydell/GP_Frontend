@@ -214,17 +214,33 @@
 
                 <div class="card-body">
                   <h5 class="card-title">Tus ofertas <span>| Tienes</span></h5>
-
+                
                   <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <div 
+                      class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                      pTooltip="Acción de agregar o quitar ofertas"
+                      tooltipPosition="top"
+                      [showDelay]="1000"
+                      [hideDelay]="1000">
                       <i class="bi bi-plus-slash-minus"></i>
                     </div>
                     <div class="ps-3">
                       <h6>{{this.cant_ofts+" "}}<span style="font-size: 20px;">ofertas</span></h6>
-                      <a href="" class="text-success small pt-1 fw-bold" (click)="SeccionGestionOfertas($event)">Agregar</a><span class="text-muted small pt-2 ps-1">ofertas</span>
+                      <a 
+                        href="" 
+                        class="text-success small pt-1 fw-bold" 
+                        (click)="SeccionGestionOfertas($event)"
+                        pTooltip="Haz clic para agregar una oferta"
+                        tooltipPosition="bottom"
+                        [showDelay]="1000"
+                        [hideDelay]="1000">
+                        Agregar
+                      </a>
+                      <span class="text-muted small pt-2 ps-1">ofertas</span>
                     </div>
                   </div>
                 </div>
+                
 
               </div>
             </div><!-- End Sales Card -->
@@ -233,18 +249,34 @@
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card revenue-card">
                 <div class="card-body">
-                  <h5 class="card-title">Tus puntos verdes </h5>
-
+                  <h5 class="card-title">Tus puntos verdes</h5>
+                
                   <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <div 
+                      class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                      pTooltip="Ubicación de los puntos verdes activos"
+                      tooltipPosition="top"
+                      [showDelay]="1000"
+                      [hideDelay]="1000">
                       <i class="bi bi-geo-alt-fill"></i>
                     </div>
                     <div class="ps-3">
                       <h6>{{this.cant_pvs+" "}}<span style="font-size: 20px;">activos</span></h6>
-                      <a href="" class="text-success small pt-1 fw-bold" (click)="SeccionPuntosVerdes($event)">Agregar</a><span class="text-muted small pt-2 ps-1">PVs</span>
+                      <a 
+                        href="" 
+                        class="text-success small pt-1 fw-bold" 
+                        (click)="SeccionPuntosVerdes($event)"
+                        pTooltip="Haz clic para agregar un nuevo punto verde"
+                        tooltipPosition="bottom"
+                        [showDelay]="1000"
+                        [hideDelay]="1000">
+                        Agregar
+                      </a>
+                      <span class="text-muted small pt-2 ps-1">PVs</span>
                     </div>
                   </div>
                 </div>
+                
 
               </div>
             </div><!-- End Revenue Card -->
