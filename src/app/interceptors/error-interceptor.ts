@@ -13,7 +13,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         if (!error.status) { // Esto significa que el servidor no es alcanzable
-          this.router.navigate(['/server-error']);
+          //this.router.navigate(['/server-error']);
         }
         return throwError(error);
       })
