@@ -80,7 +80,8 @@ import { PgPerfilnegocioComponent } from './ModuloNegocio/pg-perfilnegocio/pg-pe
 import { PgPerfilusuarioComponent } from './ModuloUsuario/pg-perfilusuario/pg-perfilusuario.component';
 import { PgMapaPuntosVerdesAdminComponent } from './ModuloAdministracion/pg-mapa-puntos-verdes-admin/pg-mapa-puntos-verdes-admin.component';
 import { ErrorInterceptor } from './interceptors/error-interceptor'; 
-import { ServerErrorComponent } from './server-error/server-error.component'; 
+import { ServerErrorComponent } from './server-error/server-error.component';
+import { PgPuntoscriticosComponent } from './ModuloUsuario/pg-puntoscriticos/pg-puntoscriticos.component'; 
 
 @NgModule({
   declarations: [
@@ -125,7 +126,8 @@ import { ServerErrorComponent } from './server-error/server-error.component';
     PgPerfilnegocioComponent,
     PgPerfilusuarioComponent,
     PgMapaPuntosVerdesAdminComponent,
-    ServerErrorComponent
+    ServerErrorComponent,
+    PgPuntoscriticosComponent
   ],
   imports: [
     BrowserModule,

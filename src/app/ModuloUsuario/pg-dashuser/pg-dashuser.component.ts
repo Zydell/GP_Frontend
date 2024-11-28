@@ -120,6 +120,10 @@ export class PgDashuserComponent {
     event.preventDefault();
     this.seccion = '4';
   }
+  SeccionPuntosCriticos(event: Event){
+    event.preventDefault();
+    this.seccion = '5';
+  }
 
   SeccionFaq(event: Event){
     event.preventDefault();

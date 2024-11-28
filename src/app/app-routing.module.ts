@@ -34,12 +34,12 @@ const routes: Routes = [
   //{ path: 'protected', component: ProtectedComponent, canActivate: [AuthGuard] },
   { path: 'user-menu', 
     component: PgDashuserComponent, 
-    canActivate: [AuthGuard] ,
+    //canActivate: [AuthGuard] ,
     data: { expectedUserType: 1 } 
   },
   { path: 'user-negocio', 
     component: PgDashnegocioComponent, 
-    canActivate: [AuthGuard] ,
+    //canActivate: [AuthGuard] ,
     data: { expectedUserType: 2 } 
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' },

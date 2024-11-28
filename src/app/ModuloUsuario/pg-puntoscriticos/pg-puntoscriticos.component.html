@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="pagetitle">
+    <h1>Reportar Puntos Críticos</h1>
+  </div><!-- End Page Title -->
+
+  <section class="section dashboard">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"> Puntos Críticos</h5>
+        <hr>
+        <p style="font-weight: bold;"><span>Sube una foto:</span></p>
+        <div class="file-wrapper">
+          <!-- Imagen de previsualización o ícono de cámara -->
+          <img *ngIf="selectedImage; else defaultIcon" [src]="selectedImage" alt="Imagen seleccionada" />
+          
+          <!-- Ícono predeterminado que se muestra si no hay imagen seleccionada -->
+          <ng-template #defaultIcon>
+            <i class="pi pi-camera"></i>
+          </ng-template>
+          
+          <!-- Input de archivo invisible -->
+          <input type="file" id="fileInput" accept="image/*" (change)="onFileChange($event)" />
+        </div>
+
+        <hr>
+        <p style="font-weight: bold;"><span>Selecciona la ubicación:</span></p>
+      
+        <div id="map" style="border-radius: 5px; border:  2px solid gray; margin-left: 15%; height: 500px; width: 60%; margin-top: 20px;"></div>
+        
+        <hr>
+        <div style="width: 100%; display: flex; justify-content: end;">
+          <button pButton type="button" label="Enviar" icon="pi pi-send"></button>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+</div>
