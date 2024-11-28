@@ -194,7 +194,12 @@
                   <div class="card-body">
                     <h5 class="card-title">Códigos <span>|<br> Todos</span></h5>
                     <div class="d-flex align-items-center">
-                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <div 
+                        class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                        pTooltip="Esta es la cantidad de códigos QR que tienes canjeados"
+                        tooltipPosition="top"
+                        [showDelay]="1000"
+                        [hideDelay]="1000">
                         <i class="bi bi-qr-code"></i>
                       </div>
                       <div class="ps-3">
@@ -211,7 +216,12 @@
                   <div class="card-body">
                     <h5 class="card-title">GreenCoins <span>| Total</span></h5>
                     <div class="d-flex align-items-center">
-                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <div 
+                        class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                        pTooltip="Este es el total de GreenCoins que tienes para canjear ofertas"
+                        tooltipPosition="top"
+                        [showDelay]="1000"
+                        [hideDelay]="1000">
                         <i class="bi bi-currency-dollar"></i>
                       </div>
                       <div class="ps-3">
@@ -228,7 +238,12 @@
                   <div class="card-body">
                     <h5 class="card-title">Ofertas <span>| Disponibles</span></h5>
                     <div class="d-flex align-items-center">
-                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <div 
+                        class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                        pTooltip="Cantidad de ofertas disponibles para canjear"
+                        tooltipPosition="top"
+                        [showDelay]="1000"
+                        [hideDelay]="1000">
                         <i class="bi bi-plus-slash-minus"></i>
                       </div>
                       <div class="ps-3">
@@ -236,6 +251,7 @@
                       </div>
                     </div>
                   </div>
+                  
                 </div>
               </div>
 
@@ -311,7 +327,7 @@
       </section>
     </div>
 
-    <div *ngIf="seccion === '2'">
+    <div *ngIf="seccion === '2'" >
       <app-pg-canjeoofertas></app-pg-canjeoofertas>
     </div>
 

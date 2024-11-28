@@ -14,6 +14,7 @@ import { SpinnerService } from './ModuloServiciosWeb/spinner.service';
 import { SpinnerInterceptor } from './ModuloServiciosWeb/InterceptorServicios.service';
 import { SpinnerComponent } from './ModuloServiciosWeb/spinner.component';
 import { ListboxModule } from 'primeng/listbox';
+import { TooltipModule } from 'primeng/tooltip';
 import { FooteradminComponent } from './Template/templateAdmin/footeradmin/footeradmin.component';
 import { HeaderadminComponent } from './Template/templateAdmin/headeradmin/headeradmin.component';
 import { MenuadminComponent } from './Template/templateAdmin/menuadmin/menuadmin.component';
@@ -138,6 +139,7 @@ import { PgPuntoscriticosComponent } from './ModuloUsuario/pg-puntoscriticos/pg-
     ConfirmDialogModule,
     BrowserAnimationsModule,
     ListboxModule,
+    TooltipModule,
     ToggleButtonModule,
     AppRoutingModule,
     ReactiveFormsModule,

@@ -37,7 +37,7 @@
                       <label for="code" class="form-label" style="font-size: 14px;">Código de oferta</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">#</span>
-                        <input type="text" [(ngModel)]="code" name="code" class="form-control" id="code" required style="font-size: 13px;" placeholder="#### - #### - ########">
+                        <input type="text" [(ngModel)]="code" name="code" class="form-control" id="code" required style="font-size: 13px;" placeholder="#### - #### - ########" pTooltip="Ingresa un código en el formato ### - ### - ########" tooltipPosition="right" [showDelay]="1000" [hideDelay]="1000">
                       </div>
                     </div>
                     
